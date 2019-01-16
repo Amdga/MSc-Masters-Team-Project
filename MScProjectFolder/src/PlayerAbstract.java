@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 
-import javax.smartcardio.Card;
-
 /**
  * The PlayerAbstract class holds all methods for the functioning of a
  * player's actions in a Top Trumps game.
@@ -112,6 +110,7 @@ public abstract class PlayerAbstract {
 				logOutput += "/t/t" + c.getCardName() + "/n";
 			}
 		}
+		return logOutput;
 	}
 	
 	public String logDeckContents(int playerNumber) {
