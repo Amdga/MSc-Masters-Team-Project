@@ -13,14 +13,14 @@ import java.util.ArrayList;
  */
 
 public class TestLogger {
-	
+
 	/**
 	 * Posts debug test information to a log file if in test mode.
 	 */
-	
+
 	boolean testMode;
 	FileWriter fr;
-	
+
 	public TestLogger(boolean testModeInput) {
 		/**
 		 * creates a TestLogger object
@@ -29,12 +29,14 @@ public class TestLogger {
 		 */
 		this.testMode = testModeInput;
 		try {
-			fr = new FileWriter("toptrumps.log");
+			if (this.testMode) { 
+				fr = new FileWriter("toptrumps.log");
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	//-------Logging Methods------------------------------------
 	public void write(String output) {
 		/**
@@ -43,26 +45,28 @@ public class TestLogger {
 		 * @Param String to be written
 		 */
 		try {
-			fr.write(output);
-			writeSeparator();
+			if (this.testMode) {
+				fr.write(output);
+				writeSeparator();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	public void logDeckCreation(ArrayList<Card> deck) {
 		/**
 		 * Writes the contents of the created deck to the file
 		 * 
 		 * @Param  deck an ArrayList of type Card
 		 */
-		
+
 		String logOutput = "Deck has been created/n";
 		logOutput += deckToString(deck);
 		write(logOutput);
 	}
-	
+
 	public void logDeckShuffle(ArrayList<Card> deck) {
 		/**
 		 * Writes the contents of the shuffled deck to the file
@@ -73,7 +77,7 @@ public class TestLogger {
 		logOutput += deckToString(deck);
 		write(logOutput);
 	}
-	
+
 	public void logPlayerInitialDeck(int playerNumber, boolean isHuman, ArrayList<Card> deck) {
 		/**
 		 * Writes a string with player type and all initial cards in the deck.
@@ -84,9 +88,9 @@ public class TestLogger {
 		logOutput += logDeckContents(playerNumber, isHuman, deck);
 		write(logOutput);
 	}
-	
-	
-	
+
+
+
 	public void logCommunalPile(ArrayList<Card> deck) {
 		/**
 		 * Writes the contents of the communal pile to the file
@@ -97,7 +101,7 @@ public class TestLogger {
 		logOutput += deckToString(deck);
 		write(logOutput);
 	}
-	
+
 	public void logActiveCards(ArrayList<Card> deck) {
 		/**
 		 * Writes the active cards to the file
@@ -108,7 +112,7 @@ public class TestLogger {
 		logOutput += deckToString(deck);
 		write(logOutput);
 	}
-	
+
 	public void logCategory(int playerNumber, String choice) {
 		/**
 		 * Writes a string detailing the player number and their category selection.
@@ -118,7 +122,7 @@ public class TestLogger {
 		 */
 		write(logCategorySelection(playerNumber, choice));
 	}
-	
+
 	public void logPlayerDeck(int playerNumber, boolean isHuman, ArrayList<Card> deck) {
 		/**
 		 * Writes a string with player type and all card names in the deck.
@@ -128,7 +132,7 @@ public class TestLogger {
 		String logOutput = logDeckContents(playerNumber, isHuman, deck);
 		write(logOutput);
 	}
-	
+
 	public void logWinningPlayer(int playerNumber) {
 		/**
 		 * Writes a string detailing who won the game.
@@ -139,9 +143,9 @@ public class TestLogger {
 		write(logOutput);
 	}
 
-	
+
 	//-------Helper Methods-------------------------------------
-	
+
 	public void writeSeparator() {
 		String separator = "/n------------------------------/n";
 		try {
@@ -150,7 +154,7 @@ public class TestLogger {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private String deckToString(ArrayList<Card> deck) {
 		/**
 		 * Creates a string with all card names in the deck.
@@ -170,7 +174,7 @@ public class TestLogger {
 		}
 		return logOutput;
 	}
-	
+
 	private String logDeckContents(int playerNumber, boolean isHuman, ArrayList<Card> deck) {
 		/**
 		 * Creates a string with player type and all card names in the deck.
@@ -184,12 +188,12 @@ public class TestLogger {
 		if (isHuman) {
 			playerType = "Human";
 		}
-		
+
 		logOutput += playerType + " is Player  " + playerNumber + " and has/n";
 		logOutput += deckToString(deck);
 		return logOutput;
 	}
-	
+
 	private String logCategorySelection(int playerNumber, String choice) {
 		/**
 		 * Creates a string detailing the player number and their category selection.
@@ -200,9 +204,9 @@ public class TestLogger {
 		 */
 		String logOutput = "Player " + playerNumber + " chose the category: " + choice;
 		return logOutput;
-		
+
 	}
-	
+
 	private String logWinner(int playerNumber) {
 		/**
 		 * Creates a string detailing who won the game.
@@ -210,7 +214,7 @@ public class TestLogger {
 		 * @param playerNumber	the number assigned to the player within the game.
 		 * @return string with the winning player
 		 */
-		
+
 		String logOutput =  "Winner is Player " + playerNumber;
 		return logOutput;
 	}
