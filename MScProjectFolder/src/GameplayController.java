@@ -16,7 +16,6 @@ public class GameplayController {
 		int player_who_goes_first = (int) (Math.random() * number_of_players);
 		
 		return player_who_goes_first;
-		
 	}
 	
 	private void giveCardsToPlayers(ArrayList<Card> card, PlayerAbstract player) {
