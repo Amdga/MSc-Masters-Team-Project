@@ -109,7 +109,7 @@ public abstract class PlayerAbstract {
 		} else {
 			logOutput += "/tDeck: /n";
 			for(Card c: this.currentDeck) {
-				logOutput += "/t/t" + c.getName() + "/n";
+				logOutput += "/t/t" + c.getCardName() + "/n";
 			}
 		}
 	}
