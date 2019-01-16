@@ -7,6 +7,8 @@ import online.TopTrumpsOnlineApplication;
 public class TopTrumps {
 
 	/** This is the main class for the TopTrumps Application */
+	/** This main class will probably be changed **/
+
 	public static void main(String[] args) {
 		
 		System.out.println("--------------------");
