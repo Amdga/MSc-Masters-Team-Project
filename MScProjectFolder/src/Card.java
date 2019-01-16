@@ -18,6 +18,10 @@ public class Card {
 	public int getValue(String category) {
 		return values.get(category);
 	}
+
+	public int getValue(int category) {
+		return values.get(getHeaders[catergory]);
+	}
 	
 	public String[] getHeaders() {
 		return (String[]) values.keySet().toArray();
