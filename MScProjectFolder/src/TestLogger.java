@@ -36,12 +36,113 @@ public class TestLogger {
 	}
 	
 	//-------Logging Methods------------------------------------
+	public void write(String output) {
+		/**
+		 * Writes a string to the file
+		 * 
+		 * @Param String to be written
+		 */
+		try {
+			fr.write(output);
+			writeSeparator();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void logDeckCreation(ArrayList<Card> deck) {
+		/**
+		 * Writes the contents of the created deck to the file
+		 * 
+		 * @Param  deck an ArrayList of type Card
+		 */
+		
+		String logOutput = "Deck has been created/n";
+		logOutput += deckToString(deck);
+		write(logOutput);
+	}
+	
+	public void logDeckShuffle(ArrayList<Card> deck) {
+		/**
+		 * Writes the contents of the shuffled deck to the file
+		 * 
+		 * @Param  deck an ArrayList of type Card
+		 */
+		String logOutput = "Deck has been shuffled/n";
+		logOutput += deckToString(deck);
+		write(logOutput);
+	}
+	
+	public void logPlayerInitialDeck(int playerNumber, boolean isHuman, ArrayList<Card> deck) {
+		/**
+		 * Writes a string with player type and all initial cards in the deck.
+		 * 
+		 * @param playerNumber	the number assigned to the player within the Top Trumps game
+		 */
+		String logOutput = "Initial deck: ";
+		logOutput += logDeckContents(playerNumber, isHuman, deck);
+		write(logOutput);
+	}
 	
 	
+	
+	public void logCommunalPile(ArrayList<Card> deck) {
+		/**
+		 * Writes the contents of the communal pile to the file
+		 * 
+		 * @Param  deck an ArrayList of type Card
+		 */
+		String logOutput = "Communal pile contains:/n";
+		logOutput += deckToString(deck);
+		write(logOutput);
+	}
+	
+	public void logActiveCards(ArrayList<Card> deck) {
+		/**
+		 * Writes the active cards to the file
+		 * 
+		 * @Param  deck an ArrayList of type Card
+		 */
+		String logOutput = "Active cards are:/n";
+		logOutput += deckToString(deck);
+		write(logOutput);
+	}
+	
+	public void logCategory(int playerNumber, String choice) {
+		/**
+		 * Writes a string detailing the player number and their category selection.
+		 * 
+		 * @param playerNumber	the number assigned to the player within the game.
+		 * @param choice		the category choice of the player
+		 */
+		write(logCategorySelection(playerNumber, choice));
+	}
+	
+	public void logPlayerDeck(int playerNumber, boolean isHuman, ArrayList<Card> deck) {
+		/**
+		 * Writes a string with player type and all card names in the deck.
+		 * 
+		 * @param playerNumber	the number assigned to the player within the Top Trumps game
+		 */
+		String logOutput = logDeckContents(playerNumber, isHuman, deck);
+		write(logOutput);
+	}
+	
+	public void logWinningPlayer(int playerNumber) {
+		/**
+		 * Writes a string detailing who won the game.
+		 * 
+		 * @param playerNumber	the number assigned to the player within the game.
+		 */
+		String logOutput = logWinner(playerNumber);
+		write(logOutput);
+	}
+
 	
 	//-------Helper Methods-------------------------------------
 	
-	private void writeSeparator() {
+	public void writeSeparator() {
 		String separator = "/n------------------------------/n";
 		try {
 			fr.write(separator);
@@ -62,7 +163,7 @@ public class TestLogger {
 		if (deck.size()==0) {
 			logOutput += "/n/t Deck is Empty /n";
 		} else {
-			logOutput += "/tDeck: /n";
+			logOutput += "/tCards: /n";
 			for(Card c: deck) {
 				logOutput += "/t/t" + c.getCardName() + "/n";
 			}
