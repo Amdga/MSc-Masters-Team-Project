@@ -81,6 +81,14 @@ public abstract class PlayerAbstract {
 		return currentDeck.size();
 	}
 	
+	public ArrayList<Card> getCurrentDeck() {
+		/**
+		 * Returns the deck of the player
+		 * 
+		 * @return ArrayList of type Card which is the deck of the player
+		 */
+		return this.currentDeck;
+	}
 	
 	
 	//------Setters---------------------------------
@@ -91,44 +99,5 @@ public abstract class PlayerAbstract {
 		 * @param inputDeck	an ArrayList of type Card
 		 */
 		this.currentDeck = inputDeck;
-	}
-	
-	//------Logger Methods--------------------------
-	private String logDeckContents() {
-		/**
-		 * Creates a string with all card names in the deck.
-		 * 
-		 * @return string with all cards in the deck or;
-		 * 		   string saying deck is empty if no cards in the deck
-		 */
-		String logOutput = "";
-		if (this.currentDeck.size()==0) {
-			logOutput += "/n/t Deck is Empty /n";
-		} else {
-			logOutput += "/tDeck: /n";
-			for(Card c: this.currentDeck) {
-				logOutput += "/t/t" + c.getCardName() + "/n";
-			}
-		}
-		return logOutput;
-	}
-	
-	public String logDeckContents(int playerNumber) {
-		/**
-		 * Creates a string with player type and all card names in the deck.
-		 * 
-		 * @param playerNumber	the number assigned to the player within the Top Trumps game
-		 * @return string with all cards in the deck or;
-		 * 		   string saying deck is empty if no cards in the deck
-		 */
-		String playerType = "AI";
-		String logOutput = "";
-		if (amIHuman) {
-			playerType = "Human";
-		}
-		
-		logOutput += playerType + " " + playerNumber + "/n";
-		logOutput += logDeckContents();
-		return logOutput;
 	}
 }
