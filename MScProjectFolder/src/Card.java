@@ -20,7 +20,7 @@ public class Card {
 	}
 
 	public int getValue(int category) {
-		return values.get(getHeaders[catergory]);
+		return values.get(getHeaders()[category]);
 	}
 	
 	public String[] getHeaders() {
