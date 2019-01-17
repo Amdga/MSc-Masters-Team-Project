@@ -100,4 +100,20 @@ public abstract class PlayerAbstract {
 		 */
 		this.currentDeck = inputDeck;
 	}
+	
+//	public static void main(String[] args) {
+//		HumanPlayer hP = new HumanPlayer();
+//		AIPlayer aP = new AIPlayer();
+//		GetDeckModel dM = new GetDeckModel();
+//		TestLogger tL = new TestLogger(true);
+//		
+//		ArrayList<Card> deck = dM.getShuffledDeck();
+//		hP.setDeck(deck);
+//		aP.addToDeck(deck.get(0));
+//		aP.addToDeck(deck.get(1));
+//		System.out.println(hP.takeTopCard().getCardName());
+//		
+//		tL.logPlayerDeck(1, hP.amIHuman(), hP.getCurrentDeck());
+//		tL.logPlayerInitialDeck(2, aP.amIHuman(), aP.getCurrentDeck());
+//	}
 }

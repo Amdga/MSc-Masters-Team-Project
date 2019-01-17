@@ -190,7 +190,7 @@ public class TestLogger {
 			playerType = "Human";
 		}
 
-		logOutput += playerType + " is Player  " + playerNumber + " and has\n";
+		logOutput += "Player  " + playerNumber + " is " + playerType + " and has\n";
 		logOutput += deckToString(deck);
 		return logOutput;
 	}
