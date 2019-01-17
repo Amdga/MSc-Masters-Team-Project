@@ -111,7 +111,7 @@ public abstract class PlayerAbstract {
 //		hP.setDeck(deck);
 //		aP.addToDeck(deck.get(0));
 //		aP.addToDeck(deck.get(1));
-//		System.out.println(hP.takeTopCard().getCardName());
+//		hP.takeTopCard().getCardName();
 //		
 //		tL.logPlayerDeck(1, hP.amIHuman(), hP.getCurrentDeck());
 //		tL.logPlayerInitialDeck(2, aP.amIHuman(), aP.getCurrentDeck());
