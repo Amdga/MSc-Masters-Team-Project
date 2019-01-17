@@ -48,6 +48,7 @@ public class TestLogger {
 			if (this.testMode) {
 				fr.write(output);
 				writeSeparator();
+				fr.flush();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -62,7 +63,7 @@ public class TestLogger {
 		 * @Param  deck an ArrayList of type Card
 		 */
 
-		String logOutput = "Deck has been created/n";
+		String logOutput = "Deck has been created\n";
 		logOutput += deckToString(deck);
 		write(logOutput);
 	}
@@ -73,7 +74,7 @@ public class TestLogger {
 		 * 
 		 * @Param  deck an ArrayList of type Card
 		 */
-		String logOutput = "Deck has been shuffled/n";
+		String logOutput = "Deck has been shuffled\n";
 		logOutput += deckToString(deck);
 		write(logOutput);
 	}
@@ -97,7 +98,7 @@ public class TestLogger {
 		 * 
 		 * @Param  deck an ArrayList of type Card
 		 */
-		String logOutput = "Communal pile contains:/n";
+		String logOutput = "Communal pile contains:\n";
 		logOutput += deckToString(deck);
 		write(logOutput);
 	}
@@ -108,7 +109,7 @@ public class TestLogger {
 		 * 
 		 * @Param  deck an ArrayList of type Card
 		 */
-		String logOutput = "Active cards are:/n";
+		String logOutput = "Active cards are:\n";
 		logOutput += deckToString(deck);
 		write(logOutput);
 	}
@@ -147,7 +148,7 @@ public class TestLogger {
 	//-------Helper Methods-------------------------------------
 
 	public void writeSeparator() {
-		String separator = "/n------------------------------/n";
+		String separator = "\n------------------------------\n";
 		try {
 			fr.write(separator);
 		} catch (IOException e) {
@@ -165,11 +166,11 @@ public class TestLogger {
 		 */
 		String logOutput = "";
 		if (deck.size()==0) {
-			logOutput += "/n/t Deck is Empty /n";
+			logOutput += "\n\t Deck is Empty \n";
 		} else {
-			logOutput += "/tCards: /n";
+			logOutput += "\tCards: \n";
 			for(Card c: deck) {
-				logOutput += "/t/t" + c.getCardName() + "/n";
+				logOutput += "\t\t" + c.getCardName() + "\n";
 			}
 		}
 		return logOutput;
@@ -189,7 +190,7 @@ public class TestLogger {
 			playerType = "Human";
 		}
 
-		logOutput += playerType + " is Player  " + playerNumber + " and has/n";
+		logOutput += playerType + " is Player  " + playerNumber + " and has\n";
 		logOutput += deckToString(deck);
 		return logOutput;
 	}
