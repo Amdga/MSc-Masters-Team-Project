@@ -102,10 +102,15 @@ public abstract class PlayerAbstract {
 	}
 	
 //	public static void main(String[] args) {
+//		
+//		// Test Method
+//		
 //		HumanPlayer hP = new HumanPlayer();
 //		AIPlayer aP = new AIPlayer();
 //		GetDeckModel dM = new GetDeckModel();
 //		TestLogger tL = new TestLogger(true);
+//		
+//		int[] pO = {0, 1};
 //		
 //		ArrayList<Card> deck = dM.getShuffledDeck();
 //		hP.setDeck(deck);
@@ -113,7 +118,15 @@ public abstract class PlayerAbstract {
 //		aP.addToDeck(deck.get(1));
 //		hP.takeTopCard().getCardName();
 //		
+//		ArrayList<Card> activeCards = new ArrayList<>();
+//		activeCards.add(hP.lookAtTopCard());
+//		activeCards.add(aP.lookAtTopCard());
+//		
 //		tL.logPlayerDeck(1, hP.amIHuman(), hP.getCurrentDeck());
 //		tL.logPlayerInitialDeck(2, aP.amIHuman(), aP.getCurrentDeck());
+//		
+//		tL.logCategory(2, aP.decideOnCategory(), pO, activeCards);
+//		tL.logCategory(1, hP.decideOnCategory(), pO, activeCards);
+//		
 //	}
 }
