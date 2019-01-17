@@ -236,5 +236,4 @@ public class TestLogger {
 		String logOutput =  "Winner is Player " + playerNumber;
 		return logOutput;
 	}
-
 }

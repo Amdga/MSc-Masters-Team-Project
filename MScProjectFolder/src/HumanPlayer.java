@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-/*
-Human Player class reads user's category decision
+/**
+ * Human Player class reads user's category decision
  *
-@author Ifigenia Temesio
-@ version 1
+ * @author Ifigenia Temesio
+ * @version 1
  */
 
 public class HumanPlayer extends PlayerAbstract {
@@ -54,8 +54,6 @@ public class HumanPlayer extends PlayerAbstract {
 			}
 		}
 	}
-
-
 }
 
 
