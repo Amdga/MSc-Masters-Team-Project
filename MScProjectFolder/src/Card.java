@@ -24,7 +24,12 @@ public class Card {
 	}
 	
 	public String[] getHeaders() {
-		return (String[]) values.keySet().toArray();
+		Object[] arr = values.keySet().toArray();
+		String[] output = new String[arr.length];
+		for(int i=0;i<arr.length;i++) {
+			output[i] = (String) arr[i];
+		}
+		return output;
 	}
 
 }
