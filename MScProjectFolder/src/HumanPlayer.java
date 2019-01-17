@@ -18,7 +18,23 @@ public class HumanPlayer extends PlayerAbstract {
 	public String decideOnCategory() {
 		setAvailableChoices();
 		Scanner input = new Scanner(System.in);
-
+		// Prompt user
+		String output = getUserPrompt();
+		System.out.println(output);
+		// Get Prompt
+		choice = input.nextLine();
+		// If choice is not suitable, ask again
+		if (!availableChoices.contains(choice)) {
+			System.out.println("Category not recognised!");
+			choice = decideOnCategory();
+		}
+		
+		input.close();
+		return choice;
+	}
+	
+	private String getUserPrompt() {
+		// loop through available choices show user what choices are available
 		String output = "Choose a category (" + availableChoices.get(0);
 		for(int i=1;i<availableChoices.size();i++) {
 			if (i != availableChoices.size()-1) {
@@ -27,20 +43,11 @@ public class HumanPlayer extends PlayerAbstract {
 				output += " OR " + availableChoices.get(i) + "):";
 			}
 		}
-		System.out.println(output);
-		choice = input.nextLine();
-		
-		if (!availableChoices.contains(choice)) {
-			System.out.println("Category not recognised!");
-			choice = decideOnCategory();
-		}
-		
-		input.close();
-		
-		return choice;
+		return output;
 	}
 
 	private void setAvailableChoices() {
+		// set the suitable available choices which the user can choose
 		if (availableChoices.isEmpty()) {
 			for(String category: lookAtTopCard().getHeaders()) {
 				availableChoices.add(category);
