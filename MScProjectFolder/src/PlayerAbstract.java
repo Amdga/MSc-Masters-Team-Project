@@ -14,8 +14,8 @@ public abstract class PlayerAbstract {
 	 * Performs the player actions for a game of Top Trumps.
 	 */
 	
-	private ArrayList<Card> currentDeck = new ArrayList<Card>();
-	private boolean amIHuman = false;
+	protected ArrayList<Card> currentDeck = new ArrayList<Card>();
+	protected boolean amIHuman = false;
 	
 	//------Abstract methods--------------------------
 	

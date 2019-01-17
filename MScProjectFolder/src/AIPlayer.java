@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Random;
 
 /*
@@ -8,19 +7,17 @@ import java.util.Random;
  * */
 
 public class AIPlayer extends PlayerAbstract{
-	private Deck currentDeck = new Deck();
+	private String choice = "";
 	private Random r = new Random();
 	
-	public AIPlayer() {
-		
-	}
-// Random selection of 5 deck headers. 
+	// Random selection of 5 deck headers. 
 	public String decideOnCategory() {
+		
 		int choiceNum = r.nextInt(5);
-		String choice = currentDeck.getHeader()[choiceNum];
+		choice = currentDeck.get(0).getHeaders()[choiceNum];
+		
 		return choice;
 	}
-	
 
 }
 
