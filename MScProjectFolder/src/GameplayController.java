@@ -63,11 +63,32 @@ public class GameplayController {
 		
 		//single round of top trumps
 		
+		for(int i=0; i<players.size(); i++) {
+		//for loop done this way to avoid ConcurrentModificationException caused by removing a player from the list	within the loop
+			PlayerAbstract p = players.get(i);
+			
+			Card players_card = p.takeTopCard();
+			if(players_card == null) {
+				players.remove(p);
+			}
+			else {
+				System.out.println(players_card.get_card_number());
+				cardsInPlay.add(players_card);
+			}
+			
+		}
 	}
 	
 	private void topTrumpsGame() {
 		
 		//while each player still has cards left, have a round
+		
+		int round_counter = 0;
+		while(players.size() > 1) {
+			System.out.println("Round "+round_counter);
+			topTrumpsRound();
+			round_counter ++;
+		}
 		
 	}
 	
@@ -95,23 +116,7 @@ public class GameplayController {
 		}
 		
 		dealOutDeck();
-		for(PlayerAbstract p : players) {
-			
-			System.out.println("Player "+players.indexOf(p));
-			
-			for(Card card : p.deck) {
-
-				System.out.println(card.get_card_number());
-				
-			}
-			
-		}
-		
-		/*for(int i=0; i<100; i++) {
-			int player_who_goes_first = decideWhoGoesFirst();
-			System.out.println(player_who_goes_first);
-			speak_player(player_who_goes_first);
-		}*/
+		topTrumpsGame();
 	
 	}
 	
