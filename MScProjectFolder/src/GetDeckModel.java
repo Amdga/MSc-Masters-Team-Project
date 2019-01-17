@@ -5,65 +5,86 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class GetDeckModel {
-	private ArrayList <Card> deck = new ArrayList();
-	private String [] headers;
-//	private int [] inputValues;
-	private String filename;
+	
+	private ArrayList <Card> deck = new ArrayList<>();
+	private String filepath = ".\\StarCitizenDeck.txt";
 	private String [] header;
-	private ArrayList <Card> shuffleTheDeck = new ArrayList ();
+	private ArrayList <Card> shuffleTheDeck = new ArrayList<>();
+
+	// Constructor
 	
-public void getDeckModel(String filename) {
-	this.filename = filename;
-	Scanner s;
-	FileReader cardFile;
-	
-	try {
-		cardFile = new FileReader(filename + ".");
-		s = new Scanner(filename);
-		String data = s.next();
-		 // Separates the headers from card values
-		header = data.split(",");
-		
-		for(int i = 0; i < 40; i ++) {
-		String cardTitle = s.next();
-		String [] x = data.split(",");
-		int [] values = {Integer.parseInt(x[0]), Integer.parseInt(x[1]), Integer.parseInt(x[2]),
-				Integer.parseInt(x[3]), Integer.parseInt(x[4])};
-		Card newCard = new Card(cardTitle, header, values);
-		deck.add(newCard);
-		
+	public GetDeckModel() {
+
+		Scanner s;
+		FileReader cardFile;
+
+		try {
+			// Read deck file
+			cardFile = new FileReader(filepath);
+			s = new Scanner(cardFile);
+
+			// Separates the headers from card values
+			String data = s.nextLine();
+			header = data.split(" ");
+
+			// Saves values of categories
+			while(s.hasNextLine()) {
+				String [] x = s.nextLine().split(" ");
+				String cardTitle = x[0];
+				int [] values = {Integer.parseInt(x[1]), Integer.parseInt(x[2]), Integer.parseInt(x[3]),
+						Integer.parseInt(x[4]), Integer.parseInt(x[5])};
+				// Create card and add to deck
+				Card newCard = new Card(cardTitle, header, values);
+				deck.add(newCard);
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 		}
-	} catch (FileNotFoundException e) {
 		
-		e.printStackTrace();
+		// Shuffle the cards
+		shuffleCards();
 	}
-	shuffleCards();
-}
-
-public ArrayList<Card> getShuffledDeck() {
-	return shuffleTheDeck;
 	
-}
-public ArrayList<Card> getDeck() {
-	return deck;
-	
-}
+	private ArrayList<Card> shuffleCards(){
+		Random randomIndex = new Random();
+		// Create temporary deck to remove cards out of
+		ArrayList <Card> tempDeck = (ArrayList<Card>) deck.clone();
 
-
-private ArrayList<Card> shuffleCards(){
-	int max = 39;
-	Random randomIndex = new Random();
-//	ArrayList <Card> shuffleTheDeck = new ArrayList ();
-	for(int i = 0; i < deck.size(); i ++) {
-		int x = randomIndex.nextInt(max);
-		shuffleTheDeck.add(deck.get(x));
+		while(tempDeck.size()!=0) { // While the temp deck still has cards
+			int x = randomIndex.nextInt(tempDeck.size()); // Choose a random card from the deck
+			shuffleTheDeck.add(tempDeck.get(x)); // Add the chosen card to the shuffled deck
+			tempDeck.remove(x); // Remove the chosen card from the temp deck
+		}
+		return shuffleTheDeck; // Return the shuffled deck
 	}
-	return shuffleTheDeck;
-}
-public String [] getHeader() {
 	
-	return header;
-	
-}
+	// Getters
+
+	public ArrayList<Card> getShuffledDeck() {
+		//return shuffled deck
+		return shuffleTheDeck;
+	}
+
+	public ArrayList<Card> getDeck() {
+		//return initial deck
+		return deck;
+	}
+
+	public String [] getHeader() {
+		String[] output = new String[header.length-1];
+		for(int i=1;i<header.length;i++) {
+			output[i-1] = header[i];
+		}
+		return output; // Return the headers, excluding the Description header
+	}
+
+//	public static void main(String[] args) {
+//		// Testing method
+//		GetDeckModel deckModel = new GetDeckModel();
+//		System.out.println("end");
+//		TestLogger tL = new TestLogger(true);
+//		tL.logDeckCreation(deckModel.deck);
+//		tL.logDeckShuffle(deckModel.shuffleTheDeck);
+//	}
 }
 
