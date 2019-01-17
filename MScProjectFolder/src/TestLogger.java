@@ -114,7 +114,7 @@ public class TestLogger {
 		write(logOutput);
 	}
 
-	public void logCategory(int playerNumber, String choice) {
+	public void logCategory(int playerNumber, String choice, int[] playerOrder, ArrayList<Card> activeCards) {
 		/**
 		 * Writes a string detailing the player number and their category selection.
 		 * 
@@ -122,6 +122,7 @@ public class TestLogger {
 		 * @param choice		the category choice of the player
 		 */
 		write(logCategorySelection(playerNumber, choice));
+		write(logCategoryScores(playerOrder, activeCards, choice));
 	}
 
 	public void logPlayerDeck(int playerNumber, boolean isHuman, ArrayList<Card> deck) {
@@ -203,9 +204,25 @@ public class TestLogger {
 		 * @param choice		the category choice of the player
 		 * @return string with the player number and their category choice
 		 */
-		String logOutput = "Player " + playerNumber + " chose the category: " + choice;
+		String logOutput = "Player " + playerNumber + " chose the category: " + choice + "\n";
 		return logOutput;
 
+	}
+	
+	private String logCategoryScores(int[] playerOrder, ArrayList<Card> activeCards, String choice) {
+		/**
+		 * Creates a string detailing the scores of the category
+		 * 
+		 * @param playerOrder	the order in which players have added cards to the active card deck
+		 * @param activeCards	Arraylist<Card> with the active cards of each player
+		 * @param choice		categoty choice made by the player
+		 * @return	string with the scores of each player
+		 */
+		String logOutput = "\tScores:\n";
+		for(int i=0;i<activeCards.size();i++) {
+			logOutput += "\t\tPlayer " + playerOrder[i] + ":\t" + activeCards.get(i).getValue(choice) + "\n";
+		}
+		return logOutput;
 	}
 
 	private String logWinner(int playerNumber) {
