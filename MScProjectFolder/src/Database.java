@@ -124,5 +124,9 @@ public class Database {
 		String column = "MAX";
 		queryDatabase(mRounds, output, column);
 	}
-
-}
+	public void getTotalGames() {
+	String tgames = "SELECT COUNT(g.gameID) FROM GAMESTATS AS g;";
+	String output = "Total number of games played: ";
+	String column = "COUNT";
+	queryDatabase(tgames, output, column);
+	}}
