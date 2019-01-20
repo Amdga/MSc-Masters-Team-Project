@@ -2,11 +2,11 @@ import java.util.ArrayList;
 
 public class GameplayController {
 	
-	ArrayList<Card> cardsInDeck; //This will be replaced by model.getDeck() when model is implemented
+	private ArrayList<Card> cardsInDeck; //This will be replaced by model.getDeck() when model is implemented
 	
-	ArrayList<Card> cardsInDrawPile;
-	ArrayList<Card> cardsInPlay;
-	ArrayList<PlayerAbstract> players;
+	private ArrayList<Card> cardsInDrawPile;
+	private ArrayList<Card> cardsInPlay;
+	public ArrayList<PlayerAbstract> players;
 	
 	int model; //This will be replaced by GetDeck class when it is created
 	int controller; //This will be replaced by Controller class when it is created
@@ -59,7 +59,7 @@ public class GameplayController {
 		
 	}
 	
-	private void topTrumpsRound() {
+	/*private void topTrumpsRound() {
 		
 		//single round of top trumps
 		
@@ -90,12 +90,13 @@ public class GameplayController {
 			round_counter ++;
 		}
 		
-	}
+	}*/
 	
 	public GameplayController(int model, int controller, int number_of_human_players, int number_of_ai_players) {
 		
 		players = new ArrayList<PlayerAbstract>();
 		cardsInDeck = new ArrayList<Card>();
+		cardsInPlay = new ArrayList<Card>();
 		
 		this.model = model;
 		this.controller = controller;
@@ -104,19 +105,27 @@ public class GameplayController {
 		
 		for(int i=0; i<10; i++) {
 			
-			Card card = new Card("hello "+i,null,null);
+			String[] headers = {"Food","Tastiness","Speed of Consumption"};
+			int[] input_values = {1,1,1};
+			
+			
+			Card card = new Card("hello "+i,headers,input_values);
 			cardsInDeck.add(card);
 			
 		}
 		
 		dealOutDeck();
-		topTrumpsGame();
-	
 	}
 	
 	public static void main(String[] args) {
 		
 		GameplayController game = new GameplayController(0,0,3,4);
+		
+		int first_player = game.decideWhoGoesFirst();
+		
+		System.out.println("Player "+first_player+" goes first");
+		System.out.println("Their first card is:");
+		System.out.println(game.players.get(first_player).lookAtTopCard().getCardName());
 		
 	}
 
