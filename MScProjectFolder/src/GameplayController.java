@@ -72,7 +72,7 @@ public class GameplayController {
 				players.remove(p);
 			}
 			else {
-				System.out.println(players_card.get_card_number());
+				System.out.println(players_card.getCardName());
 				cardsInPlay.add(players_card);
 			}
 			
@@ -92,12 +92,6 @@ public class GameplayController {
 		
 	}
 	
-	public void speak_player(int player) { //temporary testing method
-		
-		players.get(player).speak();
-		
-	}
-	
 	public GameplayController(int model, int controller, int number_of_human_players, int number_of_ai_players) {
 		
 		players = new ArrayList<PlayerAbstract>();
@@ -110,7 +104,7 @@ public class GameplayController {
 		
 		for(int i=0; i<10; i++) {
 			
-			Card card = new Card(i);
+			Card card = new Card("hello "+i,null,null);
 			cardsInDeck.add(card);
 			
 		}

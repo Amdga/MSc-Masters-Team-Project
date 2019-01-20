@@ -34,3 +34,6 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
 
+# Mac
+*.DS_Store
+
