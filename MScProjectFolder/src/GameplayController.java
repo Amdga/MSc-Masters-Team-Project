@@ -59,7 +59,7 @@ public class GameplayController {
 		
 	}
 	
-	/*private void topTrumpsRound() {
+	private void topTrumpsRound() {
 		
 		//single round of top trumps
 		
@@ -90,7 +90,7 @@ public class GameplayController {
 			round_counter ++;
 		}
 		
-	}*/
+	}
 	
 	public GameplayController(int model, int controller, int number_of_human_players, int number_of_ai_players) {
 		
