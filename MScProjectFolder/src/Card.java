@@ -8,6 +8,7 @@ public class Card {
 	public Card(String cardname, String[] headers, int[] inputValues) {
 		this.cardname = cardname;
 		for(int i=0;i<(headers.length-1);i++) {
+			System.out.println(headers[i+1]+" "+inputValues[i]);
 			values.put(headers[i+1],inputValues[i]);
 		}
 	}
