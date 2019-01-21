@@ -1,0 +1,132 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+public class Database {
+
+	private ArrayList <String> statements = new ArrayList<String>();
+	private ArrayList <String> query = new ArrayList <String>();
+	private final String username = "postgres";
+	private final String password = "foodislife";
+
+
+
+	public Database () {
+	}
+
+	public void updateDatabase() {
+		//When called, update Database will loop through an array of waiting 
+		//data to be inserted into the database
+		//it then clears the ArrayList once they have been added so there is not a chance of duplication
+
+		try {
+			//test that the JBDC file works 
+			Class.forName("org.postgresql.Driver");
+			Connection connection = DriverManager.getConnection 
+					//input server location, username, and password
+					("jdbc:postgresql://localhost:5432/Top Trumps",username ,
+							password);
+
+			Statement gameDetails = connection.createStatement();
+			for (String s: statements) {
+				gameDetails.execute(s);
+				connection.close();
+				statements.clear();	
+			}
+		}
+		catch (SQLException | ClassNotFoundException e) { 
+			System.out.println("Connection failed" ); 
+			e.printStackTrace(); 
+			return; }
+	}
+
+	//the queryDatabase connects to the database and implements the passed SELECT statement
+	private void queryDatabase(String query, String output, String columnName) {
+		try {
+			//test that the JBDC file works 
+			Class.forName("org.postgresql.Driver");
+			Connection connection = DriverManager.getConnection 
+					//input server location, username, and password
+					("jdbc:postgresql://localhost:5432/Top Trumps",username ,
+							password);
+
+			Statement gameDetails = connection.createStatement();
+
+			ResultSet queryResult =  gameDetails.executeQuery(query);
+			
+			while(queryResult.next()) {
+				int value = queryResult.getInt(columnName);
+				System.out.println(output + value);
+			}
+			//System.out.println(output + value);
+			
+			connection.close();	
+			
+		}
+		catch (SQLException | ClassNotFoundException e) { 
+			System.out.println("Connection failed" ); 
+			e.printStackTrace(); 
+			return; }
+	}
+
+	//////////////////////Insert Methods
+
+	public void addGameStats(int rounds, String playerID, int draws) {
+		//add gamestats info to an array to be executed by main	
+		String statement = String.format("INSERT INTO GAMESTATS (no_of_rounds,winner,draws)VALUES (%d, %s, %d);", rounds, playerID, draws);
+		statements.add(0, statement);
+	}
+	public void addRoundStats(String playerID, int noRoundsWon ) {
+		//add round stats to the array executed by main, will be bumped to after gamestats,
+		//to so the serial ID pulled is correct
+		String statement = String.format("INSERT INTO ROUNDSTATS(gameID, playerID, no_rounds_won) VALUES ((SELECT MAX(gameid) from gamestats), %s, %d);", playerID, noRoundsWon);
+		statements.add(statement);
+
+	}
+	
+	////////////////////////////Query methods
+
+	public void getHumanWinnerQuery() {
+		//	How many times Human has won:
+		String hwinner =
+				"SELECT COUNT(g.winner) FROM PLAYER AS p, GAMESTATS as g WHERE p.playerID = g.winner AND p.playerID IN (SELECT p.playerID WHERE ptype = 'human');";
+		String output = "Human total wins: ";
+		String column = "COUNT";
+		queryDatabase(hwinner, output, column);
+
+	}
+	public void getAIWinnerQuery() {
+		//query to get how many times AI has won
+		String aiwinner = 
+				"SELECT COUNT(g.winner) FROM GAMESTATS as g, PLAYER as p WHERE p.playerID = g.winner AND p.playerID IN (SELECT playerID WHERE ptype = 'AI');";
+		String output = "AI total wins: ";
+		String columnName = "COUNT";
+		queryDatabase(aiwinner, output, columnName);
+	}
+	public void getAvgDraws() {
+		//queries database the average number of draws per game
+		String nDraws = 
+				"SELECT AVG(g.draws) FROM GAMESTATS as g;";
+		String output = "Average draws are: ";
+		String columnName = "AVG";
+		queryDatabase(nDraws, output, columnName);
+	}
+
+	public void getMaxRounds() {
+		//queries database the max number of rounds per game that has happened
+		String mRounds = 
+				"SELECT MAX(g.no_of_rounds) FROM GAMESTATS as g;";
+		String output = "Most number of rounds played: ";
+		String column = "MAX";
+		queryDatabase(mRounds, output, column);
+	}
+	public void getTotalGames() {
+	String tgames = "SELECT COUNT(g.gameID) FROM GAMESTATS AS g;";
+	String output = "Total number of games played: ";
+	String column = "COUNT";
+	queryDatabase(tgames, output, column);
+	}}
