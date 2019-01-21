@@ -21,7 +21,7 @@ public class Database {
 	public void updateDatabase() {
 		//When called, update Database will loop through an array of waiting 
 		//data to be inserted into the database
-		//it then clears the ArrayList once they have been added so there is not a chance of duplication
+		//it then clears the ArrayList once they have been added so there is no chance of duplication
 
 		try {
 			//test that the JBDC file works 
@@ -34,14 +34,17 @@ public class Database {
 			Statement gameDetails = connection.createStatement();
 			for (String s: statements) {
 				gameDetails.execute(s);
-				connection.close();
-				statements.clear();	
+				//				connection.close();
+				//				statements.clear(); ADRIAN - think this may be clearing the whole, moved it to outside the for loop
 			}
+			connection.close();
+			statements.clear();
 		}
 		catch (SQLException | ClassNotFoundException e) { 
 			System.out.println("Connection failed" ); 
 			e.printStackTrace(); 
-			return; }
+			return; 
+		}
 	}
 
 	//the queryDatabase connects to the database and implements the passed SELECT statement
@@ -57,20 +60,21 @@ public class Database {
 			Statement gameDetails = connection.createStatement();
 
 			ResultSet queryResult =  gameDetails.executeQuery(query);
-			
+
 			while(queryResult.next()) {
 				int value = queryResult.getInt(columnName);
 				System.out.println(output + value);
 			}
 			//System.out.println(output + value);
-			
+
 			connection.close();	
-			
+
 		}
 		catch (SQLException | ClassNotFoundException e) { 
 			System.out.println("Connection failed" ); 
 			e.printStackTrace(); 
-			return; }
+			return; 
+		}
 	}
 
 	//////////////////////Insert Methods
@@ -80,6 +84,7 @@ public class Database {
 		String statement = String.format("INSERT INTO GAMESTATS (no_of_rounds,winner,draws)VALUES (%d, %s, %d);", rounds, playerID, draws);
 		statements.add(0, statement);
 	}
+
 	public void addRoundStats(String playerID, int noRoundsWon ) {
 		//add round stats to the array executed by main, will be bumped to after gamestats,
 		//to so the serial ID pulled is correct
@@ -87,7 +92,7 @@ public class Database {
 		statements.add(statement);
 
 	}
-	
+
 	////////////////////////////Query methods
 
 	public void getHumanWinnerQuery() {
@@ -97,8 +102,8 @@ public class Database {
 		String output = "Human total wins: ";
 		String column = "COUNT";
 		queryDatabase(hwinner, output, column);
-
 	}
+
 	public void getAIWinnerQuery() {
 		//query to get how many times AI has won
 		String aiwinner = 
@@ -107,6 +112,7 @@ public class Database {
 		String columnName = "COUNT";
 		queryDatabase(aiwinner, output, columnName);
 	}
+
 	public void getAvgDraws() {
 		//queries database the average number of draws per game
 		String nDraws = 
@@ -124,9 +130,11 @@ public class Database {
 		String column = "MAX";
 		queryDatabase(mRounds, output, column);
 	}
+
 	public void getTotalGames() {
-	String tgames = "SELECT COUNT(g.gameID) FROM GAMESTATS AS g;";
-	String output = "Total number of games played: ";
-	String column = "COUNT";
-	queryDatabase(tgames, output, column);
-	}}
+		String tgames = "SELECT COUNT(g.gameID) FROM GAMESTATS AS g;";
+		String output = "Total number of games played: ";
+		String column = "COUNT";
+		queryDatabase(tgames, output, column);
+	}
+}
