@@ -10,11 +10,12 @@ import java.util.Scanner;
 public class HumanPlayer extends PlayerAbstract {
 	private String choice = "";
 	private ArrayList<String> availableChoices = new ArrayList<String>();
-	private UserInterfaceController uIController;
+	private CLIView view;
 
-	public HumanPlayer(UserInterfaceController uIC) {
+	public HumanPlayer(int playerNumber, CLIView inputView) {
+		super(playerNumber);
 		amIHuman = true;
-		uIController = uIC;
+		view = inputView;
 	}
 
 	public String decideOnCategory() {
@@ -32,7 +33,7 @@ public class HumanPlayer extends PlayerAbstract {
 //		}
 //		
 //		input.close();
-		choice = uIController.decideOnCategory();
+		choice = view.getCategory(this.lookAtTopCard());
 		return choice;
 	}
 	

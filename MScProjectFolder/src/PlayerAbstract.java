@@ -16,6 +16,13 @@ public abstract class PlayerAbstract {
 	
 	protected ArrayList<Card> currentDeck = new ArrayList<Card>();
 	protected boolean amIHuman = false;
+	protected int playerNumber;
+	
+	//------Constructor-------------------------------
+	
+	protected PlayerAbstract(int inputPlayer) {
+		this.playerNumber = inputPlayer;
+	}
 	
 	//------Abstract methods--------------------------
 	
