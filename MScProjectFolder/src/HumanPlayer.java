@@ -59,5 +59,3 @@ public class HumanPlayer extends PlayerAbstract {
 //		}
 //	}
 }
-
-

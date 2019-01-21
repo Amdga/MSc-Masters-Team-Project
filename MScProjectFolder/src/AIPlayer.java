@@ -24,5 +24,3 @@ public class AIPlayer extends PlayerAbstract{
 		return choice;
 	}
 }
-
-

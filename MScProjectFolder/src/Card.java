@@ -1,6 +1,7 @@
 import java.util.HashMap;
 
 public class Card {
+
 	private String cardname;
 	private HashMap<String, Integer> values = new HashMap<String, Integer>();
 
