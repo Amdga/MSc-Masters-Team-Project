@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class GameplayController {
 	
@@ -76,18 +77,11 @@ public class GameplayController {
 	
 	private PlayerAbstract topTrumpsRound(PlayerAbstract current_player) {
 		
-		//single round of top trumps
-		//Players who are not out draw a card
-		//Respective card shown to player
-		//Active player makes category selection
-		//All drawn cards added to "in play" pile
-		//All cards in play shown corresponding with owners
-		//Category value selected are compared in all cards
-		//Player with the highest value card wins
-		//Winner gets all in play cards
+		current_player.lookAtTopCard();
+		String category = current_player.decideOnCategory();
 		
-		//get the player to decide on a category
-		String category = "Food";
+			category = "Food"; //This will be deleted once I know everything else is working!
+		
 		PlayerAbstract winning_player = players.get(0);
 		int winning_value = Integer.MIN_VALUE;
 		
@@ -95,13 +89,15 @@ public class GameplayController {
 		for(PlayerAbstract p : players) {
 			//now take the top cards off all the players
 			
+			p.lookAtTopCard();
 			Card players_card = p.takeTopCard();
+			//show card to player - called in View??
+			
 			if(players_card == null) {
 				System.out.println("Player "+p.whoAmI()+" has no cards left");
 				players_to_remove.add(p);
 			}
 			else {
-				//System.out.println(players_card.getCardName());
 				System.out.println("Player "+p.whoAmI()+" has 1 less card");
 				int current_value = players_card.getValue("Tastiness");
 				System.out.println("And their card has value "+current_value);
@@ -116,6 +112,7 @@ public class GameplayController {
 		}
 		
 		System.out.println("Winning player = "+winning_player.whoAmI());
+		Collections.shuffle(cardsInPlay);
 		
 		for(Card c : cardsInPlay) {
 			winning_player.addToDeck(c);
@@ -131,16 +128,6 @@ public class GameplayController {
 			players.remove(p_to_be_removed);
 			
 		}
-		
-		/*for(PlayerAbstract p : players) {
-			System.out.println("Player "+p.whoAmI()+": "+p.getNumberofCardsLeft());
-
-			System.out.println("Cards = ");
-			for(Card c : p.getCurrentDeck()) {
-				System.out.println(c.getCardName());
-			}
-		
-		}*/
 		
 		return nextPlayer(current_player);
 		
@@ -174,18 +161,11 @@ public class GameplayController {
 		PlayerAbstract current_player = decideWhoGoesFirst();
 		
 		int round_counter = 0;
-		//while(players.size() > 1) {
-		for(int i=0; i<10; i++) {
+		while(players.size() > 1) {
 			System.out.println("Round "+round_counter);
 			current_player = topTrumpsRound(current_player);
 			round_counter ++;
-		}
-		
-		//While there are still people left in the game
-			//Play rounds
-			//Winner gets passed to round and becomes new active player
-			//Passed back into round
-		
+		}		
 	}
 	
 	public GameplayController(int model, CLIView view, int number_of_human_players, int number_of_ai_players) {
@@ -199,7 +179,7 @@ public class GameplayController {
 		
 		createPlayers(number_of_human_players,number_of_ai_players);
 		
-		for(int i=0; i<4; i++) {
+		/*for(int i=0; i<4; i++) {
 			
 			String[] headers = {"Food","Tastiness","Speed of Consumption"};
 			int[] input_values = {i,i,i};
@@ -208,7 +188,18 @@ public class GameplayController {
 			Card card = new Card("hello "+i,headers,input_values);
 			cardsInDeck.add(card);
 			
-		}
+		}*/
+		
+		String[] headers = {"Food","Tastiness","Speed of Consumption"};
+		
+		int[] input_values = {0,0,0};
+		Card card = new Card("hello 0",headers,input_values);
+		cardsInDeck.add(card);
+		
+		int[] input_values_2 = {1,1,1};
+		card = new Card("hello 0",headers,input_values_2);
+		cardsInDeck.add(card);
+		
 		
 	}
 	
