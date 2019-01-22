@@ -34,9 +34,10 @@ public class Database {
 			Statement gameDetails = connection.createStatement();
 			for (String s: statements) {
 				gameDetails.execute(s);
-				connection.close();
-				statements.clear();	
+				
 			}
+			connection.close();
+			statements.clear();	
 		}
 		catch (SQLException | ClassNotFoundException e) { 
 			System.out.println("Connection failed" ); 
@@ -75,15 +76,15 @@ public class Database {
 
 	//////////////////////Insert Methods
 
-	public void addGameStats(int rounds, String playerID, int draws) {
+	public void addGameStats(int rounds, int playerID, int draws) {
 		//add gamestats info to an array to be executed by main	
-		String statement = String.format("INSERT INTO GAMESTATS (no_of_rounds,winner,draws)VALUES (%d, %s, %d);", rounds, playerID, draws);
+		String statement = String.format("INSERT INTO GAMESTATS (no_of_rounds,winner,draws)VALUES (%d, %d, %d);", rounds, playerID, draws);
 		statements.add(0, statement);
 	}
-	public void addRoundStats(String playerID, int noRoundsWon ) {
+	public void addRoundStats(int playerID, int noRoundsWon ) {
 		//add round stats to the array executed by main, will be bumped to after gamestats,
 		//to so the serial ID pulled is correct
-		String statement = String.format("INSERT INTO ROUNDSTATS(gameID, playerID, no_rounds_won) VALUES ((SELECT MAX(gameid) from gamestats), %s, %d);", playerID, noRoundsWon);
+		String statement = String.format("INSERT INTO ROUNDSTATS(gameID, playerID, no_rounds_won) VALUES ((SELECT MAX(gameid) from gamestats), %d, %d);", playerID, noRoundsWon);
 		statements.add(statement);
 
 	}
@@ -125,6 +126,7 @@ public class Database {
 		queryDatabase(mRounds, output, column);
 	}
 	public void getTotalGames() {
+		//get's the total amount of games that have been played
 	String tgames = "SELECT COUNT(g.gameID) FROM GAMESTATS AS g;";
 	String output = "Total number of games played: ";
 	String column = "COUNT";
