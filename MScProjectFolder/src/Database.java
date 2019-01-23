@@ -46,7 +46,8 @@ public class Database {
 	}
 
 	//the queryDatabase connects to the database and implements the passed SELECT statement
-	private void queryDatabase(String query, String output, String columnName) {
+	private  String queryDatabase(String query, String output, String columnName) {
+		String returnQueryOutput =null;
 		try {
 			//test that the JBDC file works 
 			Class.forName("org.postgresql.Driver");
@@ -61,7 +62,9 @@ public class Database {
 			
 			while(queryResult.next()) {
 				int value = queryResult.getInt(columnName);
-				System.out.println(output + value);
+				returnQueryOutput = output + value;
+				System.out.println(returnQueryOutput);
+				
 			}
 			//System.out.println(output + value);
 			
@@ -71,7 +74,8 @@ public class Database {
 		catch (SQLException | ClassNotFoundException e) { 
 			System.out.println("Connection failed" ); 
 			e.printStackTrace(); 
-			return; }
+			}
+		return returnQueryOutput;
 	}
 
 	//////////////////////Insert Methods
@@ -125,10 +129,12 @@ public class Database {
 		String column = "MAX";
 		queryDatabase(mRounds, output, column);
 	}
-	public void getTotalGames() {
+	public String getTotalGames() {
 		//get's the total amount of games that have been played
 	String tgames = "SELECT COUNT(g.gameID) FROM GAMESTATS AS g;";
 	String output = "Total number of games played: ";
 	String column = "COUNT";
-	queryDatabase(tgames, output, column);
+	String x = queryDatabase(tgames, output, column);
+	return x;
+	
 	}}
