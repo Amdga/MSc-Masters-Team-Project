@@ -141,7 +141,7 @@ public class Database {
 		String x = queryDatabase(tgames, output, column);
 		return x;
 	}
-	
+
 	public String getStats() {
 		String stats = "Statistics: \n";
 		stats += getHumanWinnerQuery() + "\n";
@@ -149,7 +149,23 @@ public class Database {
 		stats += getAvgDraws() + "\n";
 		stats += getMaxRounds() + "\n";
 		stats += getTotalGames() + "\n";
-		
+
 		return stats;
 	}
+
+//	public static void main(String [] args) { 
+//
+//		Database db = new Database();
+//		String x = db.getTotalGames();
+//		System.out.println( x);
+//		//		db.addGameStats(10, 0, 4);
+//		//		db.addRoundStats(0, 6);
+//		//		db.updateDatabase();
+//		//		
+//		//		db.addRoundStats(1, 6);
+//		//		db.addRoundStats(2,2);
+//		//		db.addGameStats(8, 1, 0);
+//		//		db.updateDatabase();
+//
+//	}
 }
