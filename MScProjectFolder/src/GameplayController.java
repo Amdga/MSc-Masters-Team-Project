@@ -36,7 +36,7 @@ public class GameplayController {
 			
 			int player_to_give_card_to = card_counter % players.size();
 			
-			//System.out.println("Player "+player_to_give_card_to+" gets "+c.getCardName());
+			System.out.println("Player "+player_to_give_card_to+" gets "+c.getValue("Food"));
 			players.get(player_to_give_card_to).addToDeck(c);
 			card_counter ++;
 			
@@ -131,6 +131,7 @@ public class GameplayController {
 		ArrayList<PlayerAbstract> winning_players = new ArrayList<PlayerAbstract>();
 		ArrayList<Card> winning_cards_pile = new ArrayList<Card>();
 		
+		Collections.sort(player_plays_list, Collections.reverseOrder());
 		int winning_value = Collections.max(player_plays_list).getCategoryValue();
 		System.out.println("winning value = "+winning_value);
 		
