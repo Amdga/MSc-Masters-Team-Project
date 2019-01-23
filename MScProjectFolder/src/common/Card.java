@@ -5,7 +5,7 @@ public class Card {
 
 	private String cardname;
 	private HashMap<String, Integer> values = new HashMap<String, Integer>();
-
+	
 	public Card(String cardname, String[] headers, int[] inputValues) {
 		this.cardname = cardname;
 		for(int i=0;i<(headers.length-1);i++) {
@@ -32,6 +32,10 @@ public class Card {
 			output[i] = (String) arr[i];
 		}
 		return output;
+	}
+	
+	public HashMap<String, Integer> getValueMap() {
+		return values;
 	}
 }
 
