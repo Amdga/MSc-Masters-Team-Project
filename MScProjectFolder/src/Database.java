@@ -34,11 +34,10 @@ public class Database {
 			Statement gameDetails = connection.createStatement();
 			for (String s: statements) {
 				gameDetails.execute(s);
-				//				connection.close();
-				//				statements.clear(); ADRIAN - think this may be clearing the whole, moved it to outside the for loop
+				
 			}
 			connection.close();
-			statements.clear();
+			statements.clear();	
 		}
 		catch (SQLException | ClassNotFoundException e) { 
 			System.out.println("Connection failed" ); 
@@ -48,7 +47,8 @@ public class Database {
 	}
 
 	//the queryDatabase connects to the database and implements the passed SELECT statement
-	private void queryDatabase(String query, String output, String columnName) {
+	private  String queryDatabase(String query, String output, String columnName) {
+		String returnQueryOutput =null;
 		try {
 			//test that the JBDC file works 
 			Class.forName("org.postgresql.Driver");
@@ -63,7 +63,9 @@ public class Database {
 
 			while(queryResult.next()) {
 				int value = queryResult.getInt(columnName);
-				System.out.println(output + value);
+				returnQueryOutput = output + value;
+				System.out.println(returnQueryOutput);
+				
 			}
 			//System.out.println(output + value);
 
@@ -73,22 +75,21 @@ public class Database {
 		catch (SQLException | ClassNotFoundException e) { 
 			System.out.println("Connection failed" ); 
 			e.printStackTrace(); 
-			return; 
-		}
+			}
+		return returnQueryOutput;
 	}
 
 	//////////////////////Insert Methods
 
-	public void addGameStats(int rounds, String playerID, int draws) {
+	public void addGameStats(int rounds, int playerID, int draws) {
 		//add gamestats info to an array to be executed by main	
-		String statement = String.format("INSERT INTO GAMESTATS (no_of_rounds,winner,draws)VALUES (%d, %s, %d);", rounds, playerID, draws);
+		String statement = String.format("INSERT INTO GAMESTATS (no_of_rounds,winner,draws)VALUES (%d, %d, %d);", rounds, playerID, draws);
 		statements.add(0, statement);
 	}
-
-	public void addRoundStats(String playerID, int noRoundsWon ) {
+	public void addRoundStats(int playerID, int noRoundsWon ) {
 		//add round stats to the array executed by main, will be bumped to after gamestats,
 		//to so the serial ID pulled is correct
-		String statement = String.format("INSERT INTO ROUNDSTATS(gameID, playerID, no_rounds_won) VALUES ((SELECT MAX(gameid) from gamestats), %s, %d);", playerID, noRoundsWon);
+		String statement = String.format("INSERT INTO ROUNDSTATS(gameID, playerID, no_rounds_won) VALUES ((SELECT MAX(gameid) from gamestats), %d, %d);", playerID, noRoundsWon);
 		statements.add(statement);
 
 	}
@@ -130,11 +131,12 @@ public class Database {
 		String column = "MAX";
 		queryDatabase(mRounds, output, column);
 	}
-
-	public void getTotalGames() {
-		String tgames = "SELECT COUNT(g.gameID) FROM GAMESTATS AS g;";
-		String output = "Total number of games played: ";
-		String column = "COUNT";
-		queryDatabase(tgames, output, column);
-	}
-}
+	public String getTotalGames() {
+		//get's the total amount of games that have been played
+	String tgames = "SELECT COUNT(g.gameID) FROM GAMESTATS AS g;";
+	String output = "Total number of games played: ";
+	String column = "COUNT";
+	String x = queryDatabase(tgames, output, column);
+	return x;
+	
+	}}
