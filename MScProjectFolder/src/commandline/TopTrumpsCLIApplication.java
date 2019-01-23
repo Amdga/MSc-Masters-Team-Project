@@ -1,7 +1,6 @@
 package commandline;
 
 import common.GameplayController;
-import common.CLIView;
 import common.Database;
 import common.GetDeckModel;
 

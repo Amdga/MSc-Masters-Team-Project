@@ -1,8 +1,11 @@
-package common;
+package commandline;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class CLIView {
+import common.Card;
+import common.ReturnsUserInput;
+
+public class CLIView implements ReturnsUserInput{
 	Scanner s;
 
 	public CLIView() {
