@@ -1,3 +1,4 @@
+package common;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -34,7 +35,7 @@ public class Database {
 			Statement gameDetails = connection.createStatement();
 			for (String s: statements) {
 				gameDetails.execute(s);
-				
+
 			}
 			connection.close();
 			statements.clear();	
@@ -65,7 +66,7 @@ public class Database {
 				int value = queryResult.getInt(columnName);
 				returnQueryOutput = output + value;
 				System.out.println(returnQueryOutput);
-				
+
 			}
 			//System.out.println(output + value);
 
@@ -75,7 +76,7 @@ public class Database {
 		catch (SQLException | ClassNotFoundException e) { 
 			System.out.println("Connection failed" ); 
 			e.printStackTrace(); 
-			}
+		}
 		return returnQueryOutput;
 	}
 
@@ -96,47 +97,59 @@ public class Database {
 
 	////////////////////////////Query methods
 
-	public void getHumanWinnerQuery() {
+	public String getHumanWinnerQuery() {
 		//	How many times Human has won:
 		String hwinner =
 				"SELECT COUNT(g.winner) FROM PLAYER AS p, GAMESTATS as g WHERE p.playerID = g.winner AND p.playerID IN (SELECT p.playerID WHERE ptype = 'human');";
 		String output = "Human total wins: ";
 		String column = "COUNT";
-		queryDatabase(hwinner, output, column);
+		return queryDatabase(hwinner, output, column);
 	}
 
-	public void getAIWinnerQuery() {
+	public String getAIWinnerQuery() {
 		//query to get how many times AI has won
 		String aiwinner = 
 				"SELECT COUNT(g.winner) FROM GAMESTATS as g, PLAYER as p WHERE p.playerID = g.winner AND p.playerID IN (SELECT playerID WHERE ptype = 'AI');";
 		String output = "AI total wins: ";
 		String columnName = "COUNT";
-		queryDatabase(aiwinner, output, columnName);
+		return queryDatabase(aiwinner, output, columnName);
 	}
 
-	public void getAvgDraws() {
+	public String getAvgDraws() {
 		//queries database the average number of draws per game
 		String nDraws = 
 				"SELECT AVG(g.draws) FROM GAMESTATS as g;";
 		String output = "Average draws are: ";
 		String columnName = "AVG";
-		queryDatabase(nDraws, output, columnName);
+		return queryDatabase(nDraws, output, columnName);
 	}
 
-	public void getMaxRounds() {
+	public String getMaxRounds() {
 		//queries database the max number of rounds per game that has happened
 		String mRounds = 
 				"SELECT MAX(g.no_of_rounds) FROM GAMESTATS as g;";
 		String output = "Most number of rounds played: ";
 		String column = "MAX";
-		queryDatabase(mRounds, output, column);
+		return queryDatabase(mRounds, output, column);
+
 	}
 	public String getTotalGames() {
 		//get's the total amount of games that have been played
-	String tgames = "SELECT COUNT(g.gameID) FROM GAMESTATS AS g;";
-	String output = "Total number of games played: ";
-	String column = "COUNT";
-	String x = queryDatabase(tgames, output, column);
-	return x;
+		String tgames = "SELECT COUNT(g.gameID) FROM GAMESTATS AS g;";
+		String output = "Total number of games played: ";
+		String column = "COUNT";
+		String x = queryDatabase(tgames, output, column);
+		return x;
+	}
 	
-	}}
+	public String getStats() {
+		String stats = "Statistics: \n";
+		stats += getHumanWinnerQuery() + "\n";
+		stats += getAIWinnerQuery() + "\n";
+		stats += getAvgDraws() + "\n";
+		stats += getMaxRounds() + "\n";
+		stats += getTotalGames() + "\n";
+		
+		return stats;
+	}
+}

@@ -1,3 +1,4 @@
+package common;
 import java.sql.*;
 public class DatabaseMainTest {
 

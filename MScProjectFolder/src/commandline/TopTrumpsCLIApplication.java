@@ -1,5 +1,10 @@
 package commandline;
 
+import common.GameplayController;
+import common.CLIView;
+import common.Database;
+import common.GetDeckModel;
+
 /**
  * Top Trumps command line application. Contains the main method which is run,
  * and the TopTrumpsCLIApplication class.
@@ -37,7 +42,7 @@ public class TopTrumpsCLIApplication {
 			
 			if (menuSelection == 0) { // if user wants to quit, exit
 				userWantsToQuit = true;
-				view.goodbyeMessage();
+				app.view.goodbyeMessage();
 			} else if (menuSelection == 1) { // if user wants to start a game, start one
 				app.playGame();
 			} else if (menuSelection == 2) { // if user wants to see stats, show them
@@ -56,7 +61,7 @@ public class TopTrumpsCLIApplication {
 		logData = writeGameLogsToFile;
 		db = new Database();
 		deckModel = new GetDeckModel();
-		view = new CLIView(deckModel, db);
+		view = new CLIView();//deckModel, db);
 	}
 	
 	private int menu() {
@@ -65,8 +70,8 @@ public class TopTrumpsCLIApplication {
 		 * 
 		 * @return selection	0 - quit, 1 - play game, 2 - view stats
 		 */
-		view.displayMainMenu();
-		int selection = view.getMainMenuSelection;
+		view.welcomeMessage();
+		int selection = view.gameOrStatorQuit();
 		return selection;
 	}
 	
@@ -84,7 +89,7 @@ public class TopTrumpsCLIApplication {
 		/**
 		 * Method to display the aggregate stats for past games
 		 */
-		view.showStatsPage(db);
+		view.printStatistics(db.getStats());
 	}
 	
 }
