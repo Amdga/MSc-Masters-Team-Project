@@ -122,8 +122,6 @@ public class GameplayController {
 			}
 		}
 		
-		Collections.sort(player_plays_list, Collections.reverseOrder());
-		
 		for(PlayerPlays p : player_plays_list) {
 			
 			System.out.println(p.toString());
@@ -133,8 +131,8 @@ public class GameplayController {
 		ArrayList<PlayerAbstract> winning_players = new ArrayList<PlayerAbstract>();
 		ArrayList<Card> winning_cards_pile = new ArrayList<Card>();
 		
-		int winning_value = player_plays_list.get(0).getCategoryValue();
-		//winning_players.add(player_plays_list.get(0).getPlayer());
+		int winning_value = Collections.max(player_plays_list).getCategoryValue();
+		System.out.println("winning value = "+winning_value);
 		
 		int current_value = winning_value;
 		int i=0;
