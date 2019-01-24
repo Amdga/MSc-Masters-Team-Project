@@ -223,7 +223,10 @@ public class GameplayController {
 			System.out.println("Round "+round_counter);
 			current_player = topTrumpsRound(current_player);
 			round_counter ++;
-		}		
+		}
+		
+		System.out.println("The final winner is "+players.get(0).whoAmI());
+		
 	}
 	
 	/**
