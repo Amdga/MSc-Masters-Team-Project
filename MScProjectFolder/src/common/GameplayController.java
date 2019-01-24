@@ -1,4 +1,5 @@
 package common;
+import commandline.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -12,9 +13,9 @@ public class GameplayController {
 	private ArrayList<PlayerAbstract> players;
 	
 	private CLIView cli_view;
+	private GetDeckModel model;
 	
-	int model; //This will be replaced by GetDeck class when it is created
-	int controller; //This will be replaced by Controller class when it is created
+	boolean log_data;
 	
 	/**
 	 * Method that randomly decides which player is to go first
@@ -40,7 +41,7 @@ public class GameplayController {
 			
 			int player_to_give_card_to = card_counter % players.size();
 			
-			System.out.println("Player "+player_to_give_card_to+" gets "+c.getValue("Food"));
+			System.out.println("Player "+player_to_give_card_to+" gets "+c.getValue("Cargo"));
 			players.get(player_to_give_card_to).addToDeck(c);
 			card_counter ++;
 			
@@ -83,9 +84,7 @@ public class GameplayController {
 	private PlayerAbstract topTrumpsRound(PlayerAbstract current_player) {
 		
 		current_player.lookAtTopCard();
-		//String category = current_player.decideOnCategory();
-		
-		String category = "Food"; //This will be deleted once I know everything else is working!
+		String category = current_player.decideOnCategory();
 		
 		ArrayList<PlayerAbstract> players_to_remove = new ArrayList<PlayerAbstract>(); //An arraylist of players with no cards left
 		ArrayList<PlayerPlays> player_plays_list = new ArrayList<PlayerPlays>(); //An arraylist of objects storing players and their played cards
@@ -151,7 +150,7 @@ public class GameplayController {
 			
 			PlayerAbstract winning_player = winning_players.get(0);
 			
-			System.out.println("Winning player = "+winning_player.whoAmI());
+			cli_view.theWinnerIs(winning_player.whoAmI());
 			Collections.shuffle(cardsInPlay);
 			Collections.shuffle(cardsInDrawPile);
 			
@@ -221,12 +220,12 @@ public class GameplayController {
 		//While there is still players left, have a round
 		int round_counter = 0;
 		while(players.size() > 1) {
-			System.out.println("Round "+round_counter);
+			cli_view.beginningOfRound(players.get(0).getCurrentDeck().size(), round_counter);
 			current_player = topTrumpsRound(current_player);
 			round_counter ++;
 		}
 		
-		System.out.println("The final winner is "+players.get(0).whoAmI());
+		cli_view.overallWinner(players.get(0).whoAmI());
 		
 	}
 	
@@ -238,7 +237,7 @@ public class GameplayController {
 	 * @param number_of_human_players
 	 * @param number_of_ai_players
 	 */
-	public GameplayController(int model, CLIView view, int number_of_human_players, int number_of_ai_players) {
+	public GameplayController(GetDeckModel model, CLIView view, int number_of_human_players, int number_of_ai_players, boolean log_data) {
 		
 		players = new ArrayList<PlayerAbstract>();
 		cardsInDeck = new ArrayList<Card>();
@@ -247,11 +246,12 @@ public class GameplayController {
 		
 		this.model = model;
 		this.cli_view = view;
+		this.log_data = log_data;
 		
 		createPlayers(number_of_human_players,number_of_ai_players);
 		
 		//THIS WHOLE BLOCK WILL BE REMOVED WHEN THE MODEL IS INTEGRATED
-		for(int i=0; i<10; i++) {
+		/*for(int i=0; i<10; i++) {
 			
 			Random r = new Random();
 			
@@ -261,7 +261,9 @@ public class GameplayController {
 			Card card = new Card("hello "+i,headers,input_values);
 			cardsInDeck.add(card);
 			
-		}
+		}*/
+		
+		cardsInDeck.addAll(model.getDeck());
 		
 	}
 	
@@ -273,8 +275,9 @@ public class GameplayController {
 	public static void main(String[] args) {
 		
 		CLIView placeholder_view = new CLIView();
+		GetDeckModel placeholder_model = new GetDeckModel();
 		
-		GameplayController game = new GameplayController(0,placeholder_view,1,2);
+		GameplayController game = new GameplayController(placeholder_model,placeholder_view,1,2, false);
 		
 		game.topTrumpsGame();
 		
