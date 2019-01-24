@@ -1,5 +1,4 @@
 package commandline;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import common.Card;
@@ -7,12 +6,11 @@ import common.ReturnsUserInput;
 
 public class CLIView implements ReturnsUserInput{
 	Scanner s;
-
+	private Card card;
+	
 	public CLIView() {
 		s = new Scanner(System.in);
 	}
-
-	private Card card;
 
 	public void welcomeMessage() {
 		printStars();
@@ -30,9 +28,9 @@ public class CLIView implements ReturnsUserInput{
 		System.out.println("You are playing against 4 other players");
 	}
 
-	public void beginningOfRound(int cards, int round) {
+	public void beginningOfRound(int cardsInDeck, int round) { // ADD WHO IS THE ACTIVE PLAYER?
 		System.out.println();
-		System.out.println("~ " + "Round " + round + " ~" + "\n\nYou have " + cards + " cards in your deck.");
+		System.out.println("~ " + "Round " + round + " ~" + "\n\nYou have " + cardsInDeck + " cards in your deck.");
 		System.out.println();
 	}
 
@@ -81,10 +79,9 @@ public class CLIView implements ReturnsUserInput{
 	// Method that translates what player won from the passed number. Player 0 is
 	// the user and is displayed differently.
 	public void translatePlayer(int number) {
-		String player = "Player" + number;
+		String player = "Player " + number;
 		if (number == 0) {
-			player = "You ";
-
+			player = "You";
 		}
 		System.out.println(player);
 
@@ -101,11 +98,11 @@ public class CLIView implements ReturnsUserInput{
 				checkNumberInput(number);
 				return number;
 			} catch (NumberFormatException e) {
-				System.out.println("That was an invalid digit. Please try again: ");
-
+				System.out.println("Entry invalid. Please try again: ");
 			}
 		}
 	}
+	
 	//Method that checks if the input is within the valid range.
 	public void checkNumberInput(int number) throws NumberFormatException {
 		if (number < 0 || 2 < number) {
@@ -121,7 +118,11 @@ public class CLIView implements ReturnsUserInput{
 	public String decideCategory() {
 		String[] headers = card.getHeaders();
 		String selectedCategory;
-		System.out.println("Please enter a category: ");
+		System.out.print("Please enter a category (");
+		for(int i=0;i<headers.length;i++) {
+			if (i<headers.length-1) {System.out.print(headers[i] + ", ");}
+			else {System.out.print(headers[i] + "): \n");}
+		}
 		while (true) {
 			selectedCategory = s.next();
 			for (int i = 0; i < headers.length; i++) {
@@ -134,25 +135,25 @@ public class CLIView implements ReturnsUserInput{
 
 	}
 	
-//	public static void main(String[] args) {
-//		String [] headers = {"description", "Range", "Speed", "Velocity", "Strength", "intellect"};
-//		int [] inputValues = {3, 5, 1, 8, 7};
-//		
-//		
-//		CLIView cliView = new CLIView();
-//		Card card = new Card("T-rex", headers, inputValues);
-//		cliView.welcomeMessage();
-//		cliView.numberOfPlayersPlaying();
-//		cliView.beginningOfRound(14, 1);
-//		String category = cliView.getCategory(card);
-//		System.out.println(category);
-//		cliView.theWinnerIs(3);
-//		cliView.overallWinner(0);
-//		int number = cliView.gameOrStatorQuit();
-//		System.out.println(number);
-//		
-//		
-//		
-//	}
+	public static void main(String[] args) {
+		String [] headers = {"description", "Range", "Speed", "Velocity", "Strength", "intellect"};
+		int [] inputValues = {3, 5, 1, 8, 7};
+		
+		
+		CLIView cliView = new CLIView();
+		Card card = new Card("T-rex", headers, inputValues);
+		cliView.welcomeMessage();
+		cliView.numberOfPlayersPlaying();
+		cliView.beginningOfRound(14, 1);
+		String category = cliView.getCategory(card);
+		System.out.println(category);
+		cliView.theWinnerIs(3);
+		cliView.overallWinner(0);
+		int number = cliView.gameOrStatorQuit();
+		System.out.println(number);
+		
+		
+		
+	}
 
 }
