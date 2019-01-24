@@ -1,5 +1,7 @@
+package common;
 import java.util.ArrayList;
-import java.util.Scanner;
+//import java.util.Scanner;
+
 /**
  * Human Player class reads user's category decision
  *
@@ -10,12 +12,12 @@ import java.util.Scanner;
 public class HumanPlayer extends PlayerAbstract {
 	private String choice = "";
 	private ArrayList<String> availableChoices = new ArrayList<String>();
-	private CLIView view;
+	private ReturnsUserInput inputGetter;
 
-	public HumanPlayer(int playerNumber, CLIView inputView) {
+	public HumanPlayer(int playerNumber, ReturnsUserInput inputView) {
 		super(playerNumber);
 		amIHuman = true;
-		view = inputView;
+		inputGetter = inputView;
 	}
 
 	public String decideOnCategory() {
@@ -33,7 +35,7 @@ public class HumanPlayer extends PlayerAbstract {
 //		}
 //		
 //		input.close();
-		choice = view.getCategory(this.lookAtTopCard());
+		choice = inputGetter.getCategory(this.lookAtTopCard());
 		return choice;
 	}
 	
