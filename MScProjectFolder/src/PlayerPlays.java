@@ -1,6 +1,11 @@
 
 public class PlayerPlays implements Comparable<PlayerPlays> {
 	
+	/**
+	 * Class needed to associate players with cards, so if a card wins in GameplayController we know who has played it
+	 * 
+	 */
+	
 	private PlayerAbstract player;
 	private Card card;
 	private String category;
@@ -13,6 +18,11 @@ public class PlayerPlays implements Comparable<PlayerPlays> {
 		
 	}
 
+	/**
+	 * GameplayController sorts the list of cards in play, and therefore a compareTo method is needed
+	 * We want to sort the values of the chosen category
+	 * 
+	 */
 	public int compareTo(PlayerPlays compare_to_object) {
 		
 		int compare_to_value = compare_to_object.getCard().getValue(category);
@@ -29,6 +39,10 @@ public class PlayerPlays implements Comparable<PlayerPlays> {
 		
 	}
 	
+	/**
+	 * 
+	 * This method is only used for debugging so far
+	 */
 	public String toString() {
 		
 		String to_string = "Player "+player.playerNumber + " has card value "+card.getValue(category);
