@@ -81,6 +81,7 @@ public class TopTrumpsCLIApplication {
 		//int aiPlayers = view.getNumOfAIPlayers();
 		int aiPlayers = 4;
 		gameController = new GameplayController(deckModel, view, 1, aiPlayers, logData);
+		gameController.topTrumpsGame();
 		//data = gameController.getGameData(); 
 		// Might not need the last line
 	}
