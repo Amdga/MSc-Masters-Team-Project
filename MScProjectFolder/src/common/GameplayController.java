@@ -1,8 +1,9 @@
 package common;
 import commandline.*;
+import logger.PersistentGameData;
+
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
 
 public class GameplayController {
 	
@@ -11,11 +12,14 @@ public class GameplayController {
 	private ArrayList<Card> cardsInDrawPile;
 	private ArrayList<Card> cardsInPlay;
 	private ArrayList<PlayerAbstract> players;
+	private ArrayList<PlayerAbstract> players_in_game;
 	
 	private CLIView cli_view;
 	private GetDeckModel model;
 	
-	boolean log_data;
+	private boolean log_data;
+	
+	public PersistentGameData persistent_game_data;
 	
 	/**
 	 * Method that randomly decides which player is to go first
@@ -41,7 +45,7 @@ public class GameplayController {
 			
 			int player_to_give_card_to = card_counter % players.size();
 			
-			System.out.println("Player "+player_to_give_card_to+" gets "+c.getValue("Cargo"));
+			//System.out.println("Player "+player_to_give_card_to+" gets "+c.getValue("Cargo"));
 			players.get(player_to_give_card_to).addToDeck(c);
 			card_counter ++;
 			
@@ -60,12 +64,16 @@ public class GameplayController {
 		int player_counter = 0;
 		
 		for(int i=0; i<number_of_humans; i++) {
-			players.add(new HumanPlayer(player_counter,cli_view));
+			PlayerAbstract human_player = new HumanPlayer(player_counter,cli_view);
+			players.add(human_player);
+			players_in_game.add(human_player);
 			player_counter++;
 		}
 		
 		for(int i=0; i<number_of_ai; i++) {
-			players.add(new AIPlayer(player_counter));
+			PlayerAbstract ai_player = new AIPlayer(player_counter);
+			players.add(ai_player);
+			players_in_game.add(ai_player);
 			player_counter++;
 		}
 		
@@ -83,29 +91,24 @@ public class GameplayController {
 	
 	private PlayerAbstract topTrumpsRound(PlayerAbstract current_player) {
 		
-		current_player.lookAtTopCard();
+		cli_view.currentPlayer(current_player.whoAmI());
+		
+		Card top_card = current_player.lookAtTopCard();
+		cli_view.showTopCard(top_card);
 		String category = current_player.decideOnCategory();
 		
-		ArrayList<PlayerAbstract> players_to_remove = new ArrayList<PlayerAbstract>(); //An arraylist of players with no cards left
 		ArrayList<PlayerPlays> player_plays_list = new ArrayList<PlayerPlays>(); //An arraylist of objects storing players and their played cards
 		
-		for(PlayerAbstract p : players) {
+		for(PlayerAbstract p : players_in_game) {
 			//now take the top cards off all the players
 			
 			p.lookAtTopCard();
 			Card players_card = p.takeTopCard();
 			
-			//show card to player - called in View??
-			
-			if(players_card == null) {
-				System.out.println("Player "+p.whoAmI()+" has no cards left");
-				players_to_remove.add(p);
-			}
-			
-			else {
-				System.out.println("Player "+p.whoAmI()+" has 1 less card");
+			if(players_card != null) {
+				System.out.println("GAMEPLAY: Player "+p.whoAmI()+" has 1 less card");
 				int current_value = players_card.getValue(category);
-				System.out.println("And their card has value "+current_value);
+				System.out.println("GAMEPLAY: And their card has value "+current_value);
 				
 				cardsInPlay.add(players_card);
 				
@@ -119,7 +122,7 @@ public class GameplayController {
 		
 		Collections.sort(player_plays_list, Collections.reverseOrder()); //Sort the cards in play by players from highest to lowest
 		int winning_value = Collections.max(player_plays_list).getCategoryValue(); 
-		System.out.println("winning value = "+winning_value);
+		System.out.println("GAMEPLAY: winning value = "+winning_value);
 		
 		int current_value = winning_value;
 		int i=0;
@@ -129,7 +132,7 @@ public class GameplayController {
 			
 			winning_players.add(player_plays_list.get(i).getPlayer());
 			winning_cards_pile.add(player_plays_list.get(i).getCard());
-			System.out.println("Player "+player_plays_list.get(i).getPlayer().playerNumber+" has been added to winning players list");
+			System.out.println("GAMEPLAY: Player "+player_plays_list.get(i).getPlayer().playerNumber+" has been added to winning players list");
 			
 			i++;
 			if(i<player_plays_list.size()) {
@@ -137,11 +140,23 @@ public class GameplayController {
 			}
 		}
 		
+		ArrayList<PlayerAbstract> players_to_remove = new ArrayList<PlayerAbstract>(); //An arraylist of players with no cards left
+		
+		//Find the list of players who are to be removed from the game
+		//Done here as if there is a draw and a player has no cards left as a result they should still be removed from the game
+		for(PlayerAbstract player : players_in_game) {
+			
+			if(player.getNumberofCardsLeft() == 0) {
+				players_to_remove.add(player);
+			}
+			
+		}
+		
 		//then iterate through array removing all players with no cards left
 		for(PlayerAbstract p_to_be_removed : players_to_remove) {
 			
-			System.out.println("Player "+p_to_be_removed.whoAmI()+" being removed from the game");
-			players.remove(p_to_be_removed);
+			cli_view.playerLoses(p_to_be_removed.whoAmI());
+			players_in_game.remove(p_to_be_removed);
 			
 		}
 		
@@ -149,6 +164,7 @@ public class GameplayController {
 			//If there isn't a draw
 			
 			PlayerAbstract winning_player = winning_players.get(0);
+			persistent_game_data.log_player_won_rounds(winning_player.whoAmI());
 			
 			cli_view.theWinnerIs(winning_player.whoAmI());
 			Collections.shuffle(cardsInPlay);
@@ -167,10 +183,12 @@ public class GameplayController {
 		}
 		else {
 			
+			persistent_game_data.increment_number_of_draws();
+			
 			for(Card c : winning_cards_pile) {
 				cardsInDrawPile.add(c);
 			}
-			System.out.println("No winning player, round is a draw");
+			System.out.println("GAMEPLAY: No winning player, round is a draw");
 			
 			cardsInPlay.clear();
 			return current_player;
@@ -190,16 +208,16 @@ public class GameplayController {
 	 */
 	private PlayerAbstract nextPlayer(PlayerAbstract current_player) {
 		
-		int current_player_index = players.indexOf(current_player);
+		int current_player_index = players_in_game.indexOf(current_player);
 		int next_player_index = current_player_index;
 		
 		next_player_index++;
-		if(next_player_index >= players.size()) {
+		if(next_player_index >= players_in_game.size()) {
 			next_player_index = 0;
 		}
 		
-		if(!players.isEmpty()) {
-			PlayerAbstract next_player = players.get(next_player_index);
+		if(!players_in_game.isEmpty()) {
+			PlayerAbstract next_player = players_in_game.get(next_player_index);
 			return next_player;
 		}
 		else {
@@ -218,15 +236,32 @@ public class GameplayController {
 		PlayerAbstract current_player = decideWhoGoesFirst();
 		
 		//While there is still players left, have a round
-		int round_counter = 0;
-		while(players.size() > 1) {
+		int round_counter = 1;
+		while(players_in_game.size() > 1) {
+			persistent_game_data.increment_rounds();
 			cli_view.beginningOfRound(players.get(0).getCurrentDeck().size(), round_counter);
 			current_player = topTrumpsRound(current_player);
 			round_counter ++;
 		}
 		
-		cli_view.overallWinner(players.get(0).whoAmI());
+		try {
+			persistent_game_data.log_player_who_won(players_in_game.get(0).whoAmI());
+			cli_view.overallWinner(players_in_game.get(0).whoAmI());
+		}
+		catch (IndexOutOfBoundsException e) {
+			System.out.println("GAMEPLAY: Sorry, no winner this time!!");
+		}
+			
+		System.out.println("GAME DATA");
+		System.out.println("Number of rounds = "+persistent_game_data.get_number_of_rounds());
+		System.out.println("Number of draws = "+persistent_game_data.get_number_of_draws());
+		System.out.println("Player who won = "+persistent_game_data.get_winning_player());
 		
+		int[] player_wins = persistent_game_data.get_player_wins();
+		for(int i=0; i<player_wins.length; i++) {
+			System.out.println("Player "+i+" won "+player_wins[i]+" games");
+		}
+
 	}
 	
 	/**
@@ -240,6 +275,7 @@ public class GameplayController {
 	public GameplayController(GetDeckModel model, CLIView view, int number_of_human_players, int number_of_ai_players, boolean log_data) {
 		
 		players = new ArrayList<PlayerAbstract>();
+		players_in_game = new ArrayList<PlayerAbstract>();
 		cardsInDeck = new ArrayList<Card>();
 		cardsInPlay = new ArrayList<Card>();
 		cardsInDrawPile = new ArrayList<Card>();
@@ -249,6 +285,8 @@ public class GameplayController {
 		this.log_data = log_data;
 		
 		createPlayers(number_of_human_players,number_of_ai_players);
+		
+		this.persistent_game_data = PersistentGameData.getInstance(number_of_human_players+number_of_ai_players);
 		
 		//THIS WHOLE BLOCK WILL BE REMOVED WHEN THE MODEL IS INTEGRATED
 		/*for(int i=0; i<10; i++) {
@@ -263,8 +301,15 @@ public class GameplayController {
 			
 		}*/
 		
-		cardsInDeck.addAll(model.getDeck());
+		//cardsInDeck.addAll(model.getDeck());
+		for(int i=0;i<10;i++) {
+			cardsInDeck.add(model.getDeck().get(i));
+		}
 		
+	}
+	
+	public PersistentGameData get_game_data() {
+		return persistent_game_data;
 	}
 	
 	/**

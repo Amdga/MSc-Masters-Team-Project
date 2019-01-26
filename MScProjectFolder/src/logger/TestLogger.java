@@ -1,7 +1,9 @@
-package common;
+package logger;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import common.Card;
 
 /**
  * The TestLogger Class contains the functionality to log actions performed during the
