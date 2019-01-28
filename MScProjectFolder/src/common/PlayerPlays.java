@@ -46,7 +46,7 @@ public class PlayerPlays implements Comparable<PlayerPlays> {
 	 */
 	public String toString() {
 		
-		String to_string = "Player "+player.playerNumber + " has card value "+card.getValue(category);
+		String to_string = "Player "+player.whoAmI() + " has card value "+card.getValue(category);
 		return to_string;
 		
 	}
