@@ -3,6 +3,9 @@ package commandline;
 import common.GameplayController;
 import common.Database;
 import common.GetDeckModel;
+import common.AIPlayer;
+import common.HumanPlayer;
+import common.PlayerAbstract;
 
 /**
  * Top Trumps command line application. Contains the main method which is run,
@@ -78,9 +81,8 @@ public class TopTrumpsCLIApplication {
 		/**
 		 * Method to create a gameplayController which runs the game till completion
 		 */
-		int aiPlayers = view.getNumOfAIPlayers();
+		int aiPlayers = 4;
 		gameController = new GameplayController(deckModel, view, 1, aiPlayers, logData);
-		data = gameController.getGameData(); 
 		// Might not need the last line
 	}
 	
