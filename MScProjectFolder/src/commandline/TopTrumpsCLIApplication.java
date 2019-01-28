@@ -78,7 +78,6 @@ public class TopTrumpsCLIApplication {
 		/**
 		 * Method to create a gameplayController which runs the game till completion
 		 */
-		//int aiPlayers = view.getNumOfAIPlayers();
 		int aiPlayers = 4;
 		gameController = new GameplayController(deckModel, view, 1, aiPlayers, logData);
 		gameController.topTrumpsGame();

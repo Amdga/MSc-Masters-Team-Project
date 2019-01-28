@@ -116,6 +116,17 @@ public class TestLogger {
 		logOutput += deckToString(deck);
 		write(logOutput);
 	}
+	
+	public void logNewRound(int round) {
+		/**
+		 * Logs a new round starting
+		 * 
+		 * @Param the number of the round
+		 */
+		
+		String logOutput = "Round "+round+"\n"; 
+		write(logOutput);
+	}
 
 	public void logCategory(int playerNumber, String choice, int[] playerOrder, ArrayList<Card> activeCards) {
 		/**

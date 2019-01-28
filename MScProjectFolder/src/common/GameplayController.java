@@ -19,8 +19,6 @@ public class GameplayController {
 	private CLIView cli_view;
 	private GetDeckModel model;
 	
-	private boolean log_data;
-	
 	private PersistentGameData persistent_game_data;
 	
 	private TestLogger test_logger;
@@ -101,8 +99,13 @@ public class GameplayController {
 		
 		cli_view.currentPlayer(current_player.whoAmI());
 		
-		Card top_card = current_player.lookAtTopCard();
-		cli_view.showTopCard(top_card);
+		int human_player_index = players_in_game.indexOf(players.get(0));
+			
+		if(human_player_index != -1 ) {
+			Card top_card = players_in_game.get(human_player_index).lookAtTopCard();
+			cli_view.showTopCard(top_card);
+		}
+
 		String category = current_player.decideOnCategory();
 		cli_view.showCategory(category);
 		
@@ -243,6 +246,7 @@ public class GameplayController {
 		int round_counter = 1;
 		while(players_in_game.size() > 1) {
 			persistent_game_data.increment_rounds();
+			test_logger.logNewRound(round_counter);
 			cli_view.beginningOfRound(players.get(0).getCurrentDeck().size(), round_counter);
 			current_player = topTrumpsRound(current_player);
 			round_counter ++;
@@ -279,10 +283,10 @@ public class GameplayController {
 	
 	public void getDeck() {
 		
-		//cardsInDeck.addAll(model.getShuffledDeck());
-		for(int i=0;i<10;i++) {
+		cardsInDeck.addAll(model.getShuffledDeck());
+		/*for(int i=0;i<10;i++) {
 			cardsInDeck.add(model.getShuffledDeck().get(i));
-		}
+		}*/
 		
 		test_logger.logDeckCreation(model.getDeck());
 		test_logger.logDeckShuffle(cardsInDeck);
@@ -311,7 +315,6 @@ public class GameplayController {
 		
 		this.model = model;
 		this.cli_view = view;
-		this.log_data = log_data;
 		
 		test_logger = new TestLogger(log_data);
 		
@@ -329,7 +332,7 @@ public class GameplayController {
 	 * 
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		
 		CLIView placeholder_view = new CLIView();
 		GetDeckModel placeholder_model = new GetDeckModel();
@@ -338,6 +341,6 @@ public class GameplayController {
 		
 		game.topTrumpsGame();
 		
-	}
+	}*/
 
 }
