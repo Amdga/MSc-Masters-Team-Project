@@ -100,7 +100,9 @@ public class GameplayController {
 		cli_view.currentPlayer(current_player.whoAmI());
 		
 		int human_player_index = players_in_game.indexOf(players.get(0));
-			
+		
+		//Find the index of the human player in the players_in_game arraylist
+		//and show them their card if they are still part of the game
 		if(human_player_index != -1 ) {
 			Card top_card = players_in_game.get(human_player_index).lookAtTopCard();
 			cli_view.showTopCard(top_card);
@@ -129,6 +131,7 @@ public class GameplayController {
 		}
 		
 		test_logger.logActiveCards(cardsInPlay);
+		test_logger.logCategory(current_player.whoAmI(), category, player_plays_list);		
 		
 		ArrayList<PlayerAbstract> winning_players = new ArrayList<PlayerAbstract>(); //List of players who have the maximum value of a card
 		ArrayList<Card> winning_cards_pile = new ArrayList<Card>(); //List of winning cards (to be moved into the draw pile if > 1)

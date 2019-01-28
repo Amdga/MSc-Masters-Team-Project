@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import common.Card;
+import common.PlayerPlays;
 
 /**
  * The TestLogger Class contains the functionality to log actions performed during the
@@ -128,7 +129,7 @@ public class TestLogger {
 		write(logOutput);
 	}
 
-	public void logCategory(int playerNumber, String choice, int[] playerOrder, ArrayList<Card> activeCards) {
+	public void logCategory(int playerNumber, String choice, ArrayList<PlayerPlays> player_plays_list) {
 		/**
 		 * Writes a string detailing the player number and their category selection.
 		 * 
@@ -136,7 +137,7 @@ public class TestLogger {
 		 * @param choice		the category choice of the player
 		 */
 		write(logCategorySelection(playerNumber, choice));
-		write(logCategoryScores(playerOrder, activeCards, choice));
+		write(logCategoryScores(choice, player_plays_list));
 	}
 
 	public void logPlayerDeck(int playerNumber, boolean isHuman, ArrayList<Card> deck) {
@@ -223,7 +224,7 @@ public class TestLogger {
 
 	}
 	
-	private String logCategoryScores(int[] playerOrder, ArrayList<Card> activeCards, String choice) {
+	private String logCategoryScores(String category, ArrayList<PlayerPlays> player_plays) {
 		/**
 		 * Creates a string detailing the scores of the category
 		 * 
@@ -233,9 +234,11 @@ public class TestLogger {
 		 * @return	string with the scores of each player
 		 */
 		String logOutput = "\tScores:\n";
-		for(int i=0;i<activeCards.size();i++) {
-			logOutput += "\t\tPlayer " + playerOrder[i] + ":\t" + activeCards.get(i).getValue(choice) + "\n";
+
+		for(PlayerPlays player : player_plays) {
+			logOutput += "\t\tPlayer " + player.getPlayer().whoAmI() + ":\t" + player.getCard().getValue(category) + "\n";
 		}
+		
 		return logOutput;
 	}
 
