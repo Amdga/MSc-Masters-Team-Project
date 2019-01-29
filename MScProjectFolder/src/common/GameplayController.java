@@ -9,10 +9,13 @@ import java.util.Iterator;
 
 public class GameplayController {
 	
-	private ArrayList<Card> cardsInDeck; //This will be replaced by model.getDeck() when model is implemented
+	private ArrayList<Card> cardsInDeck;
 	
 	private ArrayList<Card> cardsInDrawPile;
 	private ArrayList<Card> cardsInPlay;
+	
+	//players = a list of every player in the game (including those who have lost)
+	//players_in_game = a list of players who currently have cards left (are still in the game)
 	private ArrayList<PlayerAbstract> players;
 	private ArrayList<PlayerAbstract> players_in_game;
 	
@@ -44,15 +47,15 @@ public class GameplayController {
 		
 		int card_counter = 0;
 		for(Card c : cardsInDeck) {
-			
+			//The modulus of the number of players in the game gives an index between 0 and the number of players
+			//This number is the index of the player the card is to be given to
 			int player_to_give_card_to = card_counter % players.size();
 			
-			//System.out.println("Player "+player_to_give_card_to+" gets "+c.getValue("Cargo"));
 			players.get(player_to_give_card_to).addToDeck(c);
 			card_counter ++;
-			
 		}
-		
+
+		//Log the initial state of each players deck
 		for(PlayerAbstract player : players) {
 			test_logger.logPlayerInitialDeck(player.whoAmI(), player.amIHuman(), player.getCurrentDeck());
 		}
@@ -69,6 +72,7 @@ public class GameplayController {
 		
 		int player_counter = 0;
 		
+		//Create the human players and add them to the players_in_game list and the players list
 		for(int i=0; i<number_of_humans; i++) {
 			PlayerAbstract human_player = new HumanPlayer(player_counter,cli_view);
 			players.add(human_player);
@@ -76,6 +80,7 @@ public class GameplayController {
 			player_counter++;
 		}
 		
+		//Create the AI players adn add tehm to the players_in_game list and the players list
 		for(int i=0; i<number_of_ai; i++) {
 			PlayerAbstract ai_player = new AIPlayer(player_counter);
 			players.add(ai_player);
@@ -97,8 +102,11 @@ public class GameplayController {
 	
 	private PlayerAbstract topTrumpsRound(PlayerAbstract current_player) {
 		
+		//Log the current player on the CLI
 		cli_view.currentPlayer(current_player.whoAmI());
 		
+		//Get the index of the human player (human player is always stored at index 0 of the players list
+		// - we have decided this as a standard in our code)
 		int human_player_index = players_in_game.indexOf(players.get(0));
 		
 		//Find the index of the human player in the players_in_game arraylist
@@ -108,7 +116,7 @@ public class GameplayController {
 			cli_view.showTopCard(top_card);
 		}
 
-		System.out.println("Current player deck size = "+current_player.currentDeck.size());
+		//Get the category from the current player and send this to the CLI
 		String category = current_player.decideOnCategory();
 		cli_view.showCategory(category);
 		
@@ -120,17 +128,22 @@ public class GameplayController {
 			p.lookAtTopCard();
 			Card players_card = p.takeTopCard();
 			
+			//If their card exists (it should always exist but it is just a check)
 			if(players_card != null) {
+				//Print the value of the players card to the CLI
 				int current_value = players_card.getValue(category);
 				cli_view.playerHasValue(p.whoAmI(), current_value);
 				
+				//add their card to the cards in play
 				cardsInPlay.add(players_card);
 				
+				//Create a new PlayerPlays object to keep track of who played what card
 				PlayerPlays player_plays = new PlayerPlays(p,players_card,category);
 				player_plays_list.add(player_plays);
 			}
 		}
 		
+		//Send relevant information to logger
 		test_logger.logActiveCards(cardsInPlay);
 		test_logger.logCategory(current_player.whoAmI(), category, player_plays_list);		
 		
@@ -146,6 +159,8 @@ public class GameplayController {
 		while(winning_value == current_value && (i<player_plays_list.size())) {
 			//Loop which determines if there is a draw
 			
+			//While the next value in the list is equal to the first value (while there is multiple "winning" values
+			//add the card to the winning players list and the winning cards list
 			winning_players.add(player_plays_list.get(i).getPlayer());
 			winning_cards_pile.add(player_plays_list.get(i).getCard());
 			
@@ -158,21 +173,27 @@ public class GameplayController {
 		if(winning_cards_pile.size() == 1) {
 			//If there isn't a draw
 			
+			//Get and log the winning player
 			PlayerAbstract winning_player = winning_players.get(0);
 			persistent_game_data.log_player_won_rounds(winning_player.whoAmI());
-			
 			cli_view.theWinnerIs(winning_player.whoAmI());
+			
+			//Shuffle the cards in play and teh cards in the draw pile
 			Collections.shuffle(cardsInPlay);
 			Collections.shuffle(cardsInDrawPile);
 			
+			//Add the cards currently in play to the winning players deck
 			for(Card c : cardsInPlay) {
 				winning_player.addToDeck(c);
 			}
 			
+			//Add the cards in the draw pile to the winning players deck
+			//(this list is only populated if the previous round resulted in a draw)
 			for(Card c : cardsInDrawPile) {
 				winning_player.addToDeck(c);
 			}
 			
+			//Clear the cards in the draw pile (as they have just been handed out) and log this
 			cardsInDrawPile.clear();
 			test_logger.logCommunalPile(cardsInDrawPile);
 			
@@ -180,42 +201,54 @@ public class GameplayController {
 		else {
 			//If there is a draw
 			
-			persistent_game_data.increment_number_of_draws();
-			
+			//Add all cards in play to the draw pile
 			for(Card c : cardsInPlay) {
 				cardsInDrawPile.add(c);
 			}
 			
+			//Log that there is a draw in all the appropriate places
+			persistent_game_data.increment_number_of_draws();
 			test_logger.logCommunalPile(cardsInDrawPile);
-			
 			cli_view.itsADraw();
 			
 			removeLosingPlayers();
 			cardsInPlay.clear();
+			
+			//The current player gets to play again if it is a draw, so return the current player
 			return current_player;
 			
 		}
 			
 		removeLosingPlayers();
 		cardsInPlay.clear();
+		
+		//Return the next player whos turn it is
 		return nextPlayer(current_player);
 		
 	}
 	
+	/**
+	 * Method which iterates through the list of players in the game and removes all
+	 * of those with 0 cards left
+	 */
+	
 	private void removeLosingPlayers() {
 		
+		//Iterate through the arrayList of players in the game, removing those with 0 cards left
 		Iterator<PlayerAbstract> it = players_in_game.iterator();
 		while(it.hasNext()) {
 			
 			PlayerAbstract player = it.next();
 			if(player.getNumberofCardsLeft() == 0) {
+				//Tell the CLI that a player has lost
 				cli_view.playerLoses(player.whoAmI());
 				it.remove();
 			}
 			
 		}
 		
-		//To prevent cards being stuck in the draw pile at the end of the game
+		//If there is only one player left, give all cards in the draw pile to the winning player
+		//this is for completeness and results in the winning player ending up with the complete deck
 		if(players_in_game.size() == 1) {
 			for(Card c : cardsInDrawPile) {
 				players_in_game.get(0).addToDeck(c);
@@ -275,7 +308,6 @@ public class GameplayController {
 		}
 		
 		try {
-			
 			int winning_player = players_in_game.get(0).whoAmI();
 			
 			persistent_game_data.log_player_who_won(winning_player);
@@ -283,9 +315,10 @@ public class GameplayController {
 			test_logger.logWinningPlayer(winning_player);
 		}
 		catch (IndexOutOfBoundsException e) {
-			System.out.println("GAMEPLAY: Sorry, no winner this time!!");
+			System.out.println("Sorry, no winner this time!!");
 		}
 			
+		//We don't need this in here but it's here until Database is set up
 		System.out.println("GAME DATA");
 		System.out.println("Number of rounds = "+persistent_game_data.get_number_of_rounds());
 		System.out.println("Number of draws = "+persistent_game_data.get_number_of_draws());
@@ -298,17 +331,24 @@ public class GameplayController {
 
 	}
 	
+	/**
+	 * Method which gets the deck from the model and stores it in
+	 * the cardsInDeck arrayList
+	 * Also logs the deck before and after shuffling
+	 */
+	
 	public void getDeck() {
-		
 		cardsInDeck.addAll(model.getShuffledDeck());
-		/*for(int i=0;i<10;i++) {
-			cardsInDeck.add(model.getShuffledDeck().get(i));
-		}*/
 		
 		test_logger.logDeckCreation(model.getDeck());
 		test_logger.logDeckShuffle(cardsInDeck);
-		
 	}
+	
+	/**
+	 * PersistentGameData is used to store game data as the game progresses
+	 * 
+	 * @return the PersistentGameData object for this game
+	 */
 	
 	public PersistentGameData get_game_data() {
 		return persistent_game_data;
@@ -321,6 +361,7 @@ public class GameplayController {
 	 * @param view
 	 * @param number_of_human_players
 	 * @param number_of_ai_players
+	 * @param log_data - whether the game data is to be logged or not
 	 */
 	public GameplayController(GetDeckModel model, CLIView view, int number_of_human_players, int number_of_ai_players, boolean log_data) {
 		
@@ -356,7 +397,9 @@ public class GameplayController {
 		
 		GameplayController game = new GameplayController(placeholder_model,placeholder_view,1,2, false);
 		
-		game.topTrumpsGame();
+		//game.topTrumpsGame();
+		
+		Database db = new Database();
 		
 	}*/
 

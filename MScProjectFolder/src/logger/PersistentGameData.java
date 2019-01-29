@@ -13,7 +13,6 @@ public class PersistentGameData {
 	    	
 	    	//Uses the Singleton design pattern since we only want one of these per game
 	    	//(multiple games can't be run at once)
-
 	    	
 	    	player_wins = new int[number_of_players];
 	    	for(int i=0; i<player_wins.length; i++) {
