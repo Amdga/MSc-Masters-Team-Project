@@ -108,6 +108,7 @@ public class GameplayController {
 			cli_view.showTopCard(top_card);
 		}
 
+		System.out.println("Current player deck size = "+current_player.currentDeck.size());
 		String category = current_player.decideOnCategory();
 		cli_view.showCategory(category);
 		
@@ -153,18 +154,7 @@ public class GameplayController {
 				current_value = player_plays_list.get(i).getCategoryValue();
 			}
 		}
-		
-		Iterator<PlayerAbstract> it = players_in_game.iterator();
-		while(it.hasNext()) {
 			
-			PlayerAbstract player = it.next();
-			if(player.getNumberofCardsLeft() == 0) {
-				cli_view.playerLoses(player.whoAmI());
-				it.remove();
-			}
-			
-		}
-		
 		if(winning_cards_pile.size() == 1) {
 			//If there isn't a draw
 			
@@ -192,7 +182,7 @@ public class GameplayController {
 			
 			persistent_game_data.increment_number_of_draws();
 			
-			for(Card c : winning_cards_pile) {
+			for(Card c : cardsInPlay) {
 				cardsInDrawPile.add(c);
 			}
 			
@@ -200,13 +190,37 @@ public class GameplayController {
 			
 			cli_view.itsADraw();
 			
+			removeLosingPlayers();
 			cardsInPlay.clear();
 			return current_player;
 			
 		}
-		
+			
+		removeLosingPlayers();
 		cardsInPlay.clear();
 		return nextPlayer(current_player);
+		
+	}
+	
+	private void removeLosingPlayers() {
+		
+		Iterator<PlayerAbstract> it = players_in_game.iterator();
+		while(it.hasNext()) {
+			
+			PlayerAbstract player = it.next();
+			if(player.getNumberofCardsLeft() == 0) {
+				cli_view.playerLoses(player.whoAmI());
+				it.remove();
+			}
+			
+		}
+		
+		//To prevent cards being stuck in the draw pile at the end of the game
+		if(players_in_game.size() == 1) {
+			for(Card c : cardsInDrawPile) {
+				players_in_game.get(0).addToDeck(c);
+			}
+		}
 		
 	}
 	
