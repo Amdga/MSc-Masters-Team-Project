@@ -1,9 +1,9 @@
 import java.util.Scanner;
 /*
 Human Player class reads user's category decision
- *
-@author Ifigenia Temesio
-@ version 1
+*
+* @author Ifigenia Temesio
+* @ version 2
  */
 
 public class HumanPlayer extends PlayerAbstract {
@@ -11,10 +11,12 @@ public class HumanPlayer extends PlayerAbstract {
 	private String choice = "";
 	Scanner input;
 
+	// Sets human player to human, overwrites false state from PlayerAbstract. 
 	public HumanPlayer() {
 		amIHuman = true;
 
 	}
+	// Human selection returns a string choice based on keyboard input. 
 	public String decideOnCategory() {
 		input = new Scanner(System.in);
 
@@ -22,7 +24,7 @@ public class HumanPlayer extends PlayerAbstract {
 		choice = input.nextLine();
 		input.close();
 		return choice;
-		
+
 	}
 }
 

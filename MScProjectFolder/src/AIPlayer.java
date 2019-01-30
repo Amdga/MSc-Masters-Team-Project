@@ -4,7 +4,7 @@ import java.util.Random;
 /*
  * AI player randomly selecting category from 1 to 5
  * @author Ifigenia Temesio
- * @version 1
+ * @version 2
  * */
 
 public class AIPlayer extends PlayerAbstract{
@@ -14,13 +14,13 @@ public class AIPlayer extends PlayerAbstract{
 	public AIPlayer() {
 		
 	}
-// Random selection of 5 deck headers. 
+// Random selection from 5 categories from the Deck header object.
 	public String decideOnCategory() {
 		int choiceNum = r.nextInt(5);
 		String choice = currentDeck.getHeader()[choiceNum];
 		return choice;
 	}
-	
+	// Depends on the structure of the Deck object.
 
 }
 

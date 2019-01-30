@@ -1,5 +1,6 @@
 <html>
-
+<style>
+  	body{ background-color:#12A5F4; 
 	<head>
 		<!-- Web page title -->
     	<title>Top Trumps</title>
@@ -19,12 +20,71 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
 	</head>
-
+}
+</style>
     <body onload="initalize()"> <!-- Call the initalize method when the page loads -->
     	
     	<div class="container">
 
-			<!-- Add your HTML Here -->
+			 <style>
+  .buttonGame {
+  background-color: #ff7c30;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 15px 25px;
+  text-align: center;
+  font-size: 30px;
+  font-family: arial,serif;
+  cursor: pointer;
+}
+
+.buttonGame:hover {
+  background-color: #f25900;
+}
+</style>
+			 <style>
+  .buttonStats {
+  background-color: #ff7c30;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 15px 25px;
+  text-align: center;
+  font-size: 30px;
+  font-family: arial,serif;
+  cursor: pointer;
+}
+
+.buttonStats:hover {
+  background-color: #f25900;
+}
+</style>
+
+<style>
+.center {
+  margin: auto;
+  width: 70%;
+  padding: 200px;
+}
+</style>
+
+  <body>
+  	<div class="center">
+  	<div class="container-fluid">
+  	<div class="row">
+  <div class="col-sm-12"><font color="#ffffff"><h1 style= "font-family: arial, serif; font-size:36px"><center>WELCOME TO FOOD IS LIFE'S TOP TRUMPS GAME</center></h1></div>
+</div>
+
+	<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4"><h2 style= "font-family: arial, serif;font-size:30px"><small><center> Choose to play a game or see latest statistics below</center></h2></small>
+  	<center> <button class="buttonGame">Game</button><button class="buttonStats">Stats</button></center></div>
+  <div class="col-sm-4"></div>
+ 
+</div>
+  	</div>
+  </body>
 		
 		</div>
 		
@@ -36,10 +96,7 @@
 				// --------------------------------------------------------------------------
 				// You can call other methods you want to run when the page first loads here
 				// --------------------------------------------------------------------------
-				
-				// For example, lets call our sample methods
-				helloJSONList();
-				helloWord("Student");
+
 				
 			}
 			

@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 
-import javax.smartcardio.Card;
-
 /**
  * The PlayerAbstract class holds all methods for the functioning of a
  * player's actions in a Top Trumps game.
