@@ -261,32 +261,6 @@ public class GameplayController {
 	}
 	
 	/**
-	 * Method used to determine whos turn it is next to play
-	 * 
-	 * @param current_player: the player who went last
-	 * @return next_player: the player whos turn it is next
-	 */
-	private PlayerAbstract nextPlayer(PlayerAbstract current_player) {
-		
-		int current_player_index = players_in_game.indexOf(current_player);
-		int next_player_index = current_player_index;
-		
-		next_player_index++;
-		if(next_player_index >= players_in_game.size()) {
-			next_player_index = 0;
-		}
-		
-		if(!players_in_game.isEmpty()) {
-			PlayerAbstract next_player = players_in_game.get(next_player_index);
-			return next_player;
-		}
-		else {
-			return null;
-		}
-
-	}
-	
-	/**
 	 * This is the actual top trumps game, and repeats rounds while there is still players left
 	 * 
 	 */
