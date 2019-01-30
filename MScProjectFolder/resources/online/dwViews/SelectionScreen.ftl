@@ -38,6 +38,9 @@
   font-family: arial,serif;
   cursor: pointer;
 }
+.buttonGame:shadow {
+  background-color: 0 8px 16px rgba(0,0,0,2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
 
 .buttonGame:hover {
   background-color: #f25900;
@@ -59,6 +62,9 @@
 .buttonStats:hover {
   background-color: #f25900;
 }
+.buttonStats:shadow {
+  background-color: 0 8px 16px rgba(0,0,0,2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
 </style>
 
 <style>
@@ -79,7 +85,7 @@
 	<div class="row">
   <div class="col-sm-4"></div>
   <div class="col-sm-4"><h2 style= "font-family: arial, serif;font-size:30px"><small><center> Choose to play a game or see latest statistics below</center></h2></small>
-  	<center> <button class="buttonGame">Game</button><button class="buttonStats">Stats</button></center></div>
+  	<center> <button class="button buttonGame">Game</button><button class="button buttonStats">Stats</button></center></div>
   <div class="col-sm-4"></div>
  
 </div>
