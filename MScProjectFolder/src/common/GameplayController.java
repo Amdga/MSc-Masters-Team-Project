@@ -102,6 +102,9 @@ public class GameplayController {
 	
 	private PlayerAbstract topTrumpsRound(PlayerAbstract current_player) {
 		
+		//variable to store the winner of the game
+		PlayerAbstract winning_player;
+		
 		//Log the current player on the CLI
 		cli_view.currentPlayer(current_player.whoAmI());
 		
@@ -174,7 +177,7 @@ public class GameplayController {
 			//If there isn't a draw
 			
 			//Get and log the winning player
-			PlayerAbstract winning_player = winning_players.get(0);
+			winning_player = winning_players.get(0);
 			persistent_game_data.log_player_won_rounds(winning_player.whoAmI());
 			cli_view.theWinnerIs(winning_player.whoAmI());
 			
@@ -223,7 +226,7 @@ public class GameplayController {
 		cardsInPlay.clear();
 		
 		//Return the next player whos turn it is
-		return nextPlayer(current_player);
+		return winning_player;
 		
 	}
 	
