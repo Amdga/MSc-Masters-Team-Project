@@ -6,7 +6,7 @@ public class PersistentGameData {
 		private int winning_player;
 		private int number_of_rounds;
 		private int[] player_wins;
-		private boolean gameWasCompleted = true;
+		private boolean gameWasQuit = false;
 		
 	    private static PersistentGameData game_data; 
 	  
@@ -64,11 +64,11 @@ public class PersistentGameData {
 	    	return player_wins; 
 	    }
 	    
-	    public void gameNotCompleted() {
-	    	this.gameWasCompleted = false;
+	    public void setWhetherGameWasQuit(boolean quit_game) {
+	    	this.gameWasQuit = quit_game;
 	    }
 	    
 	    public boolean wasGameCompleted() {
-	    	return this.gameWasCompleted;
+	    	return !this.gameWasQuit;
 	    }
 }

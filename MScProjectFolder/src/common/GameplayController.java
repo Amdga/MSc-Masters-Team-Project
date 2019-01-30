@@ -304,10 +304,8 @@ public class GameplayController {
 			catch (IndexOutOfBoundsException e) {
 				System.out.println("Sorry, no winner this time!!");
 			}
-		}
-		
-		if(quit_game == true) {
-			persistent_game_data.gameNotCompleted();
+		} else {
+			persistent_game_data.setWhetherGameWasQuit(quit_game);
 		}
 			
 		//We don't need this in here but it's here until Database is set up
