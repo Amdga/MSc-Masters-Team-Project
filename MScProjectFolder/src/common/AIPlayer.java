@@ -21,9 +21,6 @@ public class AIPlayer extends PlayerAbstract{
 		
 		int choiceNum = r.nextInt(5);
 		
-		System.out.println("Current Deck = "+currentDeck.size());
-		System.out.println("Card name = "+currentDeck.get(0).getCardName());
-		
 		choice = currentDeck.get(0).getHeaders()[choiceNum];
 		
 		return choice;
