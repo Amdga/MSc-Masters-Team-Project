@@ -1,4 +1,5 @@
 package commandline;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import ch.qos.logback.core.net.SyslogOutputStream;
@@ -13,6 +14,8 @@ public class CLIView implements ReturnsUserInput{
 	public CLIView() {
 		input_scanner = new Scanner(System.in);
 	}
+
+	private Card card;
 
 	public void welcomeMessage() {
 		printStars();
@@ -41,9 +44,9 @@ public class CLIView implements ReturnsUserInput{
 		System.out.println("You are playing against 4 other players");
 	}
 
-	public void beginningOfRound(int cardsInDeck, int round) { // ADD WHO IS THE ACTIVE PLAYER?
+	public void beginningOfRound(int cards, int round) {
 		System.out.println();
-		System.out.println("~ " + "Round " + round + " ~" + "\n\nYou have " + cardsInDeck + " cards in your deck.");
+		System.out.println("~ " + "Round " + round + " ~" + "\n\nYou have " + cards + " cards in your deck.");
 		System.out.println();
 	}
 
@@ -52,16 +55,16 @@ public class CLIView implements ReturnsUserInput{
 		
 		//System.out.println("Card name = "+card.getCardName());
 		
-//		this.card = card;
+		this.card = card;
 		//showTopCard();
-		return decideCategory(card);
+		return decideCategory();
 	}
 
 	// Method that shows the top card. Called by the getCategory() method in the
 	// same class.
 	public void showTopCard(Card card) {
 
-//		this.card = card;
+		this.card = card;
 		String[] headers = card.getHeaders();
 		System.out.println("Players have drawn their cards." + "\n\nYou drew: " + card.getCardName());
 		printStars();
@@ -96,9 +99,10 @@ public class CLIView implements ReturnsUserInput{
 	// Method that translates what player won from the passed number. Player 0 is
 	// the user and is displayed differently.
 	public void translatePlayer(int number) {
-		String player = "Player " + number;
+		String player = "Player" + number;
 		if (number == 0) {
-			player = "You";
+			player = "You ";
+
 		}
 		System.out.println(player);
 
@@ -132,11 +136,11 @@ public class CLIView implements ReturnsUserInput{
 				checkNumberInput(number);
 				return number;
 			} catch (NumberFormatException e) {
-				System.out.println("Entry invalid. Please try again: ");
+				System.out.println("That was an invalid digit. Please try again: ");
+
 			}
 		}
 	}
-	
 	//Method that checks if the input is within the valid range.
 	public void checkNumberInput(int number) throws NumberFormatException {
 		if (number < 0 || 2 < number) {
@@ -149,14 +153,10 @@ public class CLIView implements ReturnsUserInput{
 		System.out.println(statistics);
 	}
 	//Method that take user input, checks if the input is an existing category, and returns the chosen category as a String.
-	public String decideCategory(Card card) {
+	public String decideCategory() {
 		String[] headers = card.getHeaders();
 		String selectedCategory;
-		System.out.print("Please enter a category (");
-		for(int i=0;i<headers.length;i++) {
-			if (i<headers.length-1) {System.out.print(headers[i] + ", ");}
-			else {System.out.print(headers[i] + "): \n");}
-		}
+		System.out.println("Please enter a category: ");
 		while (true) {
 			selectedCategory = input_scanner.next();
 			if(selectedCategory.equals("quit")) {
