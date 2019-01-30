@@ -305,6 +305,10 @@ public class GameplayController {
 				System.out.println("Sorry, no winner this time!!");
 			}
 		}
+		
+		if(quit_game == true) {
+			persistent_game_data.gameNotCompleted();
+		}
 			
 		//We don't need this in here but it's here until Database is set up
 		/*System.out.println("GAME DATA");
