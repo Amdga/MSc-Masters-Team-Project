@@ -6,11 +6,12 @@ import common.Card;
 import common.ReturnsUserInput;
 
 public class CLIView implements ReturnsUserInput{
-	Scanner s;
-	private Card card;
+	
+	Scanner input_scanner;
+	boolean quit_game = false;
 	
 	public CLIView() {
-		s = new Scanner(System.in);
+		input_scanner = new Scanner(System.in);
 	}
 
 	public void welcomeMessage() {
@@ -22,7 +23,18 @@ public class CLIView implements ReturnsUserInput{
 	public void goodbyeMessage() {
 		printStars();
 		System.out.println("GoodBye");
+		quit_game = true;
 		printStars();
+	}
+	
+	public void quitGame() {
+		printStars();
+		System.out.println("You have quit the game");
+		printStars();
+	}
+	
+	public boolean hasGameQuit() {
+		return quit_game;
 	}
 
 	public void numberOfPlayersPlaying() {
@@ -40,16 +52,16 @@ public class CLIView implements ReturnsUserInput{
 		
 		//System.out.println("Card name = "+card.getCardName());
 		
-		this.card = card;
+//		this.card = card;
 		//showTopCard();
-		return decideCategory();
+		return decideCategory(card);
 	}
 
 	// Method that shows the top card. Called by the getCategory() method in the
 	// same class.
 	public void showTopCard(Card card) {
 
-		this.card = card;
+//		this.card = card;
 		String[] headers = card.getHeaders();
 		System.out.println("Players have drawn their cards." + "\n\nYou drew: " + card.getCardName());
 		printStars();
@@ -116,7 +128,7 @@ public class CLIView implements ReturnsUserInput{
 				"To quit, select 0. To play a game, select 1. To view statistics from previous games, select 2. Please enter a digit: ");
 		while (true) {
 			try {
-				int number = Integer.parseInt(s.next());
+				int number = Integer.parseInt(input_scanner.next());
 				checkNumberInput(number);
 				return number;
 			} catch (NumberFormatException e) {
@@ -137,7 +149,7 @@ public class CLIView implements ReturnsUserInput{
 		System.out.println(statistics);
 	}
 	//Method that take user input, checks if the input is an existing category, and returns the chosen category as a String.
-	public String decideCategory() {
+	public String decideCategory(Card card) {
 		String[] headers = card.getHeaders();
 		String selectedCategory;
 		System.out.print("Please enter a category (");
@@ -146,7 +158,11 @@ public class CLIView implements ReturnsUserInput{
 			else {System.out.print(headers[i] + "): \n");}
 		}
 		while (true) {
-			selectedCategory = s.next();
+			selectedCategory = input_scanner.next();
+			if(selectedCategory.equals("quit")) {
+				quitGame();
+				return "quit";
+			}
 			for (int i = 0; i < headers.length; i++) {
 				if (selectedCategory.toLowerCase().equals((headers[i]).toLowerCase())) {
 					return headers[i];
@@ -157,7 +173,7 @@ public class CLIView implements ReturnsUserInput{
 
 	}
 	
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		String [] headers = {"description", "Range", "Speed", "Velocity", "Strength", "intellect"};
 		int [] inputValues = {3, 5, 1, 8, 7};
 		
@@ -174,8 +190,6 @@ public class CLIView implements ReturnsUserInput{
 		int number = cliView.gameOrStatorQuit();
 		System.out.println(number);
 		
-		
-		
-	}
+	}*/
 
 }
