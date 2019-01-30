@@ -7,10 +7,12 @@ import common.Card;
 import common.ReturnsUserInput;
 
 public class CLIView implements ReturnsUserInput{
-	Scanner s;
-
+	
+	Scanner input_scanner;
+	boolean quit_game = false;
+	
 	public CLIView() {
-		s = new Scanner(System.in);
+		input_scanner = new Scanner(System.in);
 	}
 
 	private Card card;
@@ -24,7 +26,18 @@ public class CLIView implements ReturnsUserInput{
 	public void goodbyeMessage() {
 		printStars();
 		System.out.println("GoodBye");
+		quit_game = true;
 		printStars();
+	}
+	
+	public void quitGame() {
+		printStars();
+		System.out.println("You have quit the game");
+		printStars();
+	}
+	
+	public boolean hasGameQuit() {
+		return quit_game;
 	}
 
 	public void numberOfPlayersPlaying() {
@@ -119,7 +132,7 @@ public class CLIView implements ReturnsUserInput{
 				"To quit, select 0. To play a game, select 1. To view statistics from previous games, select 2. Please enter a digit: ");
 		while (true) {
 			try {
-				int number = Integer.parseInt(s.next());
+				int number = Integer.parseInt(input_scanner.next());
 				checkNumberInput(number);
 				return number;
 			} catch (NumberFormatException e) {
@@ -145,7 +158,11 @@ public class CLIView implements ReturnsUserInput{
 		String selectedCategory;
 		System.out.println("Please enter a category: ");
 		while (true) {
-			selectedCategory = s.next();
+			selectedCategory = input_scanner.next();
+			if(selectedCategory.equals("quit")) {
+				quitGame();
+				return "quit";
+			}
 			for (int i = 0; i < headers.length; i++) {
 				if (selectedCategory.toLowerCase().equals((headers[i]).toLowerCase())) {
 					return headers[i];
@@ -156,7 +173,7 @@ public class CLIView implements ReturnsUserInput{
 
 	}
 	
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		String [] headers = {"description", "Range", "Speed", "Velocity", "Strength", "intellect"};
 		int [] inputValues = {3, 5, 1, 8, 7};
 		
@@ -173,8 +190,6 @@ public class CLIView implements ReturnsUserInput{
 		int number = cliView.gameOrStatorQuit();
 		System.out.println(number);
 		
-		
-		
-	}
+	}*/
 
 }

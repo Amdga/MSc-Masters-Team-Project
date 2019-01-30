@@ -26,6 +26,8 @@ public class GameplayController {
 	
 	private TestLogger test_logger;
 	
+	private boolean quit_game = false;
+	
 	/**
 	 * Method that randomly decides which player is to go first
 	 * @return is a player who has been selected to go first
@@ -121,6 +123,12 @@ public class GameplayController {
 
 		//Get the category from the current player and send this to the CLI
 		String category = current_player.decideOnCategory();
+		
+		if(category.equals("quit")) {
+			quit_game = true;
+			return null;
+		}
+		
 		cli_view.showCategory(category);
 		
 		ArrayList<PlayerPlays> player_plays_list = new ArrayList<PlayerPlays>(); //An arraylist of objects storing players and their played cards
@@ -271,7 +279,7 @@ public class GameplayController {
 		
 		//While there is still players left, have a round
 		int round_counter = 1;
-		while(players_in_game.size() > 1) {
+		while(players_in_game.size() > 1 && quit_game == false) {
 			persistent_game_data.increment_rounds();
 			test_logger.logNewRound(round_counter);
 			cli_view.beginningOfRound(players.get(0).getCurrentDeck().size(), round_counter);
@@ -284,19 +292,22 @@ public class GameplayController {
 			
 		}
 		
-		try {
-			int winning_player = players_in_game.get(0).whoAmI();
-			
-			persistent_game_data.log_player_who_won(winning_player);
-			cli_view.overallWinner(winning_player);
-			test_logger.logWinningPlayer(winning_player);
-		}
-		catch (IndexOutOfBoundsException e) {
-			System.out.println("Sorry, no winner this time!!");
+		if(quit_game == false) {
+			System.out.println("I am in the not quit game loop");
+			try {
+				int winning_player = players_in_game.get(0).whoAmI();
+				
+				persistent_game_data.log_player_who_won(winning_player);
+				cli_view.overallWinner(winning_player);
+				test_logger.logWinningPlayer(winning_player);
+			}
+			catch (IndexOutOfBoundsException e) {
+				System.out.println("Sorry, no winner this time!!");
+			}
 		}
 			
 		//We don't need this in here but it's here until Database is set up
-		System.out.println("GAME DATA");
+		/*System.out.println("GAME DATA");
 		System.out.println("Number of rounds = "+persistent_game_data.get_number_of_rounds());
 		System.out.println("Number of draws = "+persistent_game_data.get_number_of_draws());
 		System.out.println("Player who won = "+persistent_game_data.get_winning_player());
@@ -304,7 +315,7 @@ public class GameplayController {
 		int[] player_wins = persistent_game_data.get_player_wins();
 		for(int i=0; i<player_wins.length; i++) {
 			System.out.println("Player "+i+" won "+player_wins[i]+" games");
-		}
+		}*/
 
 	}
 	
