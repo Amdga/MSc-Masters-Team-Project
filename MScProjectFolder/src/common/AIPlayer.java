@@ -20,6 +20,7 @@ public class AIPlayer extends PlayerAbstract{
 	public String decideOnCategory() {
 		
 		int choiceNum = r.nextInt(5);
+		
 		choice = currentDeck.get(0).getHeaders()[choiceNum];
 		
 		return choice;

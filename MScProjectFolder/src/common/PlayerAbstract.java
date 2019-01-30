@@ -109,6 +109,12 @@ public abstract class PlayerAbstract {
 		this.currentDeck = inputDeck;
 	}
 	
+	public int whoAmI() {
+		
+		return playerNumber;
+		
+	}
+	
 //	public static void main(String[] args) {
 //		
 //		// Test Method

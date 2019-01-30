@@ -1,6 +1,7 @@
 package commandline;
 import java.util.Scanner;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import common.Card;
 import common.ReturnsUserInput;
 
@@ -36,15 +37,19 @@ public class CLIView implements ReturnsUserInput{
 
 	// Method that pass a Card object to the CLIView, calls showTopCard and decideCategory and returns the chosen category as a String
 	public String getCategory(Card card) {
+		
+		//System.out.println("Card name = "+card.getCardName());
+		
 		this.card = card;
-		showTopCard();
+		//showTopCard();
 		return decideCategory();
 	}
 
 	// Method that shows the top card. Called by the getCategory() method in the
 	// same class.
-	public void showTopCard() {
+	public void showTopCard(Card card) {
 
+		this.card = card;
 		String[] headers = card.getHeaders();
 		System.out.println("Players have drawn their cards." + "\n\nYou drew: " + card.getCardName());
 		printStars();
@@ -85,6 +90,23 @@ public class CLIView implements ReturnsUserInput{
 		}
 		System.out.println(player);
 
+	}
+	
+	public void playerLoses(int player) {
+		System.out.println("Player" + player + " has no more cards left to draw and is being removed from play");
+	}
+	
+	public void currentPlayer(int player) {
+		System.out.println("The current player is: ");
+		translatePlayer(player);
+	}
+	
+	public void showCategory(String category) {
+		System.out.println("The selected category is "+category);
+	}
+	
+	public void playerHasValue(int player, int value) {
+		System.out.println("Player "+player+" has card value "+value);
 	}
 
 	// Method that lets the user choose between quitting, play a game, or view statiscs.
