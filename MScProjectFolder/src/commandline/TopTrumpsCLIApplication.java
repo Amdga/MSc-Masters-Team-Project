@@ -3,6 +3,7 @@ package commandline;
 import common.GameplayController;
 import common.Database;
 import common.GetDeckModel;
+import logger.PersistentGameData;
 
 /**
  * Top Trumps command line application. Contains the main method which is run,
@@ -44,6 +45,7 @@ public class TopTrumpsCLIApplication {
 				app.view.goodbyeMessage();
 			} else if (menuSelection == 1) { // if user wants to start a game, start one
 				app.playGame();
+				app.writeToDatabase();
 			} else if (menuSelection == 2) { // if user wants to see stats, show them
 				app.showStats();
 			}
@@ -81,8 +83,21 @@ public class TopTrumpsCLIApplication {
 		int aiPlayers = 4;
 		gameController = new GameplayController(deckModel, view, 1, aiPlayers, logData);
 		gameController.topTrumpsGame();
-		//data = gameController.getGameData(); 
-		// Might not need the last line
+		
+	}
+	
+	private void writeToDatabase() {
+		
+		PersistentGameData game_data = gameController.get_game_data();
+		
+		db.addGameStats(game_data.get_number_of_rounds(), game_data.get_winning_player(), game_data.get_number_of_draws());
+		
+		int[] player_wins = game_data.get_player_wins();
+		for(int i=0; i<player_wins.length; i++) {
+			db.addRoundStats(i, player_wins[i]);
+		}
+
+		db.updateDatabase();
 	}
 	
 	private void showStats() {

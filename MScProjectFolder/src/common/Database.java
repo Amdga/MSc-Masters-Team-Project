@@ -12,7 +12,7 @@ public class Database {
 	private ArrayList <String> statements = new ArrayList<String>();
 	private ArrayList <String> query = new ArrayList <String>();
 	private final String username = "postgres";
-	private final String password = "foodislife";
+	private final String password = "2409217J";
 
 
 
@@ -65,8 +65,6 @@ public class Database {
 			while(queryResult.next()) {
 				int value = queryResult.getInt(columnName);
 				returnQueryOutput = output + value;
-				System.out.println(returnQueryOutput);
-
 			}
 			//System.out.println(output + value);
 
@@ -153,7 +151,7 @@ public class Database {
 		return stats;
 	}
 
-	public static void main(String [] args) { 
+	/*public static void main(String [] args) { 
 
 		Database db = new Database();
 		db.addGameStats(10, 0, 4);
@@ -168,5 +166,5 @@ public class Database {
 		//		db.addGameStats(8, 1, 0);
 		//		db.updateDatabase();
 
-	}
+	}*/
 }
