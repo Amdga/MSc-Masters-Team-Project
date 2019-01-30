@@ -151,7 +151,7 @@ public class Database {
 		return stats;
 	}
 
-	public static void main(String[] args) { 
+	/*public static void main(String[] args) { 
 
 		Database db = new Database();
 		db.addGameStats(10, 0, 4);
@@ -166,5 +166,5 @@ public class Database {
 		//		db.addGameStats(8, 1, 0);
 		//		db.updateDatabase();
 
-	}
+	}*/
 }
