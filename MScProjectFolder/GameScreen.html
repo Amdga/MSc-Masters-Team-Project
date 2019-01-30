@@ -29,7 +29,7 @@
 	  border: 1px solid #ccc;
 	  float: left;
 	  width: 180px;
-	  height: 300px;
+	  height: 250px;
 	  background-color: #F1F1F1;
 	  border-radius: 8px;
 	  border-color: black;
@@ -91,6 +91,61 @@ div.desc {
        	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 
 </style>
+
+<style>
+.rectangleBackGround {
+  height: 250px;
+  width: 200px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  position: fixed;
+  width: 98%;
+  left: 1%;
+  bottom: 10px;
+}
+</style>
+
+<style>
+.squareMainCard {
+  position: absolute;
+  height: 350px;
+  width: 250px;
+  border-radius: 8px;
+  border-style: solid;
+  border-width: 1px;
+  margin-left:-150px;
+  background:#f1f1f1;
+  bottom:30px;
+  left:50%;
+  top: 80%;
+}
+</style>
+
+<style>
+.btn-group button {
+  background-color: #ff7c30; 
+  border: 1px; 
+  color: white;
+  padding: 10px 10px;
+  cursor: pointer; 
+  width: 90%; 
+  bottom: 0px;
+  left:80%;
+  top: 40%;
+  margin-left: 10px;
+  border-radius: 8px;
+  display: block; 
+}
+
+.btn-group button:not(:last-child) {
+  border-bottom: none; 
+}
+
+.btn-group button:hover {
+  background-color: #f25900;
+}
+</style>
+
 </head>
 	
 <body>
@@ -103,28 +158,28 @@ div.desc {
 		<div class="col-sm-9" style="width:70%"> 
 <div class="gallery">
   <a target="_blank" href="Avenger.jpg">
-    <img src="Avenger.jpg" alt="Cinque Terre" width="600" height="400">
+    <img src="Avenger.jpg" alt="Player 1" width="600" height="400">
   </a>
   <div class="desc">Add a description of the image here</div>
 </div>
 
 <div class="gallery">
   <a target="_blank" href="Carrack.jpg">
-    <img src="Carrack.jpg" alt="Forest" width="600" height="400">
+    <img src="Carrack.jpg" alt="Player 2" width="600" height="400">
   </a>
   <div class="desc">Add a description of the image here</div>
 </div>
 
 <div class="gallery">
   <a target="_blank" href="Constellation.jpg">
-    <img src="Constellation.jpg" alt="Northern Lights" width="600" height="400">
+    <img src="Constellation.jpg" alt="Player 3" width="600" height="400">
   </a>
   <div class="desc">Add a description of the image here</div>
 </div>
 
 <div class="gallery">
   <a target="_blank" href="350r.jpg">
-    <img src="350r.jpg" alt="Mountains" width="600" height="400">
+    <img src="350r.jpg" alt="Player 4" width="600" height="400">
   </a>
   <div class="desc">Add a description of the image here</div>
 </div>
@@ -138,6 +193,33 @@ div.desc {
 			</div>
 </div>
 </div>
+</div>
 
 </body>
+
+<body>
+
+<div class= "container-fluid">
+  <div class="row">
+    <div class ="col-sm-12">
+<div class="rectangleBackGround"></div>
+</div>
+
+
+<div class= "container-fluid">
+  <div class="row">
+      <div class ="col-sm-12">
+        <div class="squareMainCard">
+  <img src="350r.jpg" alt="Player 0" style="width:247px;height:150px;padding:5px">
+  <div class="btn-group">
+  <button>Category 1</button>
+  <button>Category 2</button>
+  <button>Category 3</button>
+  <button>Category 4</button>
+  <button>Category 5</button>
+</div>
+</div>
+</body>
+
+
 </html>
