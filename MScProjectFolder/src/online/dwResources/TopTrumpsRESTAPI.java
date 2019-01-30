@@ -16,6 +16,8 @@ import online.configuration.TopTrumpsJSONConfiguration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
+import common.Card;
+
 @Path("/toptrumps") // Resources specified here should be hosted at http://localhost:7777/toptrumps
 @Produces(MediaType.APPLICATION_JSON) // This resource returns JSON content
 @Consumes(MediaType.APPLICATION_JSON) // This resource can take JSON content as input
@@ -50,6 +52,15 @@ public class TopTrumpsRESTAPI {
 	// ----------------------------------------------------
 	// Add relevant API methods here
 	// ----------------------------------------------------
+	@GET
+	@Path("/showCard")
+	public String showCard() throws IOException{
+		
+		Card c = new Card("Name", new String[] {"0", "1", "2", "3"}, new int[] {1, 2, 3});
+		
+		return oWriter.writeValueAsString(c);	
+	}
+	
 	
 	@GET
 	@Path("/helloJSONList")

@@ -40,6 +40,7 @@
 				// For example, lets call our sample methods
 				helloJSONList();
 				helloWord("Student");
+				showCard();
 				
 			}
 			
@@ -76,6 +77,25 @@
 		
 		<!-- Here are examples of how to call REST API Methods -->
 		<script type="text/javascript">
+		
+			function showCard() {
+				var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/showCard");
+				
+				// Message is not sent yet, but we can check that the browser supports CORS
+				if (!xhr) {
+  					alert("CORS not supported");
+				}
+				
+				xhr.onload = function(e) {
+ 					var responseCard = JSON.parse(xhr.response); // the text of the response
+ 					
+					alert(responseCard.cardName + " " + responseCard.headers[1] + " ! " + responseCard.valueMap["2"]); // lets produce an alert
+					alert(xhr.response);
+				};
+				
+				// We have done everything we need to prepare the CORS request, so send it
+				xhr.send();		
+			}
 		
 			// This calls the helloJSONList REST method from TopTrumpsRESTAPI
 			function helloJSONList() {
