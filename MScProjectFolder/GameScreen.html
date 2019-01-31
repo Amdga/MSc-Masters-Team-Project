@@ -93,7 +93,7 @@ div.desc {
 </style>
 
 <style>
-.rectangleBackGround {
+div.rectangleBackGround {
   height: 250px;
   width: 200px;
   border-radius: 8px;
@@ -103,10 +103,8 @@ div.desc {
   left: 1%;
   bottom: 10px;
 }
-</style>
 
-<style>
-.squareMainCard {
+div.squareMainCard {
   position: absolute;
   height: 350px;
   width: 250px;
@@ -114,25 +112,41 @@ div.desc {
   border-style: solid;
   border-width: 1px;
   margin-left:-150px;
+  position:fixed;
   background:#f1f1f1;
   bottom:30px;
   left:50%;
-  top: 80%;
-}
-</style>
+  top: 50%;
 
-<style>
-.btn-group button {
+}
+
+
+button {
   background-color: #ff7c30; 
-  border: 1px; 
   color: white;
-  padding: 10px 10px;
+  font-style: arial,serif;
+  width: 100%
   cursor: pointer; 
-  width: 90%; 
+  border-radius: 8px;
+  display: block; 
+  margin: 4px;
+
+}
+
+div.btn-group{
+  color: white;
+  width: 100%
+
+
+}
+
+div.btn-group button {
+  
+  width: 100%; 
   bottom: 0px;
   left:80%;
   top: 40%;
-  margin-left: 10px;
+  margin:4px;
   border-radius: 8px;
   display: block; 
 }
@@ -193,32 +207,29 @@ div.desc {
 			</div>
 </div>
 </div>
-</div>
-
-</body>
-
-<body>
-
-<div class= "container-fluid">
-  <div class="row">
-    <div class ="col-sm-12">
+<div class="row">
 <div class="rectangleBackGround"></div>
-</div>
-
-
-<div class= "container-fluid">
-  <div class="row">
-      <div class ="col-sm-12">
-        <div class="squareMainCard">
+  <div class ="col-sm-12">  
+        <div class="squareMainCard" align="bottom">  
   <img src="350r.jpg" alt="Player 0" style="width:247px;height:150px;padding:5px">
+  <a>
   <div class="btn-group">
+    <ul>
   <button>Category 1</button>
   <button>Category 2</button>
   <button>Category 3</button>
   <button>Category 4</button>
   <button>Category 5</button>
+</ul>
+</a>
 </div>
 </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
 </body>
 
 
