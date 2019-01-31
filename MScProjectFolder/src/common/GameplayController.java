@@ -1,8 +1,6 @@
 package common;
 import java.util.ArrayList;
 
-import commandline.CLIView;
-
 public class GameplayController {
 	
 	private ArrayList<Card> cardsInDeck; //This will be replaced by model.getDeck() when model is implemented
@@ -11,8 +9,8 @@ public class GameplayController {
 	private ArrayList<Card> cardsInPlay;
 	public ArrayList<PlayerAbstract> players;
 	
-	GetDeckModel model; //This will be replaced by GetDeck class when it is created
-	CLIView controller; //This will be replaced by Controller class when it is created
+	int model; //This will be replaced by GetDeck class when it is created
+	int controller; //This will be replaced by Controller class when it is created
 	
 	private int decideWhoGoesFirst() {
 		
@@ -52,16 +50,12 @@ public class GameplayController {
 	
 	private void createPlayers(int number_of_humans, int number_of_ai) {
 		
-		int player_counter = 0;
-		
 		for(int i=0; i<number_of_humans; i++) {
-			players.add(new HumanPlayer(player_counter));
-			player_counter++;
+			players.add(new HumanPlayer());
 		}
 		
 		for(int i=0; i<number_of_ai; i++) {
-			players.add(new AIPlayer(player_counter));
-			player_counter++;
+			players.add(new AIPlayer());
 		}
 		
 	}
@@ -99,7 +93,7 @@ public class GameplayController {
 		
 	}*/
 	
-	public GameplayController(GetDeckModel model, CLIView controller, int number_of_human_players, int number_of_ai_players, boolean logging) {
+	public GameplayController(int model, int controller, int number_of_human_players, int number_of_ai_players) {
 		
 		players = new ArrayList<PlayerAbstract>();
 		cardsInDeck = new ArrayList<Card>();
@@ -126,10 +120,7 @@ public class GameplayController {
 	
 	public static void main(String[] args) {
 		
-		CLIView test_view = new CLIView();
-		GetDeckModel test_model = new GetDeckModel();
-		
-		GameplayController game = new GameplayController(test_model,test_view,1,4, false);
+		GameplayController game = new GameplayController(0,0,3,4);
 		
 		int first_player = game.decideWhoGoesFirst();
 		

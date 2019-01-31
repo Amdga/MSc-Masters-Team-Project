@@ -12,10 +12,12 @@ import java.util.ArrayList;
 public class HumanPlayer extends PlayerAbstract {
 	private String choice = "";
 	private ArrayList<String> availableChoices = new ArrayList<String>();
+	private ReturnsUserInput inputGetter;
 
-	public HumanPlayer(int playerNumber) {
+	public HumanPlayer(int playerNumber, ReturnsUserInput inputView) {
 		super(playerNumber);
 		amIHuman = true;
+		inputGetter = inputView;
 	}
 
 	public String decideOnCategory() {
@@ -33,6 +35,7 @@ public class HumanPlayer extends PlayerAbstract {
 //		}
 //		
 //		input.close();
+		choice = inputGetter.getCategory(this.lookAtTopCard());
 		return choice;
 	}
 	

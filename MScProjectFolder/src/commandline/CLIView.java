@@ -3,8 +3,9 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import common.Card;
+import common.ReturnsUserInput;
 
-public class CLIView {
+public class CLIView implements ReturnsUserInput{
 	Scanner s;
 
 	public CLIView() {
