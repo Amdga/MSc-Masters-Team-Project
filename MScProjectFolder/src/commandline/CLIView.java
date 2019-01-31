@@ -95,6 +95,10 @@ public class CLIView implements ReturnsUserInput{
 		System.out.println("The winner of the game: ");
 		translatePlayer(number);
 	}
+	
+	public void noWinner() {
+		System.out.println("Sorry, no winner this time!");
+	}
 
 	// Method that translates what player won from the passed number. Player 0 is
 	// the user and is displayed differently.

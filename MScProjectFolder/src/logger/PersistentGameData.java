@@ -6,7 +6,7 @@ public class PersistentGameData {
 		private int winning_player;
 		private int number_of_rounds;
 		private int[] player_wins;
-		private boolean gameWasQuit = false;
+		private boolean log_data;
 		
 	    private static PersistentGameData game_data; 
 	  
@@ -22,6 +22,7 @@ public class PersistentGameData {
 	    	
 	    	number_of_draws = 0;
 	    	number_of_rounds = 0;
+	    	log_data = true;
 	    	
 	    } 
 	  
@@ -48,6 +49,10 @@ public class PersistentGameData {
 	    	player_wins[player_id]++;
 	    }
 	    
+	    public void set_logger(boolean to_be_logged) {
+	    	log_data = to_be_logged;
+	    }
+	    
 	    public int get_number_of_rounds() {
 	    	return number_of_rounds;
 	    }
@@ -64,11 +69,7 @@ public class PersistentGameData {
 	    	return player_wins; 
 	    }
 	    
-	    public void setWhetherGameWasQuit(boolean quit_game) {
-	    	this.gameWasQuit = quit_game;
-	    }
-	    
-	    public boolean wasGameCompleted() {
-	    	return !this.gameWasQuit;
+	    public boolean data_to_be_logged() {
+	    	return log_data;
 	    }
 }

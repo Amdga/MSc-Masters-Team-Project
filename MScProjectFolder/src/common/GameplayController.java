@@ -293,7 +293,6 @@ public class GameplayController {
 		}
 		
 		if(quit_game == false) {
-			System.out.println("I am in the not quit game loop");
 			try {
 				int winning_player = players_in_game.get(0).whoAmI();
 				
@@ -302,10 +301,10 @@ public class GameplayController {
 				test_logger.logWinningPlayer(winning_player);
 			}
 			catch (IndexOutOfBoundsException e) {
-				System.out.println("Sorry, no winner this time!!");
+				cli_view.noWinner();
 			}
 		} else {
-			persistent_game_data.setWhetherGameWasQuit(quit_game);
+			persistent_game_data.set_logger(false);
 		}
 			
 		//We don't need this in here but it's here until Database is set up
@@ -373,6 +372,13 @@ public class GameplayController {
 		getDeck();
 		
 	}
+	
+	/*
+	 * Testing note to self:
+	 * 
+	 * Test database, main gameplay logic, at least 5 major test cases
+	 * 
+	 */
 
 	
 	/**
