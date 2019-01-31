@@ -86,9 +86,11 @@ div.desc {
        	margin: 5px;
         margin-right: 20px;
        	border-radius: 8px;
+        border-color: black;
+        border-width: 2px;
        	width:100%;
 	  	border-color: black;
-       	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+       	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.24), 0 6px 20px 0 rgba(0,0,0,0.19);
 
 </style>
 
@@ -120,7 +122,6 @@ div.squareMainCard {
 
 }
 
-
 button {
   background-color: #ff7c30; 
   color: white;
@@ -130,14 +131,11 @@ button {
   border-radius: 8px;
   display: block; 
   margin: 4px;
-
 }
 
 div.btn-group{
   color: white;
   width: 100%
-
-
 }
 
 div.btn-group button {
@@ -158,6 +156,31 @@ div.btn-group button {
 .btn-group button:hover {
   background-color: #f25900;
 }
+
+.cardPile {
+  background: #f1f1f1;
+  height: 250px;
+  width: 150px;
+  font-style: arial, serif;
+  font-size: 15px;
+  text-align: left;
+  border-radius: 8px;
+  border-width: 1px;
+  border-style: solid;
+  position: fixed;
+  bottom:200px;
+  right: 75px;
+  border-color: black;
+  box-shadow:
+    0 -1px 2px rgba(0,0,0,0.15),
+    0 -10px 0 -5px #eee,
+    0 -10px 2px -4px rgba(0,0,0,0.15),
+    0 -20px 0 -10px #eee,
+    0 -20px 2px -9px rgba(0,0,0,0.15);
+    padding: 30px;
+
+}
+
 </style>
 
 </head>
@@ -208,8 +231,9 @@ div.btn-group button {
 </div>
 </div>
 <div class="row">
-<div class="rectangleBackGround"></div>
-  <div class ="col-sm-12">  
+ <div class="rectangleBackGround"></div>
+  <div class ="col-sm-9"> 
+   
         <div class="squareMainCard" align="bottom">  
   <img src="350r.jpg" alt="Player 0" style="width:247px;height:150px;padding:5px">
   <a>
@@ -222,13 +246,18 @@ div.btn-group button {
   <button>Category 5</button>
 </ul>
 </a>
+ </div>
+ <div class="col-sm-3">
+   <div class="cardPile">
+     <p>Communal Pile <br> No.of Cards: </p>
+   </div>
 </div>
 </div>
 </div>
 </div>
 </div>
 </div>
-</div>
+
 
 </body>
 
