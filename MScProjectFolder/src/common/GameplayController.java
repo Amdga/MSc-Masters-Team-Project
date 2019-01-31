@@ -293,7 +293,6 @@ public class GameplayController {
 		}
 		
 		if(quit_game == false) {
-			System.out.println("I am in the not quit game loop");
 			try {
 				int winning_player = players_in_game.get(0).whoAmI();
 				
@@ -302,7 +301,7 @@ public class GameplayController {
 				test_logger.logWinningPlayer(winning_player);
 			}
 			catch (IndexOutOfBoundsException e) {
-				System.out.println("Sorry, no winner this time!!");
+				cli_view.noWinner();
 			}
 		}
 			
