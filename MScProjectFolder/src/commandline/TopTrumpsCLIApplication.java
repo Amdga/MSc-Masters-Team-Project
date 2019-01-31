@@ -90,14 +90,16 @@ public class TopTrumpsCLIApplication {
 		
 		PersistentGameData game_data = gameController.get_game_data();
 		
-		db.addGameStats(game_data.get_number_of_rounds(), game_data.get_winning_player(), game_data.get_number_of_draws());
-		
-		int[] player_wins = game_data.get_player_wins();
-		for(int i=0; i<player_wins.length; i++) {
-			db.addRoundStats(i, player_wins[i]);
+		if(game_data.data_to_be_logged() == true) {
+			db.addGameStats(game_data.get_number_of_rounds(), game_data.get_winning_player(), game_data.get_number_of_draws());
+			
+			int[] player_wins = game_data.get_player_wins();
+			for(int i=0; i<player_wins.length; i++) {
+				db.addRoundStats(i, player_wins[i]);
+			}
+	
+			db.updateDatabase();
 		}
-
-		db.updateDatabase();
 	}
 	
 	private void showStats() {

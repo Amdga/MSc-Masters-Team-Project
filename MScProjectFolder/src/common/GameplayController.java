@@ -304,6 +304,9 @@ public class GameplayController {
 				cli_view.noWinner();
 			}
 		}
+		else {
+			persistent_game_data.set_logger(false);
+		}
 			
 		//We don't need this in here but it's here until Database is set up
 		/*System.out.println("GAME DATA");
@@ -370,6 +373,13 @@ public class GameplayController {
 		getDeck();
 		
 	}
+	
+	/*
+	 * Testing note to self:
+	 * 
+	 * Test database, main gameplay logic, at least 5 major test cases
+	 * 
+	 */
 
 	
 	/**
