@@ -122,13 +122,11 @@ public class GameplayController {
 		}
 
 		cli_view.showCategory(category);
-
-		ArrayList<PlayerPlays> player_plays_list = playersPlayCards(category); //An arraylist of objects storing players and their played cards
-
-		//Send relevant information to logger
-		test_logger.logActiveCards(cardsInPlay);
-		test_logger.logCategory(current_player.whoAmI(), category, player_plays_list);		
 		
+		//An arraylist of objects storing players and their played cards
+		ArrayList<PlayerPlays> player_plays_list = playersPlayCards(category, current_player.whoAmI()); 
+		
+		//Do round resolution and get next active player
 		next_active_player = roundResolution(current_player, player_plays_list);
 
 		return next_active_player;
@@ -147,7 +145,7 @@ public class GameplayController {
 		}
 	}
 
-	private ArrayList<PlayerPlays> playersPlayCards(String category) {
+	private ArrayList<PlayerPlays> playersPlayCards(String category, int active_player_number) {
 		
 		ArrayList<PlayerPlays> player_plays_list = new ArrayList<PlayerPlays>(); //An arraylist of objects storing players and their played cards
 
@@ -171,6 +169,10 @@ public class GameplayController {
 				player_plays_list.add(player_plays);
 			}
 		}
+		
+		//Send relevant information to logger
+		test_logger.logActiveCards(cardsInPlay);
+		test_logger.logCategory(active_player_number, category, player_plays_list);
 		
 		return player_plays_list;
 	}
