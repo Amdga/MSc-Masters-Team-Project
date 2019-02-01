@@ -29,6 +29,36 @@ public class GameplayController {
 	private boolean quit_game = false;
 
 	/**
+	 * Constructor of GameplayController, initialises variables and creates players
+	 * 
+	 * @param model
+	 * @param view
+	 * @param number_of_human_players
+	 * @param number_of_ai_players
+	 * @param log_data - whether the game data is to be logged or not
+	 */
+	public GameplayController(GetDeckModel model, CLIView view, int number_of_human_players, int number_of_ai_players, boolean log_data) {
+
+		players = new ArrayList<PlayerAbstract>();
+		players_in_game = new ArrayList<PlayerAbstract>();
+		cardsInDeck = new ArrayList<Card>();
+		cardsInPlay = new ArrayList<Card>();
+		cardsInDrawPile = new ArrayList<Card>();
+
+		this.model = model;
+		this.cli_view = view;
+
+		test_logger = new TestLogger(log_data);
+
+		createPlayers(number_of_human_players,number_of_ai_players);
+
+		this.persistent_game_data = PersistentGameData.getInstance(number_of_human_players+number_of_ai_players);
+
+		getDeck();
+
+	}
+	
+	/**
 	 * Method that randomly decides which player is to go first
 	 * @return is a player who has been selected to go first
 	 */
@@ -369,36 +399,6 @@ public class GameplayController {
 
 	public PersistentGameData get_game_data() {
 		return persistent_game_data;
-	}
-
-	/**
-	 * Constructor of GameplayController, initialises variables and creates players
-	 * 
-	 * @param model
-	 * @param view
-	 * @param number_of_human_players
-	 * @param number_of_ai_players
-	 * @param log_data - whether the game data is to be logged or not
-	 */
-	public GameplayController(GetDeckModel model, CLIView view, int number_of_human_players, int number_of_ai_players, boolean log_data) {
-
-		players = new ArrayList<PlayerAbstract>();
-		players_in_game = new ArrayList<PlayerAbstract>();
-		cardsInDeck = new ArrayList<Card>();
-		cardsInPlay = new ArrayList<Card>();
-		cardsInDrawPile = new ArrayList<Card>();
-
-		this.model = model;
-		this.cli_view = view;
-
-		test_logger = new TestLogger(log_data);
-
-		createPlayers(number_of_human_players,number_of_ai_players);
-
-		this.persistent_game_data = PersistentGameData.getInstance(number_of_human_players+number_of_ai_players);
-
-		getDeck();
-
 	}
 
 	/*
