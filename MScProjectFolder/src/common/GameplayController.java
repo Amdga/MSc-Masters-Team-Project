@@ -19,7 +19,7 @@ public class GameplayController {
 	private ArrayList<PlayerAbstract> players;
 	private ArrayList<PlayerAbstract> players_in_game;
 
-	private CLIView cli_view;
+	private CLIView to_view;
 	private GetDeckModel model;
 
 	private PersistentGameData persistent_game_data;
@@ -46,7 +46,7 @@ public class GameplayController {
 		cardsInDrawPile = new ArrayList<Card>();
 
 		this.model = model;
-		this.cli_view = view;
+		this.to_view = view;
 
 		test_logger = new TestLogger(log_data);
 
@@ -72,7 +72,7 @@ public class GameplayController {
 		while(players_in_game.size() > 1 && quit_game == false) {
 			persistent_game_data.increment_rounds();
 			test_logger.logNewRound(round_counter);
-			cli_view.beginningOfRound(players.get(0).getCurrentDeck().size(), round_counter);
+			to_view.beginningOfRound(players.get(0).getCurrentDeck().size(), round_counter);
 			current_player = topTrumpsRound(current_player);
 			round_counter ++;
 
@@ -86,11 +86,11 @@ public class GameplayController {
 				int winning_player = players_in_game.get(0).whoAmI();
 
 				persistent_game_data.log_player_who_won(winning_player);
-				cli_view.overallWinner(winning_player);
+				to_view.overallWinner(winning_player);
 				test_logger.logWinningPlayer(winning_player);
 			}
 			catch (IndexOutOfBoundsException e) {
-				cli_view.noWinner();
+				to_view.noWinner();
 			}
 		} else {
 			persistent_game_data.set_logger(false);
@@ -125,7 +125,7 @@ public class GameplayController {
 		PlayerAbstract next_active_player;
 
 		//Log the current player on the CLI
-		cli_view.currentPlayer(current_player.whoAmI());
+		to_view.currentPlayer(current_player.whoAmI());
 
 		//Show User their card if still in game
 		roundStartForHuman();
@@ -134,12 +134,12 @@ public class GameplayController {
 		String category = current_player.decideOnCategory();
 
 		if(category.equals("quit")) {
-			cli_view.quitGame();
+			to_view.quitGame();
 			quit_game = true;
 			return null;
 		}
 
-		cli_view.showCategory(category);
+		to_view.showCategory(category);
 		
 		//An arraylist of objects storing players and their played cards
 		ArrayList<PlayerPlays> player_plays_list = playersPlayCards(category, current_player.whoAmI()); 
@@ -159,7 +159,7 @@ public class GameplayController {
 		//and show them their card if they are still part of the game
 		if(human_player_index != -1 ) {
 			Card top_card = players_in_game.get(human_player_index).lookAtTopCard();
-			cli_view.showTopCard(top_card);
+			to_view.showTopCard(top_card);
 		}
 	}
 
@@ -177,7 +177,7 @@ public class GameplayController {
 			if(players_card != null) {
 				//Print the value of the players card to the CLI
 				int current_value = players_card.getValue(category);
-				cli_view.playerHasValue(p.whoAmI(), current_value);
+				to_view.playerHasValue(p.whoAmI(), current_value);
 
 				//add their card to the cards in play
 				cardsInPlay.add(players_card);
@@ -246,7 +246,7 @@ public class GameplayController {
 	private PlayerAbstract weHaveAWinner(PlayerAbstract winning_player) {
 		
 		persistent_game_data.log_player_won_rounds(winning_player.whoAmI());
-		cli_view.theWinnerIs(winning_player.whoAmI());
+		to_view.theWinnerIs(winning_player.whoAmI());
 
 		//Shuffle the cards in play and teh cards in the draw pile
 		Collections.shuffle(cardsInPlay);
@@ -280,7 +280,8 @@ public class GameplayController {
 		//Log that there is a draw in all the appropriate places
 		persistent_game_data.increment_number_of_draws();
 		test_logger.logCommunalPile(cardsInDrawPile);
-		cli_view.itsADraw();
+		to_view.itsADraw();
+		to_view.showCommunalPileSize(cardsInDrawPile.size());
 		
 	}
 
@@ -298,7 +299,7 @@ public class GameplayController {
 			PlayerAbstract player = it.next();
 			if(player.getNumberofCardsLeft() == 0) {
 				//Tell the CLI that a player has lost
-				cli_view.playerLoses(player.whoAmI());
+				to_view.playerLoses(player.whoAmI());
 				it.remove();
 			}
 
@@ -377,7 +378,7 @@ public class GameplayController {
 
 		//Create the human players and add them to the players_in_game list and the players list
 		for(int i=0; i<number_of_humans; i++) {
-			PlayerAbstract human_player = new HumanPlayer(player_counter,cli_view);
+			PlayerAbstract human_player = new HumanPlayer(player_counter,to_view);
 			players.add(human_player);
 			players_in_game.add(human_player);
 			player_counter++;

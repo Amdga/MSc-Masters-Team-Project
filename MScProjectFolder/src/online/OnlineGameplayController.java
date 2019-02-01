@@ -27,7 +27,7 @@ public class OnlineGameplayController extends GameplayController{
 	private ArrayList<PlayerAbstract> players; //a list of every player in the game (including those who have lost)
 	private ArrayList<PlayerAbstract> players_in_game; //a list of players who currently have cards left (are still in the game)
 
-	private CLIView cli_view;
+	private OnlineDataBuffer to_view;
 	private GetDeckModel model;
 
 	private PersistentGameData persistent_game_data;
@@ -44,8 +44,9 @@ public class OnlineGameplayController extends GameplayController{
 	private int round_counter;
 	private String category;
 
-	public OnlineGameplayController(GetDeckModel model, CLIView view, int number_of_human_players, int number_of_ai_players) {
+	public OnlineGameplayController(GetDeckModel model, OnlineDataBuffer view, int number_of_human_players, int number_of_ai_players) {
 		super(model, view, number_of_human_players, number_of_ai_players, false);
+		
 	}
 
 	public String initialiseGame() {
@@ -69,8 +70,8 @@ public class OnlineGameplayController extends GameplayController{
 
 	public String startARound() {
 		if(state.equals(STATES[2]) || state.equals(STATES[5])) {
-			cli_view.beginningOfRound(players.get(0).getCurrentDeck().size(), round_counter); // saves deck size and round num
-			cli_view.currentPlayer(current_player.whoAmI()); // saves active player
+			to_view.beginningOfRound(players.get(0).getCurrentDeck().size(), round_counter); // saves deck size and round num
+			to_view.currentPlayer(current_player.whoAmI()); // saves active player
 			roundStartForHuman(); // saves human card info if human is still in game
 
 			if (current_player.amIHuman()) { // if active player is human
@@ -79,7 +80,7 @@ public class OnlineGameplayController extends GameplayController{
 			}
 			// else:
 			category = current_player.decideOnCategory();
-			cli_view.showCategory(category);
+			to_view.showCategory(category);
 			state = STATES[4];
 			String rest_of_round_output = showRoundResults();
 
@@ -93,7 +94,7 @@ public class OnlineGameplayController extends GameplayController{
 	public String chosenCategory(String category) {
 		if(state.equals(STATES[3])) {
 			this.category = category;
-			cli_view.showCategory(category);
+			to_view.showCategory(category);
 			state = STATES[4];
 			String rest_of_round_output = showRoundResults();
 			return info_from_category_selection + rest_of_round_info;
@@ -114,7 +115,7 @@ public class OnlineGameplayController extends GameplayController{
 			current_player = roundResolution(current_player, player_plays_list);
 			
 			//save size of communal pile
-			cli_view.showCommunalPileSize(cardsInDrawPile.size());
+			to_view.showCommunalPileSize(cardsInDrawPile.size());
 			
 			state = STATES[5];
 			
@@ -122,7 +123,7 @@ public class OnlineGameplayController extends GameplayController{
 			if(players_in_game.size() == 1) {
 				state = STATES[6];
 				persistent_game_data.log_player_who_won(players_in_game.get(0).whoAmI());
-				cli_view.overallWinner(players_in_game.get(0).whoAmI()); //save overall winner
+				to_view.overallWinner(players_in_game.get(0).whoAmI()); //save overall winner
 			}
 			
 			return info_saved_in_this_method;
@@ -134,8 +135,12 @@ public class OnlineGameplayController extends GameplayController{
 	
 	public String quit() {
 		state = STATES[0];
-		cli_view.quitGame();
+		to_view.quitGame();
 		persistent_game_data.set_logger(false);
 		return quit_game_info;
+	}
+	
+	public String getState() {
+		return state;
 	}
 }
