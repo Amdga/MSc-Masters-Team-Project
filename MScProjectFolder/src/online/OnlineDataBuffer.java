@@ -1,9 +1,9 @@
 package online;
 
-import commandline.CLIView;
+import common.ViewInterface;
 import common.Card;
 
-public class OnlineDataBuffer extends CLIView{
+public class OnlineDataBuffer implements ViewInterface{
 
 	public void beginningOfRound(int deck_size, int round) {
 		
@@ -33,7 +33,11 @@ public class OnlineDataBuffer extends CLIView{
 		
 	}
 	
-	public void showCommunalPileSize(int pileSize) {
+	public void playerLoses(int player_number) {
+		
+	}
+	
+	public void showCommunalPileSize(int pile_size) {
 		
 	}
 	
@@ -44,4 +48,7 @@ public class OnlineDataBuffer extends CLIView{
 	public void quitGame() {
 		
 	}
+	
+	// unused method
+	public String getCategory(Card card) {return null;}
 }

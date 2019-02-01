@@ -14,9 +14,9 @@ import commandline.CLIView;
 public class HumanPlayer extends PlayerAbstract {
 	private String choice = "";
 	private ArrayList<String> availableChoices = new ArrayList<String>();
-	private CLIView inputGetter;
+	private ViewInterface inputGetter;
 
-	public HumanPlayer(int playerNumber, CLIView inputView) {
+	public HumanPlayer(int playerNumber, ViewInterface inputView) {
 		super(playerNumber);
 		amIHuman = true;
 		inputGetter = inputView;

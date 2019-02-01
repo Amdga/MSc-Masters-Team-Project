@@ -2,8 +2,9 @@ package commandline;
 import java.util.Scanner;
 
 import common.Card;
+import common.ViewInterface;
 
-public class CLIView{
+public class CLIView implements ViewInterface{
 	
 	Scanner input_scanner;
 	boolean quit_game = false;

@@ -19,7 +19,7 @@ public class GameplayController {
 	private ArrayList<PlayerAbstract> players;
 	private ArrayList<PlayerAbstract> players_in_game;
 
-	private CLIView to_view;
+	private ViewInterface to_view;
 	private GetDeckModel model;
 
 	private PersistentGameData persistent_game_data;
@@ -37,7 +37,7 @@ public class GameplayController {
 	 * @param number_of_ai_players
 	 * @param log_data - whether the game data is to be logged or not
 	 */
-	public GameplayController(GetDeckModel model, CLIView view, int number_of_human_players, int number_of_ai_players, boolean log_data) {
+	public GameplayController(GetDeckModel model, ViewInterface view, int number_of_human_players, int number_of_ai_players, boolean log_data) {
 
 		players = new ArrayList<PlayerAbstract>();
 		players_in_game = new ArrayList<PlayerAbstract>();
@@ -57,7 +57,7 @@ public class GameplayController {
 		getDeck();
 
 	}
-	
+
 	/**
 	 * This is the actual top trumps game, and repeats rounds while there is still players left
 	 * 
@@ -82,16 +82,16 @@ public class GameplayController {
 		}
 
 		if(quit_game == false) {
-			try {
-				int winning_player = players_in_game.get(0).whoAmI();
+			//			try {
+			int winning_player = players_in_game.get(0).whoAmI();
 
-				persistent_game_data.log_player_who_won(winning_player);
-				to_view.overallWinner(winning_player);
-				test_logger.logWinningPlayer(winning_player);
-			}
-			catch (IndexOutOfBoundsException e) {
-				to_view.noWinner();
-			}
+			persistent_game_data.log_player_who_won(winning_player);
+			to_view.overallWinner(winning_player);
+			test_logger.logWinningPlayer(winning_player);
+			//			}
+			//			catch (IndexOutOfBoundsException e) { // cannot have no players in a game
+			//				to_view.noWinner();
+			//			}
 		} else {
 			persistent_game_data.set_logger(false);
 		}
@@ -140,16 +140,16 @@ public class GameplayController {
 		}
 
 		to_view.showCategory(category);
-		
+
 		//An arraylist of objects storing players and their played cards
 		ArrayList<PlayerPlays> player_plays_list = playersPlayCards(category, current_player.whoAmI()); 
-		
+
 		//Do round resolution and get next active player
 		next_active_player = roundResolution(current_player, player_plays_list);
 
 		return next_active_player;
 	}
-	
+
 	protected void roundStartForHuman() {
 		//Get the index of the human player (human player is always stored at index 0 of the players list
 		// - we have decided this as a standard in our code)
@@ -164,7 +164,7 @@ public class GameplayController {
 	}
 
 	protected ArrayList<PlayerPlays> playersPlayCards(String category, int active_player_number) {
-		
+
 		ArrayList<PlayerPlays> player_plays_list = new ArrayList<PlayerPlays>(); //An arraylist of objects storing players and their played cards
 
 		for(PlayerAbstract p : players_in_game) {
@@ -187,18 +187,18 @@ public class GameplayController {
 				player_plays_list.add(player_plays);
 			}
 		}
-		
+
 		//Send relevant information to logger
 		test_logger.logActiveCards(cardsInPlay);
 		test_logger.logCategory(active_player_number, category, player_plays_list);
-		
+
 		return player_plays_list;
 	}
-	
+
 	protected PlayerAbstract roundResolution(PlayerAbstract current_player, ArrayList<PlayerPlays> player_plays_list) {
-		
+
 		PlayerAbstract next_active_player;
-		
+
 		ArrayList<PlayerAbstract> winning_players = new ArrayList<PlayerAbstract>(); //List of players who have the maximum value of a card
 		ArrayList<Card> winning_cards_pile = new ArrayList<Card>(); //List of winning cards (to be moved into the draw pile if > 1)
 
@@ -242,9 +242,9 @@ public class GameplayController {
 		//Return the next player whos turn it is
 		return next_active_player;
 	}
-	
+
 	private PlayerAbstract weHaveAWinner(PlayerAbstract winning_player) {
-		
+
 		persistent_game_data.log_player_won_rounds(winning_player.whoAmI());
 		to_view.theWinnerIs(winning_player.whoAmI());
 
@@ -266,12 +266,12 @@ public class GameplayController {
 		//Clear the cards in the draw pile (as they have just been handed out) and log this
 		cardsInDrawPile.clear();
 		test_logger.logCommunalPile(cardsInDrawPile);
-		
+
 		return winning_player;
 	}
-	
+
 	private void weHaveADraw() {
-		
+
 		//Add all cards in play to the draw pile
 		for(Card c : cardsInPlay) {
 			cardsInDrawPile.add(c);
@@ -282,7 +282,7 @@ public class GameplayController {
 		test_logger.logCommunalPile(cardsInDrawPile);
 		to_view.itsADraw();
 		to_view.showCommunalPileSize(cardsInDrawPile.size());
-		
+
 	}
 
 	/**
@@ -315,7 +315,7 @@ public class GameplayController {
 
 	}
 
-	
+
 	/**
 	 * Method which gets the deck from the model and stores it in
 	 * the cardsInDeck arrayList
@@ -328,8 +328,8 @@ public class GameplayController {
 		test_logger.logDeckCreation(model.getDeck());
 		test_logger.logDeckShuffle(cardsInDeck);
 	}
-	
-	
+
+
 	/**
 	 * Method that randomly decides which player is to go first
 	 * @return is a player who has been selected to go first
@@ -378,7 +378,7 @@ public class GameplayController {
 
 		//Create the human players and add them to the players_in_game list and the players list
 		for(int i=0; i<number_of_humans; i++) {
-			PlayerAbstract human_player = new HumanPlayer(player_counter,to_view);
+			PlayerAbstract human_player = new HumanPlayer(player_counter, to_view);
 			players.add(human_player);
 			players_in_game.add(human_player);
 			player_counter++;
