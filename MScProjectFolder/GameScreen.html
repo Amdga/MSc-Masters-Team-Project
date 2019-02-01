@@ -107,6 +107,7 @@ div.rectangleBackGround {
 }
 
 div.squareMainCard {
+  
   position: absolute;
   height: 350px;
   width: 250px;
@@ -129,24 +130,22 @@ button {
   width: 100%
   cursor: pointer; 
   border-radius: 8px;
-  display: block; 
   margin: 4px;
-}
+  text-align: center;
 
-div.btn-group{
-  color: white;
-  width: 100%
 }
 
 div.btn-group button {
-  
-  width: 100px; 
+ 
+  width: 230px; 
+  height: 35px;
   bottom: 0px;
-  left:80%;
   top: 40%;
+  left: 10px;
   margin:4px;
   border-radius: 8px;
-  display: block; 
+  display: block;
+
 }
 
 .btn-group button:not(:last-child) {
@@ -157,12 +156,13 @@ div.btn-group button {
   background-color: #f25900;
 }
 
-<<<<<<< HEAD
-div.textSquare text {
+div.textSquare {
   text-align: left;
+  top: 50px;
   padding-left: 10%;
   font: arial, serif;
-=======
+}
+
 .cardPile {
   background: #f1f1f1;
   height: 250px;
@@ -185,7 +185,7 @@ div.textSquare text {
     0 -20px 2px -9px rgba(0,0,0,0.15);
     padding: 30px;
 
->>>>>>> b1d2d266359ba3b0e81b95aa03983250d60c50c2
+
 }
 
 </style>
@@ -202,28 +202,28 @@ div.textSquare text {
 		<div class="col-sm-9" style="width:70%"> 
 <div class="gallery">
   <a target="_blank" href="Avenger.jpg">
-    <img src="Avenger.jpg" alt="Player 1" width="600" height="400">
+    <img src="Avenger.jpg" alt="Player 1" style="width:177px;height:110px;">
   </a>
   <div class="desc">Add a description of the image here</div>
 </div>
 
 <div class="gallery">
   <a target="_blank" href="Carrack.jpg">
-    <img src="Carrack.jpg" alt="Player 2" width="600" height="400">
+    <img src="Carrack.jpg" alt="Player 2" style="width:177px;height:110px;">
   </a>
   <div class="desc">Add a description of the image here</div>
 </div>
 
 <div class="gallery">
   <a target="_blank" href="Constellation.jpg">
-    <img src="Constellation.jpg" alt="Player 3" width="600" height="400">
+    <img src="Constellation.jpg" alt="Player 3" style="width:177px;height:110px;">
   </a>
   <div class="desc">Add a description of the image here</div>
 </div>
 
 <div class="gallery">
   <a target="_blank" href="350r.jpg">
-    <img src="350r.jpg" alt="Player 4" width="600" height="400">
+    <img src="350r.jpg" alt="Player 4" style="width:177px;height:110px;">
   </a>
   <div class="desc">Add a description of the image here</div>
 </div>
@@ -238,20 +238,17 @@ div.textSquare text {
 </div>
 </div>
 <div class="row">
-<<<<<<< HEAD
-
+  <div class ="col-sm-12">
 <div class="rectangleBackGround">
-  <div class="text">
-  <p style="margin-left"10px><h3><b>Turn:</b> Player 1<br>
-  <b>Winner:</b> You</br></p></h3></div></div>
-  <div class ="col-sm-12">  
+<div class="textSquare">
+    <p><h3><b>Turn:</b> Player 1<br>
+  <b>Winner:</b> You<br></p></h3></div>
+</div>
+    
         <div class="squareMainCard">  
-=======
- <div class="rectangleBackGround"></div>
-  <div class ="col-sm-9"> 
+  <div class ="col-sm-9">
    
-        <div class="squareMainCard" align="bottom">  
->>>>>>> b1d2d266359ba3b0e81b95aa03983250d60c50c2
+  <div class="squareMainCard" align="bottom"> 
   <img src="350r.jpg" alt="Player 0" style="width:247px;height:150px;padding:5px">
   <a>
   <div class="btn-group">
@@ -266,7 +263,7 @@ div.textSquare text {
  </div>
  <div class="col-sm-3">
    <div class="cardPile">
-     <p>Communal Pile <br> No.of Cards: </p>
+     <p><h5><center><b>Communal Pile</b></center></h5> <br> No.of Cards: </p>
    </div>
 </div>
 </div>
