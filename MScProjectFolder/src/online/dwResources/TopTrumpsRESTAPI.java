@@ -17,6 +17,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
 import common.Card;
+import common.Database;
+import common.GameplayController;
+import common.GetDeckModel;
 
 @Path("/toptrumps") // Resources specified here should be hosted at http://localhost:7777/toptrumps
 @Produces(MediaType.APPLICATION_JSON) // This resource returns JSON content
@@ -32,6 +35,14 @@ import common.Card;
  * methods that allow a TopTrumps game to be controled from a Web page.
  */
 public class TopTrumpsRESTAPI {
+	
+	// variable initialisation
+	private RoundRequestHandler requestHandler; // should implement the same interface as CLIView
+	private GameplayController gameController;
+	private Database db;
+	private GetDeckModel deckModel;
+	private int number_of_human_players = 1;
+	private int number_of_ai_players;
 
 	/** A Jackson Object writer. It allows us to turn Java objects
 	 * into JSON strings easily. */
@@ -47,11 +58,36 @@ public class TopTrumpsRESTAPI {
 		// ----------------------------------------------------
 		// Add relevant initalization here
 		// ----------------------------------------------------
+		
+		requestHandler = new RoundRequestHandler();
+		db = new Database();
+		deckModel = new GetDeckModel(conf.getDeckFile());
+		number_of_ai_players = conf.getNumAIPlayers();
+		
 	}
 	
 	// ----------------------------------------------------
 	// Add relevant API methods here
 	// ----------------------------------------------------
+	@GET
+	@Path("/initialiseGameplay")
+	public String initialiseGameplay() {
+		gameController = new GameplayController(deckModel, view, 1, number_of_ai_players, false); // Replace view with interfacable object
+		gameController.topTrumpsGame();
+		return requestHandler.getStartOfRoundJSON(); // returns round number, cards in deck, active player, card drawn by human
+	}
+	
+	@GET
+	@Path("/decideOnCategory")
+	public String getHumanDecision(@QueryParam("Choice") String choice) throws IOException{
+		// HOW DO WE TELL THE GAMEPLAYCONTROLLER HUMAN CHOICE BEFORE IT ASKS FOR IT???????????????
+		return requestHandler.getRestOfHumanChoiceRoundJSON();
+		
+	}
+	
+	
+	//################## examples and tests
+	
 	@GET
 	@Path("/showCard")
 	public String showCard() throws IOException{
