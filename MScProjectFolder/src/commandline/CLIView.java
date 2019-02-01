@@ -163,8 +163,8 @@ public class CLIView implements ReturnsUserInput{
 		System.out.println("Please enter a category: ");
 		while (true) {
 			selectedCategory = input_scanner.next();
-			if(selectedCategory.equals("quit")) {
-				quitGame();
+			if(selectedCategory.equalsIgnoreCase("quit")) {
+//				quitGame();
 				return "quit";
 			}
 			for (int i = 0; i < headers.length; i++) {

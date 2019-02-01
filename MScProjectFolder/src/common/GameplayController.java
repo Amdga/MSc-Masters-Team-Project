@@ -59,66 +59,53 @@ public class GameplayController {
 	}
 	
 	/**
-	 * Method that randomly decides which player is to go first
-	 * @return is a player who has been selected to go first
-	 */
-	private PlayerAbstract decideWhoGoesFirst() {
-
-		int number_of_players = players.size();
-		int player_who_goes_first = (int) (Math.random() * number_of_players);
-
-		PlayerAbstract player = players.get(player_who_goes_first);
-
-		return player;
-	}
-
-	/**
-	 * Takes the deck and deals it out one by one to each player in the game
-	 */
-	private void dealOutDeck() {
-
-		int card_counter = 0;
-		for(Card c : cardsInDeck) {
-			//The modulus of the number of players in the game gives an index between 0 and the number of players
-			//This number is the index of the player the card is to be given to
-			int player_to_give_card_to = card_counter % players.size();
-
-			players.get(player_to_give_card_to).addToDeck(c);
-			card_counter ++;
-		}
-
-		//Log the initial state of each players deck
-		for(PlayerAbstract player : players) {
-			test_logger.logPlayerInitialDeck(player.whoAmI(), player.amIHuman(), player.getCurrentDeck());
-		}
-
-	}
-
-	/**
-	 * Method which initialises the players and adds them to the player list
+	 * This is the actual top trumps game, and repeats rounds while there is still players left
 	 * 
-	 * @param number of human players
-	 * @param number of AI players
 	 */
-	private void createPlayers(int number_of_humans, int number_of_ai) {
+	public void topTrumpsGame() {
 
-		int player_counter = 0;
+		dealOutDeck();
+		PlayerAbstract current_player = decideWhoGoesFirst();
 
-		//Create the human players and add them to the players_in_game list and the players list
-		for(int i=0; i<number_of_humans; i++) {
-			PlayerAbstract human_player = new HumanPlayer(player_counter,cli_view);
-			players.add(human_player);
-			players_in_game.add(human_player);
-			player_counter++;
+		//While there is still players left, have a round
+		int round_counter = 1;
+		while(players_in_game.size() > 1 && quit_game == false) {
+			persistent_game_data.increment_rounds();
+			test_logger.logNewRound(round_counter);
+			cli_view.beginningOfRound(players.get(0).getCurrentDeck().size(), round_counter);
+			current_player = topTrumpsRound(current_player);
+			round_counter ++;
+
+			for(PlayerAbstract player : players) {
+				test_logger.logPlayerDeck(player.whoAmI(), player.amIHuman(), player.getCurrentDeck());
+			}
 		}
 
-		//Create the AI players adn add tehm to the players_in_game list and the players list
-		for(int i=0; i<number_of_ai; i++) {
-			PlayerAbstract ai_player = new AIPlayer(player_counter);
-			players.add(ai_player);
-			players_in_game.add(ai_player);
-			player_counter++;
+		if(quit_game == false) {
+			try {
+				int winning_player = players_in_game.get(0).whoAmI();
+
+				persistent_game_data.log_player_who_won(winning_player);
+				cli_view.overallWinner(winning_player);
+				test_logger.logWinningPlayer(winning_player);
+			}
+			catch (IndexOutOfBoundsException e) {
+				cli_view.noWinner();
+			}
+		} else {
+			persistent_game_data.set_logger(false);
 		}
+
+		//We don't need this in here but it's here until Database is set up
+		/*System.out.println("GAME DATA");
+		System.out.println("Number of rounds = "+persistent_game_data.get_number_of_rounds());
+		System.out.println("Number of draws = "+persistent_game_data.get_number_of_draws());
+		System.out.println("Player who won = "+persistent_game_data.get_winning_player());
+
+		int[] player_wins = persistent_game_data.get_player_wins();
+		for(int i=0; i<player_wins.length; i++) {
+			System.out.println("Player "+i+" won "+player_wins[i]+" games");
+		}*/
 
 	}
 
@@ -147,6 +134,7 @@ public class GameplayController {
 		String category = current_player.decideOnCategory();
 
 		if(category.equals("quit")) {
+			cli_view.quitGame();
 			quit_game = true;
 			return null;
 		}
@@ -162,7 +150,7 @@ public class GameplayController {
 		return next_active_player;
 	}
 	
-	private void roundStartForHuman() {
+	protected void roundStartForHuman() {
 		//Get the index of the human player (human player is always stored at index 0 of the players list
 		// - we have decided this as a standard in our code)
 		int human_player_index = players_in_game.indexOf(players.get(0));
@@ -175,7 +163,7 @@ public class GameplayController {
 		}
 	}
 
-	private ArrayList<PlayerPlays> playersPlayCards(String category, int active_player_number) {
+	protected ArrayList<PlayerPlays> playersPlayCards(String category, int active_player_number) {
 		
 		ArrayList<PlayerPlays> player_plays_list = new ArrayList<PlayerPlays>(); //An arraylist of objects storing players and their played cards
 
@@ -207,7 +195,7 @@ public class GameplayController {
 		return player_plays_list;
 	}
 	
-	private PlayerAbstract roundResolution(PlayerAbstract current_player, ArrayList<PlayerPlays> player_plays_list) {
+	protected PlayerAbstract roundResolution(PlayerAbstract current_player, ArrayList<PlayerPlays> player_plays_list) {
 		
 		PlayerAbstract next_active_player;
 		
@@ -326,58 +314,7 @@ public class GameplayController {
 
 	}
 
-	/**
-	 * This is the actual top trumps game, and repeats rounds while there is still players left
-	 * 
-	 */
-	public void topTrumpsGame() {
-
-		dealOutDeck();
-		PlayerAbstract current_player = decideWhoGoesFirst();
-
-		//While there is still players left, have a round
-		int round_counter = 1;
-		while(players_in_game.size() > 1 && quit_game == false) {
-			persistent_game_data.increment_rounds();
-			test_logger.logNewRound(round_counter);
-			cli_view.beginningOfRound(players.get(0).getCurrentDeck().size(), round_counter);
-			current_player = topTrumpsRound(current_player);
-			round_counter ++;
-
-			for(PlayerAbstract player : players) {
-				test_logger.logPlayerDeck(player.whoAmI(), player.amIHuman(), player.getCurrentDeck());
-			}
-
-		}
-
-		if(quit_game == false) {
-			try {
-				int winning_player = players_in_game.get(0).whoAmI();
-
-				persistent_game_data.log_player_who_won(winning_player);
-				cli_view.overallWinner(winning_player);
-				test_logger.logWinningPlayer(winning_player);
-			}
-			catch (IndexOutOfBoundsException e) {
-				cli_view.noWinner();
-			}
-		} else {
-			persistent_game_data.set_logger(false);
-		}
-
-		//We don't need this in here but it's here until Database is set up
-		/*System.out.println("GAME DATA");
-		System.out.println("Number of rounds = "+persistent_game_data.get_number_of_rounds());
-		System.out.println("Number of draws = "+persistent_game_data.get_number_of_draws());
-		System.out.println("Player who won = "+persistent_game_data.get_winning_player());
-
-		int[] player_wins = persistent_game_data.get_player_wins();
-		for(int i=0; i<player_wins.length; i++) {
-			System.out.println("Player "+i+" won "+player_wins[i]+" games");
-		}*/
-
-	}
-
+	
 	/**
 	 * Method which gets the deck from the model and stores it in
 	 * the cardsInDeck arrayList
@@ -389,6 +326,71 @@ public class GameplayController {
 
 		test_logger.logDeckCreation(model.getDeck());
 		test_logger.logDeckShuffle(cardsInDeck);
+	}
+	
+	
+	/**
+	 * Method that randomly decides which player is to go first
+	 * @return is a player who has been selected to go first
+	 */
+	protected PlayerAbstract decideWhoGoesFirst() {
+
+		int number_of_players = players.size();
+		int player_who_goes_first = (int) (Math.random() * number_of_players);
+
+		PlayerAbstract player = players.get(player_who_goes_first);
+
+		return player;
+	}
+
+	/**
+	 * Takes the deck and deals it out one by one to each player in the game
+	 */
+	protected void dealOutDeck() {
+
+		int card_counter = 0;
+		for(Card c : cardsInDeck) {
+			//The modulus of the number of players in the game gives an index between 0 and the number of players
+			//This number is the index of the player the card is to be given to
+			int player_to_give_card_to = card_counter % players.size();
+
+			players.get(player_to_give_card_to).addToDeck(c);
+			card_counter ++;
+		}
+
+		//Log the initial state of each players deck
+		for(PlayerAbstract player : players) {
+			test_logger.logPlayerInitialDeck(player.whoAmI(), player.amIHuman(), player.getCurrentDeck());
+		}
+
+	}
+
+	/**
+	 * Method which initialises the players and adds them to the player list
+	 * 
+	 * @param number of human players
+	 * @param number of AI players
+	 */
+	private void createPlayers(int number_of_humans, int number_of_ai) {
+
+		int player_counter = 0;
+
+		//Create the human players and add them to the players_in_game list and the players list
+		for(int i=0; i<number_of_humans; i++) {
+			PlayerAbstract human_player = new HumanPlayer(player_counter,cli_view);
+			players.add(human_player);
+			players_in_game.add(human_player);
+			player_counter++;
+		}
+
+		//Create the AI players adn add tehm to the players_in_game list and the players list
+		for(int i=0; i<number_of_ai; i++) {
+			PlayerAbstract ai_player = new AIPlayer(player_counter);
+			players.add(ai_player);
+			players_in_game.add(ai_player);
+			player_counter++;
+		}
+
 	}
 
 	/**
