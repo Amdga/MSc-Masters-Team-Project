@@ -11,6 +11,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import online.OnlineDataBuffer;
+import online.OnlineGameplayController;
 import online.configuration.TopTrumpsJSONConfiguration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -37,8 +39,8 @@ import common.GetDeckModel;
 public class TopTrumpsRESTAPI {
 	
 	// variable initialisation
-	private RoundRequestHandler requestHandler; // should implement the same interface as CLIView
-	private GameplayController gameController;
+	private OnlineDataBuffer dataBuffer; // should implement the same interface as CLIView
+	private OnlineGameplayController gameController;
 	private Database db;
 	private GetDeckModel deckModel;
 	private int number_of_human_players = 1;
@@ -59,10 +61,12 @@ public class TopTrumpsRESTAPI {
 		// Add relevant initalization here
 		// ----------------------------------------------------
 		
-		requestHandler = new RoundRequestHandler();
+		dataBuffer = new OnlineDataBuffer();
 		db = new Database();
 		deckModel = new GetDeckModel(conf.getDeckFile());
 		number_of_ai_players = conf.getNumAIPlayers();
+		gameController = new OnlineGameplayController(deckModel, dataBuffer, number_of_human_players, number_of_ai_players);
+		dataBuffer.setOGC(gameController);
 		
 	}
 	
@@ -72,16 +76,6 @@ public class TopTrumpsRESTAPI {
 	@GET
 	@Path("/initialiseGameplay")
 	public String initialiseGameplay() {
-		gameController = new GameplayController(deckModel, view, 1, number_of_ai_players, false); // Replace view with interfacable object
-		gameController.topTrumpsGame();
-		return requestHandler.getStartOfRoundJSON(); // returns round number, cards in deck, active player, card drawn by human
-	}
-	
-	@GET
-	@Path("/decideOnCategory")
-	public String getHumanDecision(@QueryParam("Choice") String choice) throws IOException{
-		// HOW DO WE TELL THE GAMEPLAYCONTROLLER HUMAN CHOICE BEFORE IT ASKS FOR IT???????????????
-		return requestHandler.getRestOfHumanChoiceRoundJSON();
 		
 	}
 	
