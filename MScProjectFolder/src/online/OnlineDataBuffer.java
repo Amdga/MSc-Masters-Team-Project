@@ -32,7 +32,6 @@ public class OnlineDataBuffer implements ViewInterface{
 	
 	public void resetValues() {
 		decksize = null;
-		round = null;
 		current_player = null;
 		card = null;
 		category = null;
@@ -91,6 +90,9 @@ public class OnlineDataBuffer implements ViewInterface{
 	
 	public void playerHasValue(int player_number, int value) {
 		int[] input = {player_number, value};
+		if (this.player_values == null) {
+			this.player_values = new ArrayList<int[]>();
+		}
 		this.player_values.add(input);
 		setState();
 	}
@@ -106,6 +108,9 @@ public class OnlineDataBuffer implements ViewInterface{
 	}
 	
 	public void playerLoses(int player_number) {
+		if (this.losing_players == null) {
+			this.losing_players = new ArrayList<Integer>();
+		}
 		this.losing_players.add(player_number);
 		setState();
 	}

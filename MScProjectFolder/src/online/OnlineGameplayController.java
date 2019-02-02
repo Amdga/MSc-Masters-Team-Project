@@ -72,12 +72,12 @@ public class OnlineGameplayController extends GameplayController{
 	 */
 	public String initialiseGame() {
 		if (state.equals(STATES[1])) {
+			state = STATES[2];
+			
 			dealOutDeck();
 			current_player = decideWhoGoesFirst();
-			round_counter = 1;
+			round_counter = 0;
 			persistent_game_data.increment_rounds();
-
-			state = STATES[2];
 
 			startARound(false);
 
@@ -112,18 +112,19 @@ public class OnlineGameplayController extends GameplayController{
 	 */
 	public String startARound(boolean willReset) {
 		if(state.equals(STATES[2]) || state.equals(STATES[5])) {
+			this.round_counter++;
+			state = STATES[3];
 			to_view.beginningOfRound(players.get(0).getCurrentDeck().size(), round_counter); // saves deck size and round num
 			to_view.currentPlayer(current_player.whoAmI()); // saves active player
 			roundStartForHuman(); // saves human card info if human is still in game
 
 			if (current_player.amIHuman()) { // if active player is human
-				state = STATES[3];
 				return this.to_view.toJSON(willReset);
 			}
 			// else:
+			state = STATES[4];
 			category = current_player.decideOnCategory();
 			to_view.showCategory(category);
-			state = STATES[4];
 			
 			showRoundResults(false);
 
@@ -146,9 +147,9 @@ public class OnlineGameplayController extends GameplayController{
 	 */
 	public String chosenCategory(String category) {
 		if(state.equals(STATES[3])) {
+			state = STATES[4];
 			this.category = category;
 			to_view.showCategory(category);
-			state = STATES[4];
 			showRoundResults(false);
 			return this.to_view.toJSON();
 		}
@@ -172,6 +173,8 @@ public class OnlineGameplayController extends GameplayController{
 	 */
 	public String showRoundResults(boolean willReset) {
 		if(state.equals(STATES[4])) {
+			state = STATES[5];
+			
 			// saves category values for each player
 			ArrayList<PlayerPlays> player_plays_list = playersPlayCards(category, current_player.whoAmI());
 			
@@ -181,8 +184,6 @@ public class OnlineGameplayController extends GameplayController{
 			
 			//save size of communal pile
 			to_view.showCommunalPileSize(cardsInDrawPile.size());
-			
-			state = STATES[5];
 			
 			//if we have an overall winner
 			if(players_in_game.size() == 1) {
