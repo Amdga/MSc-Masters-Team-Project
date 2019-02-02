@@ -26,19 +26,20 @@
 	<div class="container">
 
 		<!-- Add your HTML Here -->
-		<div><button type="button" id="newGame" onclick="newGame();">New Game</button></div>
+		<div><button type="button" id="newGame" onclick="newGame();">New Game</button>Click this to create a new game</div>
 
-		<div><button type="button" id="startGame" onclick="initialiseGame();">Start Game</button></div>
+		<div><button type="button" id="startGame" onclick="initialiseGame();">Start Game</button>Click this to start the game</div>
 
-		<div><button type="button" id="startRound" onclick="startARound();">Start Round</button></div>
+		<div><button type="button" id="startRound" onclick="startARound();">Start Round</button>Click this to start the next round (use in 'round ended' state)</div>
 
 		<div><button type="button" id="speed" onclick="chosenCategory('Speed');">Speed</button>
 			<button type="button" id="cargo" onclick="chosenCategory('Cargo');">Cargo</button>
 			<button type="button" id="range" onclick="chosenCategory('Range');">Range</button></div>
 		<div><button type="button" id="size" onclick="chosenCategory('Size');">Size</button>
-			<button type="button" id="firepower" onclick="chosenCategory('Firepower');">Firepower</button></div>
+			<button type="button" id="firepower" onclick="chosenCategory('Firepower');">Firepower</button>
+		Click these to choose a category (use in 'choosing category' state)</div>
 
-		<div><button type="button" id="quit" onclick="quit();">Quit</button></div>
+		<div><button type="button" id="quit" onclick="quit();">Quit</button>Click this to quit the current game</div>
 		<div>
 			<pre><p id="response">######</p></pre>
 		</div><br>
