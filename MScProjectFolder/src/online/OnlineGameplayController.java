@@ -39,6 +39,7 @@ public class OnlineGameplayController extends GameplayController{
 	// ~~~~~~~~ Online mode variable initialisation
 	private static String [] STATES = {"quit", "pre-initialisation", "initialised", "choosing category", 
 									   "showing results", "round ended", "overall winner"};
+	public static final String OVERALL_WINNER = STATES[6];
 	private String state = STATES[1]; //Holds the current state of the game
 	private PlayerAbstract current_player;
 	private int round_counter;
