@@ -49,6 +49,8 @@
 		<div>
 			<p id="error">--------</p>
 		</div>
+		<div><button type="button" id="ff" onclick="fastforward(false);">Fast Forward</button>Fast forward till time to choose category or a player is out, or end of game</div>
+		<div><button type="button" id="ff" onclick="fastforward(true);">Super FF</button>Fast forward till time to choose category or end of game</div>
 
 	</div>
 
@@ -166,6 +168,19 @@
 			xhr.send();
 			xhr.onload = function (e) {
 				testResponse(xhr.response);
+			}
+		}
+
+		function fastforward(skipLosingPlayers) {
+			var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/startARound");
+			xhr.send();
+			xhr.onload = function (e) {
+				var result = JSON.parse(xhr.response);
+				if (result.state == "round ended" && (result.losing_players == null || skipLosingPlayers)) {
+					fastforward(skipLosingPlayers);
+				} else {
+					testResponse(xhr.response);
+				}
 			}
 		}
 	</script>
