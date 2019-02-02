@@ -9,20 +9,20 @@ import java.util.Iterator;
 
 public class GameplayController {
 
-	private ArrayList<Card> cardsInDeck;
+	protected ArrayList<Card> cardsInDeck;
 
-	private ArrayList<Card> cardsInDrawPile;
-	private ArrayList<Card> cardsInPlay;
+	protected ArrayList<Card> cardsInDrawPile;
+	protected ArrayList<Card> cardsInPlay;
 
 	//players = a list of every player in the game (including those who have lost)
 	//players_in_game = a list of players who currently have cards left (are still in the game)
-	private ArrayList<PlayerAbstract> players;
-	private ArrayList<PlayerAbstract> players_in_game;
+	protected ArrayList<PlayerAbstract> players;
+	protected ArrayList<PlayerAbstract> players_in_game;
 
 	private ViewInterface to_view;
-	private GetDeckModel model;
+	protected GetDeckModel model;
 
-	private PersistentGameData persistent_game_data;
+	protected PersistentGameData persistent_game_data;
 
 	private TestLogger test_logger;
 

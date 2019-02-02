@@ -20,23 +20,24 @@ import logger.TestLogger;
  * @version 1
  */
 public class OnlineGameplayController extends GameplayController{
-	private ArrayList<Card> cardsInDeck;
-
-	private ArrayList<Card> cardsInDrawPile;
-	private ArrayList<Card> cardsInPlay;
-	private ArrayList<PlayerAbstract> players; //a list of every player in the game (including those who have lost)
-	private ArrayList<PlayerAbstract> players_in_game; //a list of players who currently have cards left (are still in the game)
-
-	private OnlineDataBuffer to_view;
-	private GetDeckModel model;
-
-	private PersistentGameData persistent_game_data;
-
-	private TestLogger test_logger;
-
-	private boolean quit_game = false;
+//	private ArrayList<Card> cardsInDeck;
+//
+//	private ArrayList<Card> cardsInDrawPile;
+//	private ArrayList<Card> cardsInPlay;
+//	private ArrayList<PlayerAbstract> players; //a list of every player in the game (including those who have lost)
+//	private ArrayList<PlayerAbstract> players_in_game; //a list of players who currently have cards left (are still in the game)
+//
+//	private ViewInteface to_view;
+//	private GetDeckModel model;
+//
+//	private PersistentGameData persistent_game_data;
+//
+//	private TestLogger test_logger;
+//
+//	private boolean quit_game = false;
 
 	// ~~~~~~~~ Online mode variable initialisation
+	private OnlineDataBuffer to_view;
 	private static String [] STATES = {"quit", "pre-initialisation", "initialised", "choosing category", 
 									   "showing results", "round ended", "overall winner"};
 	public static final String OVERALL_WINNER = STATES[6];
