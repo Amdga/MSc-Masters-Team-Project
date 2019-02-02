@@ -80,7 +80,7 @@ public class TopTrumpsRESTAPI {
 
 
 	@GET
-	@Path("game/newGame")
+	@Path("/newGame")
 	public String newGame() throws IOException{
 		dataBuffer = new OnlineDataBuffer();
 		gameController = new OnlineGameplayController(deckModel, dataBuffer, number_of_human_players, number_of_ai_players);
@@ -89,7 +89,7 @@ public class TopTrumpsRESTAPI {
 	}
 
 	@GET
-	@Path("game/initialiseGameplay")
+	@Path("/initialiseGameplay")
 	public String initialiseGameplay() throws IOException{
 		String json_output = gameController.initialiseGame();
 		checkAndWriteToDatabase();
@@ -97,7 +97,7 @@ public class TopTrumpsRESTAPI {
 	}
 
 	@GET
-	@Path("game/startARound")
+	@Path("/startARound")
 	public String startARound() throws IOException{
 		String json_output = gameController.startARound();
 		checkAndWriteToDatabase();
@@ -105,7 +105,7 @@ public class TopTrumpsRESTAPI {
 	}
 
 	@GET
-	@Path("game/chosenCategory")
+	@Path("/chosenCategory")
 	public String chosenCategory(@QueryParam("category") String category) throws IOException{
 		String json_output = gameController.chosenCategory(category);
 		checkAndWriteToDatabase();
@@ -113,7 +113,7 @@ public class TopTrumpsRESTAPI {
 	}
 
 	@GET
-	@Path("game/quit")
+	@Path("/quit")
 	public String quit() throws IOException{
 		String json_output = gameController.quit();
 		checkAndWriteToDatabase();
