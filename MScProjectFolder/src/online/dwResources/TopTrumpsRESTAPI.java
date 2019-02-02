@@ -1,8 +1,6 @@
 package online.dwResources;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -18,9 +16,7 @@ import online.configuration.TopTrumpsJSONConfiguration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
-import common.Card;
 import common.Database;
-import common.GameplayController;
 import common.GetDeckModel;
 import logger.PersistentGameData;
 

@@ -41,7 +41,7 @@ public class Database {
 			statements.clear();	
 		}
 		catch (SQLException | ClassNotFoundException e) { 
-			System.out.println("Connection failed" ); 
+			System.err.println("#############################\n\nDatabase Connection Failed\n\n#############################" ); 
 			e.printStackTrace(); 
 			return; 
 		}
@@ -72,7 +72,7 @@ public class Database {
 
 		}
 		catch (SQLException | ClassNotFoundException e) { 
-			System.out.println("Connection failed" ); 
+			System.err.println("#############################\n\nDatabase Connection Failed\n\n#############################" ); 
 			e.printStackTrace(); 
 		}
 		return returnQueryOutput;

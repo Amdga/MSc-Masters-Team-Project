@@ -2,14 +2,10 @@ package online;
 
 import java.util.ArrayList;
 
-import commandline.CLIView;
-import common.Card;
 import common.GameplayController;
 import common.GetDeckModel;
 import common.PlayerAbstract;
 import common.PlayerPlays;
-import logger.PersistentGameData;
-import logger.TestLogger;
 
 /**
  * Online version of the gameplay controller, which has the game progress in states rather than in a game loop.
@@ -20,7 +16,7 @@ import logger.TestLogger;
  * @version 1
  */
 public class OnlineGameplayController extends GameplayController{
-//	private ArrayList<Card> cardsInDeck;
+/*	private ArrayList<Card> cardsInDeck;
 //
 //	private ArrayList<Card> cardsInDrawPile;
 //	private ArrayList<Card> cardsInPlay;
@@ -34,13 +30,14 @@ public class OnlineGameplayController extends GameplayController{
 //
 //	private TestLogger test_logger;
 //
-//	private boolean quit_game = false;
+//	private boolean quit_game = false; */
 
 	// ~~~~~~~~ Online mode variable initialisation
 	private OnlineDataBuffer to_view;
 	private static String [] STATES = {"quit", "pre-initialisation", "initialised", "choosing category", 
 									   "showing results", "round ended", "overall winner"};
 	public static final String OVERALL_WINNER = STATES[6];
+	private static final String STATE_ERROR = "state error";
 	private String state = STATES[1]; //Holds the current state of the game
 	private PlayerAbstract current_player;
 	private int round_counter;
@@ -84,7 +81,7 @@ public class OnlineGameplayController extends GameplayController{
 			return this.to_view.toJSON();
 		}
 		else {
-			return null;
+			return STATE_ERROR;
 		}
 	}
 	
@@ -131,7 +128,7 @@ public class OnlineGameplayController extends GameplayController{
 			return this.to_view.toJSON(willReset);
 		}
 		else {
-			return null;
+			return STATE_ERROR;
 		}
 	}
 
@@ -154,7 +151,7 @@ public class OnlineGameplayController extends GameplayController{
 			return this.to_view.toJSON();
 		}
 		else {
-			return null;
+			return STATE_ERROR;
 		}
 
 	}
@@ -195,7 +192,7 @@ public class OnlineGameplayController extends GameplayController{
 			return this.to_view.toJSON(willReset);
 		}
 		else {
-			return null;
+			return STATE_ERROR;
 		}
 	}
 	
