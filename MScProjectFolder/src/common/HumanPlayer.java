@@ -2,8 +2,6 @@ package common;
 import java.util.ArrayList;
 //import java.util.Scanner;
 
-import commandline.CLIView;
-
 /**
  * Human Player class reads user's category decision
  *
