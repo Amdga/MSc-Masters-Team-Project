@@ -15,8 +15,6 @@ public class AIPlayer extends PlayerAbstract{
 	public AIPlayer(int playerNumber) {
 		super(playerNumber);
 	}
-	
-	// Random selection of 5 deck headers. 
 	public String decideOnCategory() {
 		
 		int choiceNum = r.nextInt(5);
