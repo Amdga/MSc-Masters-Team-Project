@@ -215,7 +215,6 @@ public class GameplayController {
 			//add the card to the winning players list and the winning cards list
 			winning_players.add(player_plays_list.get(i).getPlayer());
 			winning_cards_pile.add(player_plays_list.get(i).getCard());
-
 			i++;
 			if(i<player_plays_list.size()) {
 				current_value = player_plays_list.get(i).getCategoryValue();
@@ -410,7 +409,6 @@ public class GameplayController {
 	 * Test database, main gameplay logic, at least 5 major test cases
 	 * 
 	 */
-
 
 	/**
 	 * Temporary main to run the test program
