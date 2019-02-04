@@ -1,0 +1,25 @@
+﻿CREATE TYPE ptype AS ENUM('human','AI');
+CREATE SCHEMA TOP_TRUMPS;
+
+CREATE TABLE PLAYER(
+playerID INT NOT NULL,
+ptype ptype NOT NULL,
+PRIMARY KEY(playerID),
+UNIQUE (playerID));
+
+CREATE TABLE GAMESTATS(
+gameID SERIAL,
+No_of_rounds INT NOT NULL,
+Winner INT NOT NULL,
+draws INT,
+PRIMARY KEY(gameID),
+FOREIGN KEY(Winner) REFERENCES PLAYER(playerID)
+ON UPDATE CASCADE );
+
+CREATE TABLE ROUNDSTATS(
+gameID SERIAL,
+playerID INT NOT NULL,
+no_rounds_won INT,
+PRIMARY KEY(gameID, playerID),
+FOREIGN KEY (playerID) references PLAYER (playerID),
+FOREIGN KEY (gameID) references GAMESTATS (gameID));
