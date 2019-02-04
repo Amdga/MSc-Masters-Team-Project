@@ -1,0 +1,45 @@
+Keywords:
+    Display - just show output
+    Get     - requires input from user
+
+Stats steps
+
+1) retreive stats from database 
+2) display stats
+
+Gameplay steps
+
+1) Deal out deck
+2) Decide first player
+3) While there are players in the game and game is not quit:
+        - Display round number, number of cards in deck @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        - Start a round 
+4) If game was not quit:
+        - Display winner @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+5) Write to Database
+
+
+
+Round steps
+
+1) Display active player @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+2) If Human is still in game
+        - Display their card @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+3) Decide on Category
+        - If Human is active player
+                ~ Get user category choice @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                ~ Make sure it is suitable
+                ~ ######################### QUIT
+        - If AI is active player  
+                ~ Display AI's choice @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@??????????????????????????
+4) Display chosen category @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+5) For each player still in the game:
+        - Display value for the chosen category (?or display whole card?) @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+6) Value checking:
+        - If there is a winner
+                ~ Display who won @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        - If there is a draw
+                ~ Display that it is a draw @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                ~ Add cards to communal pile
+                ~ ?Display communal pile? @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+7) Return winning player

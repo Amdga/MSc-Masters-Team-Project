@@ -2,6 +2,8 @@ package common;
 import java.util.ArrayList;
 //import java.util.Scanner;
 
+import commandline.CLIView;
+
 /**
  * Human Player class reads user's category decision
  *
@@ -12,9 +14,9 @@ import java.util.ArrayList;
 public class HumanPlayer extends PlayerAbstract {
 	private String choice = "";
 	private ArrayList<String> availableChoices = new ArrayList<String>();
-	private ReturnsUserInput inputGetter;
+	private ViewInterface inputGetter;
 
-	public HumanPlayer(int playerNumber, ReturnsUserInput inputView) {
+	public HumanPlayer(int playerNumber, ViewInterface inputView) {
 		super(playerNumber);
 		amIHuman = true;
 		inputGetter = inputView;
