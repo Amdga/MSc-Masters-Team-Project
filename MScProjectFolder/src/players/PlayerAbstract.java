@@ -1,5 +1,7 @@
-package common;
+package players;
 import java.util.ArrayList;
+
+import common.Card;
 
 /**
  * The PlayerAbstract class holds all methods for the functioning of a
@@ -98,6 +100,11 @@ public abstract class PlayerAbstract {
 		return this.currentDeck;
 	}
 	
+	public int whoAmI() {
+		
+		return playerNumber;
+		
+	}
 	
 	//------Setters---------------------------------
 	public void setDeck(ArrayList<Card> inputDeck) {
@@ -109,11 +116,7 @@ public abstract class PlayerAbstract {
 		this.currentDeck = inputDeck;
 	}
 	
-	public int whoAmI() {
-		
-		return playerNumber;
-		
-	}
+	
 	
 //	public static void main(String[] args) {
 //		

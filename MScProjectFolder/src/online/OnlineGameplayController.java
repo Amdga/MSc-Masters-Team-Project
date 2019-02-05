@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import common.GameplayController;
 import common.GetDeckModel;
-import common.PlayerAbstract;
 import common.PlayerPlays;
+import players.PlayerAbstract;
 
 /**
  * Online version of the gameplay controller, which has the game progress in states rather than in a game loop.

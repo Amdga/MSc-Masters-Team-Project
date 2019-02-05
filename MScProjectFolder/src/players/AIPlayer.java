@@ -1,4 +1,4 @@
-package common;
+package players;
 import java.util.Random;
 
 /**
