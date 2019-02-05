@@ -22,23 +22,7 @@
 		body{
 	background-color: #12A5F4; }
 
-	.header{
-      margin-bottom: 0;
-      border-radius: 0;
-    }
 
-  .row.content {height: 450px}
-
-/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {height: 450px}
-    
-    /* Set blue background color and 100% height */
-    .header {
-      padding-top: 20px;
-      background-color: #12A5F4;
-      height: 100%;
-
-    }
 
     .goBackButton{
     	background-color: #FF7C30;
@@ -66,7 +50,9 @@
     }
     
     .statsDetails{
-    	background-color:#F1F1F1;
+
+    	 background-color:#F1F1F1;
+       padding: 20px;
         font-size: 20px;
         font-family: arial, serif; 
         font-color:black;
@@ -96,24 +82,14 @@
 
     <body onload="initalize()"> <!-- Call the initalize method when the page loads -->
     	
-    	<div class="container">
-
-		<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="header" >
+    	<div class="container" style="padding: 20px">
+        <div class ="row">
 
     	<!-- Button to go back to original screen, code to add a link <a href= "#" class = "btn btn-default btn-lg" role="button" style="background-color:#F47D30;color:white;" >Go Back</a>-->
     	<button class = "goBackButton">Go Back</button>
       
   </div>
-    </div>
-</nav>
-  
-<div class="container-fluid text-center">    
-  <div class="row content">
-    <div class="col-sm-2 sidenav">
-    </div>
-    <div class="col-sm-8 text-left" style="border-radius: 8px"> 
+    <div class="row" style="padding: 20px"> 
     	<div class="media screen">
     		<div class= "statsDetails">
       <h1 align="center">Game Statistics</h1>
@@ -122,10 +98,10 @@
       
       <ul style="font-size: 20px; font-style: Arial, serif">
       	<li> Number of games played overall </li>
-		<li> How many times the Computer has won </li>
-		<li> How many times the Human has won </li>
-		<li> The average number of draws </li>
-		<li> The largest number of rounds played in a single game </li>
+		    <li> How many times the Computer has won </li>
+		    <li> How many times the Human has won </li>
+		    <li> The average number of draws </li>
+		    <li> The largest number of rounds played in a single game </li>
 
 	</ul>
 </div>
@@ -142,9 +118,9 @@
 				// You can call other methods you want to run when the page first loads here
 				// --------------------------------------------------------------------------
 				
-				// For example, lets call our sample methods
-				helloJSONList();
-				helloWord("Student");
+				// // For example, lets call our sample methods
+				// helloJSONList();
+				// helloWord("Student");
 				
 			}
 			
