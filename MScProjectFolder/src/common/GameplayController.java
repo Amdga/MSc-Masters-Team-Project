@@ -65,17 +65,6 @@ public class GameplayController extends GameplayControllerAbstract {
 			persistent_game_data.set_logger(false);
 		}
 
-		//We don't need this in here but it's here until Database is set up
-		/*System.out.println("GAME DATA");
-		System.out.println("Number of rounds = "+persistent_game_data.get_number_of_rounds());
-		System.out.println("Number of draws = "+persistent_game_data.get_number_of_draws());
-		System.out.println("Player who won = "+persistent_game_data.get_winning_player());
-
-		int[] player_wins = persistent_game_data.get_player_wins();
-		for(int i=0; i<player_wins.length; i++) {
-			System.out.println("Player "+i+" won "+player_wins[i]+" games");
-		}*/
-
 	}
 	
 	protected boolean userWantsToQuit() {
