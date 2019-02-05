@@ -368,8 +368,7 @@ public class GameplayController {
 		
 		createPlayers(number_of_human_players,number_of_ai_players);
 		
-		this.persistent_game_data = PersistentGameData.getInstance(number_of_human_players+number_of_ai_players);
-		
+		this.persistent_game_data = new PersistentGameData(number_of_human_players + number_of_ai_players);
 		getDeck();
 		
 	}
