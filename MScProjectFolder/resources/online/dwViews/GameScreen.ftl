@@ -22,7 +22,7 @@
     	
 	body{
 	background-color: #12A5F4; }
-
+<!-- gallery class to contain opponents cards in a row -->
 	div.gallery {
 	  margin: 5px;
 	  border: 1px solid #ccc;
@@ -35,11 +35,14 @@
 	  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 	}
 
+<!-- class to change the appearance when someone hovers over the gallery -->
 	div.gallery:hover {
   	border: 1px solid #777;
   	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 	}
-
+	
+	
+<!-- class set how the images are contained in the gallery -->
 div.gallery img {
 	padding: 5px;
   width: 100%;
@@ -47,6 +50,7 @@ div.gallery img {
   border-color: black;
 }
 
+<!-- class to contain the decsription of the cards -->
 div.desc {
   padding: 15px;
   text-align: center;
@@ -54,7 +58,7 @@ div.desc {
   font-size: 15px
 	
 }
-
+<!-- class to format the exit button -->
 .goBackButton{
 		margin: 5px;
     	background-color: #FF7C30;
@@ -69,13 +73,14 @@ div.desc {
     	border-radius: 8px;
     	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     }
-
+    
+<!-- class to make exit button hoverable -->
     .goBackButton:hover{
     	background-color: #F25900;
     	font-color:white;
     	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
     }
-
+<!-- class to contain current scores -->
     .scoresBox{
 		background-color:#F1F1F1;
         font-size: 15px;
@@ -94,6 +99,8 @@ div.desc {
 </style>
 
 <style>
+
+<!-- class for div background at bottom of the page -->
 div.rectangleBackGround {
   height: 250px;
   width: 200px;
@@ -105,9 +112,9 @@ div.rectangleBackGround {
   bottom: 10px;
 }
 
+
+<!-- class to contain the player's card and its categories -->
 div.squareMainCard {
-  
-  
   height: 350px;
   width: 250px;
   border-radius: 8px;
@@ -122,6 +129,7 @@ div.squareMainCard {
 
 }
 
+<!-- class to specify the format of the category buttons -->
 button {
   background-color: #ff7c30; 
   color: white;
@@ -133,7 +141,7 @@ button {
   text-align: center;
 
 }
-
+<!-- class to specify the format how the buttons sit as a group -->
 div.btn-group button {
   width: 230px; 
   height: 35px;
@@ -150,10 +158,12 @@ div.btn-group button {
   border-bottom: none; 
 }
 
+<!-- adding hover function to buttons -->
 .btn-group button:hover {
   background-color: #f25900;
 }
 
+<!-- class to hold the player and last round winner -->
 div.textSquare {
   text-align: left;
   top: 50px;
@@ -161,6 +171,7 @@ div.textSquare {
   font: arial, serif;
 }
 
+<!-- class to represent the communal pile -->
 .cardPile {
   background: #f1f1f1;
   height: 250px;
@@ -194,6 +205,9 @@ div.textSquare {
     <body onload="initalize()"> <!-- Call the initalize method when the page loads -->
     	
     	<div class="container">
+
+<!-- adding a row, that will contain 3 columns, first one holding 'go back button, the -->
+<!-- second the gallery, the third the stats -->
 
 			<div class= "container-fluid">
 	<div class="row">
@@ -238,6 +252,10 @@ div.textSquare {
 			</div>
 </div>
 </div>
+
+
+<!-- bottom row which will take up bottom half of the screen -->
+
 <div class="row">
   <div class ="col-sm-12">
 <div class="rectangleBackGround">
@@ -245,7 +263,7 @@ div.textSquare {
     <p><h3><b>Turn:</b> Player 1<br>
   <b>Winner:</b> You<br></p></h3></div>
 </div>
-    
+    <!-- adding the human player card with categories -->
         <div class="squareMainCard">  
   <div class ="col-sm-9">
    
@@ -254,14 +272,10 @@ div.textSquare {
 
   <div class="btn-group" >
    <ul style="padding-left: 4px"> 
-  <button>Category 1 </button>
-  
+  <button>Category 1</button>
   <button>Category 2</button>
-  
   <button>Category 3</button>
-  
   <button>Category 4</button>
-  
   <button>Category 5</button>
 </ul>
 
