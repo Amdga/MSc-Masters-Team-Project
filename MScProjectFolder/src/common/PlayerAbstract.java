@@ -1,3 +1,4 @@
+package common;
 import java.util.ArrayList;
 
 /**
@@ -14,8 +15,15 @@ public abstract class PlayerAbstract {
 	 * Performs the player actions for a game of Top Trumps.
 	 */
 	
-	private ArrayList<Card> currentDeck = new ArrayList<Card>();
-	private boolean amIHuman = false;
+	protected ArrayList<Card> currentDeck = new ArrayList<Card>();
+	protected boolean amIHuman = false;
+	protected int playerNumber;
+	
+	//------Constructor-------------------------------
+	
+	protected PlayerAbstract(int inputPlayer) {
+		this.playerNumber = inputPlayer;
+	}
 	
 	//------Abstract methods--------------------------
 	
@@ -81,6 +89,14 @@ public abstract class PlayerAbstract {
 		return currentDeck.size();
 	}
 	
+	public ArrayList<Card> getCurrentDeck() {
+		/**
+		 * Returns the deck of the player
+		 * 
+		 * @return ArrayList of type Card which is the deck of the player
+		 */
+		return this.currentDeck;
+	}
 	
 	
 	//------Setters---------------------------------
@@ -93,41 +109,38 @@ public abstract class PlayerAbstract {
 		this.currentDeck = inputDeck;
 	}
 	
-	//------Logger Methods--------------------------
-	private String logDeckContents() {
-		/**
-		 * Creates a string with all card names in the deck.
-		 * 
-		 * @return string with all cards in the deck or;
-		 * 		   string saying deck is empty if no cards in the deck
-		 */
-		String logOutput = "";
-		if (this.currentDeck.size()==0) {
-			logOutput += "/n/t Deck is Empty /n";
-		} else {
-			logOutput += "/tDeck: /n";
-			for(Card c: this.currentDeck) {
-				logOutput += "/t/t" + c.getCardName() + "/n";
-			}
-		}
+	public int whoAmI() {
+		
+		return playerNumber;
+		
 	}
 	
-	public String logDeckContents(int playerNumber) {
-		/**
-		 * Creates a string with player type and all card names in the deck.
-		 * 
-		 * @param playerNumber	the number assigned to the player within the Top Trumps game
-		 * @return string with all cards in the deck or;
-		 * 		   string saying deck is empty if no cards in the deck
-		 */
-		String playerType = "AI";
-		String logOutput = "";
-		if (amIHuman) {
-			playerType = "Human";
-		}
-		
-		logOutput += playerType + " " + playerNumber + "/n";
-		logOutput += logDeckContents();
-		return logOutput;
-	}
+//	public static void main(String[] args) {
+//		
+//		// Test Method
+//		
+//		HumanPlayer hP = new HumanPlayer();
+//		AIPlayer aP = new AIPlayer();
+//		GetDeckModel dM = new GetDeckModel();
+//		TestLogger tL = new TestLogger(true);
+//		
+//		int[] pO = {0, 1};
+//		
+//		ArrayList<Card> deck = dM.getShuffledDeck();
+//		hP.setDeck(deck);
+//		aP.addToDeck(deck.get(0));
+//		aP.addToDeck(deck.get(1));
+//		hP.takeTopCard().getCardName();
+//		
+//		ArrayList<Card> activeCards = new ArrayList<>();
+//		activeCards.add(hP.lookAtTopCard());
+//		activeCards.add(aP.lookAtTopCard());
+//		
+//		tL.logPlayerDeck(1, hP.amIHuman(), hP.getCurrentDeck());
+//		tL.logPlayerInitialDeck(2, aP.amIHuman(), aP.getCurrentDeck());
+//		
+//		tL.logCategory(2, aP.decideOnCategory(), pO, activeCards);
+//		tL.logCategory(1, hP.decideOnCategory(), pO, activeCards);
+//		
+//	}
 }
