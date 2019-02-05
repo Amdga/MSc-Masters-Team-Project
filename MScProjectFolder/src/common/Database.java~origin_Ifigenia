@@ -2,6 +2,7 @@ package common;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ public class Database {
 			statements.clear();	
 		}
 		catch (SQLException | ClassNotFoundException e) { 
-			System.err.println("#############################\n\nDatabase Connection Failed\n\n#############################" ); 
+			System.out.println("Connection failed" ); 
 			e.printStackTrace(); 
 			return; 
 		}
@@ -71,7 +72,7 @@ public class Database {
 
 		}
 		catch (SQLException | ClassNotFoundException e) { 
-			System.err.println("#############################\n\nDatabase Connection Failed\n\n#############################" ); 
+			System.out.println("Connection failed" ); 
 			e.printStackTrace(); 
 		}
 		return returnQueryOutput;
@@ -90,14 +91,6 @@ public class Database {
 		String statement = String.format("INSERT INTO ROUNDSTATS(gameID, playerID, no_rounds_won) VALUES ((SELECT MAX(gameid) from gamestats), %d, %d);", playerID, noRoundsWon);
 		statements.add(statement);
 
-	}
-	
-	//Used to delete fake games inserted by testing
-	public void deleteLastGame() {
-		
-		String statement = "DELETE FROM GAMESTATS WHERE gameid=(SELECT MAX(gameid) FROM GAMESTATS);";
-		statements.add(statement);
-		
 	}
 
 	////////////////////////////Query methods
@@ -161,11 +154,9 @@ public class Database {
 	/*public static void main(String[] args) { 
 
 		Database db = new Database();
-		System.out.println(db.getAvgDraws());
-		
-		//db.addGameStats(10, 0, 4);
-		//String x = db.getTotalGames();
-		//System.out.println( x);
+		db.addGameStats(10, 0, 4);
+		String x = db.getTotalGames();
+		System.out.println( x);
 		//		db.addGameStats(10, 0, 4);
 		//		db.addRoundStats(0, 6);
 		//		db.updateDatabase();

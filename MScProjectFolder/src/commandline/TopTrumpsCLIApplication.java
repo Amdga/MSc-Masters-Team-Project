@@ -17,29 +17,29 @@ public class TopTrumpsCLIApplication {
 	/**
 	 * This main method is called by TopTrumps.java when the user specifies that they want to run in
 	 * command line mode. The contents of args[0] is whether we should write game logs to a file.
- 	 * @param args
+	 * @param args
 	 */
-	
+
 	private GameplayController gameController;
 	private Database db;
 	private CLIView view;
 	private GetDeckModel deckModel;
 	private boolean logData = false;
-	
+
 	public static void main(String[] args) {
 
 		boolean writeGameLogsToFile = false; // Should we write game logs to file?
 		if (args[0].equalsIgnoreCase("true")) writeGameLogsToFile=true; // Command line selection
 
 		boolean userWantsToQuit = false; // flag to check whether the user wants to quit the application
-		
+
 		TopTrumpsCLIApplication app = new TopTrumpsCLIApplication(writeGameLogsToFile);
-		
+
 		// Loop until the user wants to exit the game
 		while (!userWantsToQuit) {
-			
+
 			int menuSelection = app.menu(); // Show main menu and get selection
-			
+
 			if (menuSelection == 0) { // if user wants to quit, exit
 				userWantsToQuit = true;
 				app.view.goodbyeMessage();
@@ -51,7 +51,7 @@ public class TopTrumpsCLIApplication {
 			}
 		}
 	}
-	
+
 	public TopTrumpsCLIApplication(boolean writeGameLogsToFile) {
 		/**
 		 * The command line app, controls the main menu, stats page and quitting of the app.
@@ -64,7 +64,7 @@ public class TopTrumpsCLIApplication {
 		deckModel = new GetDeckModel();
 		view = new CLIView();//deckModel, db);
 	}
-	
+
 	private int menu() {
 		/**
 		 * Method to display the main menu and get user selection from the menu
@@ -75,7 +75,7 @@ public class TopTrumpsCLIApplication {
 		int selection = view.gameOrStatorQuit();
 		return selection;
 	}
-	
+
 	private void playGame() {
 		/**
 		 * Method to create a gameplayController which runs the game till completion
@@ -83,11 +83,11 @@ public class TopTrumpsCLIApplication {
 		int aiPlayers = 4;
 		gameController = new GameplayController(deckModel, view, 1, aiPlayers, logData);
 		gameController.topTrumpsGame();
-		
+
 	}
-	
+
 	private void writeToDatabase() {
-		
+
 		PersistentGameData game_data = gameController.get_game_data();
 		
 		if(game_data.data_to_be_logged() == true) {
@@ -101,12 +101,12 @@ public class TopTrumpsCLIApplication {
 			db.updateDatabase();
 		}
 	}
-	
+
 	private void showStats() {
 		/**
 		 * Method to display the aggregate stats for past games
 		 */
 		view.printStatistics(db.getStats());
 	}
-	
+
 }

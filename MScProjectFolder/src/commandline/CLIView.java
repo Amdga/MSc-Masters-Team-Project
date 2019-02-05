@@ -1,12 +1,10 @@
 package commandline;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
 import common.Card;
-import common.ReturnsUserInput;
+import common.ViewInterface;
 
-public class CLIView implements ReturnsUserInput{
+public class CLIView implements ViewInterface{
 	
 	Scanner input_scanner;
 	boolean quit_game = false;
@@ -163,8 +161,8 @@ public class CLIView implements ReturnsUserInput{
 		System.out.println("Please enter a category: ");
 		while (true) {
 			selectedCategory = input_scanner.next();
-			if(selectedCategory.equals("quit")) {
-				quitGame();
+			if(selectedCategory.equalsIgnoreCase("quit")) {
+//				quitGame();
 				return "quit";
 			}
 			for (int i = 0; i < headers.length; i++) {
@@ -175,6 +173,10 @@ public class CLIView implements ReturnsUserInput{
 			System.out.println("That's not an existing category. Please try again: ");
 		}
 
+	}
+	
+	public void showCommunalPileSize(int pile_size) {
+		System.out.println("Communal pile has " + pile_size + " cards.");
 	}
 	
 	/*public static void main(String[] args) {
