@@ -12,8 +12,10 @@ public class Database {
 	private ArrayList <String> query = new ArrayList <String>();
 	private final String username = "postgres";
 	private final String password = "2409217J";
-
-
+	private final String serverLocation = "jdbc:postgresql://localhost:5432/Top Trumps/";
+//	private final String username = "m_18_1101610r";
+//	private final String password = "1101610r";
+//	private final String serverLocation = "jdbc:postgresql://yacata.dcs.gla.ac.uk:5432/";
 
 	public Database () {
 	}
@@ -28,7 +30,7 @@ public class Database {
 			Class.forName("org.postgresql.Driver");
 			Connection connection = DriverManager.getConnection 
 					//input server location, username, and password
-					("jdbc:postgresql://localhost:5432/Top Trumps",username ,
+					(serverLocation,username ,
 							password);
 
 			Statement gameDetails = connection.createStatement();
@@ -54,7 +56,7 @@ public class Database {
 			Class.forName("org.postgresql.Driver");
 			Connection connection = DriverManager.getConnection 
 					//input server location, username, and password
-					("jdbc:postgresql://localhost:5432/Top Trumps",username ,
+					(serverLocation,username ,
 							password);
 
 			Statement gameDetails = connection.createStatement();
