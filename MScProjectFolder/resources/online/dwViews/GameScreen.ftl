@@ -38,10 +38,9 @@
 		}
 
 		.label{
-			 font-style: arial,serif;
-			 font-size: 15px;
-	  		width: 100%
-	  		cursor: pointer; 
+			font-style: arial,serif;
+			font-size: 15px;
+	  		width: 100% 
 	 		border-radius: 8px;
 	  		margin: 4px;
 	  		
@@ -87,22 +86,6 @@
 			box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 		}
 	
-		.scoresBox{
-			background-color:#F1F1F1;
-			font-size: 15px;
-			font-family: arial, serif; 
-			font-color:black;
-			   padding:20px;
-			   margin: 5px;
-			margin-right: 20px;
-			   border-radius: 8px;
-			border-color: black;
-			border-width: 2px;
-			   width:100%;
-			  border-color: black;
-			   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.24), 0 6px 20px 0 rgba(0,0,0,0.19);}
-	
-
 	div.rectangleBackGround {
 	  height: 250px;
 	  width: 200px;
@@ -119,37 +102,29 @@
 	  width: 250px;
 	  border-radius: 8px;
 	  border-style: solid;
-	  border-width: 1px;
+	  border-width: 1px; 
 	  margin-left:-150px;
 	  position:fixed;
 	  background:#f1f1f1;
-	  bottom:30px;
+	  bottom:35px;
 	  left:50%;
 	  top: 50%;
 	
 	}
 	
-	button {
-	  background-color: #ff7c30; 
-	  color: white;
-	  font-style: arial,serif;
-	  width: 100%
-	  cursor: pointer; 
-	  border-radius: 8px;
-	  margin: 4px;
-	  text-align: center;
-	
-	}
-	
 	div.btn-group button {
 	  width: 230px; 
-	  height: 35px;
-	  bottom: 0px;
-	  top: 40%;
+	  height: 35px;  
+	  padding-top: 2%;
 	  left: 10px;
 	  margin:4px;
 	  border-radius: 8px;
 	  display: block;
+	  cursor: pointer;
+	  text-align: center;
+	  background-color: #ff7c30; 
+	  color: white;
+	  font-style: arial,serif;
 	
 	}
 	
@@ -163,9 +138,10 @@
 	
 	div.textSquare {
 	  text-align: left;
-	  top: 50px;
-	  padding-left: 10%;
+	  padding-top: 2%;
+	  padding-left: 2%;
 	  font: arial, serif;
+	  font-size: 25px;
 	}
 	
 	.cardPile {
@@ -215,7 +191,7 @@
 							</div>
 						</span>
 						<a href="#">
-							<img id="img1" src="#" alt="Player 1" style="width:177px;height:110px;">
+							<img src="#" id="img1" alt="Player 1" style="width:177px;height:110px;">
 						</a>
 						<div class="desc" id="name1">Add a description of the image here P1</div>
 					</div>
@@ -228,7 +204,7 @@
 							</div>
 						</span>
 						<a  href="#">
-							<img id="img2" src="#" alt="Player 2" style="width:177px;height:110px;">
+							<img src="#" id="img2" alt="Player 2" style="width:177px;height:110px;">
 						</a>
 						<div class="desc" id="name2">Add a description of the image here</div>
 					</div>
@@ -240,7 +216,7 @@
 							</div>
 						</span>
 						<a href="#">
-							<img  id="img3" src="#" alt="Player 3" style="width:177px;height:110px;">
+							<img src="#" id="img3"  alt="Player 3" style="width:177px;height:110px;">
 						</a>
 						<div class="desc" id="name3">Add a description of the image here</div>
 					</div>
@@ -263,37 +239,51 @@
 				<div class="col-sm-12">
 					<div class="rectangleBackGround">
 						<div class="textSquare">
-							<p>
-								<h3><b>Turn:</b> Player 1<br>
-									<b>Winner:</b> You<br>
-							</p>
-							</h3>
+						
+							<p><span><b>Category:</b></span>
+      						<span id="txtCat1"> Speed</span><br>
+
+   						 <span><b>Turn:</b></span>
+      				 	<span id="txtTurn2"> Player 1</span><br>
+
+   						 <span><b>Winner:</b></span>
+    					  <span id="txtWin3"> Player 3</span><br>
+
+  						  <span><b>Round:</b></span>
+    					  <span id="txtRound4"> 5</span><br>
+
+   						 <span><b>Cards in your deck:</b></span>
+    					  <span id="txtDeck5">6</span></p>
 						</div>
 					</div>
 
-					<div class="squareMainCard">
-						<div class="col-sm-9">
+					
+						<div class="col-sm-8">
 
 							<div class="squareMainCard" align="bottom">
-								<img src="../CardImages/350r.jpg" alt="Player 0" style="width:247px;height:150px;padding:5px">
-
+								<img src="#" id="img5" alt="Player 0" style="width:247px;height:125px;padding:5px">
+								<div class="desc" id="name5"> Description</div>
+								
 								<div class="btn-group">
 									<ul style="padding-left: 4px">
-										<button>Category 1</button>
-										<button>Category 2</button>
-										<button>Category 3</button>
-										<button>Category 4</button>
-										<button>Category 5</button>
+										<button id="size">Size</button>
+  
+ 										 <button id="speed">Speed</button>
+  
+ 										 <button id="range">Range</button>
+  
+ 										 <button id="firepower">Firepower</button>
+  
+ 										 <button id="cargo">Cargo</button>
 									</ul>
 
 								</div>
-								<div class="col-sm-3">
+								</div>
+								<div class="col-sm-2"></div>
+								<div class="col-sm-1">
 									<div class="cardPile">
-										<p>
-											<h5>
-												<center><b>Communal Pile</b></center>
-											</h5> <br> No.of Cards:
-										</p>
+										<p id="commPile"><h5><center><b>Communal Pile</b></center></h5></p><br>
+     										 <p id="commNum"><h1><center>4</center></h1></p>
 									</div>
 								</div>
 							</div>
