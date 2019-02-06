@@ -22,6 +22,8 @@
 
 		body{
 		background-color: #12A5F4; }
+
+
 	
 		div.gallery {
 		  margin: 5px;
@@ -34,6 +36,16 @@
 		  border-color: black;
 		  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 		}
+
+		.label{
+			 font-style: arial,serif;
+			 font-size: 15px;
+	  		width: 100%
+	  		cursor: pointer; 
+	 		border-radius: 8px;
+	  		margin: 4px;
+	  		
+		}
 	
 		div.gallery:hover {
 		  border: 1px solid #777;
@@ -41,18 +53,17 @@
 		}
 	
 	div.gallery img {
-		padding: 5px;
+	padding: 5px;
 	  width: 100%;
 	  height: auto;
 	  border-color: black;
 	}
 	
 	div.desc {
-	  padding: 15px;
+
 	  text-align: center;
 	  font-family: arial,serif;
 	  font-size: 15px
-		
 	}
 	
 	.goBackButton{
@@ -89,12 +100,10 @@
 			border-width: 2px;
 			   width:100%;
 			  border-color: black;
-			   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.24), 0 6px 20px 0 rgba(0,0,0,0.19);
+			   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.24), 0 6px 20px 0 rgba(0,0,0,0.19);}
 	
-	</style>
 
-	<style>
-		div.rectangleBackGround {
+	div.rectangleBackGround {
 	  height: 250px;
 	  width: 200px;
 	  border-radius: 8px;
@@ -106,8 +115,6 @@
 	}
 	
 	div.squareMainCard {
-	  
-	  
 	  height: 350px;
 	  width: 250px;
 	  border-radius: 8px;
@@ -196,46 +203,61 @@
 	<div class="container">
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-sm-1" style="width:10%">
-					<button class="goBackButton">Go Back</button>
+				<div class="col-sm-1" style="width:20%">
+					<button class="goBackButton" id="goBack2">Go Back</button>
 				</div>
-				<div class="col-sm-9" style="width:70%">
-					<div class="gallery">
-						<a target="_blank" href="../CardImages/Avenger.jpg">
-							<img src="../CardImages/Avenger.jpg" alt="Player 1" style="width:177px;height:110px;">
+
+				<div class="col-sm-9" style="width:80%">
+					<div class="gallery" id="card1">
+						<div class="label" style="padding-left:5px;padding-right: 5px">
+							<p style="text-align:left;" id="p1"> Player 1
+								<span style="float:right;color: #f25900" id="p1deck"> <b> 3 </b> </span>
+							</div>
+						</span>
+						<a href="#">
+							<img id="img1" src="#" alt="Player 1" style="width:177px;height:110px;">
 						</a>
-						<div class="desc">Add a description of the image here P1</div>
+						<div class="desc" id="name1">Add a description of the image here P1</div>
 					</div>
 
-					<div class="gallery">
-						<a target="_blank" href="../CardImages/Carrack.jpg">
-							<img src="../CardImages/Carrack.jpg" alt="Player 2" style="width:177px;height:110px;">
+
+					<div class="gallery" id="card2">
+						<div class="label" style="padding-left:5px;padding-right: 5px">
+							<p style="text-align:left;" id="p2"> Player 2
+								<span style="float:right;color: #f25900" id="p2deck"> <b> 3 </b> </span>
+							</div>
+						</span>
+						<a  href="#">
+							<img id="img2" src="#" alt="Player 2" style="width:177px;height:110px;">
 						</a>
-						<div class="desc">Add a description of the image here</div>
+						<div class="desc" id="name2">Add a description of the image here</div>
 					</div>
 
-					<div class="gallery">
-						<a target="_blank" href="../CardImages/Constellation.jpg">
-							<img src="../CardImages/Constellation.jpg" alt="Player 3" style="width:177px;height:110px;">
+					<div class="gallery" id="card3">
+						<div class="label" style="padding-left:5px;padding-right: 5px">
+							<p style="text-align:left;" id="p3"> Player 3
+								<span style="float:right;color: #f25900" id="p3deck"> <b> 3 </b> </span>
+							</div>
+						</span>
+						<a href="#">
+							<img  id="img3" src="#" alt="Player 3" style="width:177px;height:110px;">
 						</a>
-						<div class="desc">Add a description of the image here</div>
+						<div class="desc" id="name3">Add a description of the image here</div>
 					</div>
 
-					<div class="gallery">
-						<a target="_blank" href="../CardImages/350r.jpg">
-							<img src="../CardImages/350r.jpg" alt="Player 4" style="width:177px;height:110px;">
+					<div class="gallery" id="card4">
+						<div class="label" style="padding-left:5px;padding-right:5px">
+							<p style="text-align:left;" id="p4"> Player 4
+								<span style="float:right;color: #f25900" id="p4deck"> <b> 3 </b> </span>
+							</div>
+						</span>
+						<a  id="img4" href="#">
+							<img src="#" alt="Player 4" style="width:177px;height:110px;">
 						</a>
-						<div class="desc">Add a description of the image here</div>
+						<div class="desc" id="name4">Add a description of the image here</div>
 					</div>
 				</div>
-				<div class="col-sm-2" style="width:20%">
-					<div class="scoresBox">
-						<p> Your score: <br>
-							Round: <br>
-							Cards left: <br>
-						</p>
-					</div>
-				</div>
+				
 			</div>
 			<div class="row">
 				<div class="col-sm-12">
@@ -257,14 +279,10 @@
 
 								<div class="btn-group">
 									<ul style="padding-left: 4px">
-										<button>Category 1 </button>
-
+										<button>Category 1</button>
 										<button>Category 2</button>
-
 										<button>Category 3</button>
-
 										<button>Category 4</button>
-
 										<button>Category 5</button>
 									</ul>
 
