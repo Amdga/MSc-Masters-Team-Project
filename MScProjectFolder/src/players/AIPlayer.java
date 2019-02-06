@@ -1,4 +1,4 @@
-package common;
+package players;
 import java.util.Random;
 
 /**
@@ -17,7 +17,9 @@ public class AIPlayer extends PlayerAbstract{
 	}
 	public String decideOnCategory() {
 		
-		int choiceNum = r.nextInt(5);
+		int number_of_headers = currentDeck.get(0).getHeaders().length;
+		
+		int choiceNum = r.nextInt(number_of_headers);
 		
 		choice = currentDeck.get(0).getHeaders()[choiceNum];
 		

@@ -1,6 +1,4 @@
 <html>
-<style>
-	body{ background-color:#12A5F4; 
 	<head>
 		<!-- Web page title -->
     	<title>Top Trumps</title>
@@ -21,7 +19,6 @@
 
 	</head>
 }
-</style>
 
 <body onload="initalize()">
 	<!-- Call the initalize method when the page loads -->
@@ -29,6 +26,10 @@
 	<div class="container">
 
 		<style>
+			body {
+				background-color:#12A5F4;
+			}
+
 			.buttonGame {
 				background-color: #ff7c30;
 				border: none;
@@ -109,7 +110,6 @@
 				// --------------------------------------------------------------------------
 				// You can call other methods you want to run when the page first loads here
 				// --------------------------------------------------------------------------
-
 
 			}
 

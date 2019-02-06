@@ -308,143 +308,143 @@
 			<p id="error">--------</p>
 		</div>
 		<div><button type="button" id="ff" onclick="fastforward(false);">Fast Forward</button>Fast forward till time to choose category or a player is out, or end of game</div>
-		<div><button type="button" id="ff" onclick="fastforward(true);">Super FF</button>Fast forward till time to choose category or end of game</div> -->
+		<div><button type="button" id="ff" onclick="fastforward(true);">Super FF</button>Fast forward till time to choose category or end of game</div>
 
-		</div>
+		</div>-->
 
-		<script type="text/javascript">
-			// $('#newGame').onclick = newGame();
-			// $('#startGame').onclick = initialiseGame();
-			// $('#startRound').onclick = startARound();
-			// $('#speed').onclick = chosenCategory("Speed");
-			// $('#cargo').onclick = chosenCategory("Cargo");
-			// $('#range').onclick = chosenCategory("Range");
-			// $('#size').onclick = chosenCategory("Size");
-			// $('#firepower').onclick = chosenCategory("Firepower");
-			// $('#quit').onclick = quit();
+	<script type="text/javascript">
+		// $('#newGame').onclick = newGame();
+		// $('#startGame').onclick = initialiseGame();
+		// $('#startRound').onclick = startARound();
+		// $('#speed').onclick = chosenCategory("Speed");
+		// $('#cargo').onclick = chosenCategory("Cargo");
+		// $('#range').onclick = chosenCategory("Range");
+		// $('#size').onclick = chosenCategory("Size");
+		// $('#firepower').onclick = chosenCategory("Firepower");
+		// $('#quit').onclick = quit();
 
-			// Method that is called on page load
-			function initalize() {
+		// Method that is called on page load
+		function initalize() {
 
-				// --------------------------------------------------------------------------
-				// You can call other methods you want to run when the page first loads here
-				// --------------------------------------------------------------------------
+			// --------------------------------------------------------------------------
+			// You can call other methods you want to run when the page first loads here
+			// --------------------------------------------------------------------------
 
+			
+			// For example, lets call our sample methods
+			// helloJSONList();
+			// helloWord("Student");
+			// showCard();
 
-				// For example, lets call our sample methods
-				// helloJSONList();
-				// helloWord("Student");
-				// showCard();
+		}
+
+		// -----------------------------------------
+		// Add your other Javascript methods Here
+		// -----------------------------------------
+
+		// This is a reusable method for creating a CORS request. Do not edit this.
+		function createCORSRequest(method, url) {
+			var xhr = new XMLHttpRequest();
+			if ("withCredentials" in xhr) {
+
+				// Check if the XMLHttpRequest object has a "withCredentials" property.
+				// "withCredentials" only exists on XMLHTTPRequest2 objects.
+				xhr.open(method, url, true);
+
+			} else if (typeof XDomainRequest != "undefined") {
+
+				// Otherwise, check if XDomainRequest.
+				// XDomainRequest only exists in IE, and is IE's way of making CORS requests.
+				xhr = new XDomainRequest();
+				xhr.open(method, url);
+
+			} else {
+
+				// Otherwise, CORS is not supported by the browser.
+				xhr = null;
 
 			}
+			return xhr;
+		}
 
-			// -----------------------------------------
-			// Add your other Javascript methods Here
-			// -----------------------------------------
+		function createCORSReq(method, url) {
+			var xhr = createCORSRequest(method, url);
+			// Message is not sent yet, but we can check that the browser supports CORS
+			if (!xhr) {
+				alert("CORS not supported");
+			}
+			return xhr;
+		}
 
-			// This is a reusable method for creating a CORS request. Do not edit this.
-			function createCORSRequest(method, url) {
-				var xhr = new XMLHttpRequest();
-				if ("withCredentials" in xhr) {
+		function testResponse(jsonAsString) {
+			//var response = JSON.parse(jsonAsString)
+			if (jsonAsString == "state error") {
+				$("#error").html("Function cant be used in this state");
+			} else if (jsonAsString == "") {
+				$("#error").html($('#error').text() + " + 1")
+			} else {
+				$("#response").html(jsonAsString);
+				$("#error").html("--------");
+			}
+		}
 
-					// Check if the XMLHttpRequest object has a "withCredentials" property.
-					// "withCredentials" only exists on XMLHTTPRequest2 objects.
-					xhr.open(method, url, true);
+		function newGame() {
+			var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/newGame");
+			xhr.send();
 
-				} else if (typeof XDomainRequest != "undefined") {
+			xhr.onload = function (e) {
+				testResponse(xhr.response);
+			}
+		}
 
-					// Otherwise, check if XDomainRequest.
-					// XDomainRequest only exists in IE, and is IE's way of making CORS requests.
-					xhr = new XDomainRequest();
-					xhr.open(method, url);
+		function initialiseGame() {
+			var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/initialiseGameplay");
+			xhr.send();
+			xhr.onload = function (e) {
+				testResponse(xhr.response);
+			}
+		}
 
+		function startARound() {
+			var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/startARound");
+			xhr.send();
+			xhr.onload = function (e) {
+				testResponse(xhr.response);
+			}
+		}
+
+		function chosenCategory(category) {
+			var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/chosenCategory?category=" + category);
+			xhr.send();
+			xhr.onload = function (e) {
+				testResponse(xhr.response);
+			}
+		}
+
+		function quit() {
+			var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/quit");
+			xhr.send();
+			xhr.onload = function (e) {
+				testResponse(xhr.response);
+			}
+		}
+
+		function fastforward(skipLosingPlayers) {
+			var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/startARound");
+			xhr.send();
+			xhr.onload = function (e) {
+				var result = JSON.parse(xhr.response);
+				if (result.state == "round ended" && (result.losing_players == null || skipLosingPlayers)) {
+					fastforward(skipLosingPlayers);
 				} else {
-
-					// Otherwise, CORS is not supported by the browser.
-					xhr = null;
-
-				}
-				return xhr;
-			}
-
-			function createCORSReq(method, url) {
-				var xhr = createCORSRequest(method, url);
-				// Message is not sent yet, but we can check that the browser supports CORS
-				if (!xhr) {
-					alert("CORS not supported");
-				}
-				return xhr;
-			}
-
-			function testResponse(jsonAsString) {
-				//var response = JSON.parse(jsonAsString)
-				if (jsonAsString == "state error") {
-					$("#error").html("Function cant be used in this state");
-				} else if (jsonAsString == "") {
-					$("#error").html($('#error').text() + " + 1")
-				} else {
-					$("#response").html(jsonAsString);
-					$("#error").html("--------");
-				}
-			}
-
-			function newGame() {
-				var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/newGame");
-				xhr.send();
-
-				xhr.onload = function (e) {
 					testResponse(xhr.response);
 				}
 			}
+		}
+	</script>
 
-			function initialiseGame() {
-				var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/initialiseGameplay");
-				xhr.send();
-				xhr.onload = function (e) {
-					testResponse(xhr.response);
-				}
-			}
-
-			function startARound() {
-				var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/startARound");
-				xhr.send();
-				xhr.onload = function (e) {
-					testResponse(xhr.response);
-				}
-			}
-
-			function chosenCategory(category) {
-				var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/chosenCategory?category=" + category);
-				xhr.send();
-				xhr.onload = function (e) {
-					testResponse(xhr.response);
-				}
-			}
-
-			function quit() {
-				var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/quit");
-				xhr.send();
-				xhr.onload = function (e) {
-					testResponse(xhr.response);
-				}
-			}
-
-			function fastforward(skipLosingPlayers) {
-				var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/startARound");
-				xhr.send();
-				xhr.onload = function (e) {
-					var result = JSON.parse(xhr.response);
-					if (result.state == "round ended" && (result.losing_players == null || skipLosingPlayers)) {
-						fastforward(skipLosingPlayers);
-					} else {
-						testResponse(xhr.response);
-					}
-				}
-			}
-		</script>
-
-		<!-- Here are examples of how to call REST API Methods -->
-		<script type="text/javascript">
+	<!-- Here are examples of how to call REST API Methods -->
+	<script type="text/javascript">
 			// function showCard() {
 			// 	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/showCard");
 
@@ -508,7 +508,7 @@
 			// 	xhr.send();		
 			// }
 
-		</script>
+	</script>
 
 </body>
 

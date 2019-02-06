@@ -2,15 +2,17 @@ package common;
 import commandline.*;
 import logger.PersistentGameData;
 import logger.TestLogger;
+import players.AIPlayer;
+import players.HumanPlayer;
+import players.PlayerAbstract;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
-public class GameplayController {
+public abstract class GameplayControllerAbstract {
 
 	protected ArrayList<Card> cardsInDeck;
-
 	protected ArrayList<Card> cardsInDrawPile;
 	protected ArrayList<Card> cardsInPlay;
 
@@ -18,27 +20,21 @@ public class GameplayController {
 	//players_in_game = a list of players who currently have cards left (are still in the game)
 	protected ArrayList<PlayerAbstract> players;
 	protected ArrayList<PlayerAbstract> players_in_game;
+	protected PlayerAbstract winning_player;
 
-	private ViewInterface to_view;
+	protected ViewInterface to_view;
 	protected GetDeckModel model;
 
 	protected PersistentGameData persistent_game_data;
 
-	private TestLogger test_logger;
+	protected String current_category;
+	
+	protected TestLogger test_logger;
 
-	private boolean quit_game = false;
-
-	/**
-	 * Constructor of GameplayController, initialises variables and creates players
-	 * 
-	 * @param model
-	 * @param view
-	 * @param number_of_human_players
-	 * @param number_of_ai_players
-	 * @param log_data - whether the game data is to be logged or not
-	 */
-	public GameplayController(GetDeckModel model, ViewInterface view, int number_of_human_players, int number_of_ai_players, boolean log_data) {
-
+	protected boolean quit_game = false;
+	
+	public GameplayControllerAbstract(GetDeckModel model, ViewInterface view, int number_of_human_players, int number_of_ai_players, boolean log_data) {
+		
 		players = new ArrayList<PlayerAbstract>();
 		players_in_game = new ArrayList<PlayerAbstract>();
 		cardsInDeck = new ArrayList<Card>();
@@ -50,65 +46,21 @@ public class GameplayController {
 
 		test_logger = new TestLogger(log_data);
 
-		createPlayers(number_of_human_players,number_of_ai_players);
+		players = createPlayers(number_of_human_players,number_of_ai_players);
 
-		this.persistent_game_data = PersistentGameData.getInstance(number_of_human_players+number_of_ai_players);
-
+		this.persistent_game_data = new PersistentGameData(number_of_ai_players+number_of_human_players);
 		getDeck();
-
+		
 	}
 
 	/**
 	 * This is the actual top trumps game, and repeats rounds while there is still players left
 	 * 
 	 */
-	public void topTrumpsGame() {
+	protected abstract void topTrumpsGame();
 
-		dealOutDeck();
-		PlayerAbstract current_player = decideWhoGoesFirst();
-
-		//While there is still players left, have a round
-		int round_counter = 1;
-		while(players_in_game.size() > 1 && quit_game == false) {
-			persistent_game_data.increment_rounds();
-			test_logger.logNewRound(round_counter);
-			to_view.beginningOfRound(players.get(0).getCurrentDeck().size(), round_counter);
-			current_player = topTrumpsRound(current_player);
-			round_counter ++;
-
-			for(PlayerAbstract player : players) {
-				test_logger.logPlayerDeck(player.whoAmI(), player.amIHuman(), player.getCurrentDeck());
-			}
-		}
-
-		if(quit_game == false) {
-			//			try {
-			int winning_player = players_in_game.get(0).whoAmI();
-
-			persistent_game_data.log_player_who_won(winning_player);
-			to_view.overallWinner(winning_player);
-			test_logger.logWinningPlayer(winning_player);
-			//			}
-			//			catch (IndexOutOfBoundsException e) { // cannot have no players in a game
-			//				to_view.noWinner();
-			//			}
-		} else {
-			persistent_game_data.set_logger(false);
-		}
-
-		//We don't need this in here but it's here until Database is set up
-		/*System.out.println("GAME DATA");
-		System.out.println("Number of rounds = "+persistent_game_data.get_number_of_rounds());
-		System.out.println("Number of draws = "+persistent_game_data.get_number_of_draws());
-		System.out.println("Player who won = "+persistent_game_data.get_winning_player());
-
-		int[] player_wins = persistent_game_data.get_player_wins();
-		for(int i=0; i<player_wins.length; i++) {
-			System.out.println("Player "+i+" won "+player_wins[i]+" games");
-		}*/
-
-	}
-
+	protected abstract boolean userWantsToQuit();
+	
 	/**
 	 * A single round of top trumps, from getting a selected category, determining who wins,
 	 * passes cards to players as required and removes players who are out of cards
@@ -119,7 +71,7 @@ public class GameplayController {
 	 * 						or the player who has just been if there is a draw
 	 */
 
-	private PlayerAbstract topTrumpsRound(PlayerAbstract current_player) {
+	public PlayerAbstract topTrumpsRound(PlayerAbstract current_player, ArrayList<Card> cards_in_play) {
 
 		//variable to store the winner of the game
 		PlayerAbstract next_active_player;
@@ -131,21 +83,21 @@ public class GameplayController {
 		roundStartForHuman();
 
 		//Get the category from the current player and send this to the CLI
-		String category = current_player.decideOnCategory();
+		current_category = current_player.decideOnCategory();
 
-		if(category.equals("quit")) {
+		if(userWantsToQuit() == true) {
 			to_view.quitGame();
 			quit_game = true;
 			return null;
 		}
 
-		to_view.showCategory(category);
+		to_view.showCategory(current_category);
 
 		//An arraylist of objects storing players and their played cards
-		ArrayList<PlayerPlays> player_plays_list = playersPlayCards(category, current_player.whoAmI()); 
+		ArrayList<PlayerPlays> player_plays_list = playersPlayCards(current_category, current_player.whoAmI()); 
 
 		//Do round resolution and get next active player
-		next_active_player = roundResolution(current_player, player_plays_list);
+		next_active_player = roundResolution(current_player, player_plays_list,cards_in_play);
 
 		return next_active_player;
 	}
@@ -195,7 +147,7 @@ public class GameplayController {
 		return player_plays_list;
 	}
 
-	protected PlayerAbstract roundResolution(PlayerAbstract current_player, ArrayList<PlayerPlays> player_plays_list) {
+	public PlayerAbstract roundResolution(PlayerAbstract current_player, ArrayList<PlayerPlays> player_plays_list, ArrayList<Card> cards_in_play) {
 
 		PlayerAbstract next_active_player;
 
@@ -225,7 +177,7 @@ public class GameplayController {
 			//If there isn't a draw
 
 			//Get and log the winning player
-			next_active_player = weHaveAWinner(winning_players.get(0));
+			next_active_player = weHaveAWinner(winning_players.get(0),cards_in_play);
 		}
 		else {
 			//If there is a draw
@@ -242,17 +194,17 @@ public class GameplayController {
 		return next_active_player;
 	}
 
-	private PlayerAbstract weHaveAWinner(PlayerAbstract winning_player) {
+	public PlayerAbstract weHaveAWinner(PlayerAbstract winning_player, ArrayList<Card> cards_in_play) {
 
 		persistent_game_data.log_player_won_rounds(winning_player.whoAmI());
 		to_view.theWinnerIs(winning_player.whoAmI());
 
-		//Shuffle the cards in play and teh cards in the draw pile
-		Collections.shuffle(cardsInPlay);
+		//Shuffle the cards in play and the cards in the draw pile
+		Collections.shuffle(cards_in_play);
 		Collections.shuffle(cardsInDrawPile);
 
 		//Add the cards currently in play to the winning players deck
-		for(Card c : cardsInPlay) {
+		for(Card c : cards_in_play) {
 			winning_player.addToDeck(c);
 		}
 
@@ -371,8 +323,9 @@ public class GameplayController {
 	 * @param number of human players
 	 * @param number of AI players
 	 */
-	private void createPlayers(int number_of_humans, int number_of_ai) {
+	public	 ArrayList<PlayerAbstract> createPlayers(int number_of_humans, int number_of_ai) {
 
+		ArrayList<PlayerAbstract> players = new ArrayList<PlayerAbstract>();
 		int player_counter = 0;
 
 		//Create the human players and add them to the players_in_game list and the players list
@@ -391,41 +344,30 @@ public class GameplayController {
 			player_counter++;
 		}
 
+		return players;
+		
 	}
-
-	/**
-	 * PersistentGameData is used to store game data as the game progresses
-	 * 
-	 * @return the PersistentGameData object for this game
-	 */
-
-	public PersistentGameData get_game_data() {
+	
+	public PersistentGameData getGameData() {
 		return persistent_game_data;
 	}
-
-	/*
-	 * Testing note to self:
-	 * 
-	 * Test database, main gameplay logic, at least 5 major test cases
-	 * 
-	 */
-
-	/**
-	 * Temporary main to run the test program
-	 * 
-	 * @param args
-	 */
-	/*public static void main(String[] args) {
-
-		CLIView placeholder_view = new CLIView();
-		GetDeckModel placeholder_model = new GetDeckModel();
-
-		GameplayController game = new GameplayController(placeholder_model,placeholder_view,1,2, false);
-
-		//game.topTrumpsGame();
-
-		Database db = new Database();
-
-	}*/
+	
+	//This is needed for testing to verify that the winning player has all the cards in the deck
+	public PlayerAbstract getWinningPlayer() {
+		return winning_player;
+	}
+	
+	//This is also needed for testing, to verify that all other players have no cards
+	public ArrayList<PlayerAbstract> getPlayerList() {
+		return players;
+	}
+	
+	public ArrayList<Card> getCardsInDrawPile() {
+		return cardsInDrawPile;
+	}
+	
+	public ArrayList<PlayerAbstract> getPlayersInGame() {
+		return players_in_game;
+	}
 
 }

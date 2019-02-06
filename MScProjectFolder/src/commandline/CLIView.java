@@ -6,13 +6,13 @@ import common.ViewInterface;
 
 public class CLIView implements ViewInterface{
 	
-	Scanner input_scanner;
+	private Scanner input_scanner;
 	boolean quit_game = false;
 	
 	public CLIView() {
 		input_scanner = new Scanner(System.in);
 	}
-
+	
 	private Card card;
 
 	public void welcomeMessage() {
@@ -55,7 +55,7 @@ public class CLIView implements ViewInterface{
 		
 		this.card = card;
 		//showTopCard();
-		return decideCategory();
+		return decideCategory(card);
 	}
 
 	// Method that shows the top card. Called by the getCategory() method in the
@@ -143,6 +143,7 @@ public class CLIView implements ViewInterface{
 			}
 		}
 	}
+	
 	//Method that checks if the input is within the valid range.
 	public void checkNumberInput(int number) throws NumberFormatException {
 		if (number < 0 || 2 < number) {
@@ -155,7 +156,7 @@ public class CLIView implements ViewInterface{
 		System.out.println(statistics);
 	}
 	//Method that take user input, checks if the input is an existing category, and returns the chosen category as a String.
-	public String decideCategory() {
+	public String decideCategory(Card card) {
 		String[] headers = card.getHeaders();
 		String selectedCategory;
 		System.out.println("Please enter a category: ");

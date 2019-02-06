@@ -1,6 +1,6 @@
 package commandline;
 
-import common.GameplayController;
+import common.GameplayControllerCLI;
 import common.Database;
 import common.GetDeckModel;
 import logger.PersistentGameData;
@@ -20,7 +20,7 @@ public class TopTrumpsCLIApplication {
 	 * @param args
 	 */
 
-	private GameplayController gameController;
+	private GameplayControllerCLI gameController;
 	private Database db;
 	private CLIView view;
 	private GetDeckModel deckModel;
@@ -81,14 +81,14 @@ public class TopTrumpsCLIApplication {
 		 * Method to create a gameplayController which runs the game till completion
 		 */
 		int aiPlayers = 4;
-		gameController = new GameplayController(deckModel, view, 1, aiPlayers, logData);
+		gameController = new GameplayControllerCLI(deckModel, view, 1, aiPlayers, logData);
 		gameController.topTrumpsGame();
 
 	}
 
 	private void writeToDatabase() {
 
-		PersistentGameData game_data = gameController.get_game_data();
+		PersistentGameData game_data = gameController.getGameData();
 		
 		if(game_data.data_to_be_logged() == true) {
 			db.addGameStats(game_data.get_number_of_rounds(), game_data.get_winning_player(), game_data.get_number_of_draws());

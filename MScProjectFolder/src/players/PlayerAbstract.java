@@ -1,5 +1,7 @@
-package common;
+package players;
 import java.util.ArrayList;
+
+import common.Card;
 
 /**
  * The PlayerAbstract class holds all methods for the functioning of a

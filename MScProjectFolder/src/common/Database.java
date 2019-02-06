@@ -93,6 +93,14 @@ public class Database {
 		statements.add(statement);
 
 	}
+	
+	//Used to delete fake games inserted by testing
+	public void deleteLastGame() {
+		
+		String statement = "DELETE FROM GAMESTATS WHERE gameid=(SELECT MAX(gameid) FROM GAMESTATS);";
+		statements.add(statement);
+		
+	}
 
 	////////////////////////////Query methods
 
@@ -155,9 +163,11 @@ public class Database {
 	/*public static void main(String[] args) { 
 
 		Database db = new Database();
-		db.addGameStats(10, 0, 4);
-		String x = db.getTotalGames();
-		System.out.println( x);
+		System.out.println(db.getAvgDraws());
+		
+		//db.addGameStats(10, 0, 4);
+		//String x = db.getTotalGames();
+		//System.out.println( x);
 		//		db.addGameStats(10, 0, 4);
 		//		db.addRoundStats(0, 6);
 		//		db.updateDatabase();

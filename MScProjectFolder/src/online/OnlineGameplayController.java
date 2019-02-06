@@ -2,10 +2,10 @@ package online;
 
 import java.util.ArrayList;
 
-import common.GameplayController;
+import common.GameplayControllerCLI;
 import common.GetDeckModel;
-import common.PlayerAbstract;
 import common.PlayerPlays;
+import players.PlayerAbstract;
 
 /**
  * Online version of the gameplay controller, which has the game progress in states rather than in a game loop.
@@ -15,7 +15,7 @@ import common.PlayerPlays;
  * @author Adrian Borg
  * @version 1
  */
-public class OnlineGameplayController extends GameplayController{
+public class OnlineGameplayController extends GameplayControllerCLI{
 /*	private ArrayList<Card> cardsInDeck;
 //
 //	private ArrayList<Card> cardsInDrawPile;
