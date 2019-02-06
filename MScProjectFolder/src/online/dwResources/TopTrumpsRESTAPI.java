@@ -79,7 +79,12 @@ public class TopTrumpsRESTAPI {
 	public String getStats() throws IOException{
 		String dbOutput = db.getStats();
 		String[] splitOutput = dbOutput.split("\n");
-		return oWriter.writeValueAsString(splitOutput);
+		String[] results = new String[splitOutput.length-1];
+		for (int i=1;i<splitOutput.length;i++) {
+			String[] temp = splitOutput[i].split(" "); 
+			results[i-1] = temp[temp.length-1];
+		}
+		return oWriter.writeValueAsString(results);
 	}
 
 	// ~~~~Gameplay Methods~~~~~~~~~~~~~

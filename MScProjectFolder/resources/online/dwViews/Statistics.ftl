@@ -25,7 +25,7 @@
 
 
 
-    .goBackButton{
+    #goBackButton{
     	background-color: #FF7C30;
     	-webkit-transition-duration: 0.4s; /* Safari */
     	transition-duration: 0.4s;
@@ -39,7 +39,7 @@
     	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     }
 
-    .goBackButton:hover{
+    #goBackButton:hover{
     	background-color: #F25900;
     }
     
@@ -65,6 +65,10 @@
 
     }
 
+	.statstitle{
+		padding-right: 40px;
+	}
+
     /* On small screens, set height to 'auto' for sidenav and grid */
     @media screen and (max-width: 767px) {
     	.header{
@@ -89,7 +93,7 @@
 		<div class="row">
 
 			<!-- Button to go back to original screen, code to add a link <a href= "#" class = "btn btn-default btn-lg" role="button" style="background-color:#F47D30;color:white;" >Go Back</a>-->
-			<button class="goBackButton">Go Back</button>
+			<button id="goBackButton" onclick=goBack();>Go Back</button>
 
 		</div>
 		<div class="row" style="padding: 20px">
@@ -99,14 +103,28 @@
 
 					<hr>
 
-					<ul style="font-size: 20px; font-style: Arial, serif">
-						<li> Number of games played overall </li>
-						<li> How many times the Computer has won </li>
-						<li> How many times the Human has won </li>
-						<li> The average number of draws </li>
-						<li> The largest number of rounds played in a single game </li>
-
-					</ul>
+					<table style="font-size: 20px; font-style: Arial, serif">
+						<tr>
+							<th class="statstitle"> Total games played overall: </td>
+							<td id="statline1"></td>
+						</tr>
+						<tr>
+							<th class="statstitle"> Computer wins: </td>
+							<td id="statline2"></td>
+						</tr>
+						<tr>
+							<th class="statstitle"> Human wins: </td>
+							<td id="statline3"></td>
+						</tr>
+						<tr>
+							<th class="statstitle"> Average number of draws: </td>
+							<td id="statline4"></td>
+						</tr>
+						<tr>
+							<th class="statstitle"> Most rounds played in a single game: </td>
+							<td id="statline5"></td>
+						</tr>
+					</table>
 				</div>
 
 
@@ -117,19 +135,8 @@
 				// Method that is called on page load
 				function initalize() {
 
-					// --------------------------------------------------------------------------
-					// You can call other methods you want to run when the page first loads here
-					// --------------------------------------------------------------------------
-
-					// // For example, lets call our sample methods
-					// helloJSONList();
-					// helloWord("Student");
-
+					initialiseStats();
 				}
-
-				// -----------------------------------------
-				// Add your other Javascript methods Here
-				// -----------------------------------------
 
 				// This is a reusable method for creating a CORS request. Do not edit this.
 				function createCORSRequest(method, url) {
@@ -156,53 +163,36 @@
 					return xhr;
 				}
 
-			</script>
-
-			<!-- Here are examples of how to call REST API Methods -->
-			<script type="text/javascript">
-
-				// This calls the helloJSONList REST method from TopTrumpsRESTAPI
-				function helloJSONList() {
-
-					// First create a CORS request, this is the message we are going to send (a get request in this case)
-					var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/helloJSONList"); // Request type and URL
-
+				function createCORSReq(method, url) {
+					var xhr = createCORSRequest(method, url);
 					// Message is not sent yet, but we can check that the browser supports CORS
 					if (!xhr) {
 						alert("CORS not supported");
 					}
-
-					// CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
-					// to do when the response arrives 
-					xhr.onload = function (e) {
-						var responseText = xhr.response; // the text of the response
-						alert(responseText); // lets produce an alert
-					};
-
-					// We have done everything we need to prepare the CORS request, so send it
-					xhr.send();
+					return xhr;
 				}
 
-				// This calls the helloJSONList REST method from TopTrumpsRESTAPI
-				function helloWord(word) {
+				function updateStats(statsArr) {
+					var stats = JSON.parse(statsArr)
+					//alert(statsArr)
+					$("#statline1").html(stats[0])
+					$("#statline2").html(stats[1])
+					$("#statline3").html(stats[2])
+					$("#statline4").html(stats[3])
+					$("#statline5").html(stats[4])
+				}
 
-					// First create a CORS request, this is the message we are going to send (a get request in this case)
-					var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/helloWord?Word=" + word); // Request type and URL+parameters
-
-					// Message is not sent yet, but we can check that the browser supports CORS
-					if (!xhr) {
-						alert("CORS not supported");
-					}
-
-					// CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
-					// to do when the response arrives 
-					xhr.onload = function (e) {
-						var responseText = xhr.response; // the text of the response
-						alert(responseText); // lets produce an alert
-					};
-
-					// We have done everything we need to prepare the CORS request, so send it
+				function initialiseStats() {
+					var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/stats/initialise");
 					xhr.send();
+
+					xhr.onload = function (e) {
+						updateStats(xhr.response);
+					}
+				}
+
+				function goBack(){
+					window.location.href = '/toptrumps';
 				}
 
 			</script>

@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class Database {
-
+	public static int test=0;
 	private ArrayList <String> statements = new ArrayList<String>();
 	private ArrayList <String> query = new ArrayList <String>();
 	private final String username = "postgres";
@@ -50,7 +50,7 @@ public class Database {
 
 	//the queryDatabase connects to the database and implements the passed SELECT statement
 	private  String queryDatabase(String query, String output, String columnName) {
-		String returnQueryOutput =null;
+		String returnQueryOutput = output + "no database connection; null";
 		try {
 			//test that the JBDC file works 
 			Class.forName("org.postgresql.Driver");
