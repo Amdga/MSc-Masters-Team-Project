@@ -96,9 +96,55 @@
 	  left: 1%;
 	  bottom: 10px;
 	}
+	.modalButton{
+			margin: 5px;
+			background-color: #FF7C30;	
+			-webkit-transition-duration: 0.4s; /* Safari */
+			transition-duration: 0.4s;
+			font-size: 20px;
+			font-family: arial,serif;
+			font-size: 20px;
+			font-color: white;
+			cursor:pointer;
+			width: 20%;
+			padding: 20px;
+			border-radius: 8px;
+			box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+	}
+
+	.modalButton:hover{
+			background-color: #F25900;
+			font-color:white;
+			box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+	}
+	
+	.modal {
+		  display: none; /* Hidden by default */
+		  position: fixed; /* Stay in place */
+		  z-index: 1; /* Sit on top */
+		  width: 100%; /* Full width */
+		  height: 100%; /* Full height */
+		  overflow: auto; /* Enable scroll if needed */
+		  background-color: rgb(0,0,0); /* Fallback color */
+		  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+		  border-radius: 8px;
+	}
+
+	/* Modal Content/Box */
+	.modal-content {
+		  background-color: #F1F1F1;
+		  margin: 15% auto; 
+		  padding: 30px;
+		  padding-top: 40px;
+		  border: 1px solid #888;
+		  width: 60%;
+		  height:60%; 
+		  text-align: center;
+		  font-size: 20px;
+	}
 	
 	div.squareMainCard {
-	  height: 350px;
+	  height: 370px;
 	  width: 250px;
 	  border-radius: 8px;
 	  border-style: solid;
@@ -165,8 +211,44 @@
 		0 -20px 0 -10px #eee,
 		0 -20px 2px -9px rgba(0,0,0,0.15);
 		padding: 30px;
+	}
+	
+	.buttonForward {
+	background: #ff7c30;
+	border-radius: 8px;
+	font-size: 20px;
+	font-family: arial,serif;
+	cursor: pointer;
+	padding: 10px 15px;
+	color: white;
+	text-align: center;
+	bottom: 120px;
+	position: fixed;
+	right: 200px
 	
 	
+	}
+	.buttonForward:hover {
+	background: #f25900;
+	}
+	
+	.buttonNext {
+	background: #ff7c30;
+	border-radius: 8px;
+	font-size: 20px;
+	font-family: arial,serif;
+	cursor: pointer;
+	padding: 10px 15px;
+	color: white;
+	text-align: center;
+	bottom: 120px;
+	position: fixed;
+	right: 360px
+	
+	
+	}
+	.buttonNext:hover {
+	background: #f25900;
 	}
 	
 	</style>
@@ -175,9 +257,37 @@
 
 <body onload="initalize()">
 	<!-- Call the initalize method when the page loads -->
+	
 
 	<div class="container">
 		<div class="container-fluid">
+		
+	<!-- Trigger/Open the Modal -->
+	
+		<button id="myBtn">Open Modal</button>
+	
+	<!-- The Modal-->
+	
+		<div id="popup" class="modal">
+	
+	<!-- Modal content -->
+	  <div class="modal-content">
+	  
+  	<h1 id="txtWinner">Which Player Has Won!</h1>
+  	
+    <p>Play another game with the same amount of AI players or return to Menu to view stats and change AI players </p>
+    <div class="row" style="display:block;align:center">
+    
+    <button class="modalButton" id="playButton">PLAY</button>
+    <button class="modalButton" id="goBack3">MENU</button>
+    
+	</div>
+	</span>
+
+  </div>
+
+</div>
+	
 			<div class="row">
 				<div class="col-sm-1" style="width:20%">
 					<button class="goBackButton" id="goBack2">Go Back</button>
@@ -193,7 +303,8 @@
 						<a href="#">
 							<img src="#" id="img1" alt="Player 1" style="width:177px;height:110px;">
 						</a>
-						<div class="desc" id="name1">Add a description of the image here P1</div>
+						<div class="desc" id="name1">Description</div>
+						<p id="cat1"><font size="6"><center><b>1</b></center></font></p>
 					</div>
 
 
@@ -206,7 +317,8 @@
 						<a  href="#">
 							<img src="#" id="img2" alt="Player 2" style="width:177px;height:110px;">
 						</a>
-						<div class="desc" id="name2">Add a description of the image here</div>
+						<div class="desc" id="name2">Description</div>
+						<p id="cat2"><font size="6"><center><b>2</b></center></font></p>
 					</div>
 
 					<div class="gallery" id="card3">
@@ -218,7 +330,8 @@
 						<a href="#">
 							<img src="#" id="img3"  alt="Player 3" style="width:177px;height:110px;">
 						</a>
-						<div class="desc" id="name3">Add a description of the image here</div>
+						<div class="desc" id="name3">Description</div>
+						<p id="cat3"><font size="6"><center><b>3</b></center></font></p>
 					</div>
 
 					<div class="gallery" id="card4">
@@ -230,7 +343,8 @@
 						<a  id="img4" href="#">
 							<img src="#" alt="Player 4" style="width:177px;height:110px;">
 						</a>
-						<div class="desc" id="name4">Add a description of the image here</div>
+						<div class="desc" id="name4">Description</div>
+						<p id="cat4"><font size="6"><center><b>4</b></center></font></p>
 					</div>
 				</div>
 				
@@ -239,7 +353,7 @@
 				<div class="col-sm-12">
 					<div class="rectangleBackGround">
 						<div class="textSquare">
-						
+					
 							<p><span><b>Category:</b></span>
       						<span id="txtCat1"> Speed</span><br>
 
@@ -255,15 +369,15 @@
    						 <span><b>Cards in your deck:</b></span>
     					  <span id="txtDeck5">6</span></p>
 						</div>
+						<div class="buttonNext" id="nextRound">Next Round</div>
+						<div class="buttonForward" id="fastForward">Fast Forward</div>
 					</div>
 
 					
-						<div class="col-sm-8">
-
-							<div class="squareMainCard" align="bottom">
-								<img src="#" id="img5" alt="Player 0" style="width:247px;height:125px;padding:5px">
-								<div class="desc" id="name5"> Description</div>
-								
+						<div class="col-sm-9">
+							<div class="squareMainCard">
+								<img src="#" id="img5" alt="Player 0" style="width:247px;height:145px;padding:5px">
+								<div class="desc" id="name5"> Description</div>				
 								<div class="btn-group">
 									<ul style="padding-left: 4px">
 										<button id="size">Size</button>
@@ -279,8 +393,8 @@
 
 								</div>
 								</div>
-								<div class="col-sm-2"></div>
-								<div class="col-sm-1">
+							
+								<div class="col-sm-3">
 									<div class="cardPile">
 										<p id="commPile"><h5><center><b>Communal Pile</b></center></h5></p><br>
      										 <p id="commNum"><h1><center>4</center></h1></p>
