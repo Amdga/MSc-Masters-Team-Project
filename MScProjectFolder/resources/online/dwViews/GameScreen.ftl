@@ -54,6 +54,7 @@
 	
 	div.gallery img {
 	padding: 5px;
+	position: center;
 	  width: 100%;
 	  height: auto;
 	  border-color: black;
@@ -140,8 +141,8 @@
 	  text-align: center;
 	
 	}
-	
-	div.btn-group button {
+
+		div.btn-group button {
 	  width: 230px; 
 	  height: 35px;
 	  bottom: 0px;
@@ -210,51 +211,63 @@
 				<div class="col-sm-9" style="width:80%">
 					<div class="gallery" id="card1">
 						<div class="label" style="padding-left:5px;padding-right: 5px">
-							<p style="text-align:left;" id="p1"> Player 1
-								<span style="float:right;color: #f25900" id="p1deck"> <b> 3 </b> </span>
+							<p> <span style="text-align:left;" id="p1"> Player 1</span>
+								<span style="float:right;color: #f25900" id="p1deck"> <b> 3 </b> </p></span>
 							</div>
 						</span>
 						<a href="#">
 							<img id="img1" src="#" alt="Player 1" style="width:177px;height:110px;">
 						</a>
-						<div class="desc" id="name1">Add a description of the image here P1</div>
+						<div class="desc">
+						<p> <span id="name1">Name of card </span>
+							<br> <span id="cat1"> Category score </span> </p>
+							</div>
 					</div>
 
 
 					<div class="gallery" id="card2">
 						<div class="label" style="padding-left:5px;padding-right: 5px">
-							<p style="text-align:left;" id="p2"> Player 2
-								<span style="float:right;color: #f25900" id="p2deck"> <b> 3 </b> </span>
+							<p> <span style="text-align:left;" id="p2"> Player 2</span>
+								<span style="float:right;color: #f25900" id="p2deck"> <b> 3 </b> </span></p>
 							</div>
 						</span>
 						<a  href="#">
 							<img id="img2" src="#" alt="Player 2" style="width:177px;height:110px;">
 						</a>
-						<div class="desc" id="name2">Add a description of the image here</div>
+						<div class="desc">
+						<p> <span id="name2">Name of card </span>
+							<br> <span id="cat2"> Category score </span> </p>
+							</div>
 					</div>
 
 					<div class="gallery" id="card3">
 						<div class="label" style="padding-left:5px;padding-right: 5px">
-							<p style="text-align:left;" id="p3"> Player 3
-								<span style="float:right;color: #f25900" id="p3deck"> <b> 3 </b> </span>
+							<p> <span style="text-align:left;" id="p3"> Player 3 </span>
+								<span style="float:right;color: #f25900" id="p3deck"> <b> 3 </b> </span></p>
 							</div>
-						</span>
 						<a href="#">
 							<img  id="img3" src="#" alt="Player 3" style="width:177px;height:110px;">
 						</a>
-						<div class="desc" id="name3">Add a description of the image here</div>
+						<div class="desc">
+						<p> <span id="name3">Name of card </span>
+							<br> <span id="cat3"> Category score </span> </p>
+							</div>
 					</div>
 
 					<div class="gallery" id="card4">
 						<div class="label" style="padding-left:5px;padding-right:5px">
-							<p style="text-align:left;" id="p4"> Player 4
-								<span style="float:right;color: #f25900" id="p4deck"> <b> 3 </b> </span>
+							<p> <span style="text-align:left;" id="p4"> Player 4
+								</span>
+								<span style="float:right;color: #f25900" id="p4deck"> <b> 3 </b> </span> </p>
 							</div>
-						</span>
+					
 						<a  id="img4" href="#">
 							<img src="#" alt="Player 4" style="width:177px;height:110px;">
 						</a>
-						<div class="desc" id="name4">Add a description of the image here</div>
+						<div class="desc">
+						<p> <span id="name2">Name of card </span>
+							<br> <span id="cat2"> Category score </span> </p>
+							</div>
 					</div>
 				</div>
 				
