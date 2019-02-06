@@ -67,7 +67,7 @@
 	  font-size: 15px
 	}
 	
-	.goBackButton{
+	.standardButton{
 			margin: 5px;
 			background-color: #FF7C30;
 			-webkit-transition-duration: 0.4s; /* Safari */
@@ -82,7 +82,29 @@
 			box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 		}
 	
-		.goBackButton:hover{
+		.standardButton:hover{
+			background-color: #F25900;
+			font-color:white;
+			box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+		}
+
+		.modalButton{
+			margin: 5px;
+			background-color: #FF7C30;	
+			-webkit-transition-duration: 0.4s; /* Safari */
+			transition-duration: 0.4s;
+			font-size: 20px;
+			font-family: arial,serif;
+			font-size: 20px;
+			font-color: white;
+			cursor:pointer;
+			width: 20%;
+			padding: 20px;
+			border-radius: 8px;
+			box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+		}
+
+		.modalButton:hover{
 			background-color: #F25900;
 			font-color:white;
 			box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
@@ -193,7 +215,32 @@
 	
 	
 	}
-	
+	.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  border-radius: 8px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #F1F1F1;
+  margin: 15% auto; 
+  padding: 30px;
+  padding-top: 40px;
+  border: 1px solid #888;
+  width: 60%;
+  height:60%; 
+  text-align: center;
+  font-size: 20px;
+}
+
+
 	</style>
 
 </head>
@@ -203,9 +250,29 @@
 
 	<div class="container">
 		<div class="container-fluid">
+
+			<!-- Trigger/Open The Modal -->
+<button id="myBtn">Open Modal</button>
+
+<!-- The Modal -->
+<div id="popup" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+  	<h1 id="txtWinner">Which Player Has Won!</h1>
+    <p>Play another game with the same amount of AI players or return to Menu to view stats and change AI players </p>
+    <div class="row" style="display:block;align:center">
+    <button class="modalButton" id="playButton">PLAY</button>
+    <button class="modalButton" id="goBack3">MENU</button>
+</div>
+</span>
+
+  </div>
+
+</div>
 			<div class="row">
 				<div class="col-sm-1" style="width:20%">
-					<button class="goBackButton" id="goBack2">Go Back</button>
+					<button class="standardButton" id="goBack2">Go Back</button>
 				</div>
 
 				<div class="col-sm-9" style="width:80%">
@@ -368,6 +435,30 @@
 				// showCard();
 
 			}
+// Get the modal
+var modal = document.getElementById('popup');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+// span.onclick = function() {
+//   modal.style.display = "none";
+// }
+
+// When the user clicks anywhere outside of the modal, close it
+// window.onclick = function(event) {
+//   if (event.target == modal) {
+//     modal.style.display = "none";
+//   }
 
 			// -----------------------------------------
 			// Add your other Javascript methods Here
