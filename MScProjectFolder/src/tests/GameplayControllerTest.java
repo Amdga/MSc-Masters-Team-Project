@@ -101,7 +101,7 @@ public class GameplayControllerTest {
 		assertEquals(0,players.size(),"No players");
 		
 		players = game.createPlayers(1, 4);
-		assertEquals(4,players.size(),"Four players");
+		assertEquals(5,players.size(),"Four players");
 		
 		assertEquals(true,players.get(0).amIHuman(),"Human check");
 		for(int i=0; i<4; i++) {
@@ -135,16 +135,16 @@ public class GameplayControllerTest {
 	
 	private ArrayList<Card> create_mock_deck(GameplayControllerCLI game, boolean draw_desired) {
 		
-		String[] headers = {"description","taste","colour","ripeness","seeds","texture"};
+		String[] headers = {"description","taste","colour","ripeness"};
 		String[] card_names = {"apple","blueberry","papaya"};
 		ArrayList<int[]> card_values = new ArrayList<int[]>();
 		for(int i=0; i<3; i++) {
 			if(draw_desired == false ) {
-				int[] card = {i,i,i,i,i,i};
+				int[] card = {i,i,i,i};
 				card_values.add(card);
 			}
 			else {
-				int[] card = {0,0,0,0,0,0};
+				int[] card = {0,0,0,0};
 				card_values.add(card);
 			}
 		}
