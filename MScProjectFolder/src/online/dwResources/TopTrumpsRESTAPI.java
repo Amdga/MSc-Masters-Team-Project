@@ -72,9 +72,18 @@ public class TopTrumpsRESTAPI {
 	// ----------------------------------------------------
 	// Add relevant API methods here
 	// ----------------------------------------------------
+	
+	// ~~~~Stats Methods~~~~~~~~~~~~~~~~
+	@GET
+	@Path("stats/initialise")
+	public String getStats() throws IOException{
+		String dbOutput = db.getStats();
+		String[] splitOutput = dbOutput.split("\n");
+		return oWriter.writeValueAsString(splitOutput);
+	}
 
-
-
+	// ~~~~Gameplay Methods~~~~~~~~~~~~~
+	
 	@GET
 	@Path("game/newGame")
 	public String newGame() throws IOException{

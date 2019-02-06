@@ -40,5 +40,12 @@ public class ObjectWriterTesting {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		String[] testArr = "1 2 33 44 55 66".split(" ");
+		try {
+			System.out.println(oWriter.writeValueAsString(testArr));
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
 	}
 }

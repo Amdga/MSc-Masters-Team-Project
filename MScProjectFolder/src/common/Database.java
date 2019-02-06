@@ -151,11 +151,11 @@ public class Database {
 
 	public String getStats() {
 		String stats = "Statistics: \n";
-		stats += getHumanWinnerQuery() + "\n";
+		stats += getTotalGames() + "\n";
 		stats += getAIWinnerQuery() + "\n";
+		stats += getHumanWinnerQuery() + "\n";
 		stats += getAvgDraws() + "\n";
 		stats += getMaxRounds() + "\n";
-		stats += getTotalGames() + "\n";
 
 		return stats;
 	}
