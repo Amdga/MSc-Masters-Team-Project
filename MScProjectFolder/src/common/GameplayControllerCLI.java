@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
-public class GameplayController extends GameplayControllerAbstract {
+public class GameplayControllerCLI extends GameplayControllerAbstract {
 	
 	/**
 	 * Constructor of GameplayController, initialises variables and creates players
@@ -21,7 +21,7 @@ public class GameplayController extends GameplayControllerAbstract {
 	 * @param number_of_ai_players
 	 * @param log_data - whether the game data is to be logged or not
 	 */
-	public GameplayController(GetDeckModel model, ViewInterface view, int number_of_human_players, int number_of_ai_players, boolean log_data) {
+	public GameplayControllerCLI(GetDeckModel model, ViewInterface view, int number_of_human_players, int number_of_ai_players, boolean log_data) {
 
 		super(model, view, number_of_human_players, number_of_ai_players, log_data);
 
