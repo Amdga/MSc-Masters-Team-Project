@@ -193,7 +193,7 @@
 <body onload="initalize()">
 	<!-- Call the initalize method when the page loads -->
 
-	<div class="container">
+	<!--<div class="container">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-sm-1" style="width:10%">
@@ -282,8 +282,8 @@
 						</div>
 					</div>
 				</div>
-			</div>
-			<!-- Add your HTML Here
+			</div> -->
+			<!-- Add your HTML Here-->
 		<div><button type="button" id="newGame" onclick="newGame();">New Game</button>Click this to create a new game</div>
 
 		<div><button type="button" id="startGame" onclick="initialiseGame();">Start Game</button>Click this to start the game</div>
@@ -310,7 +310,7 @@
 		<div><button type="button" id="ff" onclick="fastforward(false);">Fast Forward</button>Fast forward till time to choose category or a player is out, or end of game</div>
 		<div><button type="button" id="ff" onclick="fastforward(true);">Super FF</button>Fast forward till time to choose category or end of game</div>
 
-		</div>-->
+		</div>
 
 	<script type="text/javascript">
 		// $('#newGame').onclick = newGame();

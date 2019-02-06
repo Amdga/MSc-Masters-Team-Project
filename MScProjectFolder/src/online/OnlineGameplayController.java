@@ -179,6 +179,9 @@ public class OnlineGameplayController extends GameplayControllerCLI{
 			//saves removal of losing players
 			current_player = roundResolution(current_player, player_plays_list);
 			
+			//save the 
+			to_view.showPlayerDeckSizes(players_in_game);
+			
 			//save size of communal pile
 			to_view.showCommunalPileSize(cardsInDrawPile.size());
 			
