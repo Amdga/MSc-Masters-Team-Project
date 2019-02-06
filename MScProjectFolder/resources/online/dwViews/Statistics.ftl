@@ -69,11 +69,11 @@
 			text-align: center
 		}
 
-		div{
+		/* div{
 			border-color: blue;
 			border-style: dotted;
 			border-width: 3px;
-		}
+		} */
 
 		#containsStats{
 			margin-right: auto;
