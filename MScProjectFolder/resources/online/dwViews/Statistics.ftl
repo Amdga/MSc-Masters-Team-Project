@@ -82,7 +82,7 @@
 
 		#buttonDiv{
 			padding-top: 10px;
-			padding-left: 40px;
+			padding-left: 20px;
 		}
 
 		/* On small screens, set height to 'auto' for sidenav and grid */
@@ -105,48 +105,48 @@
 <body onload="initalize()">
 	<!-- Call the initalize method when the page loads -->
 
-	<!-- <div class="container" style="padding: 20px"> -->
-	<div class="row">
-		<div id="buttonDiv">
-			<!-- Button to go back to original screen, code to add a link <a href= "#" class = "btn btn-default btn-lg" role="button" style="background-color:#F47D30;color:white;" >Go Back</a>-->
-			<button id="goBackButton" onclick=goBack();>Go Back</button>
+	<div class="container-fluid">
+		<div class="row">
+			<div id="buttonDiv">
+				<!-- Button to go back to original screen, code to add a link <a href= "#" class = "btn btn-default btn-lg" role="button" style="background-color:#F47D30;color:white;" >Go Back</a>-->
+				<button id="goBackButton" onclick=goBack();>Go Back</button>
+			</div>
 		</div>
-	</div>
-	<div class="row" style="padding: 20px">
-		<div id="containsStats">
-			<div class="media screen">
-				<div class="statsDetails">
-					<h1>Game Statistics</h1>
+		<div class="row" style="padding: 20px">
+			<div id="containsStats">
+				<div class="media screen">
+					<div class="statsDetails">
+						<h1>Game Statistics</h1>
 
-					<hr>
+						<hr>
 
-					<table>
-						<tr>
-							<th class="statstitle"> Total games played overall: </td>
-							<td id="statline1"></td>
-						</tr>
-						<tr>
-							<th class="statstitle"> Computer wins: </td>
-							<td id="statline2"></td>
-						</tr>
-						<tr>
-							<th class="statstitle"> Human wins: </td>
-							<td id="statline3"></td>
-						</tr>
-						<tr>
-							<th class="statstitle"> Average number of draws: </td>
-							<td id="statline4"></td>
-						</tr>
-						<tr>
-							<th class="statstitle"> Most rounds played in a single game: </td>
-							<td id="statline5"></td>
-						</tr>
-					</table>
+						<table>
+							<tr>
+								<th class="statstitle"> Total games played overall: </td>
+								<td id="statline1"></td>
+							</tr>
+							<tr>
+								<th class="statstitle"> Computer wins: </td>
+								<td id="statline2"></td>
+							</tr>
+							<tr>
+								<th class="statstitle"> Human wins: </td>
+								<td id="statline3"></td>
+							</tr>
+							<tr>
+								<th class="statstitle"> Average number of draws: </td>
+								<td id="statline4"></td>
+							</tr>
+							<tr>
+								<th class="statstitle"> Most rounds played in a single game: </td>
+								<td id="statline5"></td>
+							</tr>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- </div> -->
 
 	<script type="text/javascript">
 
