@@ -1,5 +1,6 @@
 <html>
 	<head>
+
 		<!-- Web page title -->
     	<title>Top Trumps</title>
     	
@@ -17,6 +18,60 @@
     	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
+		<style>
+				body {
+					background-color:#12A5F4;
+				}
+	
+				.buttonGame {
+					background-color: #ff7c30;
+					border: none;
+					border-radius: 8px;
+					color: white;
+					padding: 15px 25px;
+					text-align: center;
+					font-size: 30px;
+					font-family: arial,serif;
+					cursor: pointer;
+				}
+				.buttonGame:shadow {	
+					background-color: 0 8px 16px rgba(0,0,0,2), 0 6px 20px 0 rgba(0,0,0,0.19);
+				}
+	
+				.buttonGame:hover {
+					background-color: #f25900;
+				}	
+	
+				.buttonStats {
+					background-color: #ff7c30;
+					border: none;
+					border-radius: 8px;
+					color: white;
+					padding: 15px 25px;
+					text-align: center;
+					font-size: 30px;
+					font-family: arial,serif;
+					cursor: pointer;
+				}
+	
+				.buttonStats:hover {
+					background-color: #f25900;
+				}
+				.buttonStats:shadow {
+					background-color: 0 8px 16px rgba(0,0,0,2), 0 6px 20px 0 rgba(0,0,0,0.19);
+				}	
+	
+				.center {
+					margin: auto;
+					width: 70%;
+					padding: 200px;
+				}
+				
+				#buttonDiv {
+					margin: 0 auto;
+					max-width: 400px;
+				}
+			</style>
 	</head>
 }
 
@@ -24,56 +79,6 @@
 	<!-- Call the initalize method when the page loads -->
 
 	<div class="container">
-
-		<style>
-			body {
-				background-color:#12A5F4;
-			}
-
-			.buttonGame {
-				background-color: #ff7c30;
-				border: none;
-				border-radius: 8px;
-				color: white;
-				padding: 15px 25px;
-				text-align: center;
-				font-size: 30px;
-				font-family: arial,serif;
-				cursor: pointer;
-			}
-			.buttonGame:shadow {	
-				background-color: 0 8px 16px rgba(0,0,0,2), 0 6px 20px 0 rgba(0,0,0,0.19);
-			}
-
-			.buttonGame:hover {
-				background-color: #f25900;
-			}	
-
-			.buttonStats {
-				background-color: #ff7c30;
-				border: none;
-				border-radius: 8px;
-				color: white;
-				padding: 15px 25px;
-				text-align: center;
-				font-size: 30px;
-				font-family: arial,serif;
-				cursor: pointer;
-			}
-
-			.buttonStats:hover {
-				background-color: #f25900;
-			}
-			.buttonStats:shadow {
-				background-color: 0 8px 16px rgba(0,0,0,2), 0 6px 20px 0 rgba(0,0,0,0.19);
-			}	
-
-			.center {
-				margin: auto;
-				width: 70%;
-				padding: 200px;
-			}
-		</style>
 
 		<body>
 			<div class="center">
@@ -93,7 +98,7 @@
 							<h2 style="font-family: arial, serif;font-size:30px"><small>
 									<center> Choose to play a game or see latest statistics below</center>
 							</h2></small>
-							<center> <button class="button buttonGame">Game</button><button class="button buttonStats">Stats</button></center>
+							<div id="buttonDiv"> <button class="button buttonGame">Game</button><button class="button buttonStats">Stats</button></div>
 						</div>
 						<div class="col-sm-4"></div>
 

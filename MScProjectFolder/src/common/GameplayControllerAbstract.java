@@ -1,5 +1,4 @@
 package common;
-import commandline.*;
 import logger.PersistentGameData;
 import logger.TestLogger;
 import players.AIPlayer;
@@ -59,48 +58,7 @@ public abstract class GameplayControllerAbstract {
 	 */
 	protected abstract void topTrumpsGame();
 
-	protected abstract boolean userWantsToQuit();
-	
-	/**
-	 * A single round of top trumps, from getting a selected category, determining who wins,
-	 * passes cards to players as required and removes players who are out of cards
-	 * 
-	 * @param current_player: the player whos turn it is
-	 * @return next_player: the player whos turn it is next
-	 * 						this is the next player in the list if there is a winner,
-	 * 						or the player who has just been if there is a draw
-	 */
-
-	public PlayerAbstract topTrumpsRound(PlayerAbstract current_player, ArrayList<Card> cards_in_play) {
-
-		//variable to store the winner of the game
-		PlayerAbstract next_active_player;
-
-		//Log the current player on the CLI
-		to_view.currentPlayer(current_player.whoAmI());
-
-		//Show User their card if still in game
-		roundStartForHuman();
-
-		//Get the category from the current player and send this to the CLI
-		current_category = current_player.decideOnCategory();
-
-		if(userWantsToQuit() == true) {
-			to_view.quitGame();
-			quit_game = true;
-			return null;
-		}
-
-		to_view.showCategory(current_category);
-
-		//An arraylist of objects storing players and their played cards
-		ArrayList<PlayerPlays> player_plays_list = playersPlayCards(current_category, current_player.whoAmI()); 
-
-		//Do round resolution and get next active player
-		next_active_player = roundResolution(current_player, player_plays_list,cards_in_play);
-
-		return next_active_player;
-	}
+	protected abstract boolean userWantsToQuit();	
 
 	protected void roundStartForHuman() {
 		//Get the index of the human player (human player is always stored at index 0 of the players list
@@ -147,7 +105,7 @@ public abstract class GameplayControllerAbstract {
 		return player_plays_list;
 	}
 
-	public PlayerAbstract roundResolution(PlayerAbstract current_player, ArrayList<PlayerPlays> player_plays_list, ArrayList<Card> cards_in_play) {
+	public PlayerAbstract roundResolution(PlayerAbstract current_player, ArrayList<PlayerPlays> player_plays_list) {
 
 		PlayerAbstract next_active_player;
 
@@ -177,7 +135,7 @@ public abstract class GameplayControllerAbstract {
 			//If there isn't a draw
 
 			//Get and log the winning player
-			next_active_player = weHaveAWinner(winning_players.get(0),cards_in_play);
+			next_active_player = weHaveAWinner(winning_players.get(0));
 		}
 		else {
 			//If there is a draw
@@ -194,17 +152,17 @@ public abstract class GameplayControllerAbstract {
 		return next_active_player;
 	}
 
-	public PlayerAbstract weHaveAWinner(PlayerAbstract winning_player, ArrayList<Card> cards_in_play) {
+	public PlayerAbstract weHaveAWinner(PlayerAbstract winning_player) {
 
 		persistent_game_data.log_player_won_rounds(winning_player.whoAmI());
 		to_view.theWinnerIs(winning_player.whoAmI());
 
 		//Shuffle the cards in play and the cards in the draw pile
-		Collections.shuffle(cards_in_play);
+		Collections.shuffle(cardsInPlay);
 		Collections.shuffle(cardsInDrawPile);
 
 		//Add the cards currently in play to the winning players deck
-		for(Card c : cards_in_play) {
+		for(Card c : cardsInPlay) {
 			winning_player.addToDeck(c);
 		}
 

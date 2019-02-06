@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import commandline.CLIView;
+import commandline.GameplayControllerCLI;
 import common.Card;
-import common.GameplayControllerCLI;
 import common.GetDeckModel;
 import players.PlayerAbstract;
 

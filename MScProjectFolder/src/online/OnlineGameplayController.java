@@ -2,7 +2,7 @@ package online;
 
 import java.util.ArrayList;
 
-import common.GameplayControllerCLI;
+import commandline.GameplayControllerCLI;
 import common.GetDeckModel;
 import common.PlayerPlays;
 import players.PlayerAbstract;

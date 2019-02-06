@@ -1,6 +1,5 @@
 package commandline;
 
-import common.GameplayControllerCLI;
 import common.Database;
 import common.GetDeckModel;
 import logger.PersistentGameData;

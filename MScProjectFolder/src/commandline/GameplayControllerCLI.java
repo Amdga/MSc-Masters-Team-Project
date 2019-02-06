@@ -1,14 +1,11 @@
-package common;
-import commandline.*;
-import logger.PersistentGameData;
-import logger.TestLogger;
-import players.AIPlayer;
-import players.HumanPlayer;
+package commandline;
+import common.GameplayControllerAbstract;
+import common.GetDeckModel;
+import common.PlayerPlays;
+import common.ViewInterface;
 import players.PlayerAbstract;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 
 public class GameplayControllerCLI extends GameplayControllerAbstract {
 	
@@ -42,7 +39,7 @@ public class GameplayControllerCLI extends GameplayControllerAbstract {
 			persistent_game_data.increment_rounds();
 			test_logger.logNewRound(round_counter);
 			super.to_view.beginningOfRound(players.get(0).getCurrentDeck().size(), round_counter);
-			current_player = super.topTrumpsRound(current_player,cardsInPlay);
+			current_player = topTrumpsRound(current_player);
 			round_counter ++;
 
 			for(PlayerAbstract player : players) {
@@ -66,6 +63,46 @@ public class GameplayControllerCLI extends GameplayControllerAbstract {
 			persistent_game_data.set_logger(false);
 		}
 
+	}
+	
+	/**
+	 * A single round of top trumps, from getting a selected category, determining who wins,
+	 * passes cards to players as required and removes players who are out of cards
+	 * 
+	 * @param current_player: the player whos turn it is
+	 * @return next_player: the player whos turn it is next
+	 * 						this is the next player in the list if there is a winner,
+	 * 						or the player who has just been if there is a draw
+	 */
+	public PlayerAbstract topTrumpsRound(PlayerAbstract current_player) {
+
+		//variable to store the winner of the game
+		PlayerAbstract next_active_player;
+
+		//Log the current player on the CLI
+		to_view.currentPlayer(current_player.whoAmI());
+
+		//Show User their card if still in game
+		roundStartForHuman();
+
+		//Get the category from the current player and send this to the CLI
+		current_category = current_player.decideOnCategory();
+
+		if(userWantsToQuit() == true) {
+			to_view.quitGame();
+			quit_game = true;
+			return null;
+		}
+
+		to_view.showCategory(current_category);
+
+		//An arraylist of objects storing players and their played cards
+		ArrayList<PlayerPlays> player_plays_list = playersPlayCards(current_category, current_player.whoAmI()); 
+
+		//Do round resolution and get next active player
+		next_active_player = roundResolution(current_player, player_plays_list);
+
+		return next_active_player;
 	}
 	
 	protected boolean userWantsToQuit() {
