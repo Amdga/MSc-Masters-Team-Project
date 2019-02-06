@@ -20,6 +20,7 @@ public abstract class GameplayControllerAbstract {
 	//players_in_game = a list of players who currently have cards left (are still in the game)
 	protected ArrayList<PlayerAbstract> players;
 	protected ArrayList<PlayerAbstract> players_in_game;
+	protected PlayerAbstract winning_player;
 
 	protected ViewInterface to_view;
 	protected GetDeckModel model;
@@ -45,7 +46,7 @@ public abstract class GameplayControllerAbstract {
 
 		test_logger = new TestLogger(log_data);
 
-		createPlayers(number_of_human_players,number_of_ai_players);
+		players = createPlayers(number_of_human_players,number_of_ai_players);
 
 		this.persistent_game_data = new PersistentGameData(number_of_ai_players+number_of_human_players);
 		getDeck();
@@ -70,7 +71,7 @@ public abstract class GameplayControllerAbstract {
 	 * 						or the player who has just been if there is a draw
 	 */
 
-	protected PlayerAbstract topTrumpsRound(PlayerAbstract current_player) {
+	public PlayerAbstract topTrumpsRound(PlayerAbstract current_player, ArrayList<Card> cards_in_play) {
 
 		//variable to store the winner of the game
 		PlayerAbstract next_active_player;
@@ -96,7 +97,7 @@ public abstract class GameplayControllerAbstract {
 		ArrayList<PlayerPlays> player_plays_list = playersPlayCards(current_category, current_player.whoAmI()); 
 
 		//Do round resolution and get next active player
-		next_active_player = roundResolution(current_player, player_plays_list);
+		next_active_player = roundResolution(current_player, player_plays_list,cards_in_play);
 
 		return next_active_player;
 	}
@@ -146,7 +147,7 @@ public abstract class GameplayControllerAbstract {
 		return player_plays_list;
 	}
 
-	protected PlayerAbstract roundResolution(PlayerAbstract current_player, ArrayList<PlayerPlays> player_plays_list) {
+	public PlayerAbstract roundResolution(PlayerAbstract current_player, ArrayList<PlayerPlays> player_plays_list, ArrayList<Card> cards_in_play) {
 
 		PlayerAbstract next_active_player;
 
@@ -176,7 +177,7 @@ public abstract class GameplayControllerAbstract {
 			//If there isn't a draw
 
 			//Get and log the winning player
-			next_active_player = weHaveAWinner(winning_players.get(0));
+			next_active_player = weHaveAWinner(winning_players.get(0),cards_in_play);
 		}
 		else {
 			//If there is a draw
@@ -193,17 +194,17 @@ public abstract class GameplayControllerAbstract {
 		return next_active_player;
 	}
 
-	private PlayerAbstract weHaveAWinner(PlayerAbstract winning_player) {
+	public PlayerAbstract weHaveAWinner(PlayerAbstract winning_player, ArrayList<Card> cards_in_play) {
 
 		persistent_game_data.log_player_won_rounds(winning_player.whoAmI());
 		to_view.theWinnerIs(winning_player.whoAmI());
 
 		//Shuffle the cards in play and the cards in the draw pile
-		Collections.shuffle(cardsInPlay);
+		Collections.shuffle(cards_in_play);
 		Collections.shuffle(cardsInDrawPile);
 
 		//Add the cards currently in play to the winning players deck
-		for(Card c : cardsInPlay) {
+		for(Card c : cards_in_play) {
 			winning_player.addToDeck(c);
 		}
 
@@ -322,8 +323,9 @@ public abstract class GameplayControllerAbstract {
 	 * @param number of human players
 	 * @param number of AI players
 	 */
-	private void createPlayers(int number_of_humans, int number_of_ai) {
+	public	 ArrayList<PlayerAbstract> createPlayers(int number_of_humans, int number_of_ai) {
 
+		ArrayList<PlayerAbstract> players = new ArrayList<PlayerAbstract>();
 		int player_counter = 0;
 
 		//Create the human players and add them to the players_in_game list and the players list
@@ -342,10 +344,30 @@ public abstract class GameplayControllerAbstract {
 			player_counter++;
 		}
 
+		return players;
+		
 	}
 	
-	public PersistentGameData get_game_data() {
+	public PersistentGameData getGameData() {
 		return persistent_game_data;
+	}
+	
+	//This is needed for testing to verify that the winning player has all the cards in the deck
+	public PlayerAbstract getWinningPlayer() {
+		return winning_player;
+	}
+	
+	//This is also needed for testing, to verify that all other players have no cards
+	public ArrayList<PlayerAbstract> getPlayerList() {
+		return players;
+	}
+	
+	public ArrayList<Card> getCardsInDrawPile() {
+		return cardsInDrawPile;
+	}
+	
+	public ArrayList<PlayerAbstract> getPlayersInGame() {
+		return players_in_game;
 	}
 
 }

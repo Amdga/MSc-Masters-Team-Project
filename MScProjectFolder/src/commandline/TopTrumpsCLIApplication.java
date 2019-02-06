@@ -88,7 +88,7 @@ public class TopTrumpsCLIApplication {
 
 	private void writeToDatabase() {
 
-		PersistentGameData game_data = gameController.get_game_data();
+		PersistentGameData game_data = gameController.getGameData();
 		
 		if(game_data.data_to_be_logged() == true) {
 			db.addGameStats(game_data.get_number_of_rounds(), game_data.get_winning_player(), game_data.get_number_of_draws());

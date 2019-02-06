@@ -42,7 +42,7 @@ public class GameplayControllerCLI extends GameplayControllerAbstract {
 			persistent_game_data.increment_rounds();
 			test_logger.logNewRound(round_counter);
 			super.to_view.beginningOfRound(players.get(0).getCurrentDeck().size(), round_counter);
-			current_player = super.topTrumpsRound(current_player);
+			current_player = super.topTrumpsRound(current_player,cardsInPlay);
 			round_counter ++;
 
 			for(PlayerAbstract player : players) {
@@ -53,6 +53,7 @@ public class GameplayControllerCLI extends GameplayControllerAbstract {
 		if(quit_game == false) {
 			//			try {
 			int winning_player = players_in_game.get(0).whoAmI();
+			super.winning_player = players_in_game.get(0);
 
 			persistent_game_data.log_player_who_won(winning_player);
 			to_view.overallWinner(winning_player);
