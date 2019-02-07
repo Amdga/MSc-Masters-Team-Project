@@ -478,15 +478,7 @@
 				// showCard();
 
 			}
-			
-			
-			//Set the AI cards details invisible when a new round has started and a category has not been
-			//chosen
-			function demoVisibility() {
-  			document.getElementById("myP2").style.visibility = "hidden";
-			}
-			
-			
+
 			
 		// Get the modal
 		var modal = document.getElementById('popup');
