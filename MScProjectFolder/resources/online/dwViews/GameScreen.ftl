@@ -19,250 +19,260 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
 	<style>
+		body {
+			background-color: #12A5F4;
+		}
 
-		body{
-		background-color: #12A5F4; }
 
 
-	
 		div.gallery {
-		  margin: 5px;
-		  border: 1px solid #ccc;
-		  float: left;
-		  width: 180px;
-		  height: 250px;
-		  background-color: #F1F1F1;
-		  border-radius: 8px;
-		  border-color: black;
-		  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-		}
-
-		.label{
-			font-style: arial,serif;
-			font-size: 15px;
-	  		width: 100%;
-	 		border-radius: 8px;
-	  		margin: 4px;
-	  		
-		}
-	
-		div.gallery:hover {
-		  border: 1px solid #777;
-		  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-		}
-	
-	div.gallery img {
-	padding: 5px;
-	  width: 100%;
-	  height: auto;
-	  border-color: black;
-	}
-	
-	div.desc {
-
-	  text-align: center;
-	  font-family: arial,serif;
-	  font-size: 15px
-	}
-	
-	.goBackButton{
 			margin: 5px;
-			background-color: #FF7C30;
-			-webkit-transition-duration: 0.4s; /* Safari */
-			transition-duration: 0.4s;
-			font-size: 20px;
-			font-family: arial,serif;
-			font-size: 20px;
-			color: white;
-			cursor:pointer;
+			border: 1px solid #ccc;
+			float: left;
+			width: 180px;
+			height: 250px;
+			background-color: #F1F1F1;
+			border-radius: 8px;
+			border-color: black;
+			box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+		}
+
+		.label {
+			font-style: arial, serif;
+			font-size: 15px;
 			width: 100%;
 			border-radius: 8px;
-			box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+			margin: 4px;
+
 		}
-	
-		.goBackButton:hover{
-			background-color: #F25900;
-			font-color:white;
-			box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+
+		div.gallery:hover {
+			border: 1px solid #777;
+			box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 		}
-	
-	div.rectangleBackGround {
-	  height: 250px;
-	  width: 200px;
-	  border-radius: 8px;
-	  background-color: #ffffff;
-	  position: fixed;
-	  width: 98%;
-	  left: 1%;
-	  bottom: 10px;
-	}
-	.modalButton{
+
+		div.gallery img {
+			padding: 5px;
+			position: center;
+			width: 100%;
+			height: auto;
+			border-color: black;
+		}
+
+		div.desc {
+
+			text-align: center;
+			font-family: arial, serif;
+			font-size: 15px
+		}
+
+		.standardButton {
 			margin: 5px;
-			background-color: #FF7C30;	
-			-webkit-transition-duration: 0.4s; /* Safari */
+			background-color: #FF7C30;
+			-webkit-transition-duration: 0.4s;
+			/* Safari */
 			transition-duration: 0.4s;
 			font-size: 20px;
-			font-family: arial,serif;
+			font-family: arial, serif;
 			font-size: 20px;
+			color: white;
+			cursor: pointer;
+			width: 100%;
+			border-radius: 8px;
+			box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		}
+
+		.standardButton:hover {
+			background-color: #F25900;
 			font-color: white;
-			cursor:pointer;
+			box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+		}
+
+		.modalButton {
+			margin: 5px;
+			background-color: #FF7C30;
+			-webkit-transition-duration: 0.4s;
+			/* Safari */
+			transition-duration: 0.4s;
+			color: white;
+			font-size: 20px;
+			font-family: arial, serif;
+			font-size: 20px;
+			cursor: pointer;
 			width: 20%;
 			padding: 20px;
 			border-radius: 8px;
-			box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-	}
+			box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		}
 
-	.modalButton:hover{
+		.modalButton:hover {
 			background-color: #F25900;
-			font-color:white;
-			box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-	}
-	
-	.modal {
-		  display: none; /* Hidden by default */
-		  position: fixed; /* Stay in place */
-		  z-index: 10; /* Sit on top */
-		  width: 100%; /* Full width */
-		  height: 100%; /* Full height */
-		  overflow: auto; /* Enable scroll if needed */
-		  background-color: rgb(0,0,0); /* Fallback color */
-		  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-		  border-radius: 8px;
-	}
+			color: white;
+			box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+		}
 
-	/* Modal Content/Box */
-	.modal-content {
-		  background-color: #F1F1F1;
-		  margin: 15% auto; 
-		  padding: 30px;
-		  padding-top: 40px;
-		  border: 1px solid #888;
-		  width: 60%;
-		  height:60%; 
-		  text-align: center;
-		  font-size: 20px;
-	}
-	
-	div.squareMainCard {
-	  z-index: 2;
-	  height: 375px;
-	  width: 250px;
-	  border-radius: 8px;
-	  border-style: solid;
-	  border-width: 1px; 
-	  /* margin-left:-150px; */
-	  position:fixed;
-	  background:#f1f1f1;
-	  bottom:20px;
-	  left:40%;
-	  /* top: 50%; */
-	
-	}
-	
-	div.btn-group button {
-	  width: 230px; 
-	  height: 35px;  
-	  padding-top: 2%;
-	  left: 10px;
-	  margin:4px;
-	  border-radius: 8px;
-	  display: block;
-	  cursor: pointer;
-	  text-align: center;
-	  background-color: #ff7c30; 
-	  color: white;
-	  font-style: arial,serif;
-	
-	}
-	
-	.btn-group button:not(:last-child) {
-	  border-bottom: none; 
-	}
-	
-	.btn-group button:hover {
-	  background-color: #f25900;
-	}
-	
-	div.textSquare {
-	  text-align: left;
-	  padding-top: 15px;
-	  padding-left: 15px;
-	  font: arial, serif;
-	  font-size: 25px;
-	}
-	
-	.cardPile {
-	  background: #f1f1f1;
-	  height: 220px;
-	  width: 150px;
-	  font-style: arial, serif;
-	  font-size: 15px;
-	  text-align: left;
-	  border-radius: 8px;
-	  border-width: 1px;
-	  border-style: solid;
-	  position: fixed;
-	  bottom:175px;
-	  right: 75px;
-	  border-color: black;
-	  box-shadow:
-		0 -1px 2px rgba(0,0,0,0.15),
-		0 -10px 0 -5px #eee,
-		0 -10px 2px -4px rgba(0,0,0,0.15),
-		0 -20px 0 -10px #eee,
-		0 -20px 2px -9px rgba(0,0,0,0.15);
-		padding: 30px;
-	}
-	
-	.buttonForward {
-	background: #ff7c30;
-	border-radius: 8px;
-	font-size: 20px;
-	font-family: arial,serif;
-	cursor: pointer;
-	padding: 10px 15px;
-	color: white;
-	text-align: center;
-	bottom: 40px;
-	position: fixed;
-	right: 75px
-	
-	
-	}
-	.buttonForward:hover {
-	background: #f25900;
-	}
-	
-	.buttonNext {
-	background: #ff7c30;
-	border-radius: 8px;
-	font-size: 20px;
-	font-family: arial,serif;
-	cursor: pointer;
-	padding: 10px 15px;
-	color: white;
-	text-align: center;
-	bottom: 100px;
-	position: fixed;
-	right: 75px;
-	}
-	
-	/* #galleries{
+		div.rectangleBackGround {
+			height: 250px;
+			width: 200px;
+			border-radius: 8px;
+			background-color: #ffffff;
+			position: fixed;
+			width: 98%;
+			left: 1%;
+			bottom: 10px;
+		}
+
+		div.squareMainCard {
+			z-index: 2;
+			height: 375px;
+			width: 250px;
+			border-radius: 8px;
+			border-style: solid;
+			border-width: 1px;
+			/* margin-left:-150px; */
+			position: fixed;
+			background: #f1f1f1;
+			bottom: 20px;
+			left: 40%;
+			/* top: 50%; */
+
+		}
+
+		div.btn-group button {
+			width: 230px;
+			height: 35px;
+			padding-top: 2%;
+			left: 10px;
+			margin: 4px;
+			border-radius: 8px;
+			display: block;
+			cursor: pointer;
+			text-align: center;
+			background-color: #ff7c30;
+			color: white;
+			font-style: arial, serif;
+
+		}
+
+		.btn-group button:not(:last-child) {
+			border-bottom: none;
+		}
+
+		.btn-group button:hover {
+			background-color: #f25900;
+		}
+
+		div.textSquare {
+			text-align: left;
+			padding-top: 15px;
+			padding-left: 15px;
+			font: arial, serif;
+			font-size: 25px;
+		}
+
+		.cardPile {
+			background: #f1f1f1;
+			height: 220px;
+			width: 150px;
+			font-style: arial, serif;
+			font-size: 15px;
+			text-align: left;
+			border-radius: 8px;
+			border-width: 1px;
+			border-style: solid;
+			position: fixed;
+			bottom: 175px;
+			right: 75px;
+			border-color: black;
+			box-shadow:
+				0 -1px 2px rgba(0, 0, 0, 0.15),
+				0 -10px 0 -5px #eee,
+				0 -10px 2px -4px rgba(0, 0, 0, 0.15),
+				0 -20px 0 -10px #eee,
+				0 -20px 2px -9px rgba(0, 0, 0, 0.15);
+			padding: 30px;
+		}
+
+		.buttonForward {
+			background: #ff7c30;
+			border-radius: 8px;
+			font-size: 20px;
+			font-family: arial, serif;
+			cursor: pointer;
+			padding: 10px 15px;
+			color: white;
+			text-align: center;
+			bottom: 40px;
+			position: fixed;
+			right: 75px
+		}
+
+		.modal {
+			display: none;
+			/* Hidden by default */
+			position: fixed;
+			/* Stay in place */
+			z-index: 1;
+			/* Sit on top */
+			width: 100%;
+			/* Full width */
+			height: 100%;
+			/* Full height */
+			overflow: auto;
+			/* Enable scroll if needed */
+			background-color: rgb(0, 0, 0);
+			/* Fallback color */
+			background-color: rgba(0, 0, 0, 0.4);
+			/* Black w/ opacity */
+			border-radius: 8px;
+		}
+
+		/* Modal Content/Box */
+		.modal-content {
+			background-color: #F1F1F1;
+			margin: 15% auto;
+			padding: 30px;
+			padding-top: 40px;
+			border: 1px solid #888;
+			width: 60%;
+			height: 60%;
+			text-align: center;
+			font-size: 20px;
+		}
+
+		.buttonForward:hover {
+			background: #f25900;
+		}
+
+		.buttonNext {
+			background: #ff7c30;
+			border-radius: 8px;
+			font-size: 20px;
+			font-family: arial, serif;
+			cursor: pointer;
+			padding: 10px 15px;
+			color: white;
+			text-align: center;
+			bottom: 100px;
+			position: fixed;
+			right: 75px;
+		}
+
+		/* #galleries{
 		margin-left: auto;
 		margin-right: auto;
 	} */
-	
-	
-	.buttonNext:hover {
-	background: #f25900;
-	}
 
-	/* div{
+
+		.buttonNext:hover {
+			background: #f25900;
+		}
+
+		/* div{
 			border-color: blue;
 			border-style: dotted;
 			border-width: 3px;
 		} */
-	
 	</style>
 
 </head>
@@ -270,45 +280,67 @@
 <body onload="initalize()">
 	<!-- Call the initalize method when the page loads -->
 
-
 	<div class="container-fluid">
-		<div class="container-fluid">
 
-			<!-- Trigger/Open the Modal -->
+		<!-- Trigger/Open the Modal -->
 
-			<button id="myBtn">Open Modal</button>
+		<button id="myBtn">Open Modal</button>
 
-			<!-- The Modal-->
+		<!-- The Modal-->
 
-			<div id="popup" class="modal">
+		<div id="popup" class="modal">
 
-				<!-- Modal content -->
-				<div class="modal-content">
+			<!-- Modal content -->
+			<div class="modal-content">
 
-					<h1 id="txtWinner">Which Player Has Won!</h1>
+				<h1 id="txtWinner">Which Player Has Won!</h1>
 
-					<p>Play another game with the same amount of AI players or return to Menu to view stats and change AI players </p>
-					<div class="row" style="display:block;align:center">
+				<p>Play another game with the same amount of AI players or return to Menu to view stats and change AI players
+				</p>
+				<div class="row" style="display:block;align:center">
 
-						<button class="modalButton" id="playButton">PLAY</button>
-						<button class="modalButton" id="goBack3">MENU</button>
-
-					</div>
-					</span>
+					<button class="modalButton" id="playButton">PLAY</button>
+					<button class="modalButton" id="goBack3">MENU</button>
 
 				</div>
 
-			</div>
 
+				<!-- Trigger/Open the Modal -->
+
+				<button id="myBtn">Open Modal</button>
+
+				<!-- The Modal-->
+
+				<div id="popup" class="modal">
+
+					<!-- Modal content -->
+					<div class="modal-content">
+
+						<h1 id="txtWinner">Which Player Has Won!</h1>
+
+						<p>Play another game with the same amount of AI players or return to Menu to view stats and change AI
+							players </p>
+						<div class="row" style="display:block;align:center">
+
+							<button class="modalButton" id="playButton">PLAY</button>
+							<button class="modalButton" id="goBack3">MENU</button>
+
+						</div>
+						</span>
+
+					</div>
+
+				</div>
+			</div>
 			<div class="row">
 				<div class="col-sm-1" style="min-width:100px;max-width:100px;">
-					<button class="goBackButton" id="goBack2">Go<br/>Back</button>
+					<button class="goBackButton" id="goBack2">Go<br />Back</button>
 				</div>
 
 				<div class="col-sm-10" id="galleries" style="width:auto">
 					<div class="gallery" id="card1">
 						<div class="label" style="padding-left:5px;padding-right: 5px">
-							<p style="text-align:left;" id="p1"> Player 1
+							<p> <span style="text-align:left;" id="p1"> Player 1</span>
 								<span style="float:right;color: #f25900" id="p1deck"> <b> 3 </b> </span>
 						</div>
 						</span>
@@ -326,8 +358,8 @@
 
 					<div class="gallery" id="card2">
 						<div class="label" style="padding-left:5px;padding-right: 5px">
-							<p style="text-align:left;" id="p2"> Player 2
-								<span style="float:right;color: #f25900" id="p2deck"> <b> 3 </b> </span>
+							<p> <span style="text-align:left;" id="p2"> Player 2</span>
+								<span style="float:right;color: #f25900" id="p2deck"> <b> 10 </b> </span>
 						</div>
 						</span>
 						<a href="#">
@@ -341,12 +373,13 @@
 						</p>
 					</div>
 
+
+
 					<div class="gallery" id="card3">
 						<div class="label" style="padding-left:5px;padding-right: 5px">
-							<p style="text-align:left;" id="p3"> Player 3
+							<p> <span style="text-align:left;" id="p3"> Player 3 </span>
 								<span style="float:right;color: #f25900" id="p3deck"> <b> 3 </b> </span>
 						</div>
-						</span>
 						<a href="#">
 							<img src="#" id="img3" alt="Player 3" style="width:177px;height:110px;">
 						</a>
@@ -357,6 +390,7 @@
 							</font>
 						</p>
 					</div>
+
 
 					<div class="gallery" id="card4">
 						<div class="label" style="padding-left:5px;padding-right:5px">
@@ -497,10 +531,48 @@
 
 		}
 
+
+		// Get the modal
+		var modal = document.getElementById('popup');
+
+		// Get the button that opens the modal
+		var btn = document.getElementById("myBtn");
+
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("close")[0];
+
+		// When the user clicks on the button, open the modal 
+		btn.onclick = function () {
+			modal.style.display = "block";
+		}
+
+		// When the user clicks anywhere outside of the modal, close it
+		// window.onclick = function(event) {
+		//   if (event.target == modal) {
+		//     modal.style.display = "none";
+		//   }
+
 		// -----------------------------------------
 		// Add your other Javascript methods Here
 		// -----------------------------------------
 
+		function hideAICards(){
+			//sets the AI card details to hidden at the start
+			var x = document.getElementsByClassName("desc");
+			var i;
+			for (i = 0; i < x.length; i++) {
+				x[i].style.visibility = "hidden";
+			}
+		}
+
+		function showAICards(){
+			//sets AI card details to visible once a category has been chosen
+			var x = document.getElementsByClassName("desc");
+			var i;
+			for (i = 0; i < x.length; i++) {
+				x[i].style.visibility = "visible";
+			}
+		}
 		// This is a reusable method for creating a CORS request. Do not edit this.
 		function createCORSRequest(method, url) {
 			var xhr = new XMLHttpRequest();
@@ -545,14 +617,19 @@
 				$("#response").html(jsonAsString);
 				$("#error").html("--------");
 			}
-		}
 
-		function newGame() {
-			var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/newGame");
-			xhr.send();
+			function newGame() {
 
-			xhr.onload = function (e) {
-				testResponse(xhr.response);
+				hideAICards();
+
+				var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/newGame");
+				xhr.send();
+
+				xhr.onload = function (e) {
+					testResponse(xhr.response);
+				}
+
+
 			}
 		}
 
@@ -570,7 +647,9 @@
 			xhr.onload = function (e) {
 				testResponse(xhr.response);
 			}
+			hideAICards();
 		}
+
 
 		function chosenCategory(category) {
 			var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/chosenCategory?category=" + category);
@@ -578,7 +657,10 @@
 			xhr.onload = function (e) {
 				testResponse(xhr.response);
 			}
+			showAICards();
+
 		}
+
 
 		function quit() {
 			var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/quit");
