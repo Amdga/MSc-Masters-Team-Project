@@ -92,10 +92,10 @@
 			background-color: #FF7C30;	
 			-webkit-transition-duration: 0.4s; /* Safari */
 			transition-duration: 0.4s;
+			color: white;
 			font-size: 20px;
 			font-family: arial,serif;
 			font-size: 20px;
-			font-color: white;
 			cursor:pointer;
 			width: 20%;
 			padding: 20px;
@@ -105,7 +105,7 @@
 
 		.modalButton:hover{
 			background-color: #F25900;
-			font-color:white;
+			color:white;
 			box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 		}
 	
@@ -309,19 +309,15 @@
 
 						<div class="desc">
 						<p> <span id="name1">Name of card </span>
-							<br> <span id="cat1"> Category score </span> </p>
+							<br> <span id="cat1"><font size="6"> 5 </font></span> </p>
 							</div>
-
-						<div class="desc" id="name1">Description</div>
-						<p id="cat1"><font size="6"><center><b>1</b></center></font></p>
-
 					</div>
 
 
 					<div class="gallery" id="card2">
 						<div class="label" style="padding-left:5px;padding-right: 5px">
 							<p> <span style="text-align:left;" id="p2"> Player 2</span>
-								<span style="float:right;color: #f25900" id="p2deck"> <b> 3 </b> </span></p>
+								<span style="float:right;color: #f25900" id="p2deck"> <b> 10 </b> </span></p>
 							</div>
 						</span>
 						<a  href="#">
@@ -330,13 +326,11 @@
 
 						<div class="desc">
 						<p> <span id="name2">Name of card </span>
-							<br> <span id="cat2"> Category score </span> </p>
+							<br> <span id="cat2"><font size="6"> 8 </font></span> </p>
 							</div>
-
-						<div class="desc" id="name2">Description</div>
-						<p id="cat2"><font size="6"><center><b>2</b></center></font></p>
-
 					</div>
+
+					
 
 					<div class="gallery" id="card3">
 						<div class="label" style="padding-left:5px;padding-right: 5px">
@@ -349,13 +343,11 @@
 
 						<div class="desc">
 						<p> <span id="name3">Name of card </span>
-							<br> <span id="cat3"> Category score </span> </p>
+						
+							<br> <span id="cat3"><font size="6"> 10 </font></span> </p>
 							</div>
-
-						<div class="desc" id="name3">Description</div>
-						<p id="cat3"><font size="6"><center><b>3</b></center></font></p>
-
 					</div>
+
 
 					<div class="gallery" id="card4">
 						<div class="label" style="padding-left:5px;padding-right:5px">
@@ -370,12 +362,8 @@
 
 						<div class="desc">
 						<p> <span id="name2">Name of card </span>
-							<br> <span id="cat2"> Category score </span> </p>
+							<br> <span id="cat1"><font size="6"> 3 </font></span> </p>
 							</div>
-
-						<div class="desc" id="name4">Description</div>
-						<p id="cat4"><font size="6"><center><b>4</b></center></font></p>
-
 					</div>
 				</div>
 				
@@ -490,30 +478,35 @@
 				// showCard();
 
 			}
-// Get the modal
-var modal = document.getElementById('popup');
+			
+			
+			//Set the AI cards details invisible when a new round has started and a category has not been
+			//chosen
+			function demoVisibility() {
+  			document.getElementById("myP2").style.visibility = "hidden";
+			}
+			
+			
+			
+		// Get the modal
+		var modal = document.getElementById('popup');
 
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+		// Get the button that opens the modal
+		var btn = document.getElementById("myBtn");
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks on the button, open the modal 
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-// span.onclick = function() {
-//   modal.style.display = "none";
-// }
-
-// When the user clicks anywhere outside of the modal, close it
-// window.onclick = function(event) {
-//   if (event.target == modal) {
-//     modal.style.display = "none";
-//   }
+		// When the user clicks on the button, open the modal 
+		btn.onclick = function() {
+ 		 modal.style.display = "block";
+		}
+		
+		// When the user clicks anywhere outside of the modal, close it
+		// window.onclick = function(event) {
+		//   if (event.target == modal) {
+		//     modal.style.display = "none";
+		//   }
 
 			// -----------------------------------------
 			// Add your other Javascript methods Here
@@ -564,14 +557,24 @@ btn.onclick = function() {
 					$("#error").html("--------");
 				}
 			}
-
+			
 			function newGame() {
+			
+			//sets the AI card details to hidden at the start
+				var x = document.getElementsByClassName("desc");
+				var i;
+				for (i = 0; i < x.length; i++) {
+				x[i].style.visibility = "hidden";
+				  }
+				
 				var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/newGame");
 				xhr.send();
 
 				xhr.onload = function (e) {
 					testResponse(xhr.response);
 				}
+				
+				
 			}
 
 			function initialiseGame() {
@@ -588,6 +591,12 @@ btn.onclick = function() {
 				xhr.onload = function (e) {
 					testResponse(xhr.response);
 				}
+				//clear AI cards at the start of a round
+				var x = document.getElementsByClassName("desc");
+				var i;
+				for (i = 0; i < x.length; i++) {
+				x[i].style.visibility = "hidden";
+				  }
 			}
 
 			function chosenCategory(category) {
@@ -596,6 +605,13 @@ btn.onclick = function() {
 				xhr.onload = function (e) {
 					testResponse(xhr.response);
 				}
+				//sets AI card details to visible once a category has been chosen
+				  var x = document.getElementsByClassName("desc");
+				  var i;
+				  for (i = 0; i < x.length; i++) {
+				    x[i].style.visibility = "visible";
+				  }
+
 			}
 
 			function quit() {
