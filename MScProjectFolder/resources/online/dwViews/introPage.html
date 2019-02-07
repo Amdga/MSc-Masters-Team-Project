@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  	<style>
-  	body{ background-color:#12A5F4; 
-  	<title>Top Trumps</title>
+    <title>Top Trumps</title>
     <meta charset="utf-8"> 
 
     <!-- scales to the size of the screen -->
@@ -13,17 +11,23 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+ 
+ <style>
 
+  body{ background-color:#12A5F4; 
+}
+.center {
+  margin: auto;
+  width: 100%;
+  padding: 200px;
+}
 
-
-  </head>
-  }
-  </style>
-
-  <style>
-  .button {
-  background-color: #ff7c30;
+ .button {
+  width: 150px;
+  height: 70px;
+  margin: 5px;
   border: none;
+  background-color: #ff7c30;
   border-radius: 8px;
   color: white;
   padding: 15px 25px;
@@ -31,48 +35,76 @@
   font-size: 30px;
   font-family: arial,serif;
   cursor: pointer;
-}
 
+}
 .button:hover {
   background-color: #f25900;
 }
-</style>
-
-<style>
-.center {
-  margin: auto;
-  width: 70%;
-  padding: 200px;
+div.textHeader {
+  color: #ffffff;
+  font-size: 40px;
+  font-family: arial,serif;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
 }
-</style>
+div.textSub {
+  color: #ffffff;
+  font-size: 27px;
+  font-family: arial,serif;
+  text-align: center;
+}
+div.textAI {
+  color: #ffffff;
+  font-size: 20px;
+  font-family:arial,serif;
+  text-align: left;
+  white-space: nowrap;
+  padding: 7px 0px;
+}
+div.buttonAI{
+  width: 100px;
+  height: 70px;
+  margin: 5px;
+  border: none;
+  background-color: #ff7c30;
+  border-radius: 8px;
+  color: white;
+  padding: 15px 25px;
+  text-align: center;
+  font-size: 30px;
+  font-family: arial,serif;
+  cursor: pointer;
+  float: left;
+}
+div.buttonAI:hover{
+   background-color: #f25900;
+}
+  </style>
+  </head>
 
   <body>
-  	<div class="center">
-  	<div class="container-fluid">
-  	<div class="row">
-  <div class="col-sm-12"><font color="#ffffff"><h1 style= "font-family: arial, serif; font-size:36px"><center>WELCOME TO FOOD IS LIFE'S TOP TRUMPS GAME</center></h1></div>
+    <div class="center">
+    <div class="container-fluid">
+    <div class="row">
+  <div class="col-sm-12">
+    <div class="textHeader">Welcome to food is life's top trumps game</div>
 </div>
 
-	<div class="row">
-  <div class="col-sm-4"></div>
-  <div class="col-sm-4"><h2 style= "font-family: arial, garamond, serif;font-size:30px"><small><center> Choose to play a game or see latest statistics below</center></h2></small>
-  	<center> <button class="button">Game</button><button class="button">Stats</button></center></div>
-  <div class="col-sm-4"></div>
- 
+  <div class="col-sm-12">
+    <div class="textSub">Choose to play a game or see latest statistics below</div>
+  </div>
+
+ <div class="col-sm-12">
+    <center> <button class="button" id="gameButton">Game</button><button class="button" id="statsButton">Stats</button></center></div>
+
+<div class="col-sm-2"><div class="textAI">Number of<br/>AI players:</div></div>
+
+<div class="col-sm-10">
+    <center><div class="buttonAI" id="AI1">1</div><div class="buttonAI" id="AI2">2</div><div class="buttonAI" id="AI3">3</div><div class="buttonAI" id="AI4">4</div></center>
 </div>
-  	</div>
+ 
+
+  
   </body>
-
-
-<div class="rectangleBackGround">
-  <div class="text">
-  <p style="margin-left"10px><h3><b>Turn:</b> Player 1<br>
-  <b>Winner:</b> You</br></p></h3></div></div>
-  <div class ="col-sm-12">  
-        <div class="squareMainCard">  
-  <img src="350r.jpg" alt="Player 0" style="width:247px;height:150px;padding:5px">
-
- 
-
-
 </html>

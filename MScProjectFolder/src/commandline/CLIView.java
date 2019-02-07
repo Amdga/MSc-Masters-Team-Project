@@ -30,8 +30,11 @@ public class CLIView implements ViewInterface{
 		printStars();
 	}
 	
+<<<<<<< HEAD
 	
 	
+=======
+>>>>>>> d48c21afe7727d1fcee252acc66b8162615299a2
 	public void quitGame() {
 		printStars();
 		System.out.println("You have quit the game");
