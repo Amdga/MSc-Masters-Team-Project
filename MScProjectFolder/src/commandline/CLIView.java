@@ -1,16 +1,18 @@
 package commandline;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import common.Card;
+import common.ViewInterface;
 
-public class CLIView {
-	Scanner s;
-
+public class CLIView implements ViewInterface{
+	
+	private Scanner input_scanner;
+	boolean quit_game = false;
+	
 	public CLIView() {
-		s = new Scanner(System.in);
+		input_scanner = new Scanner(System.in);
 	}
-
+	
 	private Card card;
 
 	public void welcomeMessage() {
@@ -22,7 +24,18 @@ public class CLIView {
 	public void goodbyeMessage() {
 		printStars();
 		System.out.println("GoodBye");
+		quit_game = true;
 		printStars();
+	}
+	
+	public void quitGame() {
+		printStars();
+		System.out.println("You have quit the game");
+		printStars();
+	}
+	
+	public boolean hasGameQuit() {
+		return quit_game;
 	}
 
 	public void numberOfPlayersPlaying() {
@@ -37,15 +50,19 @@ public class CLIView {
 
 	// Method that pass a Card object to the CLIView, calls showTopCard and decideCategory and returns the chosen category as a String
 	public String getCategory(Card card) {
+		
+		//System.out.println("Card name = "+card.getCardName());
+		
 		this.card = card;
-		showTopCard();
-		return decideCategory();
+		//showTopCard();
+		return decideCategory(card);
 	}
 
 	// Method that shows the top card. Called by the getCategory() method in the
 	// same class.
-	public void showTopCard() {
+	public void showTopCard(Card card) {
 
+		this.card = card;
 		String[] headers = card.getHeaders();
 		System.out.println("Players have drawn their cards." + "\n\nYou drew: " + card.getCardName());
 		printStars();
@@ -76,6 +93,10 @@ public class CLIView {
 		System.out.println("The winner of the game: ");
 		translatePlayer(number);
 	}
+	
+	public void noWinner() {
+		System.out.println("Sorry, no winner this time!");
+	}
 
 	// Method that translates what player won from the passed number. Player 0 is
 	// the user and is displayed differently.
@@ -88,6 +109,23 @@ public class CLIView {
 		System.out.println(player);
 
 	}
+	
+	public void playerLoses(int player) {
+		System.out.println("Player" + player + " has no more cards left to draw and is being removed from play");
+	}
+	
+	public void currentPlayer(int player) {
+		System.out.println("The current player is: ");
+		translatePlayer(player);
+	}
+	
+	public void showCategory(String category) {
+		System.out.println("The selected category is "+category);
+	}
+	
+	public void playerHasValue(int player, int value) {
+		System.out.println("Player "+player+" has card value "+value);
+	}
 
 	// Method that lets the user choose between quitting, play a game, or view statiscs.
 	//0: quit, 1: game, 2: statistics.
@@ -96,7 +134,7 @@ public class CLIView {
 				"To quit, select 0. To play a game, select 1. To view statistics from previous games, select 2. Please enter a digit: ");
 		while (true) {
 			try {
-				int number = Integer.parseInt(s.next());
+				int number = Integer.parseInt(input_scanner.next());
 				checkNumberInput(number);
 				return number;
 			} catch (NumberFormatException e) {
@@ -105,6 +143,7 @@ public class CLIView {
 			}
 		}
 	}
+	
 	//Method that checks if the input is within the valid range.
 	public void checkNumberInput(int number) throws NumberFormatException {
 		if (number < 0 || 2 < number) {
@@ -117,12 +156,16 @@ public class CLIView {
 		System.out.println(statistics);
 	}
 	//Method that take user input, checks if the input is an existing category, and returns the chosen category as a String.
-	public String decideCategory() {
+	public String decideCategory(Card card) {
 		String[] headers = card.getHeaders();
 		String selectedCategory;
 		System.out.println("Please enter a category: ");
 		while (true) {
-			selectedCategory = s.next();
+			selectedCategory = input_scanner.next();
+			if(selectedCategory.equalsIgnoreCase("quit")) {
+//				quitGame();
+				return "quit";
+			}
 			for (int i = 0; i < headers.length; i++) {
 				if (selectedCategory.toLowerCase().equals((headers[i]).toLowerCase())) {
 					return headers[i];
@@ -133,25 +176,27 @@ public class CLIView {
 
 	}
 	
-//	public static void main(String[] args) {
-//		String [] headers = {"description", "Range", "Speed", "Velocity", "Strength", "intellect"};
-//		int [] inputValues = {3, 5, 1, 8, 7};
-//		
-//		
-//		CLIView cliView = new CLIView();
-//		Card card = new Card("T-rex", headers, inputValues);
-//		cliView.welcomeMessage();
-//		cliView.numberOfPlayersPlaying();
-//		cliView.beginningOfRound(14, 1);
-//		String category = cliView.getCategory(card);
-//		System.out.println(category);
-//		cliView.theWinnerIs(3);
-//		cliView.overallWinner(0);
-//		int number = cliView.gameOrStatorQuit();
-//		System.out.println(number);
-//		
-//		
-//		
-//	}
+	public void showCommunalPileSize(int pile_size) {
+		System.out.println("Communal pile has " + pile_size + " cards.");
+	}
+	
+	/*public static void main(String[] args) {
+		String [] headers = {"description", "Range", "Speed", "Velocity", "Strength", "intellect"};
+		int [] inputValues = {3, 5, 1, 8, 7};
+		
+		
+		CLIView cliView = new CLIView();
+		Card card = new Card("T-rex", headers, inputValues);
+		cliView.welcomeMessage();
+		cliView.numberOfPlayersPlaying();
+		cliView.beginningOfRound(14, 1);
+		String category = cliView.getCategory(card);
+		System.out.println(category);
+		cliView.theWinnerIs(3);
+		cliView.overallWinner(0);
+		int number = cliView.gameOrStatorQuit();
+		System.out.println(number);
+		
+	}*/
 
 }

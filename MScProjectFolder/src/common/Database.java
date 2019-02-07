@@ -2,19 +2,20 @@ package common;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
 public class Database {
-
+	public static int test=0;
 	private ArrayList <String> statements = new ArrayList<String>();
 	private ArrayList <String> query = new ArrayList <String>();
 	private final String username = "postgres";
-	private final String password = "foodislife";
-
-
+	private final String password = "2409217J";
+	private final String serverLocation = "jdbc:postgresql://localhost:5432/Top Trumps/";
+//	private final String username = "m_18_1101610r";
+//	private final String password = "1101610r";
+//	private final String serverLocation = "jdbc:postgresql://yacata.dcs.gla.ac.uk:5432/";
 
 	public Database () {
 	}
@@ -29,7 +30,7 @@ public class Database {
 			Class.forName("org.postgresql.Driver");
 			Connection connection = DriverManager.getConnection 
 					//input server location, username, and password
-					("jdbc:postgresql://localhost:5432/Top Trumps",username ,
+					(serverLocation,username ,
 							password);
 
 			Statement gameDetails = connection.createStatement();
@@ -41,7 +42,7 @@ public class Database {
 			statements.clear();	
 		}
 		catch (SQLException | ClassNotFoundException e) { 
-			System.out.println("Connection failed" ); 
+			System.err.println("#############################\n\nDatabase Connection Failed\n\n#############################" ); 
 			e.printStackTrace(); 
 			return; 
 		}
@@ -49,13 +50,13 @@ public class Database {
 
 	//the queryDatabase connects to the database and implements the passed SELECT statement
 	private  String queryDatabase(String query, String output, String columnName) {
-		String returnQueryOutput =null;
+		String returnQueryOutput = output + "no database connection; null";
 		try {
 			//test that the JBDC file works 
 			Class.forName("org.postgresql.Driver");
 			Connection connection = DriverManager.getConnection 
 					//input server location, username, and password
-					("jdbc:postgresql://localhost:5432/Top Trumps",username ,
+					(serverLocation,username ,
 							password);
 
 			Statement gameDetails = connection.createStatement();
@@ -65,8 +66,6 @@ public class Database {
 			while(queryResult.next()) {
 				int value = queryResult.getInt(columnName);
 				returnQueryOutput = output + value;
-				System.out.println(returnQueryOutput);
-
 			}
 			//System.out.println(output + value);
 
@@ -74,7 +73,7 @@ public class Database {
 
 		}
 		catch (SQLException | ClassNotFoundException e) { 
-			System.out.println("Connection failed" ); 
+			System.err.println("#############################\n\nDatabase Connection Failed\n\n#############################" ); 
 			e.printStackTrace(); 
 		}
 		return returnQueryOutput;
@@ -93,6 +92,14 @@ public class Database {
 		String statement = String.format("INSERT INTO ROUNDSTATS(gameID, playerID, no_rounds_won) VALUES ((SELECT MAX(gameid) from gamestats), %d, %d);", playerID, noRoundsWon);
 		statements.add(statement);
 
+	}
+	
+	//Used to delete fake games inserted by testing
+	public void deleteLastGame() {
+		
+		String statement = "DELETE FROM GAMESTATS WHERE gameid=(SELECT MAX(gameid) FROM GAMESTATS);";
+		statements.add(statement);
+		
 	}
 
 	////////////////////////////Query methods
@@ -144,28 +151,31 @@ public class Database {
 
 	public String getStats() {
 		String stats = "Statistics: \n";
-		stats += getHumanWinnerQuery() + "\n";
+		stats += getTotalGames() + "\n";
 		stats += getAIWinnerQuery() + "\n";
+		stats += getHumanWinnerQuery() + "\n";
 		stats += getAvgDraws() + "\n";
 		stats += getMaxRounds() + "\n";
-		stats += getTotalGames() + "\n";
 
 		return stats;
 	}
 
-//	public static void main(String [] args) { 
-//
-//		Database db = new Database();
-//		String x = db.getTotalGames();
-//		System.out.println( x);
-//		//		db.addGameStats(10, 0, 4);
-//		//		db.addRoundStats(0, 6);
-//		//		db.updateDatabase();
-//		//		
-//		//		db.addRoundStats(1, 6);
-//		//		db.addRoundStats(2,2);
-//		//		db.addGameStats(8, 1, 0);
-//		//		db.updateDatabase();
-//
-//	}
+	/*public static void main(String[] args) { 
+
+		Database db = new Database();
+		System.out.println(db.getAvgDraws());
+		
+		//db.addGameStats(10, 0, 4);
+		//String x = db.getTotalGames();
+		//System.out.println( x);
+		//		db.addGameStats(10, 0, 4);
+		//		db.addRoundStats(0, 6);
+		//		db.updateDatabase();
+		//		
+		//		db.addRoundStats(1, 6);
+		//		db.addRoundStats(2,2);
+		//		db.addGameStats(8, 1, 0);
+		//		db.updateDatabase();
+
+	}*/
 }

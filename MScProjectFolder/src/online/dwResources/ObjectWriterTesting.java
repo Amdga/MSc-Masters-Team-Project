@@ -29,12 +29,22 @@ public class ObjectWriterTesting {
 			deck.add(card);
 		}
 		
+		deck = null;
+		
 		//testing of the writer
 		try {
 			String cardOutput = oWriter.writeValueAsString(deck);
 			System.out.println(cardOutput);
+			System.out.println((String) null);
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String[] testArr = "1 2 33 44 55 66".split(" ");
+		try {
+			System.out.println(oWriter.writeValueAsString(testArr));
+		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
 	}

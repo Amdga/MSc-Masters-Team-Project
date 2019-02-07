@@ -1,6 +1,7 @@
 package online;
 
 import common.ViewInterface;
+import players.PlayerAbstract;
 import common.Card;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class OnlineDataBuffer implements ViewInterface{
 	private Boolean was_quit;
 	private String state;
 	private ObjectWriter oWriter = new ObjectMapper().writerWithDefaultPrettyPrinter();
+	private ArrayList<int[]> playerDeckSizes;
 	
 	public void setOGC(OnlineGameplayController inputOGC) {
 		this.ogc = inputOGC;
@@ -42,6 +44,7 @@ public class OnlineDataBuffer implements ViewInterface{
 		communal_pile_size = null;
 		overall_winner = null;
 		was_quit = null;
+		playerDeckSizes = null;
 	}
 	
 	public String toJSON() {
@@ -130,6 +133,13 @@ public class OnlineDataBuffer implements ViewInterface{
 		setState();
 	}
 	
+	public void showPlayerDeckSizes(ArrayList<PlayerAbstract> players_in_game) {
+		playerDeckSizes = new ArrayList<int[]>();
+		for (PlayerAbstract p: players_in_game) {
+			playerDeckSizes.add(new int[] {p.whoAmI(), p.getNumberofCardsLeft()});
+		}
+	}
+	
 	// ~~~~~~~~~~~~~~~~~~~~~~ Getters for serializer
 	
 	public Integer getDecksize() {
@@ -170,6 +180,10 @@ public class OnlineDataBuffer implements ViewInterface{
 	
 	public Integer getCommunal_pile_size() {
 		return communal_pile_size;
+	}
+	
+	public ArrayList<int[]> getPlayerDeckSizes() {
+		return playerDeckSizes;
 	}
 	
 	public Integer getOverall_winner() {

@@ -8,12 +8,7 @@ public class PersistentGameData {
 		private int[] player_wins;
 		private boolean log_data;
 		
-	    private static PersistentGameData game_data; 
-	  
-	    private PersistentGameData(int number_of_players) {
-	    	
-	    	//Uses the Singleton design pattern since we only want one of these per game
-	    	//(multiple games can't be run at once)
+	    public PersistentGameData(int number_of_players) {
 	    	
 	    	player_wins = new int[number_of_players];
 	    	for(int i=0; i<player_wins.length; i++) {
@@ -26,13 +21,6 @@ public class PersistentGameData {
 	    	
 	    } 
 	  
-	    public static PersistentGameData getInstance(int number_of_players) 
-	    { 
-	        if (game_data==null) 
-	            game_data = new PersistentGameData(number_of_players); 
-	        return game_data; 
-	    } 
-	    
 	    public void increment_rounds() {
 	    	number_of_rounds++;
 	    }
