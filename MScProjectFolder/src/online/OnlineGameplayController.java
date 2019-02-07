@@ -2,10 +2,10 @@ package online;
 
 import java.util.ArrayList;
 
-import common.GameplayController;
+import commandline.GameplayControllerCLI;
 import common.GetDeckModel;
-import common.PlayerAbstract;
 import common.PlayerPlays;
+import players.PlayerAbstract;
 
 /**
  * Online version of the gameplay controller, which has the game progress in states rather than in a game loop.
@@ -15,7 +15,7 @@ import common.PlayerPlays;
  * @author Adrian Borg
  * @version 1
  */
-public class OnlineGameplayController extends GameplayController{
+public class OnlineGameplayController extends GameplayControllerCLI{
 /*	private ArrayList<Card> cardsInDeck;
 //
 //	private ArrayList<Card> cardsInDrawPile;
@@ -178,6 +178,9 @@ public class OnlineGameplayController extends GameplayController{
 			//saves if it was a draw or there was a winner
 			//saves removal of losing players
 			current_player = roundResolution(current_player, player_plays_list);
+			
+			//save the 
+			to_view.showPlayerDeckSizes(players_in_game);
 			
 			//save size of communal pile
 			to_view.showCommunalPileSize(cardsInDrawPile.size());

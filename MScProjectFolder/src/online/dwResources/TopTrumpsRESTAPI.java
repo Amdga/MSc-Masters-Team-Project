@@ -72,9 +72,23 @@ public class TopTrumpsRESTAPI {
 	// ----------------------------------------------------
 	// Add relevant API methods here
 	// ----------------------------------------------------
+	
+	// ~~~~Stats Methods~~~~~~~~~~~~~~~~
+	@GET
+	@Path("stats/initialise")
+	public String getStats() throws IOException{
+		String dbOutput = db.getStats();
+		String[] splitOutput = dbOutput.split("\n");
+		String[] results = new String[splitOutput.length-1];
+		for (int i=1;i<splitOutput.length;i++) {
+			String[] temp = splitOutput[i].split(" "); 
+			results[i-1] = temp[temp.length-1];
+		}
+		return oWriter.writeValueAsString(results);
+	}
 
-
-
+	// ~~~~Gameplay Methods~~~~~~~~~~~~~
+	
 	@GET
 	@Path("game/newGame")
 	public String newGame() throws IOException{
@@ -124,7 +138,7 @@ public class TopTrumpsRESTAPI {
 	}
 
 	private void writeToDatabase() {
-		PersistentGameData game_data = gameController.get_game_data();
+		PersistentGameData game_data = gameController.getGameData();
 
 		if(game_data.data_to_be_logged() == true) {
 			db.addGameStats(game_data.get_number_of_rounds(), game_data.get_winning_player(), game_data.get_number_of_draws());

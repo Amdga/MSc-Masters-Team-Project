@@ -1,6 +1,7 @@
 package common;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -8,18 +9,20 @@ import java.util.Scanner;
 public class GetDeckModel {
 	
 	private ArrayList <Card> deck = new ArrayList<>();
-	private String filepath = ".\\StarCitizenDeck.txt";
+	private String filepath = "";
+	private String filename = "StarCitizenDeck.txt";
 	private String [] header;
 	private ArrayList <Card> shuffleTheDeck = new ArrayList<>();
 
 	// ~~~~~~~ Constructors
 	
 	public GetDeckModel() {
+		filepath = Paths.get(".", filename).toString();
 		constructionHelper();
 	}
 
 	public GetDeckModel(String deckFileName) {
-		filepath = ".\\" + deckFileName;
+		filepath = Paths.get(".", deckFileName).toString();
 		constructionHelper();
 	}
 	

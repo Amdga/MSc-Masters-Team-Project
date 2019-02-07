@@ -1,5 +1,7 @@
 package common;
 
+import players.PlayerAbstract;
+
 public class PlayerPlays implements Comparable<PlayerPlays> {
 	
 	/**
