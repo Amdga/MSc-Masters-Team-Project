@@ -229,6 +229,7 @@
 
 		/* Modal Content/Box */
 		.modal-content {
+		display:none;
 			background-color: #F1F1F1;
 			margin: 15% auto;
 			padding: 30px;

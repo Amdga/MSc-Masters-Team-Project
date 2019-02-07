@@ -30,9 +30,7 @@ public class CLIView implements ViewInterface{
 		printStars();
 	}
 	
-	public boolean hasGameQuit() {
-		return quit_game;
-	}
+	
 	
 	public void quitGame() {
 		printStars();

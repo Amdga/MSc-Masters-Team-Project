@@ -71,6 +71,11 @@
 					margin: 0 auto;
 					max-width: 400px;
 				}
+				
+				.buttonContainer {
+				display: none;
+				
+				}
 			</style>
 	</head>
 }
@@ -98,10 +103,15 @@
 							<h2 style="font-family: arial, serif;font-size:30px"><small>
 									<center> Choose to play a game or see latest statistics below</center>
 							</h2></small>
-							<div id="buttonDiv"> <button class="button buttonGame">Game</button><button class="button buttonStats">Stats</button></div>
+							<div id="buttonDiv"> <button class="button buttonGame" onclick = showButtons();>Game</button><button class="button buttonStats" onclick = goToStatPage();>Stats</button></div>
 						</div>
 						<div class="col-sm-4"></div>
-
+					<div class = "buttonContainer">
+						<button id = "1" onclick = chosenNumberOfPlayers(1);> button 1 </button>
+						<button id = "2" onclick = chosenNumberOfPlayers(2);> button 1 </button>
+						<button id = "3" onclick = chosenNumberOfPlayers(3);> button 1 </button>
+						<button id = "4" onclick = chosenNumberOfPlayers(4);> button 1 </button>
+					</div>
 					</div>
 				</div>
 			</div>
@@ -111,17 +121,20 @@
 
 			// Method that is called on page load
 			function initalize() {
-
-				// --------------------------------------------------------------------------
-				// You can call other methods you want to run when the page first loads here
-				// --------------------------------------------------------------------------
+			
 
 			}
 
-			// -----------------------------------------
-			// Add your other Javascript methods Here
-			// -----------------------------------------
-
+			function showButtons() {
+			$(".buttonContainer").show()
+			
+			}
+			
+			
+			
+			function goToStatPage() {
+			window.location = "http://localhost:7777/toptrumps/stats"
+			}
 			// This is a reusable method for creating a CORS request. Do not edit this.
 			function createCORSRequest(method, url) {
 				var xhr = new XMLHttpRequest();
@@ -151,6 +164,15 @@
 
 		<!-- Here are examples of how to call REST API Methods -->
 		<script type="text/javascript">
+		
+		function chosenNumberOfPlayers(number) {
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/number=" + number);
+			xhr.onload = function (e) {
+				window.location = "http://localhost:7777/toptrumps/game";
+				};
+				xhr.send();
+			
+		}
 
 			// This calls the helloJSONList REST method from TopTrumpsRESTAPI
 			function helloJSONList() {
@@ -173,6 +195,11 @@
 				// We have done everything we need to prepare the CORS request, so send it
 				xhr.send();
 			}
+			
+			
+
+			
+			
 
 			// This calls the helloJSONList REST method from TopTrumpsRESTAPI
 			function helloWord(word) {
