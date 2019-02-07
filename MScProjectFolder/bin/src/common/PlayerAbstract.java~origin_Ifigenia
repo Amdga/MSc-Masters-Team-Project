@@ -98,6 +98,11 @@ public abstract class PlayerAbstract {
 		return this.currentDeck;
 	}
 	
+	public int whoAmI() {
+		
+		return playerNumber;
+		
+	}
 	
 	//------Setters---------------------------------
 	public void setDeck(ArrayList<Card> inputDeck) {

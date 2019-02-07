@@ -523,7 +523,10 @@
 			// You can call other methods you want to run when the page first loads here
 			// --------------------------------------------------------------------------
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 			// For example, lets call our sample methods
 			// helloJSONList();
 			// helloWord("Student");
