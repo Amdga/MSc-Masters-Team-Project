@@ -1,6 +1,4 @@
 <html>
-<style>
-	body{ background-color:#12A5F4; 
 	<head>
 
 		<!-- Web page title -->
@@ -19,146 +17,108 @@
     	<link rel="stylesheet" href="http://dcs.gla.ac.uk/~richardm/assets/stylesheets/vex-theme-os.css"/>
     	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-
-		<style>
-				body {
-					background-color:#12A5F4;
-				}
-	
-				.buttonGame {
-					background-color: #ff7c30;
-					border: none;
-					border-radius: 8px;
-					color: white;
-					padding: 15px 25px;
-					text-align: center;
-					font-size: 30px;
-					font-family: arial,serif;
-					cursor: pointer;
-				}
-				.buttonGame:shadow {	
-					background-color: 0 8px 16px rgba(0,0,0,2), 0 6px 20px 0 rgba(0,0,0,0.19);
-				}
-	
-				.buttonGame:hover {
-					background-color: #f25900;
-				}	
-	
-				.buttonStats {
-					background-color: #ff7c30;
-					border: none;
-					border-radius: 8px;
-					color: white;
-					padding: 15px 25px;
-					text-align: center;
-					font-size: 30px;
-					font-family: arial,serif;
-					cursor: pointer;
-				}
-	
-				.buttonStats:hover {
-					background-color: #f25900;
-				}
-				.buttonStats:shadow {
-					background-color: 0 8px 16px rgba(0,0,0,2), 0 6px 20px 0 rgba(0,0,0,0.19);
-				}	
-	
-				.center {
-					margin: auto;
-					width: 70%;
-					padding: 200px;
-				}
-				
-				#buttonDiv {
-					margin: 0 auto;
-					max-width: 400px;
-				}
-			</style>
-	</head>
+	<style>
+ 
+  body{ background-color:#12A5F4; 
 }
-</style>
+.center {
+  margin: auto;
+  width: 100%;
+  padding: 200px;
+}
+
+ .button {
+  width: 150px;
+  height: 70px;
+  margin: 5px;
+  border: none;
+  background-color: #ff7c30;
+  border-radius: 8px;
+  color: white;
+  padding: 15px 25px;
+  text-align: center;
+  font-size: 30px;
+  font-family: arial,serif;
+  cursor: pointer;
+
+}
+.button:hover {
+  background-color: #f25900;
+}
+div.textHeader {
+  color: #ffffff;
+  font-size: 40px;
+  font-family: arial,serif;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+}
+div.textSub {
+  color: #ffffff;
+  font-size: 27px;
+  font-family: arial,serif;
+  text-align: center;
+}
+div.textAI {
+  color: #ffffff;
+  font-size: 20px;
+  font-family:arial,serif;
+  text-align: left;
+  white-space: nowrap;
+  padding: 7px 0px;
+}
+div.buttonAI{
+  width: 100px;
+  height: 70px;
+  margin: 5px;
+  border: none;
+  background-color: #ff7c30;
+  border-radius: 8px;
+  color: white;
+  padding: 15px 25px;
+  text-align: center;
+  font-size: 30px;
+  font-family: arial,serif;
+  cursor: pointer;
+  float: left;
+}
+div.buttonAI:hover{
+   background-color: #f25900;
+}
+  </style>
+		
+	</head>
 
 <body onload="initalize()">
 	<!-- Call the initalize method when the page loads -->
 
-	<div class="container">
+<body>
+	<div class="center">
+	<div class="container-fluid">
+	 <div class="row">
+  <div class="col-sm-12">
+    <div class="textHeader">Welcome to food is life's top trumps game</div>
+</div>
 
-		<style>
-			.buttonGame {
-  background-color: #ff7c30;
-  border: none;
-  border-radius: 8px;
-  color: white;
-  padding: 15px 25px;
-  text-align: center;
-  font-size: 30px;
-  font-family: arial,serif;
-  cursor: pointer;
-}
-.buttonGame:shadow {
-  background-color: 0 8px 16px rgba(0,0,0,2), 0 6px 20px 0 rgba(0,0,0,0.19);
-}
+  <div class="col-sm-12">
+    <div class="textSub">Choose to play a game or see latest statistics below</div>
+  </div>
 
-.buttonGame:hover {
-  background-color: #f25900;
-}
-</style>
-		<style>
-			.buttonStats {
-  background-color: #ff7c30;
-  border: none;
-  border-radius: 8px;
-  color: white;
-  padding: 15px 25px;
-  text-align: center;
-  font-size: 30px;
-  font-family: arial,serif;
-  cursor: pointer;
-}
+ <div class="col-sm-12">
+    <center> <button class="button" id="gameButton">Game</button><button class="button" id="statsButton">Stats</button></center></div>
 
-.buttonStats:hover {
-  background-color: #f25900;
-}
-.buttonStats:shadow {
-  background-color: 0 8px 16px rgba(0,0,0,2), 0 6px 20px 0 rgba(0,0,0,0.19);
-}
-</style>
+<div class="col-sm-2"><div class="textAI">Number of<br/>AI players:</div></div>
 
-		<style>
-			.center {
-  margin: auto;
-  width: 70%;
-  padding: 200px;
-}
-</style>
+<div class="col-sm-10">
+    <center><div class="buttonAI" id="AI1">1</div><div class="buttonAI" id="AI2">2</div><div class="buttonAI" id="AI3">3</div><div class="buttonAI" id="AI4">4</div></center>
+</div>
+ 
 
-		<body>
-			<div class="center">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-sm-12">
-							<font color="#ffffff">
-								<h1 style="font-family: arial, serif; font-size:36px">
-									<center>WELCOME TO FOOD IS LIFE'S TOP TRUMPS GAME</center>
-								</h1>
-						</div>
-					</div>
+  
+  </body>
+</html>
 
-					<div class="row">
-						<div class="col-sm-4"></div>
-						<div class="col-sm-4">
-							<h2 style="font-family: arial, serif;font-size:30px"><small>
-									<center> Choose to play a game or see latest statistics below</center>
-							</h2></small>
-							<center> <button class="button buttonGame">Game</button><button class="button buttonStats">Stats</button></center>
-						</div>
-						<div class="col-sm-4"></div>
-
-					</div>
-				</div>
-			</div>
-		</body>
-
+	
 	<script type="text/javascript">
 
 		// Method that is called on page load
