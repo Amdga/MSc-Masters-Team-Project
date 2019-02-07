@@ -152,9 +152,9 @@
 	  margin-left:-150px;
 	  position:fixed;
 	  background:#f1f1f1;
-	  bottom:35px;
+	  bottom:25px;
 	  left:50%;
-	  top: 50%;
+	  
 	
 	}
 	
