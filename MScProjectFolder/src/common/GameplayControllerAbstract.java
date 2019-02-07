@@ -298,7 +298,7 @@ public abstract class GameplayControllerAbstract {
 	/**
 	 * Takes the deck and deals it out one by one to each player in the game
 	 */
-	protected void dealOutDeck() {
+	public void dealOutDeck() {
 
 		int card_counter = 0;
 		for(Card c : cardsInDeck) {
