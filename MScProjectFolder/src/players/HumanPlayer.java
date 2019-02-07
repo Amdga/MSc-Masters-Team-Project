@@ -1,7 +1,5 @@
-package players;
+package common;
 //import java.util.Scanner;
-
-import common.ViewInterface;
 
 /**
  * Human Player class reads user's category decision

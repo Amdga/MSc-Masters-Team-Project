@@ -1,4 +1,6 @@
 <html>
+<style>
+	body{ background-color:#12A5F4; 
 	<head>
 
 		<!-- Web page title -->
@@ -74,11 +76,61 @@
 			</style>
 	</head>
 }
+</style>
 
 <body onload="initalize()">
 	<!-- Call the initalize method when the page loads -->
 
 	<div class="container">
+
+		<style>
+			.buttonGame {
+  background-color: #ff7c30;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 15px 25px;
+  text-align: center;
+  font-size: 30px;
+  font-family: arial,serif;
+  cursor: pointer;
+}
+.buttonGame:shadow {
+  background-color: 0 8px 16px rgba(0,0,0,2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.buttonGame:hover {
+  background-color: #f25900;
+}
+</style>
+		<style>
+			.buttonStats {
+  background-color: #ff7c30;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 15px 25px;
+  text-align: center;
+  font-size: 30px;
+  font-family: arial,serif;
+  cursor: pointer;
+}
+
+.buttonStats:hover {
+  background-color: #f25900;
+}
+.buttonStats:shadow {
+  background-color: 0 8px 16px rgba(0,0,0,2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+</style>
+
+		<style>
+			.center {
+  margin: auto;
+  width: 70%;
+  padding: 200px;
+}
+</style>
 
 		<body>
 			<div class="center">
@@ -98,7 +150,7 @@
 							<h2 style="font-family: arial, serif;font-size:30px"><small>
 									<center> Choose to play a game or see latest statistics below</center>
 							</h2></small>
-							<div id="buttonDiv"> <button class="button buttonGame">Game</button><button class="button buttonStats">Stats</button></div>
+							<center> <button class="button buttonGame">Game</button><button class="button buttonStats">Stats</button></center>
 						</div>
 						<div class="col-sm-4"></div>
 
@@ -107,96 +159,97 @@
 			</div>
 		</body>
 
-		<script type="text/javascript">
+	<script type="text/javascript">
 
-			// Method that is called on page load
-			function initalize() {
+		// Method that is called on page load
+		function initalize() {
 
-				// --------------------------------------------------------------------------
-				// You can call other methods you want to run when the page first loads here
-				// --------------------------------------------------------------------------
+			// --------------------------------------------------------------------------
+			// You can call other methods you want to run when the page first loads here
+			// --------------------------------------------------------------------------
+
+
+		}
+
+		// -----------------------------------------
+		// Add your other Javascript methods Here
+		// -----------------------------------------
+
+		// This is a reusable method for creating a CORS request. Do not edit this.
+		function createCORSRequest(method, url) {
+			var xhr = new XMLHttpRequest();
+			if ("withCredentials" in xhr) {
+
+				// Check if the XMLHttpRequest object has a "withCredentials" property.
+				// "withCredentials" only exists on XMLHTTPRequest2 objects.
+				xhr.open(method, url, true);
+
+			} else if (typeof XDomainRequest != "undefined") {
+
+				// Otherwise, check if XDomainRequest.
+				// XDomainRequest only exists in IE, and is IE's way of making CORS requests.
+				xhr = new XDomainRequest();
+				xhr.open(method, url);
+
+			} else {
+
+				// Otherwise, CORS is not supported by the browser.
+				xhr = null;
 
 			}
+			return xhr;
+		}
 
-			// -----------------------------------------
-			// Add your other Javascript methods Here
-			// -----------------------------------------
+	</script>
 
-			// This is a reusable method for creating a CORS request. Do not edit this.
-			function createCORSRequest(method, url) {
-				var xhr = new XMLHttpRequest();
-				if ("withCredentials" in xhr) {
+	<!-- Here are examples of how to call REST API Methods -->
+	<script type="text/javascript">
 
-					// Check if the XMLHttpRequest object has a "withCredentials" property.
-					// "withCredentials" only exists on XMLHTTPRequest2 objects.
-					xhr.open(method, url, true);
+		// This calls the helloJSONList REST method from TopTrumpsRESTAPI
+		function helloJSONList() {
 
-				} else if (typeof XDomainRequest != "undefined") {
+			// First create a CORS request, this is the message we are going to send (a get request in this case)
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/helloJSONList"); // Request type and URL
 
-					// Otherwise, check if XDomainRequest.
-					// XDomainRequest only exists in IE, and is IE's way of making CORS requests.
-					xhr = new XDomainRequest();
-					xhr.open(method, url);
-
-				} else {
-
-					// Otherwise, CORS is not supported by the browser.
-					xhr = null;
-
-				}
-				return xhr;
+			// Message is not sent yet, but we can check that the browser supports CORS
+			if (!xhr) {
+				alert("CORS not supported");
 			}
 
-		</script>
+			// CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
+			// to do when the response arrives 
+			xhr.onload = function (e) {
+				var responseText = xhr.response; // the text of the response
+				alert(responseText); // lets produce an alert
+			};
 
-		<!-- Here are examples of how to call REST API Methods -->
-		<script type="text/javascript">
+			// We have done everything we need to prepare the CORS request, so send it
+			xhr.send();
+		}
 
-			// This calls the helloJSONList REST method from TopTrumpsRESTAPI
-			function helloJSONList() {
+		// This calls the helloJSONList REST method from TopTrumpsRESTAPI
+		function helloWord(word) {
 
-				// First create a CORS request, this is the message we are going to send (a get request in this case)
-				var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/helloJSONList"); // Request type and URL
+			// First create a CORS request, this is the message we are going to send (a get request in this case)
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/helloWord?Word=" + word); // Request type and URL+parameters
 
-				// Message is not sent yet, but we can check that the browser supports CORS
-				if (!xhr) {
-					alert("CORS not supported");
-				}
-
-				// CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
-				// to do when the response arrives 
-				xhr.onload = function (e) {
-					var responseText = xhr.response; // the text of the response
-					alert(responseText); // lets produce an alert
-				};
-
-				// We have done everything we need to prepare the CORS request, so send it
-				xhr.send();
+			// Message is not sent yet, but we can check that the browser supports CORS
+			if (!xhr) {
+				alert("CORS not supported");
 			}
 
-			// This calls the helloJSONList REST method from TopTrumpsRESTAPI
-			function helloWord(word) {
+			// CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
+			// to do when the response arrives 
+			xhr.onload = function (e) {
+				var responseText = xhr.response; // the text of the response
+				alert(responseText); // lets produce an alert
+			};
 
-				// First create a CORS request, this is the message we are going to send (a get request in this case)
-				var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/helloWord?Word=" + word); // Request type and URL+parameters
+			// We have done everything we need to prepare the CORS request, so send it
+			xhr.send();
+		}
 
-				// Message is not sent yet, but we can check that the browser supports CORS
-				if (!xhr) {
-					alert("CORS not supported");
-				}
-
-				// CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
-				// to do when the response arrives 
-				xhr.onload = function (e) {
-					var responseText = xhr.response; // the text of the response
-					alert(responseText); // lets produce an alert
-				};
-
-				// We have done everything we need to prepare the CORS request, so send it
-				xhr.send();
-			}
-
-		</script>
+	</script>
 
 </body>
 
