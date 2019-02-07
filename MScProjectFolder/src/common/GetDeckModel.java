@@ -1,3 +1,4 @@
+package common;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -11,10 +12,19 @@ public class GetDeckModel {
 	private String [] header;
 	private ArrayList <Card> shuffleTheDeck = new ArrayList<>();
 
-	// Constructor
+	// ~~~~~~~ Constructors
 	
 	public GetDeckModel() {
+		constructionHelper();
+	}
 
+	public GetDeckModel(String deckFileName) {
+		filepath = ".\\" + deckFileName;
+		constructionHelper();
+	}
+	
+	private void constructionHelper() {
+		
 		Scanner s;
 		FileReader cardFile;
 
@@ -44,6 +54,8 @@ public class GetDeckModel {
 		// Shuffle the cards
 		shuffleCards();
 	}
+	
+	// ~~~~~~~ Rest of Methods
 	
 	private ArrayList<Card> shuffleCards(){
 		Random randomIndex = new Random();

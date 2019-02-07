@@ -1,3 +1,4 @@
+package common;
 import java.util.ArrayList;
 
 /**
@@ -16,6 +17,13 @@ public abstract class PlayerAbstract {
 	
 	protected ArrayList<Card> currentDeck = new ArrayList<Card>();
 	protected boolean amIHuman = false;
+	protected int playerNumber;
+	
+	//------Constructor-------------------------------
+	
+	protected PlayerAbstract(int inputPlayer) {
+		this.playerNumber = inputPlayer;
+	}
 	
 	//------Abstract methods--------------------------
 	
@@ -90,6 +98,11 @@ public abstract class PlayerAbstract {
 		return this.currentDeck;
 	}
 	
+	public int whoAmI() {
+		
+		return playerNumber;
+		
+	}
 	
 	//------Setters---------------------------------
 	public void setDeck(ArrayList<Card> inputDeck) {
@@ -100,6 +113,8 @@ public abstract class PlayerAbstract {
 		 */
 		this.currentDeck = inputDeck;
 	}
+	
+	
 	
 //	public static void main(String[] args) {
 //		
