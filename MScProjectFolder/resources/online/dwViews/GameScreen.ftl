@@ -257,11 +257,11 @@
 	background: #f25900;
 	}
 
-	div{
+	/* div{
 			border-color: blue;
 			border-style: dotted;
 			border-width: 3px;
-		}
+		} */
 	
 	</style>
 
