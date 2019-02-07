@@ -108,7 +108,7 @@ div.rectangleBackGround {
 
 div.squareMainCard {
   
-  
+  position: absolute;
   height: 350px;
   width: 250px;
   border-radius: 8px;
@@ -136,6 +136,7 @@ button {
 }
 
 div.btn-group button {
+ 
   width: 230px; 
   height: 35px;
   bottom: 0px;
@@ -151,20 +152,15 @@ div.btn-group button {
   border-bottom: none; 
 }
 
-.pointer {cursor: pointer;
-}
-
 .btn-group button:hover {
   background-color: #f25900;
-  cursor: pointer;
 }
 
 div.textSquare {
   text-align: left;
-  padding-top: 2%;
-  padding-left: 2%;
+  top: 50px;
+  padding-left: 10%;
   font: arial, serif;
-  font-size: 25px;
 }
 
 .cardPile {
@@ -205,83 +201,70 @@ div.textSquare {
 		</div>
 		<div class="col-sm-9" style="width:70%"> 
 <div class="gallery">
-  <a target="_blank" href="../CardImages/Avenger.jpg">
-    <img src="../CardImages/Avenger.jpg" alt="Player 1" style="width:177px;height:110px;">
-  </a>
-  <div class="desc">Add a description of the image here P1</div>
-</div>
-
-<div class="gallery">
-  <a target="_blank" href="../CardImages/Carrack.jpg">
-    <img src="../CardImages/Carrack.jpg" alt="Player 2" style="width:177px;height:110px;">
+  <a target="_blank" href="Avenger.jpg">
+    <img src="Avenger.jpg" alt="Player 1" style="width:177px;height:110px;">
   </a>
   <div class="desc">Add a description of the image here</div>
 </div>
 
 <div class="gallery">
-  <a target="_blank" href="../CardImages/Constellation.jpg">
-    <img src="../CardImages/Constellation.jpg" alt="Player 3" style="width:177px;height:110px;">
+  <a target="_blank" href="Carrack.jpg">
+    <img src="Carrack.jpg" alt="Player 2" style="width:177px;height:110px;">
   </a>
   <div class="desc">Add a description of the image here</div>
 </div>
 
 <div class="gallery">
-  <a target="_blank" href="../CardImages/350r.jpg">
-    <img src="../CardImages/350r.jpg" alt="Player 4" style="width:177px;height:110px;">
+  <a target="_blank" href="Constellation.jpg">
+    <img src="Constellation.jpg" alt="Player 3" style="width:177px;height:110px;">
+  </a>
+  <div class="desc">Add a description of the image here</div>
+</div>
+
+<div class="gallery">
+  <a target="_blank" href="350r.jpg">
+    <img src="350r.jpg" alt="Player 4" style="width:177px;height:110px;">
   </a>
   <div class="desc">Add a description of the image here</div>
 </div>
 </div>
 <div class="col-sm-2" style="width:20%">
-
+<div class="scoresBox">
+				<p> Your score: <br>
+					Round: <br>
+					Cards left: <br>
+				 </p>
+			</div>
 </div>
 </div>
 <div class="row">
   <div class ="col-sm-12">
 <div class="rectangleBackGround">
 <div class="textSquare">
-    <p><span><b>Category:</b></span>
-      <span id="txtCat1"> Speed</span><br>
-
-    <span><b>Turn:</b></span>
-      <span id="txtTurn2"> Player 1</span><br>
-
-    <span><b>Winner:</b></span>
-      <span id="txtWin3"> Player 3</span><br>
-
-    <span><b>Round:</b></span>
-      <span id="txtRound4"> 5</span><br>
-
-    <span><b>Cards in your deck:</b></span>
-      <span id="txtDeck5">6</span></p>
-  </div>
+    <p><h3><b>Turn:</b> Player 1<br>
+  <b>Winner:</b> You<br></p></h3></div>
 </div>
     
         <div class="squareMainCard">  
   <div class ="col-sm-9">
    
-  <div id="img5" class="squareMainCard" align="bottom"> 
-  <img src="#" alt="Player 0" style="width:247px;height:130px;padding:5px">
-  <span id="/">Add a description</span>
-  <div class="btn-group" >
-   <ul style="padding-left: 4px"> 
-
-  <button id="size">Size</button>
-  
-  <button id="speed">Speed</button>
-  
-  <button id="range">Range</button>
-  
-  <button id="firepower">Firepower</button>
-  
-  <button id="cargo">Cargo</button>
+  <div class="squareMainCard" align="bottom"> 
+  <img src="350r.jpg" alt="Player 0" style="width:247px;height:150px;padding:5px">
+  <a>
+  <div class="btn-group">
+    <ul>
+  <button>Category 1</button>
+  <button>Category 2</button>
+  <button>Category 3</button>
+  <button>Category 4</button>
+  <button>Category 5</button>
 </ul>
-
+</a>
  </div>
  <div class="col-sm-3">
    <div class="cardPile">
      <p id="commPile"><h5><center><b>Communal Pile</b></center></h5></p><br>
-      <p id="commNum"><h1><center>4</center></h1></p>
+      <p id="commNum"><h4>4</h4></p>
    </div>
 </div>
 </div>
