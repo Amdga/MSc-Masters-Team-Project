@@ -26,6 +26,12 @@ public class CLIView implements ViewInterface{
 		System.out.println("GoodBye");
 		quit_game = true;
 		printStars();
+		System.out.println("You have quit the game");
+		printStars();
+	}
+	
+	public boolean hasGameQuit() {
+		return quit_game;
 	}
 	
 	public void quitGame() {
