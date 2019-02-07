@@ -40,7 +40,7 @@
 		.label{
 			font-style: arial,serif;
 			font-size: 15px;
-	  		width: 100% 
+	  		width: 100%;
 	 		border-radius: 8px;
 	  		margin: 4px;
 	  		
@@ -121,7 +121,7 @@
 	.modal {
 		  display: none; /* Hidden by default */
 		  position: fixed; /* Stay in place */
-		  z-index: 1; /* Sit on top */
+		  z-index: 10; /* Sit on top */
 		  width: 100%; /* Full width */
 		  height: 100%; /* Full height */
 		  overflow: auto; /* Enable scroll if needed */
@@ -144,17 +144,18 @@
 	}
 	
 	div.squareMainCard {
-	  height: 370px;
+	  z-index: 2;
+	  height: 375px;
 	  width: 250px;
 	  border-radius: 8px;
 	  border-style: solid;
 	  border-width: 1px; 
-	  margin-left:-150px;
+	  /* margin-left:-150px; */
 	  position:fixed;
 	  background:#f1f1f1;
-	  bottom:35px;
-	  left:50%;
-	  top: 50%;
+	  bottom:20px;
+	  left:40%;
+	  /* top: 50%; */
 	
 	}
 	
@@ -184,15 +185,15 @@
 	
 	div.textSquare {
 	  text-align: left;
-	  padding-top: 2%;
-	  padding-left: 2%;
+	  padding-top: 15px;
+	  padding-left: 15px;
 	  font: arial, serif;
 	  font-size: 25px;
 	}
 	
 	.cardPile {
 	  background: #f1f1f1;
-	  height: 250px;
+	  height: 220px;
 	  width: 150px;
 	  font-style: arial, serif;
 	  font-size: 15px;
@@ -201,7 +202,7 @@
 	  border-width: 1px;
 	  border-style: solid;
 	  position: fixed;
-	  bottom:200px;
+	  bottom:175px;
 	  right: 75px;
 	  border-color: black;
 	  box-shadow:
@@ -222,9 +223,9 @@
 	padding: 10px 15px;
 	color: white;
 	text-align: center;
-	bottom: 120px;
+	bottom: 40px;
 	position: fixed;
-	right: 200px
+	right: 75px
 	
 	
 	}
@@ -241,15 +242,26 @@
 	padding: 10px 15px;
 	color: white;
 	text-align: center;
-	bottom: 120px;
+	bottom: 100px;
 	position: fixed;
-	right: 360px
-	
-	
+	right: 75px;
 	}
+	
+	/* #galleries{
+		margin-left: auto;
+		margin-right: auto;
+	} */
+	
+	
 	.buttonNext:hover {
 	background: #f25900;
 	}
+
+	div{
+			border-color: blue;
+			border-style: dotted;
+			border-width: 3px;
+		}
 	
 	</style>
 
@@ -257,54 +269,58 @@
 
 <body onload="initalize()">
 	<!-- Call the initalize method when the page loads -->
-	
 
-	<div class="container">
+
+	<div class="container-fluid">
 		<div class="container-fluid">
-		
-	<!-- Trigger/Open the Modal -->
-	
-		<button id="myBtn">Open Modal</button>
-	
-	<!-- The Modal-->
-	
-		<div id="popup" class="modal">
-	
-	<!-- Modal content -->
-	  <div class="modal-content">
-	  
-  	<h1 id="txtWinner">Which Player Has Won!</h1>
-  	
-    <p>Play another game with the same amount of AI players or return to Menu to view stats and change AI players </p>
-    <div class="row" style="display:block;align:center">
-    
-    <button class="modalButton" id="playButton">PLAY</button>
-    <button class="modalButton" id="goBack3">MENU</button>
-    
-	</div>
-	</span>
 
-  </div>
+			<!-- Trigger/Open the Modal -->
 
-</div>
-	
-			<div class="row">
-				<div class="col-sm-1" style="width:20%">
-					<button class="goBackButton" id="goBack2">Go Back</button>
+			<button id="myBtn">Open Modal</button>
+
+			<!-- The Modal-->
+
+			<div id="popup" class="modal">
+
+				<!-- Modal content -->
+				<div class="modal-content">
+
+					<h1 id="txtWinner">Which Player Has Won!</h1>
+
+					<p>Play another game with the same amount of AI players or return to Menu to view stats and change AI players </p>
+					<div class="row" style="display:block;align:center">
+
+						<button class="modalButton" id="playButton">PLAY</button>
+						<button class="modalButton" id="goBack3">MENU</button>
+
+					</div>
+					</span>
+
 				</div>
 
-				<div class="col-sm-9" style="width:80%">
+			</div>
+
+			<div class="row">
+				<div class="col-sm-1" style="min-width:100px;max-width:100px;">
+					<button class="goBackButton" id="goBack2">Go<br/>Back</button>
+				</div>
+
+				<div class="col-sm-10" id="galleries" style="width:auto">
 					<div class="gallery" id="card1">
 						<div class="label" style="padding-left:5px;padding-right: 5px">
 							<p style="text-align:left;" id="p1"> Player 1
 								<span style="float:right;color: #f25900" id="p1deck"> <b> 3 </b> </span>
-							</div>
+						</div>
 						</span>
 						<a href="#">
 							<img src="#" id="img1" alt="Player 1" style="width:177px;height:110px;">
 						</a>
 						<div class="desc" id="name1">Description</div>
-						<p id="cat1"><font size="6"><center><b>1</b></center></font></p>
+						<p id="cat1">
+							<font size="6">
+								<center><b>1</b></center>
+							</font>
+						</p>
 					</div>
 
 
@@ -312,100 +328,121 @@
 						<div class="label" style="padding-left:5px;padding-right: 5px">
 							<p style="text-align:left;" id="p2"> Player 2
 								<span style="float:right;color: #f25900" id="p2deck"> <b> 3 </b> </span>
-							</div>
+						</div>
 						</span>
-						<a  href="#">
+						<a href="#">
 							<img src="#" id="img2" alt="Player 2" style="width:177px;height:110px;">
 						</a>
 						<div class="desc" id="name2">Description</div>
-						<p id="cat2"><font size="6"><center><b>2</b></center></font></p>
+						<p id="cat2">
+							<font size="6">
+								<center><b>2</b></center>
+							</font>
+						</p>
 					</div>
 
 					<div class="gallery" id="card3">
 						<div class="label" style="padding-left:5px;padding-right: 5px">
 							<p style="text-align:left;" id="p3"> Player 3
 								<span style="float:right;color: #f25900" id="p3deck"> <b> 3 </b> </span>
-							</div>
+						</div>
 						</span>
 						<a href="#">
-							<img src="#" id="img3"  alt="Player 3" style="width:177px;height:110px;">
+							<img src="#" id="img3" alt="Player 3" style="width:177px;height:110px;">
 						</a>
 						<div class="desc" id="name3">Description</div>
-						<p id="cat3"><font size="6"><center><b>3</b></center></font></p>
+						<p id="cat3">
+							<font size="6">
+								<center><b>3</b></center>
+							</font>
+						</p>
 					</div>
 
 					<div class="gallery" id="card4">
 						<div class="label" style="padding-left:5px;padding-right:5px">
 							<p style="text-align:left;" id="p4"> Player 4
 								<span style="float:right;color: #f25900" id="p4deck"> <b> 3 </b> </span>
-							</div>
+						</div>
 						</span>
-						<a  id="img4" href="#">
+						<a id="img4" href="#">
 							<img src="#" alt="Player 4" style="width:177px;height:110px;">
 						</a>
 						<div class="desc" id="name4">Description</div>
-						<p id="cat4"><font size="6"><center><b>4</b></center></font></p>
+						<p id="cat4">
+							<font size="6">
+								<center><b>4</b></center>
+							</font>
+						</p>
 					</div>
 				</div>
-				
+
 			</div>
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="rectangleBackGround">
 						<div class="textSquare">
-					
+
 							<p><span><b>Category:</b></span>
-      						<span id="txtCat1"> Speed</span><br>
+								<span id="txtCat1"> Speed</span><br>
 
-   						 <span><b>Turn:</b></span>
-      				 	<span id="txtTurn2"> Player 1</span><br>
+								<span><b>Turn:</b></span>
+								<span id="txtTurn2"> Player 1</span><br>
 
-   						 <span><b>Winner:</b></span>
-    					  <span id="txtWin3"> Player 3</span><br>
+								<span><b>Winner:</b></span>
+								<span id="txtWin3"> Player 3</span><br>
 
-  						  <span><b>Round:</b></span>
-    					  <span id="txtRound4"> 5</span><br>
+								<span><b>Round:</b></span>
+								<span id="txtRound4"> 5</span><br>
 
-   						 <span><b>Cards in your deck:</b></span>
-    					  <span id="txtDeck5">6</span></p>
+								<span><b>Cards in your deck:</b></span>
+								<span id="txtDeck5">6</span>
+							</p>
 						</div>
 						<div class="buttonNext" id="nextRound">Next Round</div>
 						<div class="buttonForward" id="fastForward">Fast Forward</div>
 					</div>
 
-					
-						<div class="col-sm-9">
-							<div class="squareMainCard">
-								<img src="#" id="img5" alt="Player 0" style="width:247px;height:145px;padding:5px">
-								<div class="desc" id="name5"> Description</div>				
-								<div class="btn-group">
-									<ul style="padding-left: 4px">
-										<button id="size">Size</button>
-  
- 										 <button id="speed">Speed</button>
-  
- 										 <button id="range">Range</button>
-  
- 										 <button id="firepower">Firepower</button>
-  
- 										 <button id="cargo">Cargo</button>
-									</ul>
 
-								</div>
-								</div>
-							
-								<div class="col-sm-3">
-									<div class="cardPile">
-										<p id="commPile"><h5><center><b>Communal Pile</b></center></h5></p><br>
-     										 <p id="commNum"><h1><center>4</center></h1></p>
-									</div>
-								</div>
+					<div class="col-sm-9">
+						<div class="squareMainCard">
+							<img src="#" id="img5" alt="Player 0" style="width:247px;height:145px;padding:5px">
+							<div class="desc" id="name5"> Description</div>
+							<div class="btn-group">
+								<ul style="padding-left: 4px">
+									<button id="size">Size</button>
+
+									<button id="speed">Speed</button>
+
+									<button id="range">Range</button>
+
+									<button id="firepower">Firepower</button>
+
+									<button id="cargo">Cargo</button>
+								</ul>
+
 							</div>
+						</div>
+					</div>
+
+					<div class="col-sm-3">
+						<div class="cardPile">
+							<p id="commPile">
+								<h5>
+									<center><b>Communal Pile</b></center>
+								</h5>
+							</p><br>
+							<p id="commNum">
+								<h1>
+									<center>4</center>
+								</h1>
+							</p>
 						</div>
 					</div>
 				</div>
 			</div>
-			<!-- Add your HTML Here
+		</div>
+	</div>
+	<!-- Add your HTML Here
 		<div><button type="button" id="newGame" onclick="newGame();">New Game</button>Click this to create a new game</div>
 
 		<div><button type="button" id="startGame" onclick="initialiseGame();">Start Game</button>Click this to start the game</div>
@@ -452,7 +489,7 @@
 			// You can call other methods you want to run when the page first loads here
 			// --------------------------------------------------------------------------
 
-			
+
 			// For example, lets call our sample methods
 			// helloJSONList();
 			// helloWord("Student");
