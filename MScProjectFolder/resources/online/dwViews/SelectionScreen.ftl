@@ -106,12 +106,7 @@
 							<div id="buttonDiv"> <button class="button buttonGame" onclick = showButtons();>Game</button><button class="button buttonStats" onclick = goToStatPage();>Stats</button></div>
 						</div>
 						<div class="col-sm-4"></div>
-					<div class = "buttonContainer">
-						<button id = "1" onclick = chosenNumberOfPlayers(1);> button 1 </button>
-						<button id = "2" onclick = chosenNumberOfPlayers(2);> button 1 </button>
-						<button id = "3" onclick = chosenNumberOfPlayers(3);> button 1 </button>
-						<button id = "4" onclick = chosenNumberOfPlayers(4);> button 1 </button>
-					</div>
+					
 					</div>
 				</div>
 			</div>
@@ -125,16 +120,7 @@
 
 			}
 
-			function showButtons() {
-			$(".buttonContainer").show()
 			
-			}
-			
-			
-			
-			function goToStatPage() {
-			window.location = "http://localhost:7777/toptrumps/stats"
-			}
 			// This is a reusable method for creating a CORS request. Do not edit this.
 			function createCORSRequest(method, url) {
 				var xhr = new XMLHttpRequest();
@@ -165,14 +151,7 @@
 		<!-- Here are examples of how to call REST API Methods -->
 		<script type="text/javascript">
 		
-		function chosenNumberOfPlayers(number) {
-			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/number=" + number);
-			xhr.onload = function (e) {
-				window.location = "http://localhost:7777/toptrumps/game";
-				};
-				xhr.send();
-			
-		}
+	
 
 			// This calls the helloJSONList REST method from TopTrumpsRESTAPI
 			function helloJSONList() {

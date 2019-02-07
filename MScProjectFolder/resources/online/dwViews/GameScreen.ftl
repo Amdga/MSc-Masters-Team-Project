@@ -228,7 +228,7 @@
 		}
 
 		/* Modal Content/Box */
-		.modal-content {
+		.startGame-modal-content {
 		display:none;
 			background-color: #F1F1F1;
 			margin: 15% auto;
@@ -292,20 +292,20 @@
 		<div id="popup" class="modal">
 
 			<!-- Modal content -->
-			<div class="modal-content">
+			<div class="startGame-modal-content">
 
-				<h1 id="txtWinner">Which Player Has Won!</h1>
+				<h1 id="txtWinner">Top Trumps</h1>
 
 				<p>Play another game with the same amount of AI players or return to Menu to view stats and change AI players
 				</p>
 				<div class="row" style="display:block;align:center">
 
-					<button class="modalButton" id="playButton">PLAY</button>
+					<button class="modalButton" id="playButton">START GAME</button>
 					<button class="modalButton" id="goBack3">MENU</button>
 
 				</div>
 
-
+//Second modal that opens 
 				<!-- Trigger/Open the Modal -->
 
 				<button id="myBtn">Open Modal</button>
