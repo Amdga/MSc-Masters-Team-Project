@@ -369,5 +369,9 @@ public abstract class GameplayControllerAbstract {
 	public ArrayList<PlayerAbstract> getPlayersInGame() {
 		return players_in_game;
 	}
+	
+	public ArrayList<Card> getGameDeck() {
+		return cardsInDeck;
+	}
 
 }

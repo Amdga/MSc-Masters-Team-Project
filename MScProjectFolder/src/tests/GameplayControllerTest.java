@@ -2,6 +2,7 @@ package tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
 
@@ -130,6 +131,44 @@ public class GameplayControllerTest {
 		game.topTrumpsRound(player_list.get(0), cards);
 		
 		assertEquals(1,game.getPlayersInGame().size(),"Test players being removed");
+		
+	}
+	
+	/**
+	 * Test to make sure the deck in the game is the shuffled version of the original deck
+	 * 
+	 */
+	
+	@Test
+	void test_deck_shuffling() {
+		
+		GetDeckModel model = new GetDeckModel();
+		CLIView cli_view = new CLIView();
+		
+		GameplayControllerCLI game = new GameplayControllerCLI(model, cli_view, 0, 0, false);
+		
+		ArrayList<Card> non_shuffled_deck = model.getDeck();
+		ArrayList<Card> shuffled_deck = game.getGameDeck();
+		
+		boolean deck_is_shuffled = false;
+		
+		for(Card c : non_shuffled_deck) {
+			
+			//Check to make sure the shuffled deck contains the cards of the original deck
+			if(!shuffled_deck.contains(c)) {
+				fail("Shuffled deck does not contain the cards of the original deck");
+			}
+			else {
+				//Check to make sure at least one card is in a different order in the shuffled deck to the original deck
+				if(non_shuffled_deck.indexOf(c) != shuffled_deck.indexOf(c)) {
+					deck_is_shuffled = true;
+					break;
+				}
+			}
+			
+		}
+		
+		assertTrue(deck_is_shuffled, "Shuffled deck is in a different order from original deck");
 		
 	}
 	
