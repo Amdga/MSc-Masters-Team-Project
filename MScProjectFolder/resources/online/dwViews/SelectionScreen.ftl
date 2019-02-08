@@ -27,68 +27,7 @@
   padding: 200px;
 }
 
-<<<<<<< HEAD
-		<style>
-				body {
-					background-color:#12A5F4;
-				}
-	
-				.buttonGame {
-					background-color: #ff7c30;
-					border: none;
-					border-radius: 8px;
-					color: white;
-					padding: 15px 25px;
-					text-align: center;
-					font-size: 30px;
-					font-family: arial,serif;
-					cursor: pointer;
-				}
-				.buttonGame:shadow {	
-					background-color: 0 8px 16px rgba(0,0,0,2), 0 6px 20px 0 rgba(0,0,0,0.19);
-				}
-	
-				.buttonGame:hover {
-					background-color: #f25900;
-				}	
-	
-				.buttonStats {
-					background-color: #ff7c30;
-					border: none;
-					border-radius: 8px;
-					color: white;
-					padding: 15px 25px;
-					text-align: center;
-					font-size: 30px;
-					font-family: arial,serif;
-					cursor: pointer;
-				}
-	
-				.buttonStats:hover {
-					background-color: #f25900;
-				}
-				.buttonStats:shadow {
-					background-color: 0 8px 16px rgba(0,0,0,2), 0 6px 20px 0 rgba(0,0,0,0.19);
-				}	
-	
-				.center {
-					margin: auto;
-					width: 70%;
-					padding: 200px;
-				}
-				
-				#buttonDiv {
-					margin: 0 auto;
-					max-width: 400px;
-				}
-				
-				.buttonContainer {
-				display: none;
-				
-				}
-			</style>
-	</head>
-=======
+
  .button {
   width: 150px;
   height: 70px;
@@ -130,6 +69,7 @@ div.textAI {
   padding: 7px 0px;
 }
 div.buttonAI{
+	display:none;
   width: 100px;
   height: 70px;
   margin: 5px;
@@ -146,7 +86,7 @@ div.buttonAI{
 }
 div.buttonAI:hover{
    background-color: #f25900;
->>>>>>> d48c21afe7727d1fcee252acc66b8162615299a2
+
 }
   </style>
 		
@@ -155,42 +95,7 @@ div.buttonAI:hover{
 <body onload="initalize()">
 	<!-- Call the initalize method when the page loads -->
 
-<<<<<<< HEAD
-	<div class="container">
 
-		<body>
-			<div class="center">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-sm-12">
-							<font color="#ffffff">
-								<h1 style="font-family: arial, serif; font-size:36px">
-									<center>WELCOME TO FOOD IS LIFE'S TOP TRUMPS GAME</center>
-								</h1>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-sm-4"></div>
-						<div class="col-sm-4">
-							<h2 style="font-family: arial, serif;font-size:30px"><small>
-									<center> Choose to play a game or see latest statistics below</center>
-							</h2></small>
-							<div id="buttonDiv"> <button class="button buttonGame" onclick = showButtons();>Game</button><button class="button buttonStats" onclick = goToStatPage();>Stats</button></div>
-						</div>
-						<div class="col-sm-4"></div>
-					
-					</div>
-				</div>
-			</div>
-		</body>
-
-		<script type="text/javascript">
-
-			// Method that is called on page load
-			function initalize() {
-			
-=======
 <body>
 	<div class="center">
 	<div class="container-fluid">
@@ -198,27 +103,24 @@ div.buttonAI:hover{
   <div class="col-sm-12">
     <div class="textHeader">Welcome to food is life's top trumps game</div>
 </div>
->>>>>>> d48c21afe7727d1fcee252acc66b8162615299a2
+
 
   <div class="col-sm-12">
     <div class="textSub">Choose to play a game or see latest statistics below</div>
   </div>
 
-<<<<<<< HEAD
-			
-			// This is a reusable method for creating a CORS request. Do not edit this.
-			function createCORSRequest(method, url) {
-				var xhr = new XMLHttpRequest();
-				if ("withCredentials" in xhr) {
-=======
+
  <div class="col-sm-12">
-    <center> <button class="button" id="gameButton">Game</button><button class="button" id="statsButton">Stats</button></center></div>
+    <center> <button class="button" id="gameButton" onclick = showButtons();>Game</button><button class="button" id="statsButton">Stats</button></center></div>
 
 <div class="col-sm-2"><div class="textAI">Number of<br/>AI players:</div></div>
->>>>>>> d48c21afe7727d1fcee252acc66b8162615299a2
+
 
 <div class="col-sm-10">
-    <center><div class="buttonAI" id="AI1">1</div><div class="buttonAI" id="AI2">2</div><div class="buttonAI" id="AI3">3</div><div class="buttonAI" id="AI4">4</div></center>
+    <center><div class="buttonAI" id="AI1" onclick = chosenNumberOfPlayers(1);>1</div>
+    <div class="buttonAI" id="AI2" onclick = chosenNumberOfPlayers(2);>2</div>
+    <div class="buttonAI" id="AI3" onclick = chosenNumberOfPlayers(3);>3</div>
+    <div class="buttonAI" id="AI4" onclick = chosenNumberOfPlayers(4);>4</div></center>
 </div>
  
 
@@ -238,10 +140,15 @@ div.buttonAI:hover{
 
 
 		}
+		
+		function showButtons() {
+			$(".buttonAI").show()
+			
+			}
 
-		// -----------------------------------------
-		// Add your other Javascript methods Here
-		// -----------------------------------------
+		function goToStatPage() {
+			window.location = "http://localhost:7777/toptrumps/stats"
+			}
 
 		// This is a reusable method for creating a CORS request. Do not edit this.
 		function createCORSRequest(method, url) {
@@ -252,14 +159,9 @@ div.buttonAI:hover{
 				// "withCredentials" only exists on XMLHTTPRequest2 objects.
 				xhr.open(method, url, true);
 
-<<<<<<< HEAD
-		<!-- Here are examples of how to call REST API Methods -->
-		<script type="text/javascript">
-		
-	
-=======
+
 			} else if (typeof XDomainRequest != "undefined") {
->>>>>>> d48c21afe7727d1fcee252acc66b8162615299a2
+
 
 				// Otherwise, check if XDomainRequest.
 				// XDomainRequest only exists in IE, and is IE's way of making CORS requests.
@@ -274,11 +176,22 @@ div.buttonAI:hover{
 			}
 			return xhr;
 		}
+		
+		function chosenNumberOfPlayers(number) {
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/number=" + number);
+			xhr.onload = function (e) {
+				window.location = "http://localhost:7777/toptrumps/game";
+				};
+				xhr.send();
+				}
+				
 
 	</script>
 
 	<!-- Here are examples of how to call REST API Methods -->
 	<script type="text/javascript">
+	
+		
 
 		// This calls the helloJSONList REST method from TopTrumpsRESTAPI
 		function helloJSONList() {

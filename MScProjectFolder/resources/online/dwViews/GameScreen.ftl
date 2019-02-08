@@ -114,181 +114,13 @@
 
 	.modalButton:hover{
 			background-color: #F25900;
-<<<<<<< HEAD
-			color: white;
-			box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
-		}
 
-		div.rectangleBackGround {
-			height: 250px;
-			width: 200px;
-			border-radius: 8px;
-			background-color: #ffffff;
-			position: fixed;
-			width: 98%;
-			left: 1%;
-			bottom: 10px;
-		}
-
-		div.squareMainCard {
-			z-index: 2;
-			height: 375px;
-			width: 250px;
-			border-radius: 8px;
-			border-style: solid;
-			border-width: 1px;
-			/* margin-left:-150px; */
-			position: fixed;
-			background: #f1f1f1;
-			bottom: 20px;
-			left: 40%;
-			/* top: 50%; */
-
-		}
-
-		div.btn-group button {
-			width: 230px;
-			height: 35px;
-			padding-top: 2%;
-			left: 10px;
-			margin: 4px;
-			border-radius: 8px;
-			display: block;
-			cursor: pointer;
-			text-align: center;
-			background-color: #ff7c30;
-			color: white;
-			font-style: arial, serif;
-
-		}
-
-		.btn-group button:not(:last-child) {
-			border-bottom: none;
-		}
-
-		.btn-group button:hover {
-			background-color: #f25900;
-		}
-
-		div.textSquare {
-			text-align: left;
-			padding-top: 15px;
-			padding-left: 15px;
-			font: arial, serif;
-			font-size: 25px;
-		}
-
-		.cardPile {
-			background: #f1f1f1;
-			height: 220px;
-			width: 150px;
-			font-style: arial, serif;
-			font-size: 15px;
-			text-align: left;
-			border-radius: 8px;
-			border-width: 1px;
-			border-style: solid;
-			position: fixed;
-			bottom: 175px;
-			right: 75px;
-			border-color: black;
-			box-shadow:
-				0 -1px 2px rgba(0, 0, 0, 0.15),
-				0 -10px 0 -5px #eee,
-				0 -10px 2px -4px rgba(0, 0, 0, 0.15),
-				0 -20px 0 -10px #eee,
-				0 -20px 2px -9px rgba(0, 0, 0, 0.15);
-			padding: 30px;
-		}
-
-		.buttonForward {
-			background: #ff7c30;
-			border-radius: 8px;
-			font-size: 20px;
-			font-family: arial, serif;
-			cursor: pointer;
-			padding: 10px 15px;
-			color: white;
-			text-align: center;
-			bottom: 40px;
-			position: fixed;
-			right: 75px
-		}
-
-		.modal {
-			display: none;
-			/* Hidden by default */
-			position: fixed;
-			/* Stay in place */
-			z-index: 1;
-			/* Sit on top */
-			width: 100%;
-			/* Full width */
-			height: 100%;
-			/* Full height */
-			overflow: auto;
-			/* Enable scroll if needed */
-			background-color: rgb(0, 0, 0);
-			/* Fallback color */
-			background-color: rgba(0, 0, 0, 0.4);
-			/* Black w/ opacity */
-			border-radius: 8px;
-		}
-
-		/* Modal Content/Box */
-		.startGame-modal-content {
-		display:none;
-			background-color: #F1F1F1;
-			margin: 15% auto;
-			padding: 30px;
-			padding-top: 40px;
-			border: 1px solid #888;
-			width: 60%;
-			height: 60%;
-			text-align: center;
-			font-size: 20px;
-		}
-
-		.buttonForward:hover {
-			background: #f25900;
-		}
-
-		.buttonNext {
-			background: #ff7c30;
-			border-radius: 8px;
-			font-size: 20px;
-			font-family: arial, serif;
-			cursor: pointer;
-			padding: 10px 15px;
-			color: white;
-			text-align: center;
-			bottom: 100px;
-			position: fixed;
-			right: 75px;
-		}
-
-		/* #galleries{
-		margin-left: auto;
-		margin-right: auto;
-	} */
-
-
-		.buttonNext:hover {
-			background: #f25900;
-		}
-
-		/* div{
-			border-color: blue;
-			border-style: dotted;
-			border-width: 3px;
-		} */
-=======
 			font-color:white;
 			box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 	}
 	
 	.modal {
-		  display: none; /* Hidden by default */
+		  //display: none; /* Hidden by default */
 		  position: fixed; /* Stay in place */
 		  z-index: 1; /* Sit on top */
 		  width: 100%; /* Full width */
@@ -420,7 +252,7 @@
 	background: #f25900;
 	}
 	
->>>>>>> d48c21afe7727d1fcee252acc66b8162615299a2
+
 	</style>
 
 </head>
@@ -454,49 +286,9 @@
 	</div>
 	</span>
 
-<<<<<<< HEAD
-			<!-- Modal content -->
-			<div class="startGame-modal-content">
 
-				<h1 id="txtWinner">Top Trumps</h1>
-
-				<p>Play another game with the same amount of AI players or return to Menu to view stats and change AI players
-				</p>
-				<div class="row" style="display:block;align:center">
-
-					<button class="modalButton" id="playButton">START GAME</button>
-					<button class="modalButton" id="goBack3">MENU</button>
-
-				</div>
-
-//Second modal that opens 
-				<!-- Trigger/Open the Modal -->
-
-				<button id="myBtn">Open Modal</button>
-
-				<!-- The Modal-->
-
-				<div id="popup" class="modal">
-
-					<!-- Modal content -->
-					<div class="modal-content">
-
-						<h1 id="txtWinner">Which Player Has Won!</h1>
-
-						<p>Play another game with the same amount of AI players or return to Menu to view stats and change AI
-							players </p>
-						<div class="row" style="display:block;align:center">
-
-							<button class="modalButton" id="playButton">PLAY</button>
-							<button class="modalButton" id="goBack3">MENU</button>
-
-						</div>
-						</span>
-
-					</div>
-=======
   </div>
->>>>>>> d48c21afe7727d1fcee252acc66b8162615299a2
+
 
 </div>
 	
@@ -509,7 +301,7 @@
 					<div class="gallery" id="card1">
 						<div class="label" style="padding-left:5px;padding-right: 5px">
 							<p style="text-align:left;" id="p1"> Player 1
-								<span style="float:right;color: #f25900" id="p1deck"> <b> 3 </b> </span>
+								<span class="cardVal" style="float:right;color: #f25900" id="p1deck"> <b> 3 </b> </span>
 							</div>
 						</span>
 						<a href="#">
@@ -523,7 +315,7 @@
 					<div class="gallery" id="card2">
 						<div class="label" style="padding-left:5px;padding-right: 5px">
 							<p style="text-align:left;" id="p2"> Player 2
-								<span style="float:right;color: #f25900" id="p2deck"> <b> 3 </b> </span>
+								<span class="cardVal" style="float:right;color: #f25900" id="p2deck"> <b> 3 </b> </span>
 							</div>
 						</span>
 						<a  href="#">
@@ -536,7 +328,7 @@
 					<div class="gallery" id="card3">
 						<div class="label" style="padding-left:5px;padding-right: 5px">
 							<p style="text-align:left;" id="p3"> Player 3
-								<span style="float:right;color: #f25900" id="p3deck"> <b> 3 </b> </span>
+								<span class="cardVal" style="float:right;color: #f25900" id="p3deck"> <b> 3 </b> </span>
 							</div>
 						</span>
 						<a href="#">
@@ -549,7 +341,7 @@
 					<div class="gallery" id="card4">
 						<div class="label" style="padding-left:5px;padding-right:5px">
 							<p style="text-align:left;" id="p4"> Player 4
-								<span style="float:right;color: #f25900" id="p4deck"> <b> 3 </b> </span>
+								<span class="cardVal" style="float:right;color: #f25900" id="p4deck"> <b> 3 </b> </span>
 							</div>
 						</span>
 						<a  id="img4" href="#">
@@ -561,6 +353,8 @@
 				</div>
 				
 			</div>
+			
+			
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="rectangleBackGround">
@@ -570,7 +364,7 @@
       						<span id="txtCat1"> Speed</span><br>
 
    						 <span><b>Turn:</b></span>
-      				 	<span id="txtTurn2"> Player 1</span><br>
+      				 	<span id="txtTurn2"> </span><br>
 
    						 <span><b>Winner:</b></span>
     					  <span id="txtWin3"> Player 3</span><br>
@@ -592,15 +386,15 @@
 								<div class="desc" id="name5"> Description</div>				
 								<div class="btn-group">
 									<ul style="padding-left: 4px">
-										<button id="size">Size</button>
+										<button id="size">Size <var class = "var" id = "c1"></var></button>
   
- 										 <button id="speed">Speed</button>
+ 										 <button id="speed">Speed <var class = "var" id = "c2"></var></button>
   
- 										 <button id="range">Range</button>
+ 										 <button id="range">Range <var class = "var" id = "c3"></var></button>
   
- 										 <button id="firepower">Firepower</button>
+ 										 <button id="firepower">Firepower <var class = "var" id = "c4"></var></button>
   
- 										 <button id="cargo">Cargo</button>
+ 										 <button id="cargo">Cargo <var class = "var" id = "c5"></var></button>
 									</ul>
 
 								</div>
@@ -617,33 +411,8 @@
 					</div>
 				</div>
 			</div>
-			<!-- Add your HTML Here
-		<div><button type="button" id="newGame" onclick="newGame();">New Game</button>Click this to create a new game</div>
-
-		<div><button type="button" id="startGame" onclick="initialiseGame();">Start Game</button>Click this to start the game</div>
-
-		<div><button type="button" id="startRound" onclick="startARound();">Start Round</button>Click this to start the next round (use in 'round ended' state)</div>
-
-		<div><button type="button" id="speed" onclick="chosenCategory('Speed');">Speed</button>
-			<button type="button" id="cargo" onclick="chosenCategory('Cargo');">Cargo</button>
-			<button type="button" id="range" onclick="chosenCategory('Range');">Range</button></div>
-		<div><button type="button" id="size" onclick="chosenCategory('Size');">Size</button>
-			<button type="button" id="firepower" onclick="chosenCategory('Firepower');">Firepower</button>
-		Click these to choose a category (use in 'choosing category' state)</div>
-
-		<div><button type="button" id="quit" onclick="quit();">Quit</button>Click this to quit the current game</div>
-		<div>
-			<pre><p id="response">######</p></pre>
-		</div><br>
-		<div>
-			<p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>
-		</div><br>
-		<div>
-			<p id="error">--------</p>
-		</div>
-		<div><button type="button" id="ff" onclick="fastforward(false);">Fast Forward</button>Fast forward till time to choose category or a player is out, or end of game</div>
-		<div><button type="button" id="ff" onclick="fastforward(true);">Super FF</button>Fast forward till time to choose category or end of game</div> -->
-
+			
+		
 		</div>
 
 		<script type="text/javascript">
@@ -656,25 +425,26 @@
 			// $('#size').onclick = chosenCategory("Size");
 			// $('#firepower').onclick = chosenCategory("Firepower");
 			// $('#quit').onclick = quit();
+			
+			
+			
+			
 
 			// Method that is called on page load
 			function initalize() {
-
-				// --------------------------------------------------------------------------
-				// You can call other methods you want to run when the page first loads here
-				// --------------------------------------------------------------------------
-
-
-				// For example, lets call our sample methods
-				// helloJSONList();
-				// helloWord("Student");
-				// showCard();
+			initialiseGame();
+			
+		
 
 			}
-
-			// -----------------------------------------
-			// Add your other Javascript methods Here
-			// -----------------------------------------
+		
+		
+		
+		
+		
+				
+			
+		
 
 			// This is a reusable method for creating a CORS request. Do not edit this.
 			function createCORSRequest(method, url) {
@@ -710,17 +480,66 @@
 				return xhr;
 			}
 
+
+
+
+//######################################################################################################
+
+
+
+//Function that goes through the testresponse object and display whats not null to the screen.
 			function testResponse(jsonAsString) {
-				//var response = JSON.parse(jsonAsString)
-				if (jsonAsString == "state error") {
-					$("#error").html("Function cant be used in this state");
-				} else if (jsonAsString == "") {
-					$("#error").html($('#error').text() + " + 1")
-				} else {
-					$("#response").html(jsonAsString);
-					$("#error").html("--------");
-				}
+				var response = JSON.parse(jsonAsString)
+			//if (jsonAsString == "state error") {
+			//		$("#error").html("Function cant be used in this state");
+			
+			if(response.decksize != null) {
+				$("#txtDeck5").html(response.decksize)
 			}
+			if(response.round != null) {
+				$("#txtRound4").html(response.round)
+			}
+			if(response.current_player != null){
+				$("#txtTurn2").html(response.current_player)
+			}
+		if(response.card.valueMap != null) {
+		var cardArray = Object.values(response.card.valueMap);
+		setHumanCard(cardArray);
+		$("#name5").html(response.card.cardName)
+		
+		}
+		if(response.category != null) {
+		$("#txtCat1").html(response.category)
+		}
+		
+		if(response.player_values != null) {
+		setPlayersValues(response);
+		
+		}
+		
+		}
+		//Function that displays the AIplayers values.
+			function setPlayersValues(response) {
+			alert(response.player_values);
+			var i = 0;
+			$(' .cardVal').each(function() {
+			if(this.id.indexOf(response.player_values[i][0]) > -1) {
+				$(this).text(4)
+				i++;
+			}
+			});
+		}
+		
+		//Function that displays the humanplayers card values, takes an array as parameter.
+		function setHumanCard(x) {
+			var i = 0;
+			$(' .var').each(function() {
+			$(this).text(x[i])
+			i++;
+			});
+
+			
+		}
 
 			function newGame() {
 				var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/newGame");

@@ -1,4 +1,7 @@
-package common;
+package players;
+
+import common.ViewInterface;
+
 //import java.util.Scanner;
 
 /**
