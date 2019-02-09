@@ -301,54 +301,54 @@
 					<div class="gallery" id="card1">
 						<div class="label" style="padding-left:5px;padding-right: 5px">
 							<p style="text-align:left;" id="p1"> Player 1
-								<span class="cardVal" style="float:right;color: #f25900" id="p1deck"> <b> 3 </b> </span>
+								<span class="deckVal" style="float:right;color: #f25900" id="p1deck"> <b> 3 </b> </span>
 							</div>
 						</span>
 						<a href="#">
 							<img src="#" id="img1" alt="Player 1" style="width:177px;height:110px;">
 						</a>
 						<div class="desc" id="name1">Description</div>
-						<p id="cat1"><font size="6"><center><b>1</b></center></font></p>
+						<p class = "cardVal" id="cat1"><font size="6"><center><b>1</b></center></font></p>
 					</div>
 
 
 					<div class="gallery" id="card2">
 						<div class="label" style="padding-left:5px;padding-right: 5px">
 							<p style="text-align:left;" id="p2"> Player 2
-								<span class="cardVal" style="float:right;color: #f25900" id="p2deck"> <b> 3 </b> </span>
+								<span class=""deckVal" style="float:right;color: #f25900" id="p2deck"> <b> 3 </b> </span>
 							</div>
 						</span>
 						<a  href="#">
 							<img src="#" id="img2" alt="Player 2" style="width:177px;height:110px;">
 						</a>
 						<div class="desc" id="name2">Description</div>
-						<p id="cat2"><font size="6"><center><b>2</b></center></font></p>
+						<p class = "cardVal" id="cat2"><font size="6"><center><b>2</b></center></font></p>
 					</div>
 
 					<div class="gallery" id="card3">
 						<div class="label" style="padding-left:5px;padding-right: 5px">
 							<p style="text-align:left;" id="p3"> Player 3
-								<span class="cardVal" style="float:right;color: #f25900" id="p3deck"> <b> 3 </b> </span>
+								<span class="deckVal" style="float:right;color: #f25900" id="p3deck"> <b> 3 </b> </span>
 							</div>
 						</span>
 						<a href="#">
 							<img src="#" id="img3"  alt="Player 3" style="width:177px;height:110px;">
 						</a>
 						<div class="desc" id="name3">Description</div>
-						<p id="cat3"><font size="6"><center><b>3</b></center></font></p>
+						<p class = "cardVal" id="cat3"><font size="6"><center><b>3</b></center></font></p>
 					</div>
 
 					<div class="gallery" id="card4">
 						<div class="label" style="padding-left:5px;padding-right:5px">
 							<p style="text-align:left;" id="p4"> Player 4
-								<span class="cardVal" style="float:right;color: #f25900" id="p4deck"> <b> 3 </b> </span>
+								<span class="deckVal" style="float:right;color: #f25900" id="p4deck"> <b> 3 </b> </span>
 							</div>
 						</span>
 						<a  id="img4" href="#">
 							<img src="#" alt="Player 4" style="width:177px;height:110px;">
 						</a>
 						<div class="desc" id="name4">Description</div>
-						<p id="cat4"><font size="6"><center><b>4</b></center></font></p>
+						<p class = "cardVal" id="cat4"><font size="6"><center><b>4</b></center></font></p>
 					</div>
 				</div>
 				
@@ -403,7 +403,7 @@
 								<div class="col-sm-3">
 									<div class="cardPile">
 										<p id="commPile"><h5><center><b>Communal Pile</b></center></h5></p><br>
-     										 <p id="commNum"><h1><center>4</center></h1></p>
+     										 <p ><h1 id="commNum"><center>4</center></h1></p>
 									</div>
 								</div>
 							</div>
@@ -506,25 +506,50 @@
 		var cardArray = Object.values(response.card.valueMap);
 		setHumanCard(cardArray);
 		$("#name5").html(response.card.cardName)
-		
 		}
 		if(response.category != null) {
 		$("#txtCat1").html(response.category)
 		}
-		
 		if(response.player_values != null) {
-		setPlayersValues(response);
+		var cardValues = Object.values(response.player_values);
+		setPlayersValues(cardValues, " .cardVal");
+		}
+		if(response.winning_player != null) {
+		$("#txtWin3").html(response.winning_player)
+		}
+		if(response.was_draw != null) {
+		$("#txtWin3").html("It was a draw!")
+		}
+		if(response.losing_players != null) {
+		//Print message where?
+		}
+		if(response.communal_pile_size != null) {
+		$("#commNum").html(response.communal_pile_size)
+		}
+		if(response.overall_winner != null) {
+		$("#txtWinner").html(response.over_all_winner)
+		}
+		
+		//
+		//if(playerDeckSizes != null) {
+		//var deckSizes = Object.values(response.playerDeckSizes);
+		//alert(deckSizes);
+		//setPlayerValues(deckSizes, " .deckVal");
+		
+		//}
 		
 		}
 		
-		}
-		//Function that displays the AIplayers values.
-			function setPlayersValues(response) {
-			alert(response.player_values);
-			var i = 0;
-			$(' .cardVal').each(function() {
-			if(this.id.indexOf(response.player_values[i][0]) > -1) {
-				$(this).text(4)
+		
+		
+		//Function that displays the AIplayers card values and number of cards. 
+		//Takes in an array and a html class as parameters
+			function setPlayersValues(array, html_class) {
+			alert(array);
+			var i = 1;
+			$(html_class).each(function() {
+			if((this.id).indexOf(array[i][0]) > -1) {
+			$(this).text(array[i][1])
 				i++;
 			}
 			});
