@@ -16,11 +16,12 @@ import common.GetDeckModel;
 import players.PlayerAbstract;
 
 public class GameplayControllerTest {
+	String deckFile = "TestDeck.txt";
 	
 //	@Test
 //	void test_winning_player_all_cards() {
 //		
-//		GetDeckModel deck_model = new GetDeckModel();
+//		GetDeckModel deck_model = new GetDeckModel(deckFile);
 //		CLIView cli_view = new CLIView();
 //		
 //		GameplayControllerCLI game = new GameplayControllerCLI(deck_model, cli_view, 0, 4, false);
@@ -51,7 +52,7 @@ public class GameplayControllerTest {
 //	@Test
 //	void test_winner_gets_all_cards() {
 //		
-//		GetDeckModel deck_model = new GetDeckModel();
+//		GetDeckModel deck_model = new GetDeckModel(deckFile);
 //		CLIView cli_view = new CLIView();
 //		
 //		GameplayControllerCLI game = new GameplayControllerCLI(deck_model, cli_view, 0, 3, false);
@@ -73,7 +74,7 @@ public class GameplayControllerTest {
 //	@Test
 //	void test_communal_pile_when_draw() {
 //		
-//		GetDeckModel deck_model = new GetDeckModel();
+//		GetDeckModel deck_model = new GetDeckModel(deckFile);
 //		CLIView cli_view = new CLIView();
 //		
 //		GameplayControllerCLI game = new GameplayControllerCLI(deck_model, cli_view, 0, 3, false);
@@ -95,7 +96,7 @@ public class GameplayControllerTest {
 //	@Test
 //	void test_players_created() {
 //		
-//		GetDeckModel deck = new GetDeckModel();
+//		GetDeckModel deck = new GetDeckModel(deckFile);
 //		
 //		GameplayControllerCLI game = new GameplayControllerCLI(deck,null,0,0,false);
 //		ArrayList<PlayerAbstract> players = game.createPlayers(0, 0);
@@ -117,7 +118,7 @@ public class GameplayControllerTest {
 //	@Test
 //	void test_players_being_removed() {
 //		
-//		GetDeckModel deck = new GetDeckModel();
+//		GetDeckModel deck = new GetDeckModel(deckFile);
 //		CLIView cli_view = new CLIView();
 //		
 //		GameplayControllerCLI game = new GameplayControllerCLI(deck,cli_view,0,4,false);
@@ -143,7 +144,7 @@ public class GameplayControllerTest {
 //	@Test
 //	void test_deck_shuffling() {
 //		
-//		GetDeckModel model = new GetDeckModel();
+//		GetDeckModel model = new GetDeckModel(deckFile);
 //		CLIView cli_view = new CLIView();
 //		
 //		GameplayControllerCLI game = new GameplayControllerCLI(model, cli_view, 0, 0, false);
@@ -176,7 +177,7 @@ public class GameplayControllerTest {
 	@Test
 	void test_deck_divided_evenly_between_players() {
 		
-		GetDeckModel model = new GetDeckModel();
+		GetDeckModel model = new GetDeckModel(deckFile);
 		CLIView cli_view = new CLIView();
 		
 		GameplayControllerCLI game = new GameplayControllerCLI(model, cli_view, 0, 6, false);
