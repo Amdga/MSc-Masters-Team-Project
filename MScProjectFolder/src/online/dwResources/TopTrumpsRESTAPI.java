@@ -90,6 +90,12 @@ public class TopTrumpsRESTAPI {
 	// ~~~~Gameplay Methods~~~~~~~~~~~~~
 	
 	@GET
+	@Path("/chosenNumberOfPlayer")
+		public void chosenNumberOfPlayer(@QueryParam("number") int number) {
+		number_of_ai_players = number;
+	}
+	
+	@GET
 	@Path("game/newGame")
 	public String newGame() throws IOException{
 		dataBuffer = new OnlineDataBuffer();

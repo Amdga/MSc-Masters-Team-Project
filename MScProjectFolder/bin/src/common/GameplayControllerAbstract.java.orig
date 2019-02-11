@@ -502,6 +502,7 @@ public abstract class GameplayControllerAbstract {
 	 */
 	protected PlayerAbstract decideWhoGoesFirst() {
 
+<<<<<<< HEAD
 		int number_of_players = players.size();
 		int player_who_goes_first = (int) (Math.random() * number_of_players);
 
@@ -510,6 +511,8 @@ public abstract class GameplayControllerAbstract {
 		return player;
 	}
 
+=======
+>>>>>>> origin/bfi3ld
 	/**
 	 * Takes the deck and deals it out one by one to each player in the game
 	 */

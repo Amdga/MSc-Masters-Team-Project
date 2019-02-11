@@ -1,5 +1,4 @@
 package players;
-//import java.util.Scanner;
 
 import common.ViewInterface;
 

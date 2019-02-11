@@ -21,10 +21,76 @@
 
 	<style>
 		body{
-		background-color: #12A5F4; 
-	}
+			background-color: #12A5F4; 
+		}
 
+		#goBackButton{
+			background-color: #FF7C30;
+			-webkit-transition-duration: 0.4s; /* Safari */
+			transition-duration: 0.4s;
+			vertical-align:bottom;
+			font-size: 20px;
+			font-family: arial,serif;
+			font-size: 25px;
+			color: white;
+			cursor:pointer;
+			border-radius: 8px;
+			box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+			white-space: nowrap;
+		}
 
+		#goBackButton:hover{
+			background-color: #F25900;
+		}
+		
+		.statsDetails{
+
+			background-color:#F1F1F1;
+			padding: 20px;
+			font-size: 20px;
+			font-family: arial, serif; 
+			color:black;
+			padding:20px;
+			margin-left: auto;
+			margin-right: auto;
+			border-radius: 8px;
+			box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+		}
+
+		.statstitle{
+			padding-right: 40px;
+		}
+
+		table{
+			font-size: 20px; 
+			font-style: Arial, serif"
+		}
+
+		h1{
+			text-align: center
+		}
+
+		/* div{
+			border-color: blue;
+			border-style: dotted;
+			border-width: 3px;
+		} */
+
+		#containsStats{
+			margin-right: auto;
+			margin-left: auto;
+		}
+
+		#buttonDiv{
+			padding-top: 10px;
+			padding-left: 20px;
+		}
+
+		/* On small screens, set height to 'auto' for sidenav and grid */
+		@media screen and (max-width: 767px) {
+			.header{
+			height: auto;
+			padding: 20px;
 =======
 	<head>
 		<!-- Web page title -->
@@ -48,24 +114,7 @@
 		body{
 	background-color: #12A5F4; }
 
-	.header{
-      margin-bottom: 0;
-      border-radius: 0;
-    }
 
-  .row.content {height: 450px}
-
-/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {height: 450px}
-    
-    /* Set blue background color and 100% height */
-    .header {
-      padding-top: 20px;
-      background-color: #12A5F4;
-      height: 100%;
-
-    }
->>>>>>> origin/Yola-GameplayFunctionality
 
     .goBackButton{
     	background-color: #FF7C30;
@@ -87,36 +136,20 @@
     
     /* Set blue background color, white text and some padding */
     footer {
-<<<<<<< HEAD
-      	background-color: #12A5F4;
-      	color: white;
-      	padding: 15px;
-    }
-    
-    .statsDetails{
-
-    	background-color:#F1F1F1;
-        padding: 20px;
-        font-size: 20px;
-        font-family: arial, serif; 
-        color:black;
-       	padding:20px;
-       	margin-left: auto;
-		margin-right: auto;
-=======
       background-color: #12A5F4;
       color: white;
       padding: 15px;
     }
     
     .statsDetails{
-    	background-color:#F1F1F1;
+
+    	 background-color:#F1F1F1;
+       padding: 20px;
         font-size: 20px;
         font-family: arial, serif; 
         font-color:black;
        	padding:20px;
        	align="center";
->>>>>>> origin/Yola-GameplayFunctionality
        	border-radius: 8px;
        	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 
@@ -136,43 +169,19 @@
 </style>
 
 
-<<<<<<< HEAD
-</head>
-
-
-<body onload="initalize()">
-	<!-- Call the initalize method when the page loads -->
-
-	<div class="container" style="padding: 20px">
-		<div class="row">
-
-			<!-- Button to go back to original screen, code to add a link <a href= "#" class = "btn btn-default btn-lg" role="button" style="background-color:#F47D30;color:white;" >Go Back</a>-->
-			<button class="goBackButton">Go Back</button>
-
-=======
 	</head>
 	
 
     <body onload="initalize()"> <!-- Call the initalize method when the page loads -->
     	
-    	<div class="container">
-
-		<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="header" >
+    	<div class="container" style="padding: 20px">
+        <div class ="row">
 
     	<!-- Button to go back to original screen, code to add a link <a href= "#" class = "btn btn-default btn-lg" role="button" style="background-color:#F47D30;color:white;" >Go Back</a>-->
     	<button class = "goBackButton">Go Back</button>
       
   </div>
-    </div>
-</nav>
-  
-<div class="container-fluid text-center">    
-  <div class="row content">
-    <div class="col-sm-2 sidenav">
-    </div>
-    <div class="col-sm-8 text-left" style="border-radius: 8px"> 
+    <div class="row" style="padding: 20px"> 
     	<div class="media screen">
     		<div class= "statsDetails">
       <h1 align="center">Game Statistics</h1>
@@ -181,131 +190,160 @@
       
       <ul style="font-size: 20px; font-style: Arial, serif">
       	<li> Number of games played overall </li>
-		<li> How many times the Computer has won </li>
-		<li> How many times the Human has won </li>
-		<li> The average number of draws </li>
-		<li> The largest number of rounds played in a single game </li>
+		    <li> How many times the Computer has won </li>
+		    <li> How many times the Human has won </li>
+		    <li> The average number of draws </li>
+		    <li> The largest number of rounds played in a single game </li>
 
 	</ul>
 </div>
 		
 		
->>>>>>> origin/Yola-GameplayFunctionality
+		</div>
+		
+		<script type="text/javascript">
+		
+			// Method that is called on page load
+			function initalize() {
+			
+				// --------------------------------------------------------------------------
+				// You can call other methods you want to run when the page first loads here
+				// --------------------------------------------------------------------------
+				
+				// // For example, lets call our sample methods
+				// helloJSONList();
+				// helloWord("Student");
+				
+			}
+			
+			// -----------------------------------------
+			// Add your other Javascript methods Here
+			// -----------------------------------------
+>>>>>>> origin/bfi3ld
+		
+		}
+		.row.content {height:auto;} 
+		}
+
+
+	</style>
+
+
+</head>
+
+
+<body onload="initalize()">
+	<!-- Call the initalize method when the page loads -->
+
+	<div class="container-fluid">
+		<div class="row">
+			<div id="buttonDiv">
+				<!-- Button to go back to original screen, code to add a link <a href= "#" class = "btn btn-default btn-lg" role="button" style="background-color:#F47D30;color:white;" >Go Back</a>-->
+				<button id="goBackButton" onclick=goBack();>Go Back</button>
+			</div>
 		</div>
 		<div class="row" style="padding: 20px">
-			<div class="media screen">
-				<div class="statsDetails">
-					<h1 align="center">Game Statistics</h1>
+			<div id="containsStats">
+				<div class="media screen">
+					<div class="statsDetails">
+						<h1>Game Statistics</h1>
 
-					<hr>
+						<hr>
 
-					<ul style="font-size: 20px; font-style: Arial, serif">
-						<li> Number of games played overall </li>
-						<li> How many times the Computer has won </li>
-						<li> How many times the Human has won </li>
-						<li> The average number of draws </li>
-						<li> The largest number of rounds played in a single game </li>
-
-					</ul>
+						<table>
+							<tr>
+								<th class="statstitle"> Total games played overall: </td>
+								<td id="statline1"></td>
+							</tr>
+							<tr>
+								<th class="statstitle"> Computer wins: </td>
+								<td id="statline2"></td>
+							</tr>
+							<tr>
+								<th class="statstitle"> Human wins: </td>
+								<td id="statline3"></td>
+							</tr>
+							<tr>
+								<th class="statstitle"> Average number of draws: </td>
+								<td id="statline4"></td>
+							</tr>
+							<tr>
+								<th class="statstitle"> Most rounds played in a single game: </td>
+								<td id="statline5"></td>
+							</tr>
+						</table>
+					</div>
 				</div>
-
-
 			</div>
+		</div>
+	</div>
 
-			<script type="text/javascript">
+	<script type="text/javascript">
 
-				// Method that is called on page load
-				function initalize() {
+		// Method that is called on page load
+		function initalize() {
 
-					// --------------------------------------------------------------------------
-					// You can call other methods you want to run when the page first loads here
-					// --------------------------------------------------------------------------
+			initialiseStats();
+		}
 
-					// // For example, lets call our sample methods
-					// helloJSONList();
-					// helloWord("Student");
+		// This is a reusable method for creating a CORS request. Do not edit this.
+		function createCORSRequest(method, url) {
+			var xhr = new XMLHttpRequest();
+			if ("withCredentials" in xhr) {
 
-				}
+				// Check if the XMLHttpRequest object has a "withCredentials" property.
+				// "withCredentials" only exists on XMLHTTPRequest2 objects.
+				xhr.open(method, url, true);
 
-				// -----------------------------------------
-				// Add your other Javascript methods Here
-				// -----------------------------------------
+			} else if (typeof XDomainRequest != "undefined") {
 
-				// This is a reusable method for creating a CORS request. Do not edit this.
-				function createCORSRequest(method, url) {
-					var xhr = new XMLHttpRequest();
-					if ("withCredentials" in xhr) {
+				// Otherwise, check if XDomainRequest.
+				// XDomainRequest only exists in IE, and is IE's way of making CORS requests.
+				xhr = new XDomainRequest();
+				xhr.open(method, url);
 
-						// Check if the XMLHttpRequest object has a "withCredentials" property.
-						// "withCredentials" only exists on XMLHTTPRequest2 objects.
-						xhr.open(method, url, true);
+			} else {
 
-					} else if (typeof XDomainRequest != "undefined") {
+				// Otherwise, CORS is not supported by the browser.
+				xhr = null;
 
-						// Otherwise, check if XDomainRequest.
-						// XDomainRequest only exists in IE, and is IE's way of making CORS requests.
-						xhr = new XDomainRequest();
-						xhr.open(method, url);
+			}
+			return xhr;
+		}
 
-					} else {
+		function createCORSReq(method, url) {
+			var xhr = createCORSRequest(method, url);
+			// Message is not sent yet, but we can check that the browser supports CORS
+			if (!xhr) {
+				alert("CORS not supported");
+			}
+			return xhr;
+		}
 
-						// Otherwise, CORS is not supported by the browser.
-						xhr = null;
+		function updateStats(statsArr) {
+			var stats = JSON.parse(statsArr)
+			//alert(statsArr)
+			$("#statline1").html(stats[0])
+			$("#statline2").html(stats[1])
+			$("#statline3").html(stats[2])
+			$("#statline4").html(stats[3])
+			$("#statline5").html(stats[4])
+		}
 
-					}
-					return xhr;
-				}
+		function initialiseStats() {
+			var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/stats/initialise");
+			xhr.send();
 
-			</script>
+			xhr.onload = function (e) {
+				updateStats(xhr.response);
+			}
+		}
 
-			<!-- Here are examples of how to call REST API Methods -->
-			<script type="text/javascript">
+		function goBack() {
+			window.location.href = '/toptrumps';
+		}
 
-				// This calls the helloJSONList REST method from TopTrumpsRESTAPI
-				function helloJSONList() {
-
-					// First create a CORS request, this is the message we are going to send (a get request in this case)
-					var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/helloJSONList"); // Request type and URL
-
-					// Message is not sent yet, but we can check that the browser supports CORS
-					if (!xhr) {
-						alert("CORS not supported");
-					}
-
-					// CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
-					// to do when the response arrives 
-					xhr.onload = function (e) {
-						var responseText = xhr.response; // the text of the response
-						alert(responseText); // lets produce an alert
-					};
-
-					// We have done everything we need to prepare the CORS request, so send it
-					xhr.send();
-				}
-
-				// This calls the helloJSONList REST method from TopTrumpsRESTAPI
-				function helloWord(word) {
-
-					// First create a CORS request, this is the message we are going to send (a get request in this case)
-					var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/helloWord?Word=" + word); // Request type and URL+parameters
-
-					// Message is not sent yet, but we can check that the browser supports CORS
-					if (!xhr) {
-						alert("CORS not supported");
-					}
-
-					// CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
-					// to do when the response arrives 
-					xhr.onload = function (e) {
-						var responseText = xhr.response; // the text of the response
-						alert(responseText); // lets produce an alert
-					};
-
-					// We have done everything we need to prepare the CORS request, so send it
-					xhr.send();
-				}
-
-			</script>
+	</script>
 
 </body>
 
