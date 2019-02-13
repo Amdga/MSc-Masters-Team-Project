@@ -181,6 +181,7 @@ public class OnlineGameplayController extends GameplayControllerCLI{
 			
 			//save the 
 			to_view.showPlayerDeckSizes(players_in_game);
+			to_view.showPlayerCardNames(player_plays_list);
 			
 			//save size of communal pile
 			to_view.showCommunalPileSize(cardsInDrawPile.size());
