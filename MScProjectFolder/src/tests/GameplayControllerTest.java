@@ -61,7 +61,7 @@ public class GameplayControllerTest {
 			player_list.get(i).addToDeck(cards.get(i));
 		}
 		
-		PlayerAbstract winning_player = game.topTrumpsRound(player_list.get(0), cards);
+		PlayerAbstract winning_player = game.topTrumpsRound(player_list.get(0));
 		
 		//Make sure the winning player has received all the cards in play, in this case all of the cards in the game
 		assertEquals(cards.size(),winning_player.getNumberofCardsLeft(),"Ensure winning player has received all of the cards in play");
@@ -83,7 +83,7 @@ public class GameplayControllerTest {
 			player_list.get(i).addToDeck(cards.get(i));
 		}
 		
-		game.topTrumpsRound(player_list.get(0), cards);
+		game.topTrumpsRound(player_list.get(0));
 		
 		//Make sure the winning player has received all the cards in play, in this case all of the cards in the game
 		assertEquals(cards.size(),game.getCardsInDrawPile().size(),"Ensure draw pile has all of the cards in play");
@@ -127,7 +127,7 @@ public class GameplayControllerTest {
 			player_list.get(i).addToDeck(cards.get(i));
 		}
 		
-		game.topTrumpsRound(player_list.get(0), cards);
+		game.topTrumpsRound(player_list.get(0));
 		
 		assertEquals(1,game.getPlayersInGame().size(),"Test players being removed");
 		
