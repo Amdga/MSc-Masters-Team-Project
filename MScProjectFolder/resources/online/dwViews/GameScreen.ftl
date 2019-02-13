@@ -121,7 +121,7 @@
 	}
 	
 	.modal {
-		  //display: none; /* Hidden by default */
+		  
 		  position: fixed; /* Stay in place */
 		  z-index: 1; /* Sit on top */
 		  width: 100%; /* Full width */
@@ -265,9 +265,9 @@
 	<div class="container">
 		<div class="container-fluid">
 		
-	<!-- Trigger/Open the Modal -->
+
 	
-		<button id="myBtn">Open Modal</button>
+		
 	
 	<!-- The Modal-->
 	
@@ -278,10 +278,59 @@
 	  
   	<h1 id="txtWinner">Which Player Has Won!</h1>
   	
-    <p>Play another game with the same amount of AI players or return to Menu to view stats and change AI players </p>
+    <p>Play another game with the same amount of AI players or return to Menu to view statistics and change AI players </p>
     <div class="row" style="display:block;align:center">
     
-    <button class="modalButton" id="playButton" onclick = initialize();>PLAY</button>
+    <button class="modalButton" id="playButton" onclick = initializeGame();>PLAY</button>
+    <button class="modalButton" id="goBack3" onclick = quitGame();>MENU</button>
+    
+	</div>
+	</span>
+
+
+  </div>
+
+
+</div>
+
+
+
+<div id="startModal" class="modal">
+	
+	<!-- Modal content -->
+	  <div class="modal-content">
+	  
+  	<h1 id="txtWinner">Welcome to Top Trumps</h1>
+  	
+    <p> </p>
+    <div class="row" style="display:block;align:center">
+    
+    <button class="modalButton" id="playButton" onclick = initializeGame();>PLAY</button>
+    <button class="modalButton" id="goBack3" onclick = quit();>MENU</button>
+    
+	</div>
+	</span>
+
+
+  </div>
+
+
+</div>
+
+
+
+
+<div id="modalOut" class="modal">
+	
+	<!-- Modal content -->
+	  <div class="modal-content">
+	  
+  	<h1 id="txtWinner">Your out!</h1>
+  	
+    <p> </p>
+    <div class="row" style="display:block;align:center">
+    
+    <button class="modalButton" id="playButton" onclick = $("#modalOut").hide();>Continue playing</button>
     <button class="modalButton" id="goBack3" onclick = quit();>MENU</button>
     
 	</div>
@@ -356,8 +405,8 @@
 								<span class="deckVal" style="float:right;color: #f25900" id="p4deck"> <b> 3 </b> </span>
 							</div>
 						</span>
-						<a  id="img4" href="#">
-							<img src="#" alt="Player 4" style="width:177px;height:110px;">
+						<a id = image4 href="#">
+							<img src="#" id="img4" alt="Player 4" style="width:177px;height:110px;">
 						</a>
 						<div class="desc">
 							<p> <span id="name4">Name of card </span>
@@ -389,7 +438,7 @@
     					  <span id="txtDeck5"></span></p>
 						</div>
 						<div class="buttonNext" id="nextRound" onclick = startARound();>Next Round</div>
-						<div class="buttonForward" id="fastForward">Fast Forward</div>
+						<div class="buttonForward" id="fastForward" onclick = fastforward(true);>Fast Forward</div>
 					</div>
 
 					
@@ -446,26 +495,21 @@
 			// Method that is called on page load
 				
 			function initalize() {
-		
+			$("#startModal").show()
+			
+			
+			}
+			
+			function initializeGame() {
+			$(".modal").hide()
 			newGame();
 			$('.btn-group').find('button').prop('disabled', true)
 			initialiseGame();
 			
-		
-			
-			
-		
-
 			}
 		
 		
 		
-		
-		
-				
-			
-		
-
 			// This is a reusable method for creating a CORS request. Do not edit this.
 			function createCORSRequest(method, url) {
 				var xhr = new XMLHttpRequest();
@@ -510,31 +554,45 @@
 //Function that goes through the testresponse object and display whats not null to the screen.
 			function testResponse(jsonAsString) {
 				var response = JSON.parse(jsonAsString);
-			//if (jsonAsString === "state error") {
+				//if (jsonAsString === "state error") {
 				//	alert("Function cant be used in this state");
-	//	}
-	alert(response.category);
-	alert(response.playerCardNames);
+				//	}
+				$('.gallery').hide()
 	
-	alert(response.player_values);
 
+
+			if(response.overall_winner != null) {
+				$("#popup").show()
+				var winner = (response.overall_winner == 0) ? "You " : "Player "+ response.overall_winner;
+		
+				$("#txtWinner").html(winner + "won the game!")
+	
+				}
+	
 			
 	if(response.winning_player != null) {
-			$("#txtWin3").html(response.winning_player) 
+		if(response.winning_player == 0) {
+			$("#txtWin3").html("You won!")
+		
+	} else {
+			$("#txtWin3").html("Player " + response.winning_player  + " won") 
+		}
 		}
 		
 		if(response.communal_pile_size != null) {
 			$("#commNum").html(response.communal_pile_size) 
 		}
 		
-		
 			if(response.decksize !== null) {
 			$("#txtDeck5").html(response.decksize)
 				if(response.decksize === 0) {
 					$("#txtDeck5").html(response.decksize)
+					$("#modalOut").show()
 				
 			}
 			}
+		
+		
 			if(response.round != null) {
 				if(response.round == 1) {
 					initialPlayerDecksize(response);
@@ -547,14 +605,16 @@
 			if(response.current_player != null){
 		
 		if(response.current_player == 0) { 
-					$('.cardVal').hide()
+					//$('.cardVal').hide()
+					
 			 		$('#txtTurn2').html('It is your turn to chose a category!')
 			 		$("#txtWin3").html("")
 			 		$(' .btn-group').find('button').prop('disabled', false)
 			 		
+			 		
 			 	
 			 	} else {
-			 		$("#txtTurn2").html(response.current_player) 
+			 		$("#txtTurn2").html("Player " + response.current_player) 
 			}
 			}	
 			
@@ -567,6 +627,9 @@
 		
 			$("#txtCat1").html(response.category)
 		}
+		if(response.player_values !== null) {
+		setPlayersValues(response);
+		}
 		
 		
 			
@@ -576,13 +639,22 @@
 		setHumanCard(cardArray);
 		$(document).ready(function() {
 		$("#name5").html(response.card.cardName) });
+		$("#img5").attr("src", "/assets/card_images/" + response.card.cardName + ".jpg")
+		
 		}
 		
-		if(response.player_values !== null) {
-		setPlayersValues(response);
+		if(response.playerCardNames != null) {
+		var array = response.playerCardNames;
+		array.sort();
+		for(var i = 0; i < response.playerCardNames.length; i ++) {
+		
+		$("#name" + response.playerCardNames[i][0]).html(response.playerCardNames[i][1])	
+		}
 		}
 		
-		if(response.was_quit != null) {
+		
+		
+		if(response.was_quit) {
 		windows.location = "http://localhost:7777/toptrumps/"
 		}
 			
@@ -635,29 +707,40 @@
 		//Function that displays the AIplayers card values and number of cards. 
 		//Takes in a 2d-array and a string as parameters
 			function setPlayersValues(response) {
-			
+			var array = response.playerCardNames;
+			array.sort();
+		
 			for(var i = 0; i < response.player_values.length; i++) {
+			var value = response.player_values[i][0];
+			alert(value);
+			$("#card" + value).show()
+			$("#cat" + value).html(response.player_values[i][1]).show()
+			$("#p" + value + "deck").html(response.playerDeckSizes[i][1])
+			$("#img" + value).attr("src", "/assets/card_images/" + response.playerCardNames[i][1] + ".jpg")
 			
-			if(i == (response.player_values[i][0])) {
-			
-			$("#card" + i).show()
-			$("#cat" + i).html(response.player_values[i][1]).show()
-			$("#p" + i + "deck").html(response.playerDeckSizes[i][1])
-			
-			}
 				
 			}
+			}
 			
-			
-		}
+		
 		
 		//Function that displays the humanplayers card values, takes an array as parameter.
 		function setHumanCard(array) {
 		
 			for(var i = 0; i < array.length; i++) {
-			$("#c" + (i+1)).text(array[i])	
-		}
-		}
+			$("#c" + (i+1)).text(array[i])
+			}
+			}
+			
+			function quitGame() {
+			$("#popup").hide()
+			window.location = "http://localhost:7777/toptrumps/";
+			quit();
+			
+			
+			}
+		
+		
 
 			function newGame() {
 				var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/newGame");
