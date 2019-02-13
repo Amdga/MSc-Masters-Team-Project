@@ -10,6 +10,8 @@ public interface ViewInterface {
 	
 	public void showCategory(String category); 
 	
+	public void showWinningCard(Card card);
+	
 	public void playerHasValue(int player_number, int value);
 	
 	public void theWinnerIs(int player_number); 

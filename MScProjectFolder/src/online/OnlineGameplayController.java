@@ -3,6 +3,7 @@ package online;
 import java.util.ArrayList;
 
 import commandline.GameplayControllerCLI;
+import common.GameplayControllerAbstract;
 import common.GetDeckModel;
 import common.PlayerPlays;
 import players.PlayerAbstract;
@@ -15,7 +16,7 @@ import players.PlayerAbstract;
  * @author Adrian Borg
  * @version 1
  */
-public class OnlineGameplayController extends GameplayControllerCLI{
+public class OnlineGameplayController extends GameplayControllerAbstract{
 /*	private ArrayList<Card> cardsInDeck;
 //
 //	private ArrayList<Card> cardsInDrawPile;
@@ -182,6 +183,7 @@ public class OnlineGameplayController extends GameplayControllerCLI{
 			
 			//save the 
 			to_view.showPlayerDeckSizes(players_in_game);
+			to_view.showPlayerCardNames(player_plays_list);
 			
 			//save size of communal pile
 			to_view.showCommunalPileSize(cardsInDrawPile.size());
@@ -210,6 +212,9 @@ public class OnlineGameplayController extends GameplayControllerCLI{
 		persistent_game_data.set_logger(false);
 		return this.to_view.toJSON();
 	}
+//	public boolean userWantsToQuit() {return false;}
+//	public void topTrumpsGame() {}
+	
 	
 	/**
 	 * @return the current state of the game
@@ -217,4 +222,5 @@ public class OnlineGameplayController extends GameplayControllerCLI{
 	public String getState() {
 		return state;
 	}
+	
 }

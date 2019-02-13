@@ -56,9 +56,9 @@ public abstract class GameplayControllerAbstract {
 	 * This is the actual top trumps game, and repeats rounds while there is still players left
 	 * 
 	 */
-	protected abstract void topTrumpsGame();
-
-	protected abstract boolean userWantsToQuit();	
+//	protected abstract void topTrumpsGame();
+//
+//	protected abstract boolean userWantsToQuit();	
 
 	protected void roundStartForHuman() {
 		//Get the index of the human player (human player is always stored at index 0 of the players list
@@ -136,6 +136,8 @@ public abstract class GameplayControllerAbstract {
 
 			//Get and log the winning player
 			next_active_player = weHaveAWinner(winning_players.get(0));
+			to_view.showWinningCard(winning_cards_pile.get(0));
+			
 		}
 		else {
 			//If there is a draw
@@ -256,7 +258,7 @@ public abstract class GameplayControllerAbstract {
 	/**
 	 * Takes the deck and deals it out one by one to each player in the game
 	 */
-	protected void dealOutDeck() {
+	public void dealOutDeck() {
 
 		int card_counter = 0;
 		for(Card c : cardsInDeck) {
@@ -326,6 +328,10 @@ public abstract class GameplayControllerAbstract {
 	
 	public ArrayList<PlayerAbstract> getPlayersInGame() {
 		return players_in_game;
+	}
+	
+	public ArrayList<Card> getGameDeck() {
+		return cardsInDeck;
 	}
 
 }

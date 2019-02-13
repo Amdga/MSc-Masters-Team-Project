@@ -93,13 +93,5 @@ public class GetDeckModel {
 		return output; // Return the headers, excluding the Description header
 	}
 
-//	public static void main(String[] args) {
-//		// Testing method
-//		GetDeckModel deckModel = new GetDeckModel();
-//		System.out.println("end");
-//		TestLogger tL = new TestLogger(true);
-//		tL.logDeckCreation(deckModel.deck);
-//		tL.logDeckShuffle(deckModel.shuffleTheDeck);
-//	}
 }
 

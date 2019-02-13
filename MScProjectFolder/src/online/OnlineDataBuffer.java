@@ -3,6 +3,7 @@ package online;
 import common.ViewInterface;
 import players.PlayerAbstract;
 import common.Card;
+import common.PlayerPlays;
 
 import java.util.ArrayList;
 
@@ -27,6 +28,7 @@ public class OnlineDataBuffer implements ViewInterface{
 	private String state;
 	private ObjectWriter oWriter = new ObjectMapper().writerWithDefaultPrettyPrinter();
 	private ArrayList<int[]> playerDeckSizes;
+	private ArrayList<String[]> playerCardNames;
 	
 	public void setOGC(OnlineGameplayController inputOGC) {
 		this.ogc = inputOGC;
@@ -45,6 +47,7 @@ public class OnlineDataBuffer implements ViewInterface{
 		overall_winner = null;
 		was_quit = null;
 		playerDeckSizes = null;
+		playerCardNames = null;
 	}
 	
 	public String toJSON() {
@@ -54,6 +57,8 @@ public class OnlineDataBuffer implements ViewInterface{
 	public String toJSON(boolean willReset) {
 		try {
 			String jsonOutput = oWriter.writeValueAsString(this);
+			//DEBUG LINE#########################################################
+			System.out.println(jsonOutput);
 			if(willReset) {
 				resetValues();
 				}
@@ -138,6 +143,15 @@ public class OnlineDataBuffer implements ViewInterface{
 		for (PlayerAbstract p: players_in_game) {
 			playerDeckSizes.add(new int[] {p.whoAmI(), p.getNumberofCardsLeft()});
 		}
+		setState();
+	}
+	
+	public void showPlayerCardNames(ArrayList<PlayerPlays> player_plays) {
+		playerCardNames = new ArrayList<String[]>();
+		for (PlayerPlays p: player_plays) {
+			playerCardNames.add(new String[] {""+p.getPlayer().whoAmI(), p.getCard().getCardName()});
+		}
+		setState();
 	}
 	
 	// ~~~~~~~~~~~~~~~~~~~~~~ Getters for serializer
@@ -186,6 +200,10 @@ public class OnlineDataBuffer implements ViewInterface{
 		return playerDeckSizes;
 	}
 	
+	public ArrayList<String[]> getPlayerCardNames() {
+		return playerCardNames;
+	}
+	
 	public Integer getOverall_winner() {
 		return overall_winner;
 	}
@@ -200,4 +218,6 @@ public class OnlineDataBuffer implements ViewInterface{
 	
 	// unused method
 	public String getCategory(Card card) {return null;}
+	
+	public void showWinningCard(Card card) {}
 }

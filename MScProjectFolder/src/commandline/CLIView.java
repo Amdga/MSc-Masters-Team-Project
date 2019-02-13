@@ -30,11 +30,6 @@ public class CLIView implements ViewInterface{
 		printStars();
 	}
 	
-<<<<<<< HEAD
-	
-	
-=======
->>>>>>> d48c21afe7727d1fcee252acc66b8162615299a2
 	public void quitGame() {
 		printStars();
 		System.out.println("You have quit the game");
@@ -78,6 +73,19 @@ public class CLIView implements ViewInterface{
 		}
 		printStars();
 
+	}
+	
+	public void showWinningCard(Card card) {
+	
+		System.out.println();
+		System.out.println("The winning card is:");
+		String[] headers = card.getHeaders();
+		printStars();
+		for (int i = 0; i < headers.length; i++) {
+			System.out.println("  " + headers[i] + ": " + card.getValue(i));
+		}
+		printStars();
+		
 	}
 
 	public void printStars() {
@@ -170,7 +178,6 @@ public class CLIView implements ViewInterface{
 		while (true) {
 			selectedCategory = input_scanner.next();
 			if(selectedCategory.equalsIgnoreCase("quit")) {
-//				quitGame();
 				return "quit";
 			}
 			for (int i = 0; i < headers.length; i++) {
@@ -187,23 +194,4 @@ public class CLIView implements ViewInterface{
 		System.out.println("Communal pile has " + pile_size + " cards.");
 	}
 	
-	/*public static void main(String[] args) {
-		String [] headers = {"description", "Range", "Speed", "Velocity", "Strength", "intellect"};
-		int [] inputValues = {3, 5, 1, 8, 7};
-		
-		
-		CLIView cliView = new CLIView();
-		Card card = new Card("T-rex", headers, inputValues);
-		cliView.welcomeMessage();
-		cliView.numberOfPlayersPlaying();
-		cliView.beginningOfRound(14, 1);
-		String category = cliView.getCategory(card);
-		System.out.println(category);
-		cliView.theWinnerIs(3);
-		cliView.overallWinner(0);
-		int number = cliView.gameOrStatorQuit();
-		System.out.println(number);
-		
-	}*/
-
 }
