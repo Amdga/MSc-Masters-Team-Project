@@ -136,6 +136,8 @@ public abstract class GameplayControllerAbstract {
 
 			//Get and log the winning player
 			next_active_player = weHaveAWinner(winning_players.get(0));
+			to_view.showWinningCard(winning_cards_pile.get(0));
+			
 		}
 		else {
 			//If there is a draw
