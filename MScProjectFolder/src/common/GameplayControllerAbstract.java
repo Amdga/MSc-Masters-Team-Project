@@ -56,9 +56,9 @@ public abstract class GameplayControllerAbstract {
 	 * This is the actual top trumps game, and repeats rounds while there is still players left
 	 * 
 	 */
-	protected abstract void topTrumpsGame();
-
-	protected abstract boolean userWantsToQuit();	
+//	protected abstract void topTrumpsGame();
+//
+//	protected abstract boolean userWantsToQuit();	
 
 	protected void roundStartForHuman() {
 		//Get the index of the human player (human player is always stored at index 0 of the players list
