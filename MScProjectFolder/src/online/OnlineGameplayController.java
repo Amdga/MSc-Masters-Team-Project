@@ -151,6 +151,7 @@ public class OnlineGameplayController extends GameplayControllerCLI{
 			return this.to_view.toJSON();
 		}
 		else {
+			
 			return STATE_ERROR;
 		}
 

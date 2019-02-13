@@ -90,10 +90,10 @@ public class TopTrumpsRESTAPI {
 	// ~~~~Gameplay Methods~~~~~~~~~~~~~
 	
 	@GET
-	@Path("/chosenNumberOfPlayer")
-		public void chosenNumberOfPlayer(@QueryParam("number") int number) {
+	@Path("/chosenNumberOfPlayers")
+		public void chosenNumberOfPlayers(@QueryParam("number") int number) {
 		number_of_ai_players = number;
-	}
+		}
 	
 	@GET
 	@Path("game/newGame")
@@ -101,6 +101,7 @@ public class TopTrumpsRESTAPI {
 		dataBuffer = new OnlineDataBuffer();
 		gameController = new OnlineGameplayController(deckModel, dataBuffer, number_of_human_players, number_of_ai_players);
 		dataBuffer.setOGC(gameController);
+		
 		return null;
 	}
 

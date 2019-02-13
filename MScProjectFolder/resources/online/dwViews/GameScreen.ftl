@@ -26,6 +26,7 @@
 
 	
 		div.gallery {
+		display:none;
 		  margin: 5px;
 		  border: 1px solid #ccc;
 		  float: left;
@@ -280,8 +281,8 @@
     <p>Play another game with the same amount of AI players or return to Menu to view stats and change AI players </p>
     <div class="row" style="display:block;align:center">
     
-    <button class="modalButton" id="playButton">PLAY</button>
-    <button class="modalButton" id="goBack3">MENU</button>
+    <button class="modalButton" id="playButton" onclick = initialize();>PLAY</button>
+    <button class="modalButton" id="goBack3" onclick = quit();>MENU</button>
     
 	</div>
 	</span>
@@ -307,35 +308,46 @@
 						<a href="#">
 							<img src="#" id="img1" alt="Player 1" style="width:177px;height:110px;">
 						</a>
-						<div class="desc" id="name1">Description</div>
-						<p class = "cardVal" id="cat1"><font size="6"><center><b>1</b></center></font></p>
+						
+						
+						
+						
+						
+						<div class="desc">
+							<p> <span id="name1">Name of card </span>
+									<br> <span class = "cardVal" id="cat1" style="font-size:34px">  </span> </p>
+					</div>
 					</div>
 
 
 					<div class="gallery" id="card2">
 						<div class="label" style="padding-left:5px;padding-right: 5px">
 							<p style="text-align:left;" id="p2"> Player 2
-								<span class=""deckVal" style="float:right;color: #f25900" id="p2deck"> <b> 3 </b> </span>
+								<span class="deckVal" style="float:right;color: #f25900" id="p2deck"> <b>  </b> </span>
 							</div>
 						</span>
 						<a  href="#">
 							<img src="#" id="img2" alt="Player 2" style="width:177px;height:110px;">
 						</a>
-						<div class="desc" id="name2">Description</div>
-						<p class = "cardVal" id="cat2"><font size="6"><center><b>2</b></center></font></p>
+						<div class="desc">
+							<p> <span id="name2">Name of card </span>
+									<br> <span class = "cardVal" id="cat2" style="font-size:34px">  </span> </p>
+					</div>
 					</div>
 
 					<div class="gallery" id="card3">
 						<div class="label" style="padding-left:5px;padding-right: 5px">
 							<p style="text-align:left;" id="p3"> Player 3
-								<span class="deckVal" style="float:right;color: #f25900" id="p3deck"> <b> 3 </b> </span>
+								<span class="deckVal" style="float:right;color: #f25900" id="p3deck"> <b> 7 </b> </span>
 							</div>
 						</span>
 						<a href="#">
 							<img src="#" id="img3"  alt="Player 3" style="width:177px;height:110px;">
 						</a>
-						<div class="desc" id="name3">Description</div>
-						<p class = "cardVal" id="cat3"><font size="6"><center><b>3</b></center></font></p>
+						<div class="desc">
+							<p> <span id="name3">Name of card </span>
+									<br> <span class = "cardVal" id="cat3" style="font-size:34px">  </span> </p>
+					</div>
 					</div>
 
 					<div class="gallery" id="card4">
@@ -347,10 +359,11 @@
 						<a  id="img4" href="#">
 							<img src="#" alt="Player 4" style="width:177px;height:110px;">
 						</a>
-						<div class="desc" id="name4">Description</div>
-						<p class = "cardVal" id="cat4"><font size="6"><center><b>4</b></center></font></p>
+						<div class="desc">
+							<p> <span id="name4">Name of card </span>
+									<br> <span class = "cardVal" id="cat4" style="font-size:34px"> 5 </span> </p>
 					</div>
-				</div>
+					</div>
 				
 			</div>
 			
@@ -370,12 +383,12 @@
     					  <span id="txtWin3"> Player 3</span><br>
 
   						  <span><b>Round:</b></span>
-    					  <span id="txtRound4"> 5</span><br>
+    					  <span id="txtRound4"> </span><br>
 
    						 <span><b>Cards in your deck:</b></span>
-    					  <span id="txtDeck5">6</span></p>
+    					  <span id="txtDeck5"></span></p>
 						</div>
-						<div class="buttonNext" id="nextRound">Next Round</div>
+						<div class="buttonNext" id="nextRound" onclick = startARound();>Next Round</div>
 						<div class="buttonForward" id="fastForward">Fast Forward</div>
 					</div>
 
@@ -386,15 +399,15 @@
 								<div class="desc" id="name5"> Description</div>				
 								<div class="btn-group">
 									<ul style="padding-left: 4px">
-										<button id="size">Size <var class = "var" id = "c1"></var></button>
+										<button id="size" onclick = chosenCategory("Speed");>Speed <var class = "var" id = "c1"></var></button>
   
- 										 <button id="speed">Speed <var class = "var" id = "c2"></var></button>
+ 										 <button id="speed" onclick = chosenCategory("Cargo");>Cargo <var class = "var" id = "c2"></var></button>
   
- 										 <button id="range">Range <var class = "var" id = "c3"></var></button>
+ 										 <button id="range" onclick = chosenCategory("Size");>Size <var class = "var" id = "c3"></var></button>
   
- 										 <button id="firepower">Firepower <var class = "var" id = "c4"></var></button>
+ 										 <button id="firepower" onclick = chosenCategory("Range");>Range <var class = "var" id = "c4"></var></button>
   
- 										 <button id="cargo">Cargo <var class = "var" id = "c5"></var></button>
+ 										 <button id="cargo" onclick = chosenCategory("Firepower");>Firepower <var class = "var" id = "c5"></var></button>
 									</ul>
 
 								</div>
@@ -431,8 +444,15 @@
 			
 
 			// Method that is called on page load
+				
 			function initalize() {
+		
+			newGame();
+			$('.btn-group').find('button').prop('disabled', true)
 			initialiseGame();
+			
+		
+			
 			
 		
 
@@ -489,81 +509,154 @@
 
 //Function that goes through the testresponse object and display whats not null to the screen.
 			function testResponse(jsonAsString) {
-				var response = JSON.parse(jsonAsString)
-			//if (jsonAsString == "state error") {
-			//		$("#error").html("Function cant be used in this state");
+				var response = JSON.parse(jsonAsString);
+			//if (jsonAsString === "state error") {
+				//	alert("Function cant be used in this state");
+	//	}
+	alert(response.category);
+	alert(response.playerCardNames);
+	
+	alert(response.player_values);
+
 			
-			if(response.decksize != null) {
-				$("#txtDeck5").html(response.decksize)
+	if(response.winning_player != null) {
+			$("#txtWin3").html(response.winning_player) 
+		}
+		
+		if(response.communal_pile_size != null) {
+			$("#commNum").html(response.communal_pile_size) 
+		}
+		
+		
+			if(response.decksize !== null) {
+			$("#txtDeck5").html(response.decksize)
+				if(response.decksize === 0) {
+					$("#txtDeck5").html(response.decksize)
+				
+			}
 			}
 			if(response.round != null) {
+				if(response.round == 1) {
+					initialPlayerDecksize(response);
+				}
+				
 				$("#txtRound4").html(response.round)
 			}
+			
+		
 			if(response.current_player != null){
-				$("#txtTurn2").html(response.current_player)
+		
+		if(response.current_player == 0) { 
+					$('.cardVal').hide()
+			 		$('#txtTurn2').html('It is your turn to chose a category!')
+			 		$("#txtWin3").html("")
+			 		$(' .btn-group').find('button').prop('disabled', false)
+			 		
+			 	
+			 	} else {
+			 		$("#txtTurn2").html(response.current_player) 
 			}
-		if(response.card.valueMap != null) {
-		var cardArray = Object.values(response.card.valueMap);
-		setHumanCard(cardArray);
-		$("#name5").html(response.card.cardName)
+			}	
+			
+			if(response.was_draw != null) {
+			$("#txtWin3").html('It was a draw!')
 		}
+		
+			
 		if(response.category != null) {
-		$("#txtCat1").html(response.category)
+		
+			$("#txtCat1").html(response.category)
 		}
-		if(response.player_values != null) {
-		var cardValues = Object.values(response.player_values);
-		setPlayersValues(cardValues, " .cardVal");
+		
+		
+			
+		if(response.card.valueMap !== null) {
+		var cardArray = Object.values(response.card.valueMap);
+		alert(cardArray);
+		setHumanCard(cardArray);
+		$(document).ready(function() {
+		$("#name5").html(response.card.cardName) });
 		}
-		if(response.winning_player != null) {
-		$("#txtWin3").html(response.winning_player)
+		
+		if(response.player_values !== null) {
+		setPlayersValues(response);
 		}
-		if(response.was_draw != null) {
-		$("#txtWin3").html("It was a draw!")
+		
+		if(response.was_quit != null) {
+		windows.location = "http://localhost:7777/toptrumps/"
 		}
-		if(response.losing_players != null) {
-		//Print message where?
+			
+		
+		if(response.losing_players !== null) {
+			//Print message where?
 		}
-		if(response.communal_pile_size != null) {
-		$("#commNum").html(response.communal_pile_size)
-		}
+		
 		if(response.overall_winner != null) {
-		$("#txtWinner").html(response.over_all_winner)
+			$("#txtWinner").html(response.over_all_winner)
 		}
 		
-		//
-		//if(playerDeckSizes != null) {
-		//var deckSizes = Object.values(response.playerDeckSizes);
-		//alert(deckSizes);
-		//setPlayerValues(deckSizes, " .deckVal");
 		
-		//}
+	
+		
+		
+		
 		
 		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
+		
+		//Function that initially sets players deck of cards
+		function initialPlayerDecksize(response){
+			  
+			if(response.player_values.length === 3) {
+			$(document).ready(function() {
+				$(' .deckVal').each(function() {
+			$(this).text(response.decksize - 1) }); });
+			} else {
+			$(document).ready(function() {
+			$(' .deckVal').each(function() {
+				$(this).text(response.decksize) }); });
+				
+				
+		   }
+		   
+		   }
 		
 		
 		
 		//Function that displays the AIplayers card values and number of cards. 
-		//Takes in an array and a html class as parameters
-			function setPlayersValues(array, html_class) {
-			alert(array);
-			var i = 1;
-			$(html_class).each(function() {
-			if((this.id).indexOf(array[i][0]) > -1) {
-			$(this).text(array[i][1])
-				i++;
+		//Takes in a 2d-array and a string as parameters
+			function setPlayersValues(response) {
+			
+			for(var i = 0; i < response.player_values.length; i++) {
+			
+			if(i == (response.player_values[i][0])) {
+			
+			$("#card" + i).show()
+			$("#cat" + i).html(response.player_values[i][1]).show()
+			$("#p" + i + "deck").html(response.playerDeckSizes[i][1])
+			
 			}
-			});
+				
+			}
+			
+			
 		}
 		
 		//Function that displays the humanplayers card values, takes an array as parameter.
-		function setHumanCard(x) {
-			var i = 0;
-			$(' .var').each(function() {
-			$(this).text(x[i])
-			i++;
-			});
-
-			
+		function setHumanCard(array) {
+		
+			for(var i = 0; i < array.length; i++) {
+			$("#c" + (i+1)).text(array[i])	
+		}
 		}
 
 			function newGame() {
@@ -587,12 +680,13 @@
 				var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/startARound");
 				xhr.send();
 				xhr.onload = function (e) {
+				
 					testResponse(xhr.response);
 				}
 			}
 
 			function chosenCategory(category) {
-				var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/chosenCategory?category=" + category);
+				var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/chosenCategory?category="+category);
 				xhr.send();
 				xhr.onload = function (e) {
 					testResponse(xhr.response);
@@ -619,6 +713,7 @@
 					}
 				}
 			}
+			
 		</script>
 
 		<!-- Here are examples of how to call REST API Methods -->

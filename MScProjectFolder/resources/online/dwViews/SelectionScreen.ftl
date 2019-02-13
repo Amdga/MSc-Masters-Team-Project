@@ -61,6 +61,7 @@ div.textSub {
   text-align: center;
 }
 div.textAI {
+display:none;
   color: #ffffff;
   font-size: 20px;
   font-family:arial,serif;
@@ -143,6 +144,7 @@ div.buttonAI:hover{
 		
 		function showButtons() {
 			$(".buttonAI").show()
+			$(".textAI").show()
 			
 			}
 
@@ -178,7 +180,7 @@ div.buttonAI:hover{
 		}
 		
 		function chosenNumberOfPlayers(number) {
-			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/number=" + number);
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/chosenNumberOfPlayers?number=" + number);
 			xhr.onload = function (e) {
 				window.location = "http://localhost:7777/toptrumps/game";
 				};
