@@ -306,7 +306,7 @@
     <div class="row" style="display:block;align:center">
     
     <button class="modalButton" id="playButton" onclick = initializeGame();>PLAY</button>
-    <button class="modalButton" id="goBack3" onclick = quit();>MENU</button>
+    <button class="modalButton" id="goBack3" onclick = goBack();>MENU</button>
     
 	</div>
 	</span>
@@ -331,7 +331,7 @@
     <div class="row" style="display:block;align:center">
     
     <button class="modalButton" id="playButton" onclick = $("#modalOut").hide();>Continue playing</button>
-    <button class="modalButton" id="goBack3" onclick = quit();>MENU</button>
+    <button class="modalButton" id="goBack3" onclick = goBack();>MENU</button>
     
 	</div>
 	</span>
@@ -344,7 +344,7 @@
 	
 			<div class="row">
 				<div class="col-sm-1" style="width:20%">
-					<button class="goBackButton" id="goBack2">Go Back</button>
+					<button class="goBackButton" id="goBack2" onclick = goBack(); >Go Back</button>
 				</div>
 
 				<div class="col-sm-9" style="width:80%">
@@ -550,6 +550,22 @@
 				//	}
 				
 				$('.gallery').hide() 
+				
+				
+				if(response.winning_player != null) {
+	$(document).ready(function() {
+		if(response.winning_player == 0) {
+				$("#txtWin3").html("You won!") 
+		} else {
+			$("#txtWin3").html("Player " + response.winning_player  + " won") 
+		} });
+		}
+		
+			if(response.was_draw != null) {
+		
+			$("#txtWin3").html('It was a draw!') 
+		}
+		
 	
 			if(response.player_values !== null) {
 		
@@ -586,17 +602,7 @@
 			}
 		
 			
-	if(response.winning_player != null) {
-		if(response.winning_player == 0) {
-			
-			$("#txtWin3").html("You won!") 
-		
-	} else {
-			
-			$("#txtWin3").html("Player " + response.winning_player  + " won") 
-		}
-		}
-		
+	
 		if(response.communal_pile_size != null) {
 			$("#commNum").html(response.communal_pile_size) 
 		}
@@ -640,10 +646,7 @@
 			}
 			}	
 			
-			if(response.was_draw != null) {
 		
-			$("#txtWin3").html('It was a draw!') 
-		}
 		
 		
 		
@@ -724,6 +727,9 @@
 			
 			}
 		
+			function goBack() {
+				window.location = "http://localhost:7777/toptrumps/";
+			}
 		
 
 			function newGame() {
@@ -747,8 +753,8 @@
 				var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/startARound");
 				xhr.send();
 				xhr.onload = function (e) {
-					
-					testResponse(xhr.response); 
+							
+					testResponse(xhr.response);  
 				}
 			}
 

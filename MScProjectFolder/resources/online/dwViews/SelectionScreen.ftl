@@ -112,7 +112,8 @@ div.buttonAI:hover{
 
 
  <div class="col-sm-12">
-    <center> <button class="button" id="gameButton" onclick = showButtons();>Game</button><button class="button" id="statsButton">Stats</button></center></div>
+    <center> <button class="button" id="gameButton" onclick = showButtons();>Game</button>
+    <button class="button" id="statsButton" onclick = goToStatPage();>Stats</button></center></div>
 
 <div class="col-sm-2"><div class="textAI">Number of<br/>AI players:</div></div>
 
