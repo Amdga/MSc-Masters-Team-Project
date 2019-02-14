@@ -26,7 +26,7 @@
 
 
 		div.gallery {
-			/* display: none; */
+			display: none;
 			margin: 5px;
 			border: 1px solid #ccc;
 			float: left;
@@ -357,7 +357,7 @@
 					<div class="gallery" id="card1">
 						<div class="label" style="padding-left:5px;padding-right: 5px">
 							<p style="text-align:left;" id="p1"> Player 1
-								<span class="deckVal" style="float:right;color: #f25900" id="p1deck"> <b> # </b> </span>
+								<span class="deckVal" style="float:right;color: #f25900" id="p1deck"> <b> 3 </b> </span>
 						</div>
 						</span>
 						<a href="#">
@@ -393,7 +393,7 @@
 					<div class="gallery" id="card3">
 						<div class="label" style="padding-left:5px;padding-right: 5px">
 							<p style="text-align:left;" id="p3"> Player 3
-								<span class="deckVal" style="float:right;color: #f25900" id="p3deck"> <b> # </b> </span>
+								<span class="deckVal" style="float:right;color: #f25900" id="p3deck"> <b> 7 </b> </span>
 						</div>
 						</span>
 						<a href="#">
@@ -408,7 +408,7 @@
 					<div class="gallery" id="card4">
 						<div class="label" style="padding-left:5px;padding-right:5px">
 							<p style="text-align:left;" id="p4"> Player 4
-								<span class="deckVal" style="float:right;color: #f25900" id="p4deck"> <b> # </b> </span>
+								<span class="deckVal" style="float:right;color: #f25900" id="p4deck"> <b> 3 </b> </span>
 						</div>
 						</span>
 						<a id=image4 href="#">
@@ -416,7 +416,7 @@
 						</a>
 						<div class="desc">
 							<p> <span id="name4">Name of card </span>
-								<br> <span class="cardVal" id="cat4" style="font-size:34px"> # </span> </p>
+								<br> <span class="cardVal" id="cat4" style="font-size:34px"> 5 </span> </p>
 						</div>
 					</div>
 
@@ -429,22 +429,22 @@
 							<div class="textSquare">
 
 								<p><span><b>Category:</b></span>
-									<span id="txtCat1"> #####</span><br>
+									<span id="txtCat1"> Speed</span><br>
 
 									<span><b>Turn:</b></span>
 									<span id="txtTurn2"> </span><br>
 
 									<span><b>Winner:</b></span>
-									<span id="txtWin3"> #####</span><br>
+									<span id="txtWin3"> Player 3</span><br>
 
 									<span><b>Round:</b></span>
-									<span id="txtRound4"> #####</span><br>
+									<span id="txtRound4"> </span><br>
 
 									<span><b>Cards in your deck:</b></span>
 									<span id="txtDeck5"></span></p>
 							</div>
 							<div class="buttonNext" id="nextRound" onclick=startARound();>Next Round</div>
-							<div class="buttonForward" id="fastForward" onclick=fastforward(false);>Fast Forward</div>
+							<div class="buttonForward" id="fastForward" onclick=fastforward(true);>Fast Forward</div>
 						</div>
 
 
@@ -479,7 +479,7 @@
 									</p><br>
 									<p>
 										<h1 id="commNum">
-											<center>#</center>
+											<center>4</center>
 										</h1>
 									</p>
 								</div>
@@ -501,15 +501,18 @@
 		// Method that is called on page load
 
 		function initalize() {
-			$("#startModal").show();
+			$("#startModal").show()
+
+
 		}
 
 		function initializeGame() {
 
-			$(".modal").hide();
+			$(".modal").hide()
 			newGame();
+			$('.btn-group').find('button').prop('disabled', true)
 			initialiseGame();
-			$('.btn-group').find('button').prop('disabled', true);
+
 		}
 
 
@@ -562,100 +565,148 @@
 			//	alert("Function cant be used in this state");
 			//	}
 
-			$('.gallery').hide();
+			$('.gallery').hide()
 
-			if (response.round != null) {
-				$("#txtRound4").html(response.round);
-				if (response.round == 1) {
-					initialPlayerDecksize(response);
-				}
-			}
-
-			if (response.communal_pile_size != null) {
-				$("#commNum").html(response.communal_pile_size);
-			}
-
-			if (response.category != null) {
-				$("#txtCat1").text(response.category);
-			}
-
-			if (response.decksize !== null) {
-				$("#txtDeck5").html(response.decksize);
-			}
-
-			if (response.losing_players != null) {
-				if (response.losing_players.indexOf(0) != -1){
-					$("#modalOut").show();
-				}
-				alert("player out decksizes length: " + response.playerDeckSizes.length);
-			}
 
 			if (response.winning_player != null) {
-				$('#txtTurn2').html('round ended');
+				$(document).ready(function () {
 					if (response.winning_player == 0) {
-						$("#txtWin3").html("You won!");
+						$("#txtWin3").html("You won!")
 					} else {
-						$("#txtWin3").html("Player " + response.winning_player + " won");
+						$("#txtWin3").html("Player " + response.winning_player + " won")
 					}
-			} else {
-				$("#txtWin3").html('It was a draw!');
+				});
 			}
 
-			// if (response.was_draw != null) {
-				
-			// }
+			if (response.was_draw != null) {
 
-			if (response.player_values != null) {
+				$("#txtWin3").html('It was a draw!')
+			}
+
+
+			if (response.player_values !== null) {
+
 				setPlayersValues(response);
 			}
 
-			if (response.card.valueMap != null) {
+
+			if (response.card.valueMap !== null) {
 				var cardArray = Object.values(response.card.valueMap);
 
 				setHumanCard(cardArray);
 
-				$("#name5").html(response.card.cardName);
-				$("#img5").attr("src", "/assets/card_images/" + response.card.cardName + ".jpg");
+				$("#name5").html(response.card.cardName)
+				$("#img5").attr("src", "/assets/card_images/" + response.card.cardName + ".jpg")
 			}
-	
-			if (response.playerDeckSizes != null && response.playerDeckSizes.length == 1) {
 
-				$("#popup").show();
+
+
+
+			if (response.overall_winner != null) {
+
+				$("#popup").show()
 				var winner = (response.overall_winner == 0) ? "You " : "Player " + response.overall_winner;
 
-				$("#txtWinner").html(winner + " won the game!");
+				$("#txtWinner").html(winner + " won the game!")
+
 			}
 
-			if (response.current_player != null) {
-				if (response.current_player == 0) {
-					//$('.cardVal').hide();
-					$('#txtTurn2').html('It is your turn to chose a category!');
-					$("#txtWin3").html("");
-					$(' .btn-group').find('button').prop('disabled', false);
-				} else {
-					$("#txtTurn2").html("Player " + response.current_player);
+
+
+			if (response.category != null) {
+
+				$("#txtCat1").text(response.category)
+			}
+
+
+
+			if (response.communal_pile_size != null) {
+				$("#commNum").html(response.communal_pile_size)
+			}
+
+			if (response.decksize !== null) {
+
+				$("#txtDeck5").html(response.decksize)
+
+				if (response.decksize == 0) {
+
+					$("#modalOut").show()
+
 				}
 			}
 
-			if (response.was_quit) {
-				windows.location = "http://localhost:7777/toptrumps/";
+
+
+			if (response.round != null) {
+				if (response.round == 1) {
+					initialPlayerDecksize(response);
+				}
+
+				$("#txtRound4").html(response.round)
 			}
+
+
+			if (response.current_player != null) {
+
+				if (response.current_player == 0) {
+					//$('.cardVal').hide()
+
+					$('#txtTurn2').html('It is your turn to chose a category!')
+					$("#txtWin3").html("")
+					$(' .btn-group').find('button').prop('disabled', false)
+
+
+
+				} else {
+
+					$("#txtTurn2").html("Player " + response.current_player)
+				}
+			}
+
+
+
+
+
+
+
+
+			if (response.was_quit) {
+				windows.location = "http://localhost:7777/toptrumps/"
+			}
+
+
 		}
+
+
+
+
+
+
+
+
+
+
 
 		//Function that initially sets players deck of cards
 		function initialPlayerDecksize(response) {
-			if (response.player_values != null) {
-				if (response.player_values.length === 3) {
-					$(' .deckVal').each(function () {
-						$(this).text(response.decksize - 1)
-					});
-				} else {
-					$(' .deckVal').each(function () {
-						$(this).text(response.decksize)
-					});
-				}
+
+			if (response.player_values.length === 3) {
+
+				$(' .deckVal').each(function () {
+					$(this).text(response.decksize - 1)
+				});
+			} else {
+
+				$(' .deckVal').each(function () {
+					$(this).text(response.decksize)
+				});
+
+
 			}
+
 		}
+
+
 
 		//Function that displays the AIplayers card values and number of cards. 
 		//Takes in a 2d-array and a string as parameters
@@ -666,30 +717,33 @@
 			for (var i = 0; i < response.player_values.length; i++) {
 				var value = response.player_values[i][0];
 
-				$("#card" + value).show();
-				$("#cat" + value).html(response.player_values[i][1]).show();
-				if (value == 0) {
-					$("#txtDeck5").html(response.playerDeckSizes[i][1]);
-				} else {
-					$("#p" + value + "deck").html(response.playerDeckSizes[i][1]);
-				}
-				$("#img" + value).attr("src", "/assets/card_images/" + array[i][1] + ".jpg");
-				$("#name" + array[i][0]).html(array[i][1]);
+				$("#card" + value).show()
+				$("#cat" + value).html(response.player_values[i][1]).show()
+				$("#p" + value + "deck").html(response.playerDeckSizes[i][1])
+				$("#img" + value).attr("src", "/assets/card_images/" + array[i][1] + ".jpg")
+				$("#name" + array[i][0]).html(array[i][1])
+
 
 			}
 		}
 
+
+
 		//Function that displays the humanplayers card values, takes an array as parameter.
 		function setHumanCard(array) {
+
 			for (var i = 0; i < array.length; i++) {
-				$("#c" + (i + 1)).text(array[i]);
+
+				$("#c" + (i + 1)).text(array[i])
 			}
 		}
 
 		function quitGame() {
-			$("#popup").hide();
+			$("#popup").hide()
 			window.location = "http://localhost:7777/toptrumps/";
 			quit();
+
+
 		}
 
 		function goBack() {

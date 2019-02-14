@@ -63,9 +63,9 @@ public class TopTrumpsRESTAPI {
 		number_of_ai_players = conf.getNumAIPlayers();
 		db = new Database();
 
-		dataBuffer = new OnlineDataBuffer();
-		gameController = new OnlineGameplayController(deckModel, dataBuffer, number_of_human_players, number_of_ai_players);
-		dataBuffer.setOGC(gameController);
+//		dataBuffer = new OnlineDataBuffer();
+//		gameController = new OnlineGameplayController(deckModel, dataBuffer, number_of_human_players, number_of_ai_players);
+//		dataBuffer.setOGC(gameController);
 
 	}
 
@@ -93,14 +93,17 @@ public class TopTrumpsRESTAPI {
 	@Path("/chosenNumberOfPlayers")
 		public void chosenNumberOfPlayers(@QueryParam("number") int number) {
 		number_of_ai_players = number;
+		dataBuffer = new OnlineDataBuffer();
+		gameController = new OnlineGameplayController(deckModel, dataBuffer, number_of_human_players, number_of_ai_players);
+		dataBuffer.setOGC(gameController);
 		}
 	
 	@GET
 	@Path("game/newGame")
 	public String newGame() throws IOException{
-		dataBuffer = new OnlineDataBuffer();
-		gameController = new OnlineGameplayController(deckModel, dataBuffer, number_of_human_players, number_of_ai_players);
-		dataBuffer.setOGC(gameController);
+//		dataBuffer = new OnlineDataBuffer();
+//		gameController = new OnlineGameplayController(deckModel, dataBuffer, number_of_human_players, number_of_ai_players);
+//		dataBuffer.setOGC(gameController);
 		
 		return null;
 	}
