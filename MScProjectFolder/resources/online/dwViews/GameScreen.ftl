@@ -140,6 +140,26 @@
 			/* Black w/ opacity */
 			border-radius: 8px;
 		}
+		div.buttonAI{
+	display:none;
+  width: 100px;
+  height: 70px;
+  margin: 5px;
+  border: none;
+  background-color: #ff7c30;
+  border-radius: 8px;
+  color: white;
+  padding: 15px 25px;
+  text-align: center;
+  font-size: 30px;
+  font-family: arial,serif;
+  cursor: pointer;
+  float: left;
+}
+div.buttonAI:hover{
+   background-color: #f25900;
+
+}
 
 		/* Modal Content/Box */
 		.modal-content {
@@ -263,7 +283,7 @@
 
 </head>
 
-<body onload="initalize()">
+<body onload="initialize()">
 	<!-- Call the initalize method when the page loads -->
 
 
@@ -281,13 +301,13 @@
 				<!-- Modal content -->
 				<div class="modal-content">
 
-					<h1 id="txtWinner">Which Player Has Won!</h1>
+					<h1 id="txtWinner"></h1>
 
 					<p>Play another game with the same amount of AI players or return to Menu to view statistics and change AI
 						players </p>
 					<div class="row" style="display:block;align:center">
 
-						<button class="modalButton" id="playButton" onclick=initializeGame();>PLAY</button>
+						<button class="modalButton" id="playButton" onclick= showButtons();>PLAY</button>
 						<button class="modalButton" id="goBack3" onclick=quitGame();>MENU</button>
 
 					</div>
@@ -311,8 +331,14 @@
 					<p> </p>
 					<div class="row" style="display:block;align:center">
 
-						<button class="modalButton" id="playButton" onclick=initializeGame();>PLAY</button>
+						<button class="modalButton" id="playButton" onclick = initializeGame();>PLAY</button>
 						<button class="modalButton" id="goBack3" onclick=goBack();>MENU</button>
+						<div class="col-sm-10">
+    <center><div class="buttonAI" id="AI1" onclick = chosenNumberOfPlayers(1);>1</div>
+    <div class="buttonAI" id="AI2" onclick = chosenNumberOfPlayers(2);>2</div>
+    <div class="buttonAI" id="AI3" onclick = chosenNumberOfPlayers(3);>3</div>
+    <div class="buttonAI" id="AI4" onclick = chosenNumberOfPlayers(4);>4</div></center>
+</div>
 
 					</div>
 					</span>
@@ -500,7 +526,8 @@
 
 		// Method that is called on page load
 
-		function initalize() {
+		function initialize() {
+			$(".modal").hide();
 			$("#startModal").show();
 		}
 
@@ -563,6 +590,16 @@
 			//	}
 
 			$('.gallery').hide();
+			
+			if (response.overall_winner != null) {
+				
+				$("#popup").show();
+				var winner = (response.overall_winner == 0) ? "You " : "Player " + response.overall_winner;
+				$("#txtWinner").html(winner + " won the game!");
+			
+			}
+				
+			
 
 			if (response.round != null) {
 				$("#txtRound4").html(response.round);
@@ -618,13 +655,6 @@
 				$("#img5").attr("src", "/assets/card_images/" + response.card.cardName + ".jpg");
 			}
 	
-			if (response.playerDeckSizes != null && response.playerDeckSizes.length == 1) {
-
-				$("#popup").show();
-				var winner = (response.overall_winner == 0) ? "You " : "Player " + response.overall_winner;
-
-				$("#txtWinner").html(winner + " won the game!");
-			}
 
 			if (response.current_player != null) {
 				if (response.current_player == 0) {
@@ -685,11 +715,19 @@
 				$("#c" + (i + 1)).text(array[i]);
 			}
 		}
+		
+		
+		
+		function showButtons() {
+			$(".buttonAI").show()
+			$(".textAI").show()
+			
+			}
 
 		function quitGame() {
 			$("#popup").hide();
 			window.location = "http://localhost:7777/toptrumps/";
-			quit();
+			
 		}
 
 		function goBack() {
@@ -751,6 +789,14 @@
 				}
 			}
 		}
+		
+			function chosenNumberOfPlayers(number) {
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/chosenNumberOfPlayers?number=" + number);
+			xhr.onload = function (e) {
+				window.location = "http://localhost:7777/toptrumps/game";
+				};
+				xhr.send();
+				}
 
 	</script>
 
