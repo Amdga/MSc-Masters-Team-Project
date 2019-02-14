@@ -23,7 +23,10 @@
 			background-color: #12A5F4;
 		}
 
-
+		/* div {
+			border-style: dotted;
+			border-color: green;
+		} */
 
 		div.gallery {
 			/* display: none; */
@@ -41,7 +44,8 @@
 		.label {
 			font-style: arial, serif;
 			font-size: 15px;
-			width: 100% border-radius: 8px;
+			width: 100%;
+			border-radius: 8px;
 			margin: 4px;
 
 		}
@@ -56,6 +60,11 @@
 			width: 100%;
 			height: auto;
 			border-color: black;
+			border-radius: 10px;
+		}
+		
+		.squareMainCard img {
+			border-radius: 15px;
 		}
 
 		div.desc {
@@ -66,6 +75,8 @@
 		}
 
 		.goBackButton {
+			max-width: 65px;
+			min-width: 65px;
 			margin: 5px;
 			background-color: #FF7C30;
 			-webkit-transition-duration: 0.4s;
@@ -179,17 +190,17 @@
 			display: block;
 			cursor: pointer;
 			text-align: center;
-			background-color: #ff7c30;
+			background-color: #FF7C30;
 			color: white;
 			font-style: arial, serif;
 
 		}
 
-		.btn-group button:not(:last-child) {
+		/* .btn-group button:not(:last-child) {
 			border-bottom: none;
-		}
+		} */
 
-		.btn-group button:hover {
+		div.btn-group button:hover {
 			background-color: #f25900;
 		}
 
@@ -233,9 +244,10 @@
 			padding: 10px 15px;
 			color: white;
 			text-align: center;
-			bottom: 120px;
+			bottom: 40px;
 			position: fixed;
-			right: 200px
+			right: 75px;
+			min-width: 160px;
 		}
 
 		.buttonForward:hover {
@@ -253,21 +265,27 @@
 			text-align: center;
 			bottom: 120px;
 			position: fixed;
-			right: 360px
+			right: 75px;
+			min-width: 160px;
 		}
 
 		.buttonNext:hover {
 			background: #f25900;
 		}
+
+		#txtStatus6 {
+			color: red;
+		}
+
 	</style>
 
 </head>
 
-<body onload="initalize()">
-	<!-- Call the initalize method when the page loads -->
+<body onload="initialize()">
+	<!-- Call the initialize method when the page loads -->
 
 
-	<div class="container">
+	<div class="container-fluid">
 		<div class="container-fluid">
 
 
@@ -350,7 +368,7 @@
 
 			<div class="row">
 				<div class="col-sm-1" style="width:20%">
-					<button class="goBackButton" id="goBack2" onclick=goBack();>Go Back</button>
+					<button class="goBackButton" id="goBack2" onclick=goBack();>Go <br> Back</button>
 				</div>
 
 				<div class="col-sm-9" style="width:80%">
@@ -360,7 +378,7 @@
 								<span class="deckVal" style="float:right;color: #f25900" id="p1deck"> <b> # </b> </span>
 						</div>
 						</span>
-						<a href="#">
+						<a href="">
 							<img src="#" id="img1" alt="Player 1" style="width:177px;height:110px;">
 						</a>
 
@@ -381,7 +399,7 @@
 								<span class="deckVal" style="float:right;color: #f25900" id="p2deck"> <b> </b> </span>
 						</div>
 						</span>
-						<a href="#">
+						<a href="">
 							<img src="#" id="img2" alt="Player 2" style="width:177px;height:110px;">
 						</a>
 						<div class="desc">
@@ -396,7 +414,7 @@
 								<span class="deckVal" style="float:right;color: #f25900" id="p3deck"> <b> # </b> </span>
 						</div>
 						</span>
-						<a href="#">
+						<a href="">
 							<img src="#" id="img3" alt="Player 3" style="width:177px;height:110px;">
 						</a>
 						<div class="desc">
@@ -412,7 +430,7 @@
 						</div>
 						</span>
 						<a id=image4 href="#">
-							<img src="#" id="img4" alt="Player 4" style="width:177px;height:110px;">
+							<img src="" id="img4" alt="Player 4" style="width:177px;height:110px;">
 						</a>
 						<div class="desc">
 							<p> <span id="name4">Name of card </span>
@@ -429,7 +447,7 @@
 							<div class="textSquare">
 
 								<p><span><b>Category:</b></span>
-									<span id="txtCat1"> #####</span><br>
+									<span id="txtCat1"> </span><br>
 
 									<span><b>Turn:</b></span>
 									<span id="txtTurn2"> </span><br>
@@ -441,7 +459,10 @@
 									<span id="txtRound4"> #####</span><br>
 
 									<span><b>Cards in your deck:</b></span>
-									<span id="txtDeck5"></span></p>
+									<span id="txtDeck5"></span><br>
+
+									<span id="txtStatus6"></span>
+								</p>
 							</div>
 							<div class="buttonNext" id="nextRound" onclick=startARound();>Next Round</div>
 							<div class="buttonForward" id="fastForward" onclick=fastforward(false);>Fast Forward</div>
@@ -454,16 +475,16 @@
 								<div class="desc" id="name5"> Description</div>
 								<div class="btn-group">
 									<ul style="padding-left: 4px">
-										<button id="size" onclick=chosenCategory("Speed");>Speed <var class="var" id="c1"></var></button>
+										<button id="Speedbtn" onclick=chosenCategory("Speed");>Speed <var class="var" id="c1"></var></button>
 
-										<button id="speed" onclick=chosenCategory("Cargo");>Cargo <var class="var" id="c2"></var></button>
+										<button id="Cargobtn" onclick=chosenCategory("Cargo");>Cargo <var class="var" id="c2"></var></button>
 
-										<button id="range" onclick=chosenCategory("Size");>Size <var class="var" id="c3"></var></button>
+										<button id="Sizebtn" onclick=chosenCategory("Size");>Size <var class="var" id="c3"></var></button>
 
-										<button id="firepower" onclick=chosenCategory("Range");>Range <var class="var"
+										<button id="Rangebtn" onclick=chosenCategory("Range");>Range <var class="var"
 												id="c4"></var></button>
 
-										<button id="cargo" onclick=chosenCategory("Firepower");>Firepower <var class="var"
+										<button id="Firepowerbtn" onclick=chosenCategory("Firepower");>Firepower <var class="var"
 												id="c5"></var></button>
 									</ul>
 
@@ -500,7 +521,7 @@
 
 		// Method that is called on page load
 
-		function initalize() {
+		function initialize() {
 			$("#startModal").show();
 		}
 
@@ -564,11 +585,14 @@
 
 			$('.gallery').hide();
 
+			// done at the start of every request, since round number is never 0
 			if (response.round != null) {
 				$("#txtRound4").html(response.round);
 				if (response.round == 1) {
 					initialPlayerDecksize(response);
 				}
+				resetStatButtonColour();
+				$('#txtStatus6').html("");
 			}
 
 			if (response.communal_pile_size != null) {
@@ -577,21 +601,19 @@
 
 			if (response.category != null) {
 				$("#txtCat1").text(response.category);
+				$("#" + response.category + "btn").css({"background-color": "rgb(248, 190, 157)"});
 			}
 
 			if (response.decksize !== null) {
 				$("#txtDeck5").html(response.decksize);
 			}
 
-			if (response.losing_players != null) {
-				if (response.losing_players.indexOf(0) != -1){
-					$("#modalOut").show();
-				}
-				alert("player out decksizes length: " + response.playerDeckSizes.length);
+			if (response.player_values != null) {
+				setPlayersValues(response);
 			}
 
 			if (response.winning_player != null) {
-				$('#txtTurn2').html('round ended');
+				$('#txtTurn2').html('Your Turn Ended');
 					if (response.winning_player == 0) {
 						$("#txtWin3").html("You won!");
 					} else {
@@ -599,14 +621,6 @@
 					}
 			} else {
 				$("#txtWin3").html('It was a draw!');
-			}
-
-			// if (response.was_draw != null) {
-				
-			// }
-
-			if (response.player_values != null) {
-				setPlayersValues(response);
 			}
 
 			if (response.card.valueMap != null) {
@@ -617,6 +631,25 @@
 				$("#name5").html(response.card.cardName);
 				$("#img5").attr("src", "/assets/card_images/" + response.card.cardName + ".jpg");
 			}
+
+			if (response.current_player != null) {
+				if (response.current_player == 0) {
+					//$('.cardVal').hide();
+					$('#txtTurn2').html('You choose a category!');
+					$("#txtWin3").html("");
+					$(' .btn-group').find('button').prop('disabled', false);
+				} else {
+					$("#txtTurn2").html("Player " + response.current_player);
+				}
+			}
+
+			if (response.losing_players != null) {
+				if (response.losing_players.indexOf(0) != -1){
+					$("#modalOut").show();
+				}
+				$('#txtStatus6').html("Losing players this round: " + response.losing_players);
+				alert("player out decksizes length: " + response.playerDeckSizes.length);
+			} 
 	
 			if (response.playerDeckSizes != null && response.playerDeckSizes.length == 1) {
 
@@ -624,17 +657,6 @@
 				var winner = (response.overall_winner == 0) ? "You " : "Player " + response.overall_winner;
 
 				$("#txtWinner").html(winner + " won the game!");
-			}
-
-			if (response.current_player != null) {
-				if (response.current_player == 0) {
-					//$('.cardVal').hide();
-					$('#txtTurn2').html('It is your turn to chose a category!');
-					$("#txtWin3").html("");
-					$(' .btn-group').find('button').prop('disabled', false);
-				} else {
-					$("#txtTurn2").html("Player " + response.current_player);
-				}
 			}
 
 			if (response.was_quit) {
@@ -663,20 +685,39 @@
 			var array = response.playerCardNames;
 			array.sort();
 
+			// set player deck size values to 0
+			for (var i = 0; i < 5; i++) {
+				if (i == 0) {
+					$("#txtDeck5").html("0");
+				} else {
+					$("#p" + i + "deck").html("0");
+				}
+			}
+
+			// set updated player deck sizes for end of round
+			for (var i=0; i < response.playerDeckSizes.length; i++) {
+				var player = response.playerDeckSizes[i][0];
+				if (player == 0) {
+					$("#txtDeck5").html(response.playerDeckSizes[i][1]);
+				} else {
+					$("#p" + player + "deck").html(response.playerDeckSizes[i][1]);
+				}
+			}
+
+			// set player round information for round which was just played
 			for (var i = 0; i < response.player_values.length; i++) {
 				var value = response.player_values[i][0];
 
 				$("#card" + value).show();
 				$("#cat" + value).html(response.player_values[i][1]).show();
-				if (value == 0) {
-					$("#txtDeck5").html(response.playerDeckSizes[i][1]);
-				} else {
-					$("#p" + value + "deck").html(response.playerDeckSizes[i][1]);
-				}
 				$("#img" + value).attr("src", "/assets/card_images/" + array[i][1] + ".jpg");
 				$("#name" + array[i][0]).html(array[i][1]);
 
 			}
+		}
+
+		function resetStatButtonColour() {
+			$("div.btn-group button").css({"background-color": "#ff7c30"})
 		}
 
 		//Function that displays the humanplayers card values, takes an array as parameter.

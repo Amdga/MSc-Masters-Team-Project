@@ -69,7 +69,7 @@ public class OnlineGameplayController extends GameplayControllerAbstract{
 	 * 		   null if in the wrong state
 	 */
 	public String initialiseGame() {
-		if (state.equals(STATES[1])) {
+//		if (state.equals(STATES[1])) {
 			state = STATES[2];
 			
 			dealOutDeck();
@@ -80,10 +80,10 @@ public class OnlineGameplayController extends GameplayControllerAbstract{
 			startARound(false);
 
 			return this.to_view.toJSON();
-		}
-		else {
-			return STATE_ERROR;
-		}
+//		}
+//		else {
+//			return STATE_ERROR;
+//		}
 	}
 	
 	/**
