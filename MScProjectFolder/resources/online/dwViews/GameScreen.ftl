@@ -478,20 +478,10 @@
 		</div>
 
 		<script type="text/javascript">
-			// $('#newGame').onclick = newGame();
-			// $('#startGame').onclick = initialiseGame();
-			// $('#startRound').onclick = startARound();
-			// $('#speed').onclick = chosenCategory("Speed");
-			// $('#cargo').onclick = chosenCategory("Cargo");
-			// $('#range').onclick = chosenCategory("Range");
-			// $('#size').onclick = chosenCategory("Size");
-			// $('#firepower').onclick = chosenCategory("Firepower");
-			// $('#quit').onclick = quit();
+		
+		
 			
 			
-			
-			
-
 			// Method that is called on page load
 				
 			function initalize() {
@@ -501,10 +491,11 @@
 			}
 			
 			function initializeGame() {
+			
 			$(".modal").hide()
 			newGame();
 			$('.btn-group').find('button').prop('disabled', true)
-			initialiseGame();
+			initialiseGame(); 
 			
 			}
 		
@@ -557,24 +548,51 @@
 				//if (jsonAsString === "state error") {
 				//	alert("Function cant be used in this state");
 				//	}
-				$('.gallery').hide()
+				
+				$('.gallery').hide() 
 	
-
+			if(response.player_values !== null) {
+		
+		setPlayersValues(response); 
+		}
+		
+			
+		if(response.card.valueMap !== null) {
+		var cardArray = Object.values(response.card.valueMap);
+		
+		setHumanCard(cardArray);
+	
+		$("#name5").html(response.card.cardName)
+		$("#img5").attr("src", "/assets/card_images/" + response.card.cardName + ".jpg")
+		}
+		
+		
+		
 
 			if(response.overall_winner != null) {
+		
 				$("#popup").show()
 				var winner = (response.overall_winner == 0) ? "You " : "Player "+ response.overall_winner;
 		
-				$("#txtWinner").html(winner + "won the game!")
+				$("#txtWinner").html(winner + " won the game!")
 	
 				}
-	
+				
+				
+				
+		if(response.category != null) {
+			
+			$("#txtCat1").text(response.category) 
+			}
+		
 			
 	if(response.winning_player != null) {
 		if(response.winning_player == 0) {
-			$("#txtWin3").html("You won!")
+			
+			$("#txtWin3").html("You won!") 
 		
 	} else {
+			
 			$("#txtWin3").html("Player " + response.winning_player  + " won") 
 		}
 		}
@@ -584,13 +602,16 @@
 		}
 		
 			if(response.decksize !== null) {
+			
 			$("#txtDeck5").html(response.decksize)
-				if(response.decksize === 0) {
-					$("#txtDeck5").html(response.decksize)
-					$("#modalOut").show()
+			
+				if(response.decksize == 0) {
+					
+					$("#modalOut").show() 
 				
 			}
 			}
+			
 		
 		
 			if(response.round != null) {
@@ -606,7 +627,7 @@
 		
 		if(response.current_player == 0) { 
 					//$('.cardVal').hide()
-					
+				
 			 		$('#txtTurn2').html('It is your turn to chose a category!')
 			 		$("#txtWin3").html("")
 			 		$(' .btn-group').find('button').prop('disabled', false)
@@ -614,43 +635,18 @@
 			 		
 			 	
 			 	} else {
+			
 			 		$("#txtTurn2").html("Player " + response.current_player) 
 			}
 			}	
 			
 			if(response.was_draw != null) {
-			$("#txtWin3").html('It was a draw!')
-		}
 		
-			
-		if(response.category != null) {
-		
-			$("#txtCat1").html(response.category)
-		}
-		if(response.player_values !== null) {
-		setPlayersValues(response);
+			$("#txtWin3").html('It was a draw!') 
 		}
 		
 		
-			
-		if(response.card.valueMap !== null) {
-		var cardArray = Object.values(response.card.valueMap);
-		alert(cardArray);
-		setHumanCard(cardArray);
-		$(document).ready(function() {
-		$("#name5").html(response.card.cardName) });
-		$("#img5").attr("src", "/assets/card_images/" + response.card.cardName + ".jpg")
 		
-		}
-		
-		if(response.playerCardNames != null) {
-		var array = response.playerCardNames;
-		array.sort();
-		for(var i = 0; i < response.playerCardNames.length; i ++) {
-		
-		$("#name" + response.playerCardNames[i][0]).html(response.playerCardNames[i][1])	
-		}
-		}
 		
 		
 		
@@ -659,21 +655,7 @@
 		}
 			
 		
-		if(response.losing_players !== null) {
-			//Print message where?
-		}
-		
-		if(response.overall_winner != null) {
-			$("#txtWinner").html(response.over_all_winner)
-		}
-		
-		
-	
-		
-		
-		
-		
-		}
+	}
 		
 		
 		
@@ -689,13 +671,13 @@
 		function initialPlayerDecksize(response){
 			  
 			if(response.player_values.length === 3) {
-			$(document).ready(function() {
+			
 				$(' .deckVal').each(function() {
-			$(this).text(response.decksize - 1) }); });
+			$(this).text(response.decksize - 1) }); 
 			} else {
-			$(document).ready(function() {
+			
 			$(' .deckVal').each(function() {
-				$(this).text(response.decksize) }); });
+				$(this).text(response.decksize) }); 
 				
 				
 		   }
@@ -712,11 +694,12 @@
 		
 			for(var i = 0; i < response.player_values.length; i++) {
 			var value = response.player_values[i][0];
-			alert(value);
+			
 			$("#card" + value).show()
 			$("#cat" + value).html(response.player_values[i][1]).show()
 			$("#p" + value + "deck").html(response.playerDeckSizes[i][1])
-			$("#img" + value).attr("src", "/assets/card_images/" + response.playerCardNames[i][1] + ".jpg")
+			$("#img" + value).attr("src", "/assets/card_images/" + array[i][1] + ".jpg")
+			$("#name" + array[i][0]).html(array[i][1])	
 			
 				
 			}
@@ -728,7 +711,8 @@
 		function setHumanCard(array) {
 		
 			for(var i = 0; i < array.length; i++) {
-			$("#c" + (i+1)).text(array[i])
+			
+			$("#c" + (i+1)).text(array[i]) 
 			}
 			}
 			
@@ -763,8 +747,8 @@
 				var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/startARound");
 				xhr.send();
 				xhr.onload = function (e) {
-				
-					testResponse(xhr.response);
+					
+					testResponse(xhr.response); 
 				}
 			}
 
@@ -828,7 +812,7 @@
 
 			// 	// Message is not sent yet, but we can check that the browser supports CORS
 			// 	if (!xhr) {
-  			// 		alert("CORS not supported");
+  			// 		("CORS not supported");
 			// 	}
 
 			// 	// CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
