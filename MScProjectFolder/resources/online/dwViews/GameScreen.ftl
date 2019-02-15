@@ -168,7 +168,7 @@
 			font-size: 30px;
 			font-family: arial,serif;
 			cursor: pointer;
-			float: left;
+			/* float: left; */
 			
 			
 			margin: 5px;
@@ -361,14 +361,18 @@
 					<p>Play another game with the same amount of AI players or return to Menu to view statistics and change AI
 						players </p>
 					<div class="row" style="display:block;align:center">
-
-						<button class="modalButton" id="playButton" onclick= showButtons();>PLAY</button>
-						<button class="modalButton" id="goBack3" onclick=quitGame();>MENU</button>
-						
-						 <center><div class="buttonAI" onclick = chosenNumberOfPlayers(1);>1</div>
-    <div class="buttonAI" onclick = chosenNumberOfPlayers(2);>2</div>
-    <div class="buttonAI" onclick = chosenNumberOfPlayers(3);>3</div>
-    <div class="buttonAI" onclick = chosenNumberOfPlayers(4);>4</div></center>
+						<div class="row" style="display:block;">
+							<p>
+								<button class="modalButton" id="playButton" onclick= showButtons();>PLAY</button>
+								<button class="modalButton" id="goBack3" onclick=quitGame();>MENU</button>
+							</p>
+						</div>
+						<div class="row" style="display:block;">
+							<div class="buttonAI" onclick = chosenNumberOfPlayers(1);>1</div>
+							<div class="buttonAI" onclick = chosenNumberOfPlayers(2);>2</div>
+							<div class="buttonAI" onclick = chosenNumberOfPlayers(3);>3</div>
+							<div class="buttonAI" onclick = chosenNumberOfPlayers(4);>4</div>
+						</div>
 
 
 					</div>
@@ -822,9 +826,8 @@
 		
 		
 		function showButtons() {
-			$(".buttonAI").show();
-	
-			
+			$(".buttonAI").css("display", "inline");
+			$(".buttonAI").css("text-align", "center");
 			}
 
 		function quitGame() {
