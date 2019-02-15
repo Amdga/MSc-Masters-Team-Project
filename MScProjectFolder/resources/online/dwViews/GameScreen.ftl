@@ -435,7 +435,7 @@
 
 			</div>
 
-			<div class="row">
+			<div class="row" id="content">
 				<div class="col-sm-1" style="width:20%">
 					<button class="goBackButton" id="goBack2" onclick=goBack();>Go <br> Back</button>
 				</div>
@@ -518,10 +518,10 @@
 									<span id="txtTurn2"> </span><br>
 
 									<span><b>Winner:</b></span>
-									<span id="txtWin3"> #####</span><br>
+									<span id="txtWin3"> </span><br>
 
 									<span><b>Round:</b></span>
-									<span id="txtRound4"> #####</span><br>
+									<span id="txtRound4"> </span><br>
 
 									<span><b>Cards in your deck:</b></span>
 									<span id="txtDeck5"></span><br>
