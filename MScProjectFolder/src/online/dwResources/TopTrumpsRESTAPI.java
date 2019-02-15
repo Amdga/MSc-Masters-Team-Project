@@ -98,15 +98,15 @@ public class TopTrumpsRESTAPI {
 		dataBuffer.setOGC(gameController);
 		}
 	
-//	@GET
-//	@Path("game/newGame")
-//	public String newGame() throws IOException{
-////		dataBuffer = new OnlineDataBuffer();
-////		gameController = new OnlineGameplayController(deckModel, dataBuffer, number_of_human_players, number_of_ai_players);
-////		dataBuffer.setOGC(gameController);
-//		System.out.println((String) null);
-//		return null;
-//	}
+	@GET
+	@Path("game/newGame")
+	public String newGame() throws IOException{
+//		dataBuffer = new OnlineDataBuffer();
+//		gameController = new OnlineGameplayController(deckModel, dataBuffer, number_of_human_players, number_of_ai_players);
+//		dataBuffer.setOGC(gameController);
+		System.err.println(gameController.getID());
+		return "" + gameController.getID();
+	}
 
 	@GET
 	@Path("game/initialiseGameplay")

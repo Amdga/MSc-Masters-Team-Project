@@ -39,10 +39,12 @@ public class OnlineGameplayController extends GameplayControllerAbstract{
 									   "showing results", "round ended", "overall winner"};
 	public static final String OVERALL_WINNER = STATES[6];
 	private static final String STATE_ERROR = "state error";
+	private static int game_ID_setter = 0;
 	private String state = STATES[1]; //Holds the current state of the game
 	private PlayerAbstract current_player;
 	private int round_counter;
 	private String category;
+	private int gameID;
 	
 	/**
 	 * Constructor for the online gameplay controller, initialises variables, gets deck and creates players
@@ -56,6 +58,8 @@ public class OnlineGameplayController extends GameplayControllerAbstract{
 		super(model, view, number_of_human_players, number_of_ai_players, false);
 		this.to_view = view;
 		to_view.setOGC(this);
+		gameID = game_ID_setter;
+		game_ID_setter++;
 	}
 	
 	/**
@@ -223,4 +227,7 @@ public class OnlineGameplayController extends GameplayControllerAbstract{
 		return state;
 	}
 	
+	public int getID() {
+		return gameID;
+	}
 }
