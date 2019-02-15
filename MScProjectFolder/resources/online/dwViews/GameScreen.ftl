@@ -392,7 +392,7 @@
 				<!-- Modal content -->
 				<div class="modal-content">
 
-					<h1 id="txtWinner">You're out! LOSER!</h1>
+					<h1 id="txtWinner">You're out!</h1>
 
 					<p> </p>
 					<div class="row" style="display:block;align:center">
