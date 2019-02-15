@@ -1,6 +1,7 @@
 package online.dwResources;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -36,12 +37,13 @@ import logger.PersistentGameData;
 public class TopTrumpsRESTAPI {
 
 	// variable initialisation
-	private OnlineDataBuffer dataBuffer; // should implement the same interface as CLIView
-	private OnlineGameplayController gameController;
+	private ArrayList<OnlineDataBuffer> dataBuffers;
+	private ArrayList<OnlineGameplayController> gameControllers;
 	private Database db;
-	private GetDeckModel deckModel;
+	private ArrayList<GetDeckModel> deckModels;
 	private int number_of_human_players = 1;
 	private int number_of_ai_players;
+	private TopTrumpsJSONConfiguration config;
 
 	/** A Jackson Object writer. It allows us to turn Java objects
 	 * into JSON strings easily. */
@@ -58,10 +60,9 @@ public class TopTrumpsRESTAPI {
 		// Add relevant initalization here
 		// ----------------------------------------------------
 
-
-		deckModel = new GetDeckModel(conf.getDeckFile());
 		number_of_ai_players = conf.getNumAIPlayers();
 		db = new Database();
+		config = conf;
 
 //		dataBuffer = new OnlineDataBuffer();
 //		gameController = new OnlineGameplayController(deckModel, dataBuffer, number_of_human_players, number_of_ai_players);
@@ -93,9 +94,10 @@ public class TopTrumpsRESTAPI {
 	@Path("/chosenNumberOfPlayers")
 		public void chosenNumberOfPlayers(@QueryParam("number") int number) {
 		number_of_ai_players = number;
-		dataBuffer = new OnlineDataBuffer();
-		gameController = new OnlineGameplayController(deckModel, dataBuffer, number_of_human_players, number_of_ai_players);
-		dataBuffer.setOGC(gameController);
+		dataBuffers.add(new OnlineDataBuffer());
+		deckModels.add(new GetDeckModel(config.getDeckFile()));
+		gameControllers.add(new OnlineGameplayController(deckModels.get(deckModels.size()-1), dataBuffers.get(dataBuffers.size()-1), number_of_human_players, number_of_ai_players));
+		dataBuffers.get(dataBuffers.size()-1).setOGC(gameControllers.get(gameControllers.size()-1));
 		}
 	
 	@GET
@@ -104,51 +106,51 @@ public class TopTrumpsRESTAPI {
 //		dataBuffer = new OnlineDataBuffer();
 //		gameController = new OnlineGameplayController(deckModel, dataBuffer, number_of_human_players, number_of_ai_players);
 //		dataBuffer.setOGC(gameController);
-		System.err.println(gameController.getID());
-		return "" + gameController.getID();
+		System.err.println("starting game with ID: " + gameControllers.get(gameControllers.size()-1).getID());
+		return "" + gameControllers.get(gameControllers.size()-1).getID();
 	}
 
 	@GET
 	@Path("game/initialiseGameplay")
-	public String initialiseGameplay() throws IOException{
-		String json_output = gameController.initialiseGame();
-		checkAndWriteToDatabase();
+	public String initialiseGameplay(@QueryParam("gameID") int id) throws IOException{
+		String json_output = gameControllers.get(id).initialiseGame();
+		checkAndWriteToDatabase(id);
 		return json_output;
 	}
 
 	@GET
 	@Path("game/startARound")
-	public String startARound() throws IOException{
-		String json_output = gameController.startARound();
-		checkAndWriteToDatabase();
+	public String startARound(@QueryParam("gameID") int id) throws IOException{
+		String json_output = gameControllers.get(id).startARound();
+		checkAndWriteToDatabase(id);
 		return json_output;
 	}
 
 	@GET
 	@Path("game/chosenCategory")
-	public String chosenCategory(@QueryParam("category") String category) throws IOException{
-		String json_output = gameController.chosenCategory(category);
-		checkAndWriteToDatabase();
+	public String chosenCategory(@QueryParam("category") String category, @QueryParam("gameID") int id) throws IOException{
+		String json_output = gameControllers.get(id).chosenCategory(category);
+		checkAndWriteToDatabase(id);
 		return json_output;
 	}
 
 	@GET
 	@Path("game/quit")
-	public String quit() throws IOException{
-		String json_output = gameController.quit();
-		checkAndWriteToDatabase();
+	public String quit(@QueryParam("gameID") int id) throws IOException{
+		String json_output = gameControllers.get(id).quit();
+		checkAndWriteToDatabase(id);
 		return json_output;
 	}
 
-	private void checkAndWriteToDatabase() {
+	private void checkAndWriteToDatabase(int id) {
 		// if state of game is overall winner
-		if (gameController.getState() == OnlineGameplayController.OVERALL_WINNER) { 
-			writeToDatabase();
+		if (gameControllers.get(id).getState() == OnlineGameplayController.OVERALL_WINNER) { 
+			writeToDatabase(id);
 		}
 	}
 
-	private void writeToDatabase() {
-		PersistentGameData game_data = gameController.getGameData();
+	private void writeToDatabase(int id) {
+		PersistentGameData game_data = gameControllers.get(id).getGameData();
 
 		if(game_data.data_to_be_logged() == true) {
 			db.addGameStats(game_data.get_number_of_rounds(), game_data.get_winning_player(), game_data.get_number_of_draws());
