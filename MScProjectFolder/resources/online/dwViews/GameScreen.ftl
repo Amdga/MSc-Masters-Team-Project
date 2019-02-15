@@ -152,25 +152,25 @@
 			border-radius: 8px;
 		}
 		div.buttonAI{
-	display:none;
-  width: 100px;
-  height: 70px;
-  margin: 5px;
-  border: none;
-  background-color: #ff7c30;
-  border-radius: 8px;
-  color: white;
-  padding: 15px 25px;
-  text-align: center;
-  font-size: 30px;
-  font-family: arial,serif;
-  cursor: pointer;
-  float: left;
-}
-div.buttonAI:hover{
-   background-color: #f25900;
+			display:none;
+			width: 100px;
+			height: 70px;
+			margin: 5px;
+			border: none;
+			background-color: #ff7c30;
+			border-radius: 8px;
+			color: white;
+			padding: 15px 25px;
+			text-align: center;
+			font-size: 30px;
+			font-family: arial,serif;
+			cursor: pointer;
+			float: left;
+		}
+		div.buttonAI:hover{
+			background-color: #f25900;
 
-}
+		}
 
 		/* Modal Content/Box */
 		.modal-content {
@@ -234,11 +234,11 @@ div.buttonAI:hover{
 
 		.cardPile {
 			background: #f1f1f1;
-			height: 250px;
+			height: 200px;
 			width: 150px;
 			font-style: arial, serif;
 			font-size: 15px;
-			text-align: left;
+			text-align: center;
 			border-radius: 8px;
 			border-width: 1px;
 			border-style: solid;
@@ -287,6 +287,11 @@ div.buttonAI:hover{
 			position: fixed;
 			right: 75px;
 			min-width: 160px;
+		}
+
+		p span.cardVal {
+			font-size: 34px;
+			text-align: center;
 		}
 
 		.buttonNext:hover {
@@ -375,7 +380,7 @@ div.buttonAI:hover{
 				<!-- Modal content -->
 				<div class="modal-content">
 
-					<h1 id="txtWinner">Your out!</h1>
+					<h1 id="txtWinner">You're out! LOSER!</h1>
 
 					<p> </p>
 					<div class="row" style="display:block;align:center">
@@ -398,23 +403,19 @@ div.buttonAI:hover{
 				</div>
 
 				<div class="col-sm-9" style="width:80%">
+
 					<div class="gallery" id="card1">
 						<div class="label" style="padding-left:5px;padding-right: 5px">
 							<p style="text-align:left;" id="p1"> Player 1
 								<span class="deckVal" style="float:right;color: #f25900" id="p1deck"> <b> # </b> </span>
 						</div>
 						</span>
-						<a href="">
+						
 							<img src="#" id="img1" alt="Player 1" style="width:177px;height:110px;">
-						</a>
-
-
-
-
-
+						
 						<div class="desc">
 							<p> <span id="name1">Name of card </span>
-								<br> <span class="cardVal" id="cat1" style="font-size:34px"> </span> </p>
+								<br> <span class="cardVal" id="cat1"> # </span> </p>
 						</div>
 					</div>
 
@@ -425,12 +426,12 @@ div.buttonAI:hover{
 								<span class="deckVal" style="float:right;color: #f25900" id="p2deck"> <b> </b> </span>
 						</div>
 						</span>
-						<a href="">
+						
 							<img src="#" id="img2" alt="Player 2" style="width:177px;height:110px;">
-						</a>
+						
 						<div class="desc">
 							<p> <span id="name2">Name of card </span>
-								<br> <span class="cardVal" id="cat2" style="font-size:34px"> </span> </p>
+								<br> <span class="cardVal" id="cat2"> # </span> </p>
 						</div>
 					</div>
 
@@ -440,12 +441,12 @@ div.buttonAI:hover{
 								<span class="deckVal" style="float:right;color: #f25900" id="p3deck"> <b> # </b> </span>
 						</div>
 						</span>
-						<a href="">
+						
 							<img src="#" id="img3" alt="Player 3" style="width:177px;height:110px;">
-						</a>
+						
 						<div class="desc">
 							<p> <span id="name3">Name of card </span>
-								<br> <span class="cardVal" id="cat3" style="font-size:34px"> </span> </p>
+								<br> <span class="cardVal" id="cat3"> # </span> </p>
 						</div>
 					</div>
 
@@ -455,12 +456,12 @@ div.buttonAI:hover{
 								<span class="deckVal" style="float:right;color: #f25900" id="p4deck"> <b> # </b> </span>
 						</div>
 						</span>
-						<a id=image4 href="#">
+						
 							<img src="" id="img4" alt="Player 4" style="width:177px;height:110px;">
-						</a>
+						
 						<div class="desc">
 							<p> <span id="name4">Name of card </span>
-								<br> <span class="cardVal" id="cat4" style="font-size:34px"> # </span> </p>
+								<br> <span class="cardVal" id="cat4"> # </span> </p>
 						</div>
 					</div>
 
@@ -521,13 +522,13 @@ div.buttonAI:hover{
 								<div class="cardPile">
 									<p id="commPile">
 										<h5>
-											<center><b>Communal Pile</b></center>
+											<b>Communal Pile</b>
 										</h5>
 									</p><br>
 									<p>
-										<h1 id="commNum">
-											<center>#</center>
-										</h1>
+									<span class="cardVal"	id="commNum">
+											0
+									</span>
 									</p>
 								</div>
 							</div>
@@ -628,7 +629,7 @@ div.buttonAI:hover{
 				if (response.round == 1) {
 					initialPlayerDecksize(response);
 				}
-				resetStatButtonColour();
+				resetHighlightedElements();
 				$('#txtStatus6').html("");
 			}
 
@@ -651,11 +652,13 @@ div.buttonAI:hover{
 
 			if (response.winning_player != null) {
 				$('#txtTurn2').html('Your Turn Ended');
-					if (response.winning_player == 0) {
-						$("#txtWin3").html("You won!");
-					} else {
-						$("#txtWin3").html("Player " + response.winning_player + " won");
-					}
+				if (response.winning_player == 0) {
+					$("#txtWin3").html("You won!");
+					$(".squareMainCard").css({'background-color': 'rgb(141, 205, 240)'});
+				} else {
+					$("#txtWin3").html("Player " + response.winning_player + " won");
+					$("#card" + response.winning_player).css({'background-color': 'rgb(141, 205, 240)'});
+				}
 			} else {
 				$("#txtWin3").html('It was a draw!');
 			}
@@ -685,7 +688,7 @@ div.buttonAI:hover{
 					$("#modalOut").show();
 				}
 				$('#txtStatus6').html("Losing players this round: " + response.losing_players);
-				alert("player out decksizes length: " + response.playerDeckSizes.length);
+				// alert("player out decksizes length: " + response.playerDeckSizes.length);
 			} 
 	
 			if (response.playerDeckSizes != null && response.playerDeckSizes.length == 1) {
@@ -753,8 +756,13 @@ div.buttonAI:hover{
 			}
 		}
 
-		function resetStatButtonColour() {
-			$("div.btn-group button").css({"background-color": "#ff7c30"})
+		function resetHighlightedElements() {
+			$("div.btn-group button").css({"background-color": "#ff7c30"});
+			$("#card1").css({'background-color': '#F1F1F1'});
+			$("#card2").css({'background-color': '#F1F1F1'});
+			$("#card3").css({'background-color': '#F1F1F1'});
+			$("#card4").css({'background-color': '#F1F1F1'});
+			$(".squareMainCard").css({'background-color': '#F1F1F1'});
 		}
 
 		//Function that displays the humanplayers card values, takes an array as parameter.
