@@ -116,6 +116,10 @@ public abstract class PlayerAbstract {
 		this.currentDeck = inputDeck;
 	}
 	
+	public void resetDeck() {
+		currentDeck = new ArrayList<Card>();
+	}
+	
 	
 	
 //	public static void main(String[] args) {
