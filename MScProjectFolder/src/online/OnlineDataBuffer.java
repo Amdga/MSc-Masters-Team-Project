@@ -58,7 +58,7 @@ public class OnlineDataBuffer implements ViewInterface{
 		try {
 			String jsonOutput = oWriter.writeValueAsString(this);
 			//DEBUG LINE#########################################################
-			System.out.println(jsonOutput);
+//			System.out.println(jsonOutput);
 			if(willReset) {
 				resetValues();
 				}

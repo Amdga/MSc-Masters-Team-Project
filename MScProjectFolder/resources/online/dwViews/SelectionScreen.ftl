@@ -72,7 +72,7 @@
 			font-size: 20px;
 			font-family: arial, serif;
 			text-align: left;
-			white-space: nowrap;
+			/* white-space: nowrap; */
 			padding: 7px 10px;
 			margin-bottom: 10px;
 		}
