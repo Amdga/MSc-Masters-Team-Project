@@ -134,7 +134,7 @@
 					<div class="col-sm-12">
 						<div class="text-center">
 							<p>
-							<div class="textAI">Number of AI players:</div>
+							<div class="textAI">Select number of AI players to play against:</div>
 							</p>
 						</div>
 					</div>
