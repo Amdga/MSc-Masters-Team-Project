@@ -259,7 +259,11 @@ public abstract class GameplayControllerAbstract {
 	 * Takes the deck and deals it out one by one to each player in the game
 	 */
 	public void dealOutDeck() {
-
+		
+		for(PlayerAbstract player: players) {
+			player.resetDeck();
+		}
+		
 		int card_counter = 0;
 		for(Card c : cardsInDeck) {
 			//The modulus of the number of players in the game gives an index between 0 and the number of players
