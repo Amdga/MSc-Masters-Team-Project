@@ -29,7 +29,7 @@
 		} */
 
 		div.gallery {
-			/* display: none; */
+			display: none;
 			margin: 5px;
 			border: 1px solid #ccc;
 			float: left;
@@ -111,6 +111,7 @@
 
 		.modalButton {
 			margin: 5px;
+			
 			background-color: #FF7C30;
 			-webkit-transition-duration: 0.4s;
 			/* Safari */
@@ -150,12 +151,14 @@
 			background-color: rgba(0, 0, 0, 0.4);
 			/* Black w/ opacity */
 			border-radius: 8px;
+			text-align: center;
 		}
+
 		div.buttonAI{
 			display:none;
 			width: 100px;
 			height: 70px;
-			margin: 5px;
+			/* margin: 5px; */
 			border: none;
 			background-color: #ff7c30;
 			border-radius: 8px;
@@ -166,9 +169,29 @@
 			font-family: arial,serif;
 			cursor: pointer;
 			float: left;
+			
+			
+			margin: 5px;
+			background-color: #FF7C30;
+			-webkit-transition-duration: 0.4s;
+			/* Safari */
+			transition-duration: 0.4s;
+			/* font-size: 20px; */
+			/* font-family: arial, serif; */
+			/* font-size: 20px; */
+			/* font-color: white; */
+			cursor: pointer;
+			/* width: 15%; */
+			/* padding: 20px; */
+			/* border-radius: 8px; */
+			box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 		}
+		
 		div.buttonAI:hover{
-			background-color: #f25900;
+			background-color: #F25900;
+
+			font-color: white;
+			box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 
 		}
 
@@ -221,7 +244,7 @@
 		} */
 
 		div.btn-group button:hover {
-			background-color: #f25900;
+			background-color: #f25900 !important;
 		}
 
 		div.textSquare {
@@ -302,6 +325,15 @@
 			color: red;
 		}
 
+		#squareMainCard btn-group button:disabled, #Speedbtn:disabled, #Cargobtn:disabled, #Sizebtn:disabled, #Rangebtn:disabled, #Firepowerbtn:disabled {
+			/* background-color: rgb(102, 102, 102); */
+			cursor: default !important;
+		}
+
+		#squareMainCard btn-group button:disabled:hover,  #Speedbtn:disabled:hover, #Cargobtn:disabled:hover, #Sizebtn:disabled:hover, #Rangebtn:disabled:hover, #Firepowerbtn:disabled:hover {
+			 background-color: rgb(102, 102, 102) !important;/* #FF7C30 !important;*/
+		}
+
 	</style>
 
 </head>
@@ -332,6 +364,12 @@
 
 						<button class="modalButton" id="playButton" onclick= showButtons();>PLAY</button>
 						<button class="modalButton" id="goBack3" onclick=quitGame();>MENU</button>
+						
+						 <center><div class="buttonAI" onclick = chosenNumberOfPlayers(1);>1</div>
+    <div class="buttonAI" onclick = chosenNumberOfPlayers(2);>2</div>
+    <div class="buttonAI" onclick = chosenNumberOfPlayers(3);>3</div>
+    <div class="buttonAI" onclick = chosenNumberOfPlayers(4);>4</div></center>
+
 
 					</div>
 					</span>
@@ -351,26 +389,22 @@
 
 					<h1 id="txtWinner">Welcome to Top Trumps</h1>
 
-					<p> </p>
+					
 					<div class="row" style="display:block;align:center">
 
 						<button class="modalButton" id="playButton" onclick = initializeGame();>PLAY</button>
 						<button class="modalButton" id="goBack3" onclick=goBack();>MENU</button>
-						<div class="col-sm-10">
-    <center><div class="buttonAI" id="AI1" onclick = chosenNumberOfPlayers(1);>1</div>
-    <div class="buttonAI" id="AI2" onclick = chosenNumberOfPlayers(2);>2</div>
-    <div class="buttonAI" id="AI3" onclick = chosenNumberOfPlayers(3);>3</div>
-    <div class="buttonAI" id="AI4" onclick = chosenNumberOfPlayers(4);>4</div></center>
-</div>
+						
+   
 
 					</div>
-					</span>
+					</div>	
 
 
 				</div>
 
 
-			</div>
+		
 
 
 
@@ -389,7 +423,7 @@
 						<button class="modalButton" id="goBack3" onclick=goBack();>MENU</button>
 
 					</div>
-					</span>
+				
 
 
 				</div>
@@ -497,7 +531,7 @@
 
 
 						<div class="col-sm-9">
-							<div class="squareMainCard">
+							<div class="squareMainCard" id="squareMainCard">
 								<img src="#" id="img5" alt="Player 0" style="width:247px;height:145px;padding:5px">
 								<div class="desc" id="name5"> Description</div>
 								<div class="btn-group">
@@ -556,7 +590,7 @@
 		function initializeGame() {
 
 			$(".modal").hide();
-			newGame();
+			// newGame();
 			initialiseGame();
 			$('.btn-group').find('button').prop('disabled', true);
 		}
@@ -608,6 +642,8 @@
 		function testResponse(jsonAsString) {
 			if (jsonAsString == "state error") {
 				$('#txtStatus6').html("You can't do that right now!");
+			} else if (jsonAsString == null){
+				//do nothing
 			} else {
 				var response = JSON.parse(jsonAsString);
 			
@@ -663,7 +699,7 @@
 				$('#txtTurn2').html('Your Turn Ended');
 				if (response.winning_player == 0) {
 					$("#txtWin3").html("You won!");
-					$(".squareMainCard").css({'background-color': 'rgb(141, 205, 240)'});
+					$("#squareMainCard").css({'background-color': 'rgb(141, 205, 240)'});
 				} else {
 					$("#txtWin3").html("Player " + response.winning_player + " won");
 					$("#card" + response.winning_player).css({'background-color': 'rgb(141, 205, 240)'});
@@ -672,7 +708,7 @@
 				$("#txtWin3").html('It was a draw!');
 			}
 
-			if (response.card.valueMap != null) {
+			if (response.card != null) {
 				var cardArray = Object.values(response.card.valueMap);
 
 				setHumanCard(cardArray);
@@ -686,7 +722,7 @@
 					//$('.cardVal').hide();
 					$('#txtTurn2').html('You choose a category!');
 					$("#txtWin3").html("");
-					$(' .btn-group').find('button').prop('disabled', false);
+					$('.btn-group').find('button').prop('disabled', false);
 				} else {
 					$("#txtTurn2").html("Player " + response.current_player);
 				}
@@ -768,11 +804,12 @@
 
 		function resetHighlightedElements() {
 			$("div.btn-group button").css({"background-color": "#ff7c30"});
+			// $("div.btn-group button:disabled").css({"background-color": "rgb(102, 102, 102)"});
 			$("#card1").css({'background-color': '#F1F1F1'});
 			$("#card2").css({'background-color': '#F1F1F1'});
 			$("#card3").css({'background-color': '#F1F1F1'});
 			$("#card4").css({'background-color': '#F1F1F1'});
-			$(".squareMainCard").css({'background-color': '#F1F1F1'});
+			$("#squareMainCard").css({'background-color': '#F1F1F1'});
 		}
 
 		//Function that displays the humanplayers card values, takes an array as parameter.
@@ -785,8 +822,8 @@
 		
 		
 		function showButtons() {
-			$(".buttonAI").show()
-			$(".textAI").show()
+			$(".buttonAI").show();
+	
 			
 			}
 
@@ -801,14 +838,14 @@
 		}
 
 
-		function newGame() {
-			var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/newGame");
-			xhr.send();
+		// function newGame() {
+		// 	var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/newGame");
+		// 	xhr.send();
 
-			xhr.onload = function (e) {
-				testResponse(xhr.response);
-			}
-		}
+		// 	xhr.onload = function (e) {
+		// 		testResponse(xhr.response);
+		// 	}
+		// }
 
 		function initialiseGame() {
 			var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/initialiseGameplay");
@@ -857,6 +894,7 @@
 		}
 		
 			function chosenNumberOfPlayers(number) {
+			
 			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/chosenNumberOfPlayers?number=" + number);
 			xhr.onload = function (e) {
 				window.location = "http://localhost:7777/toptrumps/game";

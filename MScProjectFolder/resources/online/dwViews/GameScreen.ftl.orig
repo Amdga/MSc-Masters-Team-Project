@@ -29,7 +29,7 @@
 		} */
 
 		div.gallery {
-			/* display: none; */
+			display: none;
 			margin: 5px;
 			border: 1px solid #ccc;
 			float: left;
@@ -111,6 +111,7 @@
 
 		.modalButton {
 			margin: 5px;
+			
 			background-color: #FF7C30;
 			-webkit-transition-duration: 0.4s;
 			/* Safari */
@@ -150,9 +151,31 @@
 			background-color: rgba(0, 0, 0, 0.4);
 			/* Black w/ opacity */
 			border-radius: 8px;
+			text-align: center;
 		}
 		div.buttonAI{
-	display:none;
+<<<<<<< HEAD
+			display:none;
+			width: 100px;
+			height: 70px;
+			margin: 5px;
+			border: none;
+			background-color: #ff7c30;
+			border-radius: 8px;
+			color: white;
+			padding: 15px 25px;
+			text-align: center;
+			font-size: 30px;
+			font-family: arial,serif;
+			cursor: pointer;
+			float: left;
+		}
+		div.buttonAI:hover{
+			background-color: #f25900;
+
+		}
+=======
+		display:none;
   width: 100px;
   height: 70px;
   margin: 5px;
@@ -166,11 +189,31 @@
   font-family: arial,serif;
   cursor: pointer;
   float: left;
+		
+		
+  		margin: 5px;
+			background-color: #FF7C30;
+			-webkit-transition-duration: 0.4s;
+			/* Safari */
+			transition-duration: 0.4s;
+			font-size: 20px;
+			font-family: arial, serif;
+			font-size: 20px;
+			font-color: white;
+			cursor: pointer;
+			width: 15%;
+			padding: 20px;
+			border-radius: 8px;
+			box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 div.buttonAI:hover{
-   background-color: #f25900;
+   background-color: #F25900;
+
+			font-color: white;
+			box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 
 }
+>>>>>>> origin/hanna
 
 		/* Modal Content/Box */
 		.modal-content {
@@ -234,11 +277,11 @@ div.buttonAI:hover{
 
 		.cardPile {
 			background: #f1f1f1;
-			height: 250px;
+			height: 200px;
 			width: 150px;
 			font-style: arial, serif;
 			font-size: 15px;
-			text-align: left;
+			text-align: center;
 			border-radius: 8px;
 			border-width: 1px;
 			border-style: solid;
@@ -289,6 +332,11 @@ div.buttonAI:hover{
 			min-width: 160px;
 		}
 
+		p span.cardVal {
+			font-size: 34px;
+			text-align: center;
+		}
+
 		.buttonNext:hover {
 			background: #f25900;
 		}
@@ -302,11 +350,7 @@ div.buttonAI:hover{
 </head>
 
 <body onload="initialize()">
-<<<<<<< HEAD
 	<!-- Call the initialize method when the page loads -->
-=======
-	<!-- Call the initalize method when the page loads -->
->>>>>>> origin/hanna
 
 
 	<div class="container-fluid">
@@ -331,6 +375,12 @@ div.buttonAI:hover{
 
 						<button class="modalButton" id="playButton" onclick= showButtons();>PLAY</button>
 						<button class="modalButton" id="goBack3" onclick=quitGame();>MENU</button>
+						
+						 <center><div class="buttonAI" onclick = chosenNumberOfPlayers(1);>1</div>
+    <div class="buttonAI" onclick = chosenNumberOfPlayers(2);>2</div>
+    <div class="buttonAI" onclick = chosenNumberOfPlayers(3);>3</div>
+    <div class="buttonAI" onclick = chosenNumberOfPlayers(4);>4</div></center>
+
 
 					</div>
 					</span>
@@ -350,26 +400,22 @@ div.buttonAI:hover{
 
 					<h1 id="txtWinner">Welcome to Top Trumps</h1>
 
-					<p> </p>
+					
 					<div class="row" style="display:block;align:center">
 
 						<button class="modalButton" id="playButton" onclick = initializeGame();>PLAY</button>
 						<button class="modalButton" id="goBack3" onclick=goBack();>MENU</button>
-						<div class="col-sm-10">
-    <center><div class="buttonAI" id="AI1" onclick = chosenNumberOfPlayers(1);>1</div>
-    <div class="buttonAI" id="AI2" onclick = chosenNumberOfPlayers(2);>2</div>
-    <div class="buttonAI" id="AI3" onclick = chosenNumberOfPlayers(3);>3</div>
-    <div class="buttonAI" id="AI4" onclick = chosenNumberOfPlayers(4);>4</div></center>
-</div>
+						
+   
 
 					</div>
-					</span>
+					</div>	
 
 
 				</div>
 
 
-			</div>
+		
 
 
 
@@ -379,7 +425,7 @@ div.buttonAI:hover{
 				<!-- Modal content -->
 				<div class="modal-content">
 
-					<h1 id="txtWinner">Your out!</h1>
+					<h1 id="txtWinner">You're out! LOSER!</h1>
 
 					<p> </p>
 					<div class="row" style="display:block;align:center">
@@ -388,7 +434,7 @@ div.buttonAI:hover{
 						<button class="modalButton" id="goBack3" onclick=goBack();>MENU</button>
 
 					</div>
-					</span>
+				
 
 
 				</div>
@@ -402,23 +448,19 @@ div.buttonAI:hover{
 				</div>
 
 				<div class="col-sm-9" style="width:80%">
+
 					<div class="gallery" id="card1">
 						<div class="label" style="padding-left:5px;padding-right: 5px">
 							<p style="text-align:left;" id="p1"> Player 1
 								<span class="deckVal" style="float:right;color: #f25900" id="p1deck"> <b> # </b> </span>
 						</div>
 						</span>
-						<a href="">
+						
 							<img src="#" id="img1" alt="Player 1" style="width:177px;height:110px;">
-						</a>
-
-
-
-
-
+						
 						<div class="desc">
 							<p> <span id="name1">Name of card </span>
-								<br> <span class="cardVal" id="cat1" style="font-size:34px"> </span> </p>
+								<br> <span class="cardVal" id="cat1"> # </span> </p>
 						</div>
 					</div>
 
@@ -429,12 +471,12 @@ div.buttonAI:hover{
 								<span class="deckVal" style="float:right;color: #f25900" id="p2deck"> <b> </b> </span>
 						</div>
 						</span>
-						<a href="">
+						
 							<img src="#" id="img2" alt="Player 2" style="width:177px;height:110px;">
-						</a>
+						
 						<div class="desc">
 							<p> <span id="name2">Name of card </span>
-								<br> <span class="cardVal" id="cat2" style="font-size:34px"> </span> </p>
+								<br> <span class="cardVal" id="cat2"> # </span> </p>
 						</div>
 					</div>
 
@@ -444,12 +486,12 @@ div.buttonAI:hover{
 								<span class="deckVal" style="float:right;color: #f25900" id="p3deck"> <b> # </b> </span>
 						</div>
 						</span>
-						<a href="">
+						
 							<img src="#" id="img3" alt="Player 3" style="width:177px;height:110px;">
-						</a>
+						
 						<div class="desc">
 							<p> <span id="name3">Name of card </span>
-								<br> <span class="cardVal" id="cat3" style="font-size:34px"> </span> </p>
+								<br> <span class="cardVal" id="cat3"> # </span> </p>
 						</div>
 					</div>
 
@@ -459,12 +501,12 @@ div.buttonAI:hover{
 								<span class="deckVal" style="float:right;color: #f25900" id="p4deck"> <b> # </b> </span>
 						</div>
 						</span>
-						<a id=image4 href="#">
+						
 							<img src="" id="img4" alt="Player 4" style="width:177px;height:110px;">
-						</a>
+						
 						<div class="desc">
 							<p> <span id="name4">Name of card </span>
-								<br> <span class="cardVal" id="cat4" style="font-size:34px"> # </span> </p>
+								<br> <span class="cardVal" id="cat4"> # </span> </p>
 						</div>
 					</div>
 
@@ -525,13 +567,13 @@ div.buttonAI:hover{
 								<div class="cardPile">
 									<p id="commPile">
 										<h5>
-											<center><b>Communal Pile</b></center>
+											<b>Communal Pile</b>
 										</h5>
 									</p><br>
 									<p>
-										<h1 id="commNum">
-											<center>#</center>
-										</h1>
+									<span class="cardVal"	id="commNum">
+											0
+									</span>
 									</p>
 								</div>
 							</div>
@@ -552,10 +594,7 @@ div.buttonAI:hover{
 		// Method that is called on page load
 
 		function initialize() {
-<<<<<<< HEAD
-=======
 			$(".modal").hide();
->>>>>>> origin/hanna
 			$("#startModal").show();
 		}
 
@@ -612,7 +651,11 @@ div.buttonAI:hover{
 
 		//Function that goes through the testresponse object and display whats not null to the screen.
 		function testResponse(jsonAsString) {
-			var response = JSON.parse(jsonAsString);
+			if (jsonAsString == "state error") {
+				$('#txtStatus6').html("You can't do that right now!");
+			} else {
+				var response = JSON.parse(jsonAsString);
+			
 			//if (jsonAsString === "state error") {
 			//	alert("Function cant be used in this state");
 			//	}
@@ -635,12 +678,17 @@ div.buttonAI:hover{
 				if (response.round == 1) {
 					initialPlayerDecksize(response);
 				}
-				resetStatButtonColour();
+				resetHighlightedElements();
 				$('#txtStatus6').html("");
 			}
 
 			if (response.communal_pile_size != null) {
 				$("#commNum").html(response.communal_pile_size);
+				if (response.communal_pile_size == 0) {
+					$('.cardPile').css({'box-shadow':'none'})
+				} else {
+					$('.cardPile').css({'box-shadow': '0 -1px 2px rgba(0, 0, 0, 0.15), 0 -10px 0 -5px #eee, 0 -10px 2px -4px rgba(0, 0, 0, 0.15), 0 -20px 0 -10px #eee, 0 -20px 2px -9px rgba(0, 0, 0, 0.15)'});
+				}
 			}
 
 			if (response.category != null) {
@@ -658,11 +706,13 @@ div.buttonAI:hover{
 
 			if (response.winning_player != null) {
 				$('#txtTurn2').html('Your Turn Ended');
-					if (response.winning_player == 0) {
-						$("#txtWin3").html("You won!");
-					} else {
-						$("#txtWin3").html("Player " + response.winning_player + " won");
-					}
+				if (response.winning_player == 0) {
+					$("#txtWin3").html("You won!");
+					$(".squareMainCard").css({'background-color': 'rgb(141, 205, 240)'});
+				} else {
+					$("#txtWin3").html("Player " + response.winning_player + " won");
+					$("#card" + response.winning_player).css({'background-color': 'rgb(141, 205, 240)'});
+				}
 			} else {
 				$("#txtWin3").html('It was a draw!');
 			}
@@ -675,10 +725,6 @@ div.buttonAI:hover{
 				$("#name5").html(response.card.cardName);
 				$("#img5").attr("src", "/assets/card_images/" + response.card.cardName + ".jpg");
 			}
-<<<<<<< HEAD
-=======
-	
->>>>>>> origin/hanna
 
 			if (response.current_player != null) {
 				if (response.current_player == 0) {
@@ -696,7 +742,7 @@ div.buttonAI:hover{
 					$("#modalOut").show();
 				}
 				$('#txtStatus6').html("Losing players this round: " + response.losing_players);
-				alert("player out decksizes length: " + response.playerDeckSizes.length);
+				// alert("player out decksizes length: " + response.playerDeckSizes.length);
 			} 
 	
 			if (response.playerDeckSizes != null && response.playerDeckSizes.length == 1) {
@@ -710,6 +756,7 @@ div.buttonAI:hover{
 			if (response.was_quit) {
 				windows.location = "http://localhost:7777/toptrumps/";
 			}
+		}
 		}
 
 		//Function that initially sets players deck of cards
@@ -764,8 +811,13 @@ div.buttonAI:hover{
 			}
 		}
 
-		function resetStatButtonColour() {
-			$("div.btn-group button").css({"background-color": "#ff7c30"})
+		function resetHighlightedElements() {
+			$("div.btn-group button").css({"background-color": "#ff7c30"});
+			$("#card1").css({'background-color': '#F1F1F1'});
+			$("#card2").css({'background-color': '#F1F1F1'});
+			$("#card3").css({'background-color': '#F1F1F1'});
+			$("#card4").css({'background-color': '#F1F1F1'});
+			$(".squareMainCard").css({'background-color': '#F1F1F1'});
 		}
 
 		//Function that displays the humanplayers card values, takes an array as parameter.
@@ -778,8 +830,8 @@ div.buttonAI:hover{
 		
 		
 		function showButtons() {
-			$(".buttonAI").show()
-			$(".textAI").show()
+			$(".buttonAI").show();
+	
 			
 			}
 
@@ -850,6 +902,7 @@ div.buttonAI:hover{
 		}
 		
 			function chosenNumberOfPlayers(number) {
+			
 			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/chosenNumberOfPlayers?number=" + number);
 			xhr.onload = function (e) {
 				window.location = "http://localhost:7777/toptrumps/game";
