@@ -1,4 +1,3 @@
-
 <html>
 
 <head>
@@ -23,18 +22,10 @@
 		body {
 			background-color: #12A5F4;
 		}
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/adrian
 		/* div {
 			border-style: dotted;
 			border-color: green;
 		} */
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/adrian
 		div.gallery {
 			display: none;
 			margin: 5px;
@@ -146,7 +137,6 @@
 			border-radius: 8px;
 			text-align: center;
 		}
-
 		div.buttonAI{
 			display:none;
 			width: 100px;
@@ -161,7 +151,7 @@
 			font-size: 30px;
 			font-family: arial,serif;
 			cursor: pointer;
-			float: left;
+			/* float: left; */
 			
 			
 			margin: 5px;
@@ -180,20 +170,22 @@
 			box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 		}
 		
+		div.textAI {
+			display:none;
+			color: black;
+			font-size: 15px;
+			font-family: arial, serif;
+			text-align: center;
+			white-space: nowrap;
+			padding: 7px 10px;
+			margin-bottom: 10px;
+		}
+		
 		div.buttonAI:hover{
 			background-color: #F25900;
-<<<<<<< HEAD
 			font-color: white;
 			box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 		}
-=======
-
-			font-color: white;
-			box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
-
-		}
-
->>>>>>> origin/adrian
 		/* Modal Content/Box */
 		.modal-content {
 			background-color: #F1F1F1;
@@ -232,24 +224,12 @@
 			color: white;
 			font-style: arial, serif;
 		}
-<<<<<<< HEAD
 		/* .btn-group button:not(:last-child) {
 			border-bottom: none;
 		} */
 		div.btn-group button:hover {
 			background-color: #f25900 !important;
 		}
-=======
-
-		/* .btn-group button:not(:last-child) {
-			border-bottom: none;
-		} */
-
-		div.btn-group button:hover {
-			background-color: #f25900 !important;
-		}
-
->>>>>>> origin/adrian
 		div.textSquare {
 			text-align: left;
 			padding-top: 2%;
@@ -310,10 +290,6 @@
 			right: 75px;
 			min-width: 160px;
 		}
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/adrian
 		p span.cardVal {
 			font-size: 34px;
 			text-align: center;
@@ -321,32 +297,16 @@
 		.buttonNext:hover {
 			background: #f25900;
 		}
-<<<<<<< HEAD
 		#txtStatus6 {
 			color: red;
 		}
-=======
-
-		#txtStatus6 {
-			color: red;
-		}
-
->>>>>>> origin/adrian
 		#squareMainCard btn-group button:disabled, #Speedbtn:disabled, #Cargobtn:disabled, #Sizebtn:disabled, #Rangebtn:disabled, #Firepowerbtn:disabled {
 			/* background-color: rgb(102, 102, 102); */
 			cursor: default !important;
 		}
-<<<<<<< HEAD
 		#squareMainCard btn-group button:disabled:hover,  #Speedbtn:disabled:hover, #Cargobtn:disabled:hover, #Sizebtn:disabled:hover, #Rangebtn:disabled:hover, #Firepowerbtn:disabled:hover {
 			 background-color: rgb(102, 102, 102) !important;/* #FF7C30 !important;*/
 		}
-=======
-
-		#squareMainCard btn-group button:disabled:hover,  #Speedbtn:disabled:hover, #Cargobtn:disabled:hover, #Sizebtn:disabled:hover, #Rangebtn:disabled:hover, #Firepowerbtn:disabled:hover {
-			 background-color: rgb(102, 102, 102) !important;/* #FF7C30 !important;*/
-		}
-
->>>>>>> origin/adrian
 	</style>
 
 </head>
@@ -371,17 +331,22 @@
 
 					<h1 id="txtWinner"></h1>
 
-					<p>Play another game with the same amount of AI players or return to Menu to view statistics and change AI
+					<p>Play another game or return to Menu to view statistics
 						players </p>
 					<div class="row" style="display:block;align:center">
-
-						<button class="modalButton" id="playButton" onclick= showButtons();>PLAY</button>
-						<button class="modalButton" id="goBack3" onclick=quitGame();>MENU</button>
-						
-						 <center><div class="buttonAI" onclick = chosenNumberOfPlayers(1);>1</div>
-    <div class="buttonAI" onclick = chosenNumberOfPlayers(2);>2</div>
-    <div class="buttonAI" onclick = chosenNumberOfPlayers(3);>3</div>
-    <div class="buttonAI" onclick = chosenNumberOfPlayers(4);>4</div></center>
+						<div class="row" style="display:block;">
+							<p>
+								<button class="modalButton" id="playButton" onclick= showButtons();>PLAY</button>
+								<button class="modalButton" id="goBack3" onclick=quitGame();>MENU</button>
+							</p>
+						</div>
+						<div class="row" style="display:block;">
+							<div class="textAI">Select number of AI players to play against:</div>
+							<div class="buttonAI" onclick = chosenNumberOfPlayers(1);>1</div>
+							<div class="buttonAI" onclick = chosenNumberOfPlayers(2);>2</div>
+							<div class="buttonAI" onclick = chosenNumberOfPlayers(3);>3</div>
+							<div class="buttonAI" onclick = chosenNumberOfPlayers(4);>4</div>
+						</div>
 
 
 					</div>
@@ -444,7 +409,7 @@
 
 			</div>
 
-			<div class="row">
+			<div class="row" id="content">
 				<div class="col-sm-1" style="width:20%">
 					<button class="goBackButton" id="goBack2" onclick=goBack();>Go <br> Back</button>
 				</div>
@@ -527,10 +492,10 @@
 									<span id="txtTurn2"> </span><br>
 
 									<span><b>Winner:</b></span>
-									<span id="txtWin3"> #####</span><br>
+									<span id="txtWin3"> </span><br>
 
 									<span><b>Round:</b></span>
-									<span id="txtRound4"> #####</span><br>
+									<span id="txtRound4"> </span><br>
 
 									<span><b>Cards in your deck:</b></span>
 									<span id="txtDeck5"></span><br>
@@ -598,7 +563,7 @@
 			$(".modal").hide();
 			// newGame();
 			initialiseGame();
-			$('.btn-group').find('button').prop('disabled', true);
+			
 		}
 		// This is a reusable method for creating a CORS request. Do not edit this.
 		function createCORSRequest(method, url) {
@@ -640,6 +605,7 @@
 			//	alert("Function cant be used in this state");
 			//	}
 			$('.gallery').hide();
+			$('.btn-group').find('button').prop('disabled', true);
 			
 			if (response.overall_winner != null) {
 				
@@ -650,10 +616,6 @@
 			}
 				
 			
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/adrian
 			// done at the start of every request, since round number is never 0
 			if (response.round != null) {
 				$("#txtRound4").html(response.round);
@@ -678,10 +640,6 @@
 			if (response.decksize !== null) {
 				$("#txtDeck5").html(response.decksize);
 			}
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/adrian
 			if (response.player_values != null) {
 				setPlayersValues(response);
 			}
@@ -697,20 +655,12 @@
 			} else {
 				$("#txtWin3").html('It was a draw!');
 			}
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/adrian
 			if (response.card != null) {
 				var cardArray = Object.values(response.card.valueMap);
 				setHumanCard(cardArray);
 				$("#name5").html(response.card.cardName);
 				$("#img5").attr("src", "/assets/card_images/" + response.card.cardName + ".jpg");
 			}
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/adrian
 			if (response.current_player != null) {
 				if (response.current_player == 0) {
 					//$('.cardVal').hide();
@@ -721,10 +671,6 @@
 					$("#txtTurn2").html("Player " + response.current_player);
 				}
 			}
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/adrian
 			if (response.losing_players != null) {
 				if (response.losing_players.indexOf(0) != -1){
 					$("#modalOut").show();
@@ -734,29 +680,15 @@
 			} 
 	
 			if (response.playerDeckSizes != null && response.playerDeckSizes.length == 1) {
-<<<<<<< HEAD
 				$("#popup").show();
 				var winner = (response.overall_winner == 0) ? "You " : "Player " + response.overall_winner;
 				$("#txtWinner").html(winner + " won the game!");
 			}
-=======
-
-				$("#popup").show();
-				var winner = (response.overall_winner == 0) ? "You " : "Player " + response.overall_winner;
-
-				$("#txtWinner").html(winner + " won the game!");
-			}
-
->>>>>>> origin/adrian
 			if (response.was_quit) {
 				windows.location = "http://localhost:7777/toptrumps/";
 			}
 		}
 		}
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/adrian
 		//Function that initially sets players deck of cards
 		function initialPlayerDecksize(response) {
 			if (response.player_values != null) {
@@ -776,10 +708,6 @@
 		function setPlayersValues(response) {
 			var array = response.playerCardNames;
 			array.sort();
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/adrian
 			// set player deck size values to 0
 			for (var i = 0; i < 5; i++) {
 				if (i == 0) {
@@ -788,10 +716,6 @@
 					$("#p" + i + "deck").html("0");
 				}
 			}
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/adrian
 			// set updated player deck sizes for end of round
 			for (var i=0; i < response.playerDeckSizes.length; i++) {
 				var player = response.playerDeckSizes[i][0];
@@ -801,10 +725,6 @@
 					$("#p" + player + "deck").html(response.playerDeckSizes[i][1]);
 				}
 			}
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/adrian
 			// set player round information for round which was just played
 			for (var i = 0; i < response.player_values.length; i++) {
 				var value = response.player_values[i][0];
@@ -814,10 +734,6 @@
 				$("#name" + array[i][0]).html(array[i][1]);
 			}
 		}
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/adrian
 		function resetHighlightedElements() {
 			$("div.btn-group button").css({"background-color": "#ff7c30"});
 			// $("div.btn-group button:disabled").css({"background-color": "rgb(102, 102, 102)"});
@@ -827,10 +743,6 @@
 			$("#card4").css({'background-color': '#F1F1F1'});
 			$("#squareMainCard").css({'background-color': '#F1F1F1'});
 		}
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/adrian
 		//Function that displays the humanplayers card values, takes an array as parameter.
 		function setHumanCard(array) {
 			for (var i = 0; i < array.length; i++) {
@@ -841,9 +753,8 @@
 		
 		
 		function showButtons() {
-			$(".buttonAI").show();
-	
-			
+			$(".buttonAI").css({"display" : "inline", "text-align" : "center"});
+			$(".textAI").show();
 			}
 		function quitGame() {
 			$("#popup").hide();
@@ -853,26 +764,13 @@
 		function goBack() {
 			window.location = "http://localhost:7777/toptrumps/";
 		}
-<<<<<<< HEAD
 		// function newGame() {
 		// 	var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/newGame");
 		// 	xhr.send();
-=======
-
-
-		// function newGame() {
-		// 	var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/newGame");
-		// 	xhr.send();
-
->>>>>>> origin/adrian
 		// 	xhr.onload = function (e) {
 		// 		testResponse(xhr.response);
 		// 	}
 		// }
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/adrian
 		function initialiseGame() {
 			var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/initialiseGameplay");
 			xhr.send();
