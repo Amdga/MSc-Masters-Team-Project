@@ -884,11 +884,15 @@
 			var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/startARound");
 			xhr.send();
 			xhr.onload = function (e) {
-				var result = JSON.parse(xhr.response);
-				if (result.state == "round ended" && (result.losing_players == null || skipLosingPlayers)) {
-					fastforward(skipLosingPlayers);
-				} else {
+				if (xhr.response == "state error"){
 					testResponse(xhr.response);
+				} else {
+					var result = JSON.parse(xhr.response);
+					if (result.state == "round ended" && (result.losing_players == null || skipLosingPlayers)) {
+						fastforward(skipLosingPlayers);
+					} else {
+						testResponse(xhr.response);
+					}
 				}
 			}
 		}
