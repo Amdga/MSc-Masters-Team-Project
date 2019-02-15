@@ -724,6 +724,7 @@
 			if (response.current_player != null) {
 				if (response.current_player == 0) {
 					//$('.cardVal').hide();
+					$('#txtCat1').text("");
 					$('#txtTurn2').html('You choose a category!');
 					$("#txtWin3").html("");
 					$('.btn-group').find('button').prop('disabled', false);
