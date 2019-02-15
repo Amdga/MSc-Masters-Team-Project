@@ -26,7 +26,7 @@
 
 
 		div.gallery {
-			/* display: none; */
+			display: none;
 			margin: 5px;
 			border: 1px solid #ccc;
 			float: left;
@@ -100,6 +100,7 @@
 
 		.modalButton {
 			margin: 5px;
+			
 			background-color: #FF7C30;
 			-webkit-transition-duration: 0.4s;
 			/* Safari */
@@ -139,9 +140,10 @@
 			background-color: rgba(0, 0, 0, 0.4);
 			/* Black w/ opacity */
 			border-radius: 8px;
+			text-align: center;
 		}
 		div.buttonAI{
-	display:none;
+		display:none;
   width: 100px;
   height: 70px;
   margin: 5px;
@@ -155,9 +157,28 @@
   font-family: arial,serif;
   cursor: pointer;
   float: left;
+		
+		
+  		margin: 5px;
+			background-color: #FF7C30;
+			-webkit-transition-duration: 0.4s;
+			/* Safari */
+			transition-duration: 0.4s;
+			font-size: 20px;
+			font-family: arial, serif;
+			font-size: 20px;
+			font-color: white;
+			cursor: pointer;
+			width: 15%;
+			padding: 20px;
+			border-radius: 8px;
+			box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 div.buttonAI:hover{
-   background-color: #f25900;
+   background-color: #F25900;
+
+			font-color: white;
+			box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 
 }
 
@@ -309,6 +330,12 @@ div.buttonAI:hover{
 
 						<button class="modalButton" id="playButton" onclick= showButtons();>PLAY</button>
 						<button class="modalButton" id="goBack3" onclick=quitGame();>MENU</button>
+						
+						 <center><div class="buttonAI" onclick = chosenNumberOfPlayers(1);>1</div>
+    <div class="buttonAI" onclick = chosenNumberOfPlayers(2);>2</div>
+    <div class="buttonAI" onclick = chosenNumberOfPlayers(3);>3</div>
+    <div class="buttonAI" onclick = chosenNumberOfPlayers(4);>4</div></center>
+
 
 					</div>
 					</span>
@@ -328,26 +355,22 @@ div.buttonAI:hover{
 
 					<h1 id="txtWinner">Welcome to Top Trumps</h1>
 
-					<p> </p>
+					
 					<div class="row" style="display:block;align:center">
 
 						<button class="modalButton" id="playButton" onclick = initializeGame();>PLAY</button>
 						<button class="modalButton" id="goBack3" onclick=goBack();>MENU</button>
-						<div class="col-sm-10">
-    <center><div class="buttonAI" id="AI1" onclick = chosenNumberOfPlayers(1);>1</div>
-    <div class="buttonAI" id="AI2" onclick = chosenNumberOfPlayers(2);>2</div>
-    <div class="buttonAI" id="AI3" onclick = chosenNumberOfPlayers(3);>3</div>
-    <div class="buttonAI" id="AI4" onclick = chosenNumberOfPlayers(4);>4</div></center>
-</div>
+						
+   
 
 					</div>
-					</span>
+					</div>	
 
 
 				</div>
 
 
-			</div>
+		
 
 
 
@@ -366,7 +389,7 @@ div.buttonAI:hover{
 						<button class="modalButton" id="goBack3" onclick=goBack();>MENU</button>
 
 					</div>
-					</span>
+				
 
 
 				</div>
@@ -719,8 +742,8 @@ div.buttonAI:hover{
 		
 		
 		function showButtons() {
-			$(".buttonAI").show()
-			$(".textAI").show()
+			$(".buttonAI").show();
+	
 			
 			}
 
@@ -791,6 +814,7 @@ div.buttonAI:hover{
 		}
 		
 			function chosenNumberOfPlayers(number) {
+			
 			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/chosenNumberOfPlayers?number=" + number);
 			xhr.onload = function (e) {
 				window.location = "http://localhost:7777/toptrumps/game";
