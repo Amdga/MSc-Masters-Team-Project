@@ -1,3 +1,4 @@
+
 <html>
 
 <head>
@@ -22,9 +23,10 @@
 		body {
 			background-color: #12A5F4;
 		}
-
-
-
+		/* div {
+			border-style: dotted;
+			border-color: green;
+		} */
 		div.gallery {
 			display: none;
 			margin: 5px;
@@ -37,35 +39,36 @@
 			border-color: black;
 			box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 		}
-
 		.label {
 			font-style: arial, serif;
 			font-size: 15px;
-			width: 100% border-radius: 8px;
+			width: 100%;
+			border-radius: 8px;
 			margin: 4px;
-
 		}
-
 		div.gallery:hover {
 			border: 1px solid #777;
 			box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 		}
-
 		div.gallery img {
 			padding: 5px;
 			width: 100%;
 			height: auto;
 			border-color: black;
+			border-radius: 10px;
 		}
-
+		
+		.squareMainCard img {
+			border-radius: 15px;
+		}
 		div.desc {
-
 			text-align: center;
 			font-family: arial, serif;
 			font-size: 15px
 		}
-
 		.goBackButton {
+			max-width: 65px;
+			min-width: 65px;
 			margin: 5px;
 			background-color: #FF7C30;
 			-webkit-transition-duration: 0.4s;
@@ -80,13 +83,11 @@
 			border-radius: 8px;
 			box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 		}
-
 		.goBackButton:hover {
 			background-color: #F25900;
 			font-color: white;
 			box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 		}
-
 		div.rectangleBackGround {
 			height: 250px;
 			width: 200px;
@@ -97,7 +98,6 @@
 			left: 1%;
 			bottom: 10px;
 		}
-
 		.modalButton {
 			margin: 5px;
 			
@@ -115,16 +115,12 @@
 			border-radius: 8px;
 			box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 		}
-
 		.modalButton:hover {
 			background-color: #F25900;
-
 			font-color: white;
 			box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 		}
-
 		.modal {
-
 			position: fixed;
 			/* Stay in place */
 			z-index: 1;
@@ -143,45 +139,43 @@
 			text-align: center;
 		}
 		div.buttonAI{
-		display:none;
-  width: 100px;
-  height: 70px;
-  margin: 5px;
-  border: none;
-  background-color: #ff7c30;
-  border-radius: 8px;
-  color: white;
-  padding: 15px 25px;
-  text-align: center;
-  font-size: 30px;
-  font-family: arial,serif;
-  cursor: pointer;
-  float: left;
-		
-		
-  		margin: 5px;
+			display:none;
+			width: 100px;
+			height: 70px;
+			/* margin: 5px; */
+			border: none;
+			background-color: #ff7c30;
+			border-radius: 8px;
+			color: white;
+			padding: 15px 25px;
+			text-align: center;
+			font-size: 30px;
+			font-family: arial,serif;
+			cursor: pointer;
+			float: left;
+			
+			
+			margin: 5px;
 			background-color: #FF7C30;
 			-webkit-transition-duration: 0.4s;
 			/* Safari */
 			transition-duration: 0.4s;
-			font-size: 20px;
-			font-family: arial, serif;
-			font-size: 20px;
-			font-color: white;
+			/* font-size: 20px; */
+			/* font-family: arial, serif; */
+			/* font-size: 20px; */
+			/* font-color: white; */
 			cursor: pointer;
-			width: 15%;
-			padding: 20px;
-			border-radius: 8px;
+			/* width: 15%; */
+			/* padding: 20px; */
+			/* border-radius: 8px; */
 			box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-div.buttonAI:hover{
-   background-color: #F25900;
-
+		}
+		
+		div.buttonAI:hover{
+			background-color: #F25900;
 			font-color: white;
 			box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
-
-}
-
+		}
 		/* Modal Content/Box */
 		.modal-content {
 			background-color: #F1F1F1;
@@ -194,7 +188,6 @@ div.buttonAI:hover{
 			text-align: center;
 			font-size: 20px;
 		}
-
 		div.squareMainCard {
 			height: 370px;
 			width: 250px;
@@ -206,10 +199,7 @@ div.buttonAI:hover{
 			background: #f1f1f1;
 			bottom: 25px;
 			left: 50%;
-
-
 		}
-
 		div.btn-group button {
 			width: 230px;
 			height: 35px;
@@ -220,20 +210,16 @@ div.buttonAI:hover{
 			display: block;
 			cursor: pointer;
 			text-align: center;
-			background-color: #ff7c30;
+			background-color: #FF7C30;
 			color: white;
 			font-style: arial, serif;
-
 		}
-
-		.btn-group button:not(:last-child) {
+		/* .btn-group button:not(:last-child) {
 			border-bottom: none;
+		} */
+		div.btn-group button:hover {
+			background-color: #f25900 !important;
 		}
-
-		.btn-group button:hover {
-			background-color: #f25900;
-		}
-
 		div.textSquare {
 			text-align: left;
 			padding-top: 2%;
@@ -241,14 +227,13 @@ div.buttonAI:hover{
 			font: arial, serif;
 			font-size: 25px;
 		}
-
 		.cardPile {
 			background: #f1f1f1;
-			height: 250px;
+			height: 200px;
 			width: 150px;
 			font-style: arial, serif;
 			font-size: 15px;
-			text-align: left;
+			text-align: center;
 			border-radius: 8px;
 			border-width: 1px;
 			border-style: solid;
@@ -264,7 +249,6 @@ div.buttonAI:hover{
 				0 -20px 2px -9px rgba(0, 0, 0, 0.15);
 			padding: 30px;
 		}
-
 		.buttonForward {
 			background: #ff7c30;
 			border-radius: 8px;
@@ -274,15 +258,14 @@ div.buttonAI:hover{
 			padding: 10px 15px;
 			color: white;
 			text-align: center;
-			bottom: 120px;
+			bottom: 40px;
 			position: fixed;
-			right: 200px
+			right: 75px;
+			min-width: 160px;
 		}
-
 		.buttonForward:hover {
 			background: #f25900;
 		}
-
 		.buttonNext {
 			background: #ff7c30;
 			border-radius: 8px;
@@ -294,21 +277,35 @@ div.buttonAI:hover{
 			text-align: center;
 			bottom: 120px;
 			position: fixed;
-			right: 360px
+			right: 75px;
+			min-width: 160px;
 		}
-
+		p span.cardVal {
+			font-size: 34px;
+			text-align: center;
+		}
 		.buttonNext:hover {
 			background: #f25900;
+		}
+		#txtStatus6 {
+			color: red;
+		}
+		#squareMainCard btn-group button:disabled, #Speedbtn:disabled, #Cargobtn:disabled, #Sizebtn:disabled, #Rangebtn:disabled, #Firepowerbtn:disabled {
+			/* background-color: rgb(102, 102, 102); */
+			cursor: default !important;
+		}
+		#squareMainCard btn-group button:disabled:hover,  #Speedbtn:disabled:hover, #Cargobtn:disabled:hover, #Sizebtn:disabled:hover, #Rangebtn:disabled:hover, #Firepowerbtn:disabled:hover {
+			 background-color: rgb(102, 102, 102) !important;/* #FF7C30 !important;*/
 		}
 	</style>
 
 </head>
 
 <body onload="initialize()">
-	<!-- Call the initalize method when the page loads -->
+	<!-- Call the initialize method when the page loads -->
 
 
-	<div class="container">
+	<div class="container-fluid">
 		<div class="container-fluid">
 
 
@@ -380,7 +377,7 @@ div.buttonAI:hover{
 				<!-- Modal content -->
 				<div class="modal-content">
 
-					<h1 id="txtWinner">Your out!</h1>
+					<h1 id="txtWinner">You're out! LOSER!</h1>
 
 					<p> </p>
 					<div class="row" style="display:block;align:center">
@@ -399,27 +396,23 @@ div.buttonAI:hover{
 
 			<div class="row">
 				<div class="col-sm-1" style="width:20%">
-					<button class="goBackButton" id="goBack2" onclick=goBack();>Go Back</button>
+					<button class="goBackButton" id="goBack2" onclick=goBack();>Go <br> Back</button>
 				</div>
 
 				<div class="col-sm-9" style="width:80%">
+
 					<div class="gallery" id="card1">
 						<div class="label" style="padding-left:5px;padding-right: 5px">
 							<p style="text-align:left;" id="p1"> Player 1
 								<span class="deckVal" style="float:right;color: #f25900" id="p1deck"> <b> # </b> </span>
 						</div>
 						</span>
-						<a href="#">
+						
 							<img src="#" id="img1" alt="Player 1" style="width:177px;height:110px;">
-						</a>
-
-
-
-
-
+						
 						<div class="desc">
 							<p> <span id="name1">Name of card </span>
-								<br> <span class="cardVal" id="cat1" style="font-size:34px"> </span> </p>
+								<br> <span class="cardVal" id="cat1"> # </span> </p>
 						</div>
 					</div>
 
@@ -430,12 +423,12 @@ div.buttonAI:hover{
 								<span class="deckVal" style="float:right;color: #f25900" id="p2deck"> <b> </b> </span>
 						</div>
 						</span>
-						<a href="#">
+						
 							<img src="#" id="img2" alt="Player 2" style="width:177px;height:110px;">
-						</a>
+						
 						<div class="desc">
 							<p> <span id="name2">Name of card </span>
-								<br> <span class="cardVal" id="cat2" style="font-size:34px"> </span> </p>
+								<br> <span class="cardVal" id="cat2"> # </span> </p>
 						</div>
 					</div>
 
@@ -445,12 +438,12 @@ div.buttonAI:hover{
 								<span class="deckVal" style="float:right;color: #f25900" id="p3deck"> <b> # </b> </span>
 						</div>
 						</span>
-						<a href="#">
+						
 							<img src="#" id="img3" alt="Player 3" style="width:177px;height:110px;">
-						</a>
+						
 						<div class="desc">
 							<p> <span id="name3">Name of card </span>
-								<br> <span class="cardVal" id="cat3" style="font-size:34px"> </span> </p>
+								<br> <span class="cardVal" id="cat3"> # </span> </p>
 						</div>
 					</div>
 
@@ -460,12 +453,12 @@ div.buttonAI:hover{
 								<span class="deckVal" style="float:right;color: #f25900" id="p4deck"> <b> # </b> </span>
 						</div>
 						</span>
-						<a id=image4 href="#">
-							<img src="#" id="img4" alt="Player 4" style="width:177px;height:110px;">
-						</a>
+						
+							<img src="" id="img4" alt="Player 4" style="width:177px;height:110px;">
+						
 						<div class="desc">
 							<p> <span id="name4">Name of card </span>
-								<br> <span class="cardVal" id="cat4" style="font-size:34px"> # </span> </p>
+								<br> <span class="cardVal" id="cat4"> # </span> </p>
 						</div>
 					</div>
 
@@ -478,7 +471,7 @@ div.buttonAI:hover{
 							<div class="textSquare">
 
 								<p><span><b>Category:</b></span>
-									<span id="txtCat1"> #####</span><br>
+									<span id="txtCat1"> </span><br>
 
 									<span><b>Turn:</b></span>
 									<span id="txtTurn2"> </span><br>
@@ -490,7 +483,10 @@ div.buttonAI:hover{
 									<span id="txtRound4"> #####</span><br>
 
 									<span><b>Cards in your deck:</b></span>
-									<span id="txtDeck5"></span></p>
+									<span id="txtDeck5"></span><br>
+
+									<span id="txtStatus6"></span>
+								</p>
 							</div>
 							<div class="buttonNext" id="nextRound" onclick=startARound();>Next Round</div>
 							<div class="buttonForward" id="fastForward" onclick=fastforward(false);>Fast Forward</div>
@@ -498,21 +494,21 @@ div.buttonAI:hover{
 
 
 						<div class="col-sm-9">
-							<div class="squareMainCard">
+							<div class="squareMainCard" id="squareMainCard">
 								<img src="#" id="img5" alt="Player 0" style="width:247px;height:145px;padding:5px">
 								<div class="desc" id="name5"> Description</div>
 								<div class="btn-group">
 									<ul style="padding-left: 4px">
-										<button id="size" onclick=chosenCategory("Speed");>Speed <var class="var" id="c1"></var></button>
+										<button id="Speedbtn" onclick=chosenCategory("Speed");>Speed <var class="var" id="c1"></var></button>
 
-										<button id="speed" onclick=chosenCategory("Cargo");>Cargo <var class="var" id="c2"></var></button>
+										<button id="Cargobtn" onclick=chosenCategory("Cargo");>Cargo <var class="var" id="c2"></var></button>
 
-										<button id="range" onclick=chosenCategory("Size");>Size <var class="var" id="c3"></var></button>
+										<button id="Sizebtn" onclick=chosenCategory("Size");>Size <var class="var" id="c3"></var></button>
 
-										<button id="firepower" onclick=chosenCategory("Range");>Range <var class="var"
+										<button id="Rangebtn" onclick=chosenCategory("Range");>Range <var class="var"
 												id="c4"></var></button>
 
-										<button id="cargo" onclick=chosenCategory("Firepower");>Firepower <var class="var"
+										<button id="Firepowerbtn" onclick=chosenCategory("Firepower");>Firepower <var class="var"
 												id="c5"></var></button>
 									</ul>
 
@@ -523,13 +519,13 @@ div.buttonAI:hover{
 								<div class="cardPile">
 									<p id="commPile">
 										<h5>
-											<center><b>Communal Pile</b></center>
+											<b>Communal Pile</b>
 										</h5>
 									</p><br>
 									<p>
-										<h1 id="commNum">
-											<center>#</center>
-										</h1>
+									<span class="cardVal"	id="commNum">
+											0
+									</span>
 									</p>
 								</div>
 							</div>
@@ -543,52 +539,35 @@ div.buttonAI:hover{
 	</div>
 
 	<script type="text/javascript">
-
-
-
-
 		// Method that is called on page load
-
 		function initialize() {
 			$(".modal").hide();
 			$("#startModal").show();
 		}
-
 		function initializeGame() {
-
 			$(".modal").hide();
-			newGame();
+			// newGame();
 			initialiseGame();
 			$('.btn-group').find('button').prop('disabled', true);
 		}
-
-
-
 		// This is a reusable method for creating a CORS request. Do not edit this.
 		function createCORSRequest(method, url) {
 			var xhr = new XMLHttpRequest();
 			if ("withCredentials" in xhr) {
-
 				// Check if the XMLHttpRequest object has a "withCredentials" property.
 				// "withCredentials" only exists on XMLHTTPRequest2 objects.
 				xhr.open(method, url, true);
-
 			} else if (typeof XDomainRequest != "undefined") {
-
 				// Otherwise, check if XDomainRequest.
 				// XDomainRequest only exists in IE, and is IE's way of making CORS requests.
 				xhr = new XDomainRequest();
 				xhr.open(method, url);
-
 			} else {
-
 				// Otherwise, CORS is not supported by the browser.
 				xhr = null;
-
 			}
 			return xhr;
 		}
-
 		function createCORSReq(method, url) {
 			var xhr = createCORSRequest(method, url);
 			// Message is not sent yet, but we can check that the browser supports CORS
@@ -597,21 +576,19 @@ div.buttonAI:hover{
 			}
 			return xhr;
 		}
-
-
-
-
 		//######################################################################################################
-
-
-
 		//Function that goes through the testresponse object and display whats not null to the screen.
 		function testResponse(jsonAsString) {
-			var response = JSON.parse(jsonAsString);
+			if (jsonAsString == "state error") {
+				$('#txtStatus6').html("You can't do that right now!");
+			} else if (jsonAsString == null){
+				//do nothing
+			} else {
+				var response = JSON.parse(jsonAsString);
+			
 			//if (jsonAsString === "state error") {
 			//	alert("Function cant be used in this state");
 			//	}
-
 			$('.gallery').hide();
 			
 			if (response.overall_winner != null) {
@@ -623,78 +600,79 @@ div.buttonAI:hover{
 			}
 				
 			
-
+			// done at the start of every request, since round number is never 0
 			if (response.round != null) {
 				$("#txtRound4").html(response.round);
 				if (response.round == 1) {
 					initialPlayerDecksize(response);
 				}
+				resetHighlightedElements();
+				$('#txtStatus6').html("");
 			}
-
 			if (response.communal_pile_size != null) {
 				$("#commNum").html(response.communal_pile_size);
+				if (response.communal_pile_size == 0) {
+					$('.cardPile').css({'box-shadow':'none'})
+				} else {
+					$('.cardPile').css({'box-shadow': '0 -1px 2px rgba(0, 0, 0, 0.15), 0 -10px 0 -5px #eee, 0 -10px 2px -4px rgba(0, 0, 0, 0.15), 0 -20px 0 -10px #eee, 0 -20px 2px -9px rgba(0, 0, 0, 0.15)'});
+				}
 			}
-
 			if (response.category != null) {
 				$("#txtCat1").text(response.category);
+				$("#" + response.category + "btn").css({"background-color": "rgb(248, 190, 157)"});
 			}
-
 			if (response.decksize !== null) {
 				$("#txtDeck5").html(response.decksize);
 			}
-
-			if (response.losing_players != null) {
-				if (response.losing_players.indexOf(0) != -1){
-					$("#modalOut").show();
-				}
-				alert("player out decksizes length: " + response.playerDeckSizes.length);
-			}
-
-			if (response.winning_player != null) {
-				$('#txtTurn2').html('round ended');
-					if (response.winning_player == 0) {
-						$("#txtWin3").html("You won!");
-					} else {
-						$("#txtWin3").html("Player " + response.winning_player + " won");
-					}
-			} else {
-				$("#txtWin3").html('It was a draw!');
-			}
-
-			// if (response.was_draw != null) {
-				
-			// }
-
 			if (response.player_values != null) {
 				setPlayersValues(response);
 			}
-
-			if (response.card.valueMap != null) {
+			if (response.winning_player != null) {
+				$('#txtTurn2').html('Your Turn Ended');
+				if (response.winning_player == 0) {
+					$("#txtWin3").html("You won!");
+					$("#squareMainCard").css({'background-color': 'rgb(141, 205, 240)'});
+				} else {
+					$("#txtWin3").html("Player " + response.winning_player + " won");
+					$("#card" + response.winning_player).css({'background-color': 'rgb(141, 205, 240)'});
+				}
+			} else {
+				$("#txtWin3").html('It was a draw!');
+			}
+			if (response.card != null) {
 				var cardArray = Object.values(response.card.valueMap);
-
 				setHumanCard(cardArray);
-
 				$("#name5").html(response.card.cardName);
 				$("#img5").attr("src", "/assets/card_images/" + response.card.cardName + ".jpg");
 			}
-	
-
 			if (response.current_player != null) {
 				if (response.current_player == 0) {
 					//$('.cardVal').hide();
-					$('#txtTurn2').html('It is your turn to chose a category!');
+					$('#txtTurn2').html('You choose a category!');
 					$("#txtWin3").html("");
-					$(' .btn-group').find('button').prop('disabled', false);
+					$('.btn-group').find('button').prop('disabled', false);
 				} else {
 					$("#txtTurn2").html("Player " + response.current_player);
 				}
 			}
-
+			if (response.losing_players != null) {
+				if (response.losing_players.indexOf(0) != -1){
+					$("#modalOut").show();
+				}
+				$('#txtStatus6').html("Losing players this round: " + response.losing_players);
+				// alert("player out decksizes length: " + response.playerDeckSizes.length);
+			} 
+	
+			if (response.playerDeckSizes != null && response.playerDeckSizes.length == 1) {
+				$("#popup").show();
+				var winner = (response.overall_winner == 0) ? "You " : "Player " + response.overall_winner;
+				$("#txtWinner").html(winner + " won the game!");
+			}
 			if (response.was_quit) {
 				windows.location = "http://localhost:7777/toptrumps/";
 			}
 		}
-
+		}
 		//Function that initially sets players deck of cards
 		function initialPlayerDecksize(response) {
 			if (response.player_values != null) {
@@ -709,29 +687,46 @@ div.buttonAI:hover{
 				}
 			}
 		}
-
 		//Function that displays the AIplayers card values and number of cards. 
 		//Takes in a 2d-array and a string as parameters
 		function setPlayersValues(response) {
 			var array = response.playerCardNames;
 			array.sort();
-
-			for (var i = 0; i < response.player_values.length; i++) {
-				var value = response.player_values[i][0];
-
-				$("#card" + value).show();
-				$("#cat" + value).html(response.player_values[i][1]).show();
-				if (value == 0) {
+			// set player deck size values to 0
+			for (var i = 0; i < 5; i++) {
+				if (i == 0) {
+					$("#txtDeck5").html("0");
+				} else {
+					$("#p" + i + "deck").html("0");
+				}
+			}
+			// set updated player deck sizes for end of round
+			for (var i=0; i < response.playerDeckSizes.length; i++) {
+				var player = response.playerDeckSizes[i][0];
+				if (player == 0) {
 					$("#txtDeck5").html(response.playerDeckSizes[i][1]);
 				} else {
-					$("#p" + value + "deck").html(response.playerDeckSizes[i][1]);
+					$("#p" + player + "deck").html(response.playerDeckSizes[i][1]);
 				}
+			}
+			// set player round information for round which was just played
+			for (var i = 0; i < response.player_values.length; i++) {
+				var value = response.player_values[i][0];
+				$("#card" + value).show();
+				$("#cat" + value).html(response.player_values[i][1]).show();
 				$("#img" + value).attr("src", "/assets/card_images/" + array[i][1] + ".jpg");
 				$("#name" + array[i][0]).html(array[i][1]);
-
 			}
 		}
-
+		function resetHighlightedElements() {
+			$("div.btn-group button").css({"background-color": "#ff7c30"});
+			// $("div.btn-group button:disabled").css({"background-color": "rgb(102, 102, 102)"});
+			$("#card1").css({'background-color': '#F1F1F1'});
+			$("#card2").css({'background-color': '#F1F1F1'});
+			$("#card3").css({'background-color': '#F1F1F1'});
+			$("#card4").css({'background-color': '#F1F1F1'});
+			$("#squareMainCard").css({'background-color': '#F1F1F1'});
+		}
 		//Function that displays the humanplayers card values, takes an array as parameter.
 		function setHumanCard(array) {
 			for (var i = 0; i < array.length; i++) {
@@ -746,27 +741,21 @@ div.buttonAI:hover{
 	
 			
 			}
-
 		function quitGame() {
 			$("#popup").hide();
 			window.location = "http://localhost:7777/toptrumps/";
 			
 		}
-
 		function goBack() {
 			window.location = "http://localhost:7777/toptrumps/";
 		}
-
-
-		function newGame() {
-			var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/newGame");
-			xhr.send();
-
-			xhr.onload = function (e) {
-				testResponse(xhr.response);
-			}
-		}
-
+		// function newGame() {
+		// 	var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/newGame");
+		// 	xhr.send();
+		// 	xhr.onload = function (e) {
+		// 		testResponse(xhr.response);
+		// 	}
+		// }
 		function initialiseGame() {
 			var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/initialiseGameplay");
 			xhr.send();
@@ -774,16 +763,13 @@ div.buttonAI:hover{
 				testResponse(xhr.response);
 			}
 		}
-
 		function startARound() {
 			var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/startARound");
 			xhr.send();
 			xhr.onload = function (e) {
-
 				testResponse(xhr.response);
 			}
 		}
-
 		function chosenCategory(category) {
 			var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/chosenCategory?category=" + category);
 			xhr.send();
@@ -791,7 +777,6 @@ div.buttonAI:hover{
 				testResponse(xhr.response);
 			}
 		}
-
 		function quit() {
 			var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/quit");
 			xhr.send();
@@ -799,16 +784,19 @@ div.buttonAI:hover{
 				testResponse(xhr.response);
 			}
 		}
-
 		function fastforward(skipLosingPlayers) {
 			var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/startARound");
 			xhr.send();
 			xhr.onload = function (e) {
-				var result = JSON.parse(xhr.response);
-				if (result.state == "round ended" && (result.losing_players == null || skipLosingPlayers)) {
-					fastforward(skipLosingPlayers);
-				} else {
+				if (xhr.response == "state error"){
 					testResponse(xhr.response);
+				} else {
+					var result = JSON.parse(xhr.response);
+					if (result.state == "round ended" && (result.losing_players == null || skipLosingPlayers)) {
+						fastforward(skipLosingPlayers);
+					} else {
+						testResponse(xhr.response);
+					}
 				}
 			}
 		}
@@ -821,74 +809,58 @@ div.buttonAI:hover{
 				};
 				xhr.send();
 				}
-
 	</script>
 
 	<!-- Here are examples of how to call REST API Methods -->
 	<script type="text/javascript">
 			// function showCard() {
 			// 	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/showCard");
-
 			// 	// Message is not sent yet, but we can check that the browser supports CORS
 			// 	if (!xhr) {
   			// 		alert("CORS not supported");
 			// 	}
-
 			// 	xhr.onload = function(e) {
  			// 		var responseCard = JSON.parse(xhr.response); // the text of the response
-
 			// 		alert(responseCard.cardName + " " + responseCard.headers[1] + " ! " + responseCard.valueMap["2"]); // lets produce an alert
 			// 		alert(xhr.response);
 			// 	};
-
 			// 	// We have done everything we need to prepare the CORS request, so send it
 			// 	xhr.send();		
 			// }
-
 			// // This calls the helloJSONList REST method from TopTrumpsRESTAPI
 			// function helloJSONList() {
-
 			// 	// First create a CORS request, this is the message we are going to send (a get request in this case)
 			// 	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/helloJSONList"); // Request type and URL
-
 			// 	// Message is not sent yet, but we can check that the browser supports CORS
 			// 	if (!xhr) {
   			// 		("CORS not supported");
 			// 	}
-
 			// 	// CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
 			// 	// to do when the response arrives 
 			// 	xhr.onload = function(e) {
  			// 		var responseText = xhr.response; // the text of the response
 			// 		alert(responseText); // lets produce an alert
 			// 	};
-
 			// 	// We have done everything we need to prepare the CORS request, so send it
 			// 	xhr.send();		
 			// }
-
 			// // This calls the helloJSONList REST method from TopTrumpsRESTAPI
 			// function helloWord(word) {
-
 			// 	// First create a CORS request, this is the message we are going to send (a get request in this case)
 			// 	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/helloWord?Word="+word); // Request type and URL+parameters
-
 			// 	// Message is not sent yet, but we can check that the browser supports CORS
 			// 	if (!xhr) {
   			// 		alert("CORS not supported");
 			// 	}
-
 			// 	// CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
 			// 	// to do when the response arrives 
 			// 	xhr.onload = function(e) {
  			// 		var responseText = xhr.response; // the text of the response
 			// 		alert(responseText); // lets produce an alert
 			// 	};
-
 			// 	// We have done everything we need to prepare the CORS request, so send it
 			// 	xhr.send();		
 			// }
-
 	</script>
 
 </body>
