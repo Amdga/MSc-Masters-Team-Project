@@ -606,7 +606,11 @@
 
 		//Function that goes through the testresponse object and display whats not null to the screen.
 		function testResponse(jsonAsString) {
-			var response = JSON.parse(jsonAsString);
+			if (jsonAsString == "state error") {
+				$('#txtStatus6').html("You can't do that right now!");
+			} else {
+				var response = JSON.parse(jsonAsString);
+			
 			//if (jsonAsString === "state error") {
 			//	alert("Function cant be used in this state");
 			//	}
@@ -635,6 +639,11 @@
 
 			if (response.communal_pile_size != null) {
 				$("#commNum").html(response.communal_pile_size);
+				if (response.communal_pile_size == 0) {
+					$('.cardPile').css({'box-shadow':'none'})
+				} else {
+					$('.cardPile').css({'box-shadow': '0 -1px 2px rgba(0, 0, 0, 0.15), 0 -10px 0 -5px #eee, 0 -10px 2px -4px rgba(0, 0, 0, 0.15), 0 -20px 0 -10px #eee, 0 -20px 2px -9px rgba(0, 0, 0, 0.15)'});
+				}
 			}
 
 			if (response.category != null) {
@@ -702,6 +711,7 @@
 			if (response.was_quit) {
 				windows.location = "http://localhost:7777/toptrumps/";
 			}
+		}
 		}
 
 		//Function that initially sets players deck of cards
