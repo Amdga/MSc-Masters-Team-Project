@@ -122,7 +122,7 @@
 
 						<table>
 							<tr>
-								<th class="statstitle"> Total games played overall: </td>
+								<th class="statstitle"> Total games completed overall: </td>
 								<td id="statline1"></td>
 							</tr>
 							<tr>

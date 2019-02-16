@@ -1,5 +1,4 @@
 ﻿CREATE TYPE ptype AS ENUM('human','AI');
-CREATE SCHEMA TOP_TRUMPS;
 
 CREATE TABLE PLAYER(
 playerID INT NOT NULL,
@@ -23,3 +22,9 @@ no_rounds_won INT,
 PRIMARY KEY(gameID, playerID),
 FOREIGN KEY (playerID) references PLAYER (playerID),
 FOREIGN KEY (gameID) references GAMESTATS (gameID));
+
+Insert into player values (0 ,'human');
+Insert into player values (1 ,'AI');
+Insert into player values (2 ,'AI');
+Insert into player values (3 ,'AI');
+Insert into player values (4 ,'AI');

@@ -11,8 +11,8 @@ public class Database {
 	private ArrayList <String> statements = new ArrayList<String>();
 	private ArrayList <String> query = new ArrayList <String>();
 	private final String username = "postgres";
-	private final String password = "2409217J";
-	private final String serverLocation = "jdbc:postgresql://localhost:5432/Top Trumps/";
+	private final String password = "REPLACE PASSWORD";
+	private final String serverLocation = "jdbc:postgresql://localhost:5432/";
 //	private final String username = "m_18_1101610r";
 //	private final String password = "1101610r";
 //	private final String serverLocation = "jdbc:postgresql://yacata.dcs.gla.ac.uk:5432/";
@@ -43,7 +43,7 @@ public class Database {
 		}
 		catch (SQLException | ClassNotFoundException e) { 
 			System.err.println("#############################\n\nDatabase Connection Failed\n\n#############################" ); 
-//			e.printStackTrace(); 
+			e.printStackTrace(); 
 			return; 
 		}
 	}

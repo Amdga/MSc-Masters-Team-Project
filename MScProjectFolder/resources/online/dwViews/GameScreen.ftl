@@ -137,6 +137,9 @@
 			border-radius: 8px;
 			text-align: center;
 		}
+		#popup {
+			z-index: 2;
+		}
 		div.buttonAI{
 			display:none;
 			width: 100px;
@@ -392,6 +395,7 @@
 				<div class="modal-content">
 
 					<h1 id="txtWinner">You're out!</h1>
+					<p> You must continue watching till the end of a game to save this game's stats to the database</p>
 
 					<p> </p>
 					<div class="row" style="display:block;align:center">
