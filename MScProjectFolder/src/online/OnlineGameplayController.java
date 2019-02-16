@@ -114,6 +114,7 @@ public class OnlineGameplayController extends GameplayControllerAbstract{
 	 */
 	public String startARound(boolean willReset) {
 		if(state.equals(STATES[2]) || state.equals(STATES[5])) {
+			persistent_game_data.increment_rounds();
 			this.round_counter++;
 			state = STATES[3];
 			to_view.beginningOfRound(players.get(0).getCurrentDeck().size(), round_counter); // saves deck size and round num
