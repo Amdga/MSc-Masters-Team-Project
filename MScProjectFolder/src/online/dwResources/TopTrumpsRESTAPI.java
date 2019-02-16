@@ -37,10 +37,10 @@ import logger.PersistentGameData;
 public class TopTrumpsRESTAPI {
 
 	// variable initialisation
-	private ArrayList<OnlineDataBuffer> dataBuffers;
-	private ArrayList<OnlineGameplayController> gameControllers;
+	private ArrayList<OnlineDataBuffer> dataBuffers = new ArrayList<>();
+	private ArrayList<OnlineGameplayController> gameControllers = new ArrayList<>();
 	private Database db;
-	private ArrayList<GetDeckModel> deckModels;
+	private ArrayList<GetDeckModel> deckModels = new ArrayList<>();
 	private int number_of_human_players = 1;
 	private int number_of_ai_players;
 	private TopTrumpsJSONConfiguration config;

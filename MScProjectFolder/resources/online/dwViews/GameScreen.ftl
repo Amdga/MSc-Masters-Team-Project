@@ -557,10 +557,11 @@
 		function initialize() {
 			$(".modal").hide();
 			$("#startModal").show();
+			newGame();
 		}
 		function initializeGame() {
 			$(".modal").hide();
-			newGame();
+			// newGame();
 			initialiseGame();
 			
 		}
@@ -773,35 +774,42 @@
 			}
 		}
 		function initialiseGame() {
-			var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/initialiseGameplay");
+			// var xhr1 = createCORSReq('GET', "http://localhost:7777/toptrumps/game/newGame");
+			// xhr1.send();
+			// xhr1.onload = function (e) {
+			// 	$('#gameID').text(xhr1.response);
+			// 	alert(xhr1.response)//expected result is gameID
+			// }
+
+			var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/initialiseGameplay?gameID=" + $('#gameID').text());
 			xhr.send();
 			xhr.onload = function (e) {
 				testResponse(xhr.response);
 			}
 		}
 		function startARound() {
-			var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/startARound");
+			var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/startARound?gameID=" + $('#gameID').text());
 			xhr.send();
 			xhr.onload = function (e) {
 				testResponse(xhr.response);
 			}
 		}
 		function chosenCategory(category) {
-			var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/chosenCategory?category=" + category);
+			var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/chosenCategory?category=" + category + "&gameID=" + $('#gameID').text());
 			xhr.send();
 			xhr.onload = function (e) {
 				testResponse(xhr.response);
 			}
 		}
 		function quit() {
-			var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/quit");
+			var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/quit?gameID=" + $('#gameID').text());
 			xhr.send();
 			xhr.onload = function (e) {
 				testResponse(xhr.response);
 			}
 		}
 		function fastforward(skipLosingPlayers) {
-			var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/startARound");
+			var xhr = createCORSReq('GET', "http://localhost:7777/toptrumps/game/startARound?gameID=" + $('#gameID').text());
 			xhr.send();
 			xhr.onload = function (e) {
 				if (xhr.response == "state error"){
