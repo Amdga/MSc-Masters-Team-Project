@@ -84,7 +84,7 @@
 		}
 		.goBackButton:hover {
 			background-color: #F25900;
-			font-color: white;
+			color: white;
 			box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 		}
 		div.rectangleBackGround {
@@ -107,7 +107,7 @@
 			font-size: 20px;
 			font-family: arial, serif;
 			font-size: 20px;
-			font-color: white;
+			color: white;
 			cursor: pointer;
 			width: 20%;
 			padding: 20px;
@@ -116,7 +116,7 @@
 		}
 		.modalButton:hover {
 			background-color: #F25900;
-			font-color: white;
+			color: white;
 			box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 		}
 		.modal {
@@ -186,7 +186,7 @@
 		
 		div.buttonAI:hover{
 			background-color: #F25900;
-			font-color: white;
+			color: white;
 			box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 		}
 		/* Modal Content/Box */
@@ -367,7 +367,16 @@
 				<!-- Modal content -->
 				<div class="modal-content">
 
-					<h1 id="txtWinner">Welcome to Top Trumps</h1>
+					<h1 id="txtWinner">Start the game</h1>
+
+					<p>
+						Note: The fastforward button skips to the next round where either:
+						<ul>
+							<li>It is your turn to pic a category</li>
+							<li>Any player is out</li>
+							<li>The game is over</li>
+						</ul>
+					</p>
 
 					
 					<div class="row" style="display:block;align:center">
@@ -774,7 +783,7 @@
 			xhr.send();
 			xhr.onload = function (e) {
 				$('#gameID').text(xhr.response);
-				alert(xhr.response)//expected result is gameID
+				//alert(xhr.response)//expected result is gameID
 			}
 		}
 		function initialiseGame() {
