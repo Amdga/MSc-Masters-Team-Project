@@ -41,6 +41,7 @@ public class TopTrumpsRESTAPI {
 	private ArrayList<OnlineGameplayController> gameControllers = new ArrayList<>();
 	private Database db;
 	private ArrayList<GetDeckModel> deckModels = new ArrayList<>();
+	private ArrayList<Boolean> isWrittenToDB = new ArrayList<>();
 	private int number_of_human_players = 1;
 	private int number_of_ai_players;
 	private TopTrumpsJSONConfiguration config;
@@ -94,6 +95,7 @@ public class TopTrumpsRESTAPI {
 	@Path("/chosenNumberOfPlayers")
 		public void chosenNumberOfPlayers(@QueryParam("number") int number) {
 		number_of_ai_players = number;
+		isWrittenToDB.add(false);
 		dataBuffers.add(new OnlineDataBuffer());
 		deckModels.add(new GetDeckModel(config.getDeckFile()));
 		gameControllers.add(new OnlineGameplayController(deckModels.get(deckModels.size()-1), dataBuffers.get(dataBuffers.size()-1), number_of_human_players, number_of_ai_players));
@@ -151,16 +153,18 @@ public class TopTrumpsRESTAPI {
 
 	private void writeToDatabase(int id) {
 		PersistentGameData game_data = gameControllers.get(id).getGameData();
-
-		if(game_data.data_to_be_logged() == true) {
-			db.addGameStats(game_data.get_number_of_rounds(), game_data.get_winning_player(), game_data.get_number_of_draws());
-
-			int[] player_wins = game_data.get_player_wins();
-			for(int i=0; i<player_wins.length; i++) {
-				db.addRoundStats(i, player_wins[i]);
+		if (isWrittenToDB.get(id) == false) {
+			if(game_data.data_to_be_logged() == true) {
+				db.addGameStats(game_data.get_number_of_rounds(), game_data.get_winning_player(), game_data.get_number_of_draws());
+	
+				int[] player_wins = game_data.get_player_wins();
+				for(int i=0; i<player_wins.length; i++) {
+					db.addRoundStats(i, player_wins[i]);
+				}
+				db.updateDatabase();
+				game_data.set_logger(false); // set to false so we do not rewrite the same data
+				isWrittenToDB.set(id, true);
 			}
-			db.updateDatabase();
-			game_data.set_logger(false); // set to false so we do not rewrite the same data
 		}
 	}
 
