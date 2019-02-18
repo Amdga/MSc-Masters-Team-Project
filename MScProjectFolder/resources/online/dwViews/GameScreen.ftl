@@ -672,7 +672,8 @@
 				var cardArray = Object.values(response.card.valueMap);
 				setHumanCard(cardArray);
 				$("#name5").html(response.card.cardName);
-				$("#img5").attr("src", "/assets/card_images/" + response.card.cardName + ".jpg");
+				$("#img5").attr("src", "http://dcs.gla.ac.uk/~richardm/TopTrumps/" + response.card.cardName + ".jpg");
+				// $("#img5").attr("src", "/assets/card_images/" + response.card.cardName + ".jpg");
 			}
 			if (response.current_player != null) {
 				if (response.current_player == 0) {
@@ -744,7 +745,8 @@
 				var value = response.player_values[i][0];
 				$("#card" + value).show();
 				$("#cat" + value).html(response.player_values[i][1]).show();
-				$("#img" + value).attr("src", "/assets/card_images/" + array[i][1] + ".jpg");
+				$("#img" + value).attr("src", "http://dcs.gla.ac.uk/~richardm/TopTrumps/" + array[i][1] + ".jpg");
+				// $("#img" + value).attr("src", "/assets/card_images/" + array[i][1] + ".jpg");
 				$("#name" + array[i][0]).html(array[i][1]);
 			}
 		}
