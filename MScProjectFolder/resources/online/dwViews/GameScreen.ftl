@@ -372,7 +372,7 @@
 					<p>
 						Note: The fastforward button skips to the next round where either:
 						<ul>
-							<li>It is your turn to pic a category</li>
+							<li>It is your turn to pick a category</li>
 							<li>Any player is out</li>
 							<li>The game is over</li>
 						</ul>
@@ -404,7 +404,7 @@
 				<div class="modal-content">
 
 					<h1 id="txtWinner">You're out!</h1>
-					<p> You must continue watching till the end of a game to save this game's stats to the database</p>
+					<p style="color:red"> You must continue watching till the end of a game to save this game's stats to the database. Hint: You can use the fastforward button to make it easier.</p>
 
 					<p> </p>
 					<div class="row" style="display:block;align:center">
