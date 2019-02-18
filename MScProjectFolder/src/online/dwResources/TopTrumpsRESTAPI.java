@@ -130,7 +130,7 @@ public class TopTrumpsRESTAPI {
 	@Path("game/chosenCategory")
 	public String chosenCategory(@QueryParam("category") String category, @QueryParam("gameID") int id) throws IOException{
 		String json_output = gameControllers.get(id).chosenCategory(category);
-		checkAndWriteToDatabase(id);
+		//checkAndWriteToDatabase(id);
 		return json_output;
 	}
 
